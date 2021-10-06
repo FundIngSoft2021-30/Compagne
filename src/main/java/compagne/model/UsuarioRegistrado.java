@@ -4,9 +4,26 @@ import java.util.Objects;
 
 public class UsuarioRegistrado{
     private int ID;
-    private String name;
-    private int infoAdicionalID;
+    private String nombre;
+    private String email;
     private char tipo;
+    private int infoAdicionalID;
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public int getID() {
         return this.ID;
@@ -16,13 +33,6 @@ public class UsuarioRegistrado{
         this.ID = ID;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getInfoAdicionalID() {
         return this.infoAdicionalID;
@@ -43,18 +53,26 @@ public class UsuarioRegistrado{
     public UsuarioRegistrado() {
     }
 
-    public UsuarioRegistrado(int ID, String name, int infoAdicionalID, char tipo) {
+    public UsuarioRegistrado(int ID, String name, int infoAdicionalID, char tipo, String email) {
         this.ID = ID;
-        this.name = name;
+        this.nombre = name;
         this.infoAdicionalID = infoAdicionalID;
         this.tipo = tipo;
+        this.email=email;
     }
+
 
     @Override
     public String toString() {
-        return "\n\t{" + "\n\t\tID='" + ID + "'" + "\n\t\tname='" + name + "'" + "\n\t\tinfoAdicionalID='" + infoAdicionalID + "'"
-                + "\n\t\ttipo='" + tipo + "'" + "\n\t}";
+        return "{" +
+            " ID='" + getID() + "'" +
+            ", nombre='" + getNombre() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", tipo='" + getTipo() + "'" +
+            ", infoAdicionalID='" + getInfoAdicionalID() + "'" +
+            "}";
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -64,7 +82,7 @@ public class UsuarioRegistrado{
             return false;
         }
         UsuarioRegistrado usuarioRegistrado = (UsuarioRegistrado) o;
-        return ID == usuarioRegistrado.ID && Objects.equals(name, usuarioRegistrado.name)
+        return ID == usuarioRegistrado.ID && Objects.equals(nombre, usuarioRegistrado.nombre)
                 && infoAdicionalID == usuarioRegistrado.infoAdicionalID && tipo == usuarioRegistrado.tipo;
     }
 

@@ -20,7 +20,7 @@ public class ConnectionClass {
     }
 
     public static String getSchema() {
-        return SCHEMA;
+        return SCHEMA+'.';
     }
 
     public static boolean usingPSQL() {

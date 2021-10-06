@@ -17,7 +17,7 @@ public class UsuarioRegistradoControl {
 
     public HashSet<UsuarioRegistrado> findAllUsuariosRegistrados() {
         HashSet<UsuarioRegistrado> data = new HashSet<>();
-        String sql = "SELECT * FROM " + ConnectionClass.getSchema() + ".\"UsuarioRegistrado\"";
+        String sql = "SELECT * FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\"";
         try {
             this.statement = this.con.prepareStatement(sql);
             this.result = this.statement.executeQuery();
@@ -26,17 +26,17 @@ public class UsuarioRegistradoControl {
                 offset = 1;
             while (this.result.next())
                 data.add(new UsuarioRegistrado(this.result.getInt(0 + offset), this.result.getString(1 + offset),
-                        this.result.getInt(2 + offset), this.result.getString(3 + offset).charAt(0)));
+                        this.result.getInt(5 + offset), this.result.getString(4 + offset).charAt(0), this.result.getString(2+offset)));
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return data;
     }
 
-    public boolean insertUsuarioRegistrado(final String NAME, final char TIPO) {
+    public boolean insertUsuarioRegistrado(final String NAME, final char TIPO, final String EMAIL, final String CONTRASENIA) {
         boolean b = false;
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
-                + ".\"UsuarioRegistrado\" (\"Name\",\"Tipo\") VALUES ('" + NAME + "', '" + TIPO + "')";
+                + "\"UsuarioRegistrado\" (\"Name\",\"Tipo\", \"Email\",\"Contrasenia\") VALUES ('" + NAME + "', '" + TIPO +"', '"+ EMAIL + "', '"+ CONTRASENIA +"')";
         try {
             this.statement = this.con.prepareStatement(sql);
             this.statement.execute();
@@ -49,7 +49,7 @@ public class UsuarioRegistradoControl {
 
     public boolean deleteUsuarioRegistrado(final String ID) {
         boolean b = false;
-        String sql = "DELETE FROM " + ConnectionClass.getSchema() + ".\"UsuarioRegistrado\" WHERE \"ID\"=" + ID;
+        String sql = "DELETE FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" WHERE \"ID\"=" + ID;
         try {
             this.statement = this.con.prepareStatement(sql);
             this.statement.execute();
@@ -62,7 +62,7 @@ public class UsuarioRegistradoControl {
 
     public boolean updateUsuarioRegistradoName(final String ID, final String NAME) {
         boolean b = false;
-        String sql = "UPDATE " + ConnectionClass.getSchema() + ".\"UsuarioRegistrado\" SET \"Name\"="+NAME+" WHERE \"ID\"=" + ID;
+        String sql = "UPDATE " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" SET \"Name\"="+NAME+" WHERE \"ID\"=" + ID;
         try {
             this.statement = this.con.prepareStatement(sql);
             this.statement.execute();
@@ -75,7 +75,7 @@ public class UsuarioRegistradoControl {
 
     public boolean updateUsuarioRegistradoTipo(final String ID, final char TIPO) {
         boolean b = false;
-        String sql = "UPDATE " + ConnectionClass.getSchema() + ".\"UsuarioRegistrado\" SET \"Tipo\"="+TIPO+" WHERE \"ID\"=" + ID;
+        String sql = "UPDATE " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" SET \"Tipo\"="+TIPO+" WHERE \"ID\"=" + ID;
         try {
             this.statement = this.con.prepareStatement(sql);
             this.statement.execute();
@@ -88,7 +88,7 @@ public class UsuarioRegistradoControl {
 
     public boolean updateUsuarioRegistradoIndoAdicionalID(final String ID, final String ADICIONAL_ID) {
         boolean b = false;
-        String sql = "UPDATE " + ConnectionClass.getSchema() + ".\"UsuarioRegistrado\" SET \"Info adicionalID\"="+ADICIONAL_ID+" WHERE \"ID\"=" + ID;
+        String sql = "UPDATE " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" SET \"Info adicionalID\"="+ADICIONAL_ID+" WHERE \"ID\"=" + ID;
         try {
             this.statement = this.con.prepareStatement(sql);
             this.statement.execute();
