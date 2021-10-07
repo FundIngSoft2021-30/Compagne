@@ -138,7 +138,7 @@ public class ControlEstudiantes {
         return r;
     }
 
-    public boolean insertarMateriaXestudiante(int tid, int id) {
+    public boolean insertarMateriaXEstudiante(int tid, int id) {
         /* Inserta una materia para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del comentario*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
@@ -212,7 +212,7 @@ public class ControlEstudiantes {
         boolean b = false; // Inicializo lo que retorno (Si el estudiante se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioRegistrado\" (\"Nombre\",\"Tipo\", \"Email\",\"Contrasenia\") VALUES ('"
-                + estudiante.getNombre() + "', '" + "T" + "', '" + estudiante.getEmail() + "', '"
+                + estudiante.getNombre() + "', '" + "S" + "', '" + estudiante.getEmail() + "', '"
                 + estudiante.getContrasenia() + "');"; // Consulta SQL para insertar
                                                                                           // un usuario registrado en la
                                                                                           // BD de tipo 'T' es decir
@@ -226,45 +226,24 @@ public class ControlEstudiantes {
         }
         int tid = this.getEstudianteID(estudiante.getEmail()); // El ID del estudiante que acabo de insertar
         try {
-            // Toca insertar los comentarios y calificaciones si hay, si no hay, saltara un
-            // error o no se
+            // Toca insertar los logros si hay, si no hay, saltara un error o no se
             // ejecutara lo siguiente.
-            if (estudiante.getComentarios().size() > 0) {
-                for (Comentario comentario : estudiante.getComentarios()) {
+            if (estudiante.getLogros().size() > 0) {
+                for (String logro : estudiante.getLogros()) {
                     // Trato de encontrar un comentario para no repetir en la BD
-                    int id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
+                    int id = this.getLogroID(logro);
                     // Si el ID es 0, entonces no existe y hay que crearlo
                     if (id == 0) {
-                        this.insertarComentario(comentario.getComentario(), comentario.getCalificacion());
-                        id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
+                        this.insertarLogro(logro);
+                        id = this.getLogroID(logro);
                     }
                     // Inserto un comentario para el usuario
-                    //this.insertarHorarioXestudiante(tid, id);
+                    this.insertarLogroXEstudiante(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada
         }
-        // Fin de insertar comentarios y calificaciones
-        try {
-            // Toca insertar los horarios de atencion si hay, si no hay, saltara un error o
-            // no se
-            // ejecutara lo siguiente.
-            if (estudiante.getHorarioAtencion().size() > 0) {
-                for (String horario : estudiante.getHorarioAtencion()) {
-                    // Trato de encontrar un comentario para no repetir en la BD
-                    int id = this.getHorarioID(horario);
-                    // Si el ID es 0, entonces no existe y hay que crearlo
-                    if (id == 0) {
-                        this.insertarHorario(horario);
-                        id = this.getHorarioID(horario);
-                    }
-                    // Inserto un comentario para el usuario
-                    this.insertarComentarioXestudiante(tid, id);
-                }
-            }
-        } catch (Exception e) { // No pasa nada
-        }
-        // Fin de insertar horarios
+        // Fin de insertar logros
         try {
             // Toca insertar las materias si hay, si no hay, saltara un error o no se
             // ejecutara lo siguiente.
@@ -278,7 +257,7 @@ public class ControlEstudiantes {
                         id = this.getMateriaID(materia);
                     }
                     // Inserto un comentario para el usuario
-                    this.insertarMateriaXestudiante(tid, id);
+                    this.insertarMateriaXEstudiante(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada
@@ -328,7 +307,7 @@ public class ControlEstudiantes {
     public boolean modificarestudiante(Estudiante estudiante) {
         /* Modifica un estudiante en la BD. Recibe: estudiante -> Instancia de la clase estudiante que tiene los datos actualizados de un estudiante, sin embargo, su e-mail no cambia*/
         boolean b = true;
-        String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"="+estudiante.getNombre()+", \"Contrasenia\"="+estudiante.getContrasenia()+", \"Tipo\"=\'T\', \"Experiencia\"="+estudiante.getExperiencia()+" WHERE \"Email\"="+estudiante.getEmail()+";";
+        String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"="+estudiante.getNombre()+", \"Contrasenia\"="+estudiante.getContrasenia()+", \"Tipo\"=\'S\' WHERE \"Email\"="+estudiante.getEmail()+";";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();

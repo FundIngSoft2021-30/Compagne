@@ -7,6 +7,16 @@ public class Profesor extends Usuario {
     private String experiencia;
     private HashSet<String> horarioAtencion;
     private HashSet<String> logros;
+    
+    public void setExperiencia(String experiencia) {
+        this.experiencia = experiencia;
+    }
+    public void setHorarioAtencion(HashSet<String> horarioAtencion) {
+        this.horarioAtencion = horarioAtencion;
+    }
+    public void setLogros(HashSet<String> logros) {
+        this.logros = logros;
+    }
 
     public String getExperiencia() {
         return this.experiencia;
