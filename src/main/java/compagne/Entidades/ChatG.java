@@ -7,6 +7,11 @@ import java.util.Objects;
 public class ChatG extends Chat{
     private Grupo pertenece;
 
+
+    public Grupo getPertenece() {
+        return this.pertenece;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -23,9 +28,18 @@ public class ChatG extends Chat{
         return Objects.hashCode(pertenece);
     }
 
-    public ChatG(Date fechaCreacion, String codigo, char tipo, HashSet<Mensaje> mensajes) {
+    public ChatG(Date fechaCreacion, String codigo, char tipo, HashSet<Mensaje> mensajes, Grupo pertenece) {
         super(fechaCreacion, codigo, tipo, mensajes);
-        //TODO Auto-generated constructor stub
+        this.pertenece=pertenece;
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " pertenece='" + getPertenece() + "'" +
+            "}";
+    }
+
     
 }
