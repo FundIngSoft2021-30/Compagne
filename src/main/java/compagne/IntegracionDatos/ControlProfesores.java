@@ -22,7 +22,7 @@ public class ControlProfesores {
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
                     + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\';");
-            this.result=this.statement.executeQuery();
+            this.result = this.statement.executeQuery();
             if (this.result.next())
                 r = this.result.getInt(0 + offset);
             else
@@ -97,11 +97,109 @@ public class ControlProfesores {
         return b;
     }
 
+
+
+    private boolean insertarHorario(String horario) {
+        boolean b = false;
+        String consulta = "";
+        try {
+                consulta = "INSERT INTO " + ConnectionClass.getSchema()
+                        + "\"HorarioAtencion\" (\"Franja\") VALUES (\'" + horario + "\');";
+            
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+            b = true;
+        } catch (Exception e) {
+            b = false;
+        }
+        return b;
+    }
+
+    private int getHorarioID(String horario) {
+        int r = 0;
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        try {
+            this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
+                    + "\"HorarioAtencion\" WHERE \"Franja\"=\'" + horario + "\';");
+            this.result = this.statement.executeQuery();
+            if (this.result.next())
+                r = this.result.getInt(0 + offset);
+            else
+                throw new Exception("No encontrado");
+        } catch (Exception e) {
+            r = 0;
+        }
+        return r;
+    }
+
+    public boolean insertarHorarioXProfesor(int tid, int id) {
+        boolean b = true;
+        String consulta = "INSERT INTO " + ConnectionClass.getSchema()
+                + "\"UsuarioXHorarioAtencion\"(\"UsuarioRegistradoID\", \"HorarioID\") VALUES (" + String.valueOf(tid)
+                + ", " + String.valueOf(id) + ");";
+        try {
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+
+    private boolean insertarMateria(String materia) {
+        boolean b = false;
+        String consulta = "";
+        try {
+                consulta = "INSERT INTO " + ConnectionClass.getSchema()
+                        + "\"Materia\" (\"Nombre\") VALUES (\'" + materia + "\');";
+            
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+            b = true;
+        } catch (Exception e) {
+            b = false;
+        }
+        return b;
+    }
+
+    private int getMateriaID(String materia) {
+        int r = 0;
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        try {
+            this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
+                    + "\"Materia\" WHERE \"Nombre\"=\'" + materia + "\';");
+            this.result = this.statement.executeQuery();
+            if (this.result.next())
+                r = this.result.getInt(0 + offset);
+            else
+                throw new Exception("No encontrado");
+        } catch (Exception e) {
+            r = 0;
+        }
+        return r;
+    }
+
+    public boolean insertarMateriaXProfesor(int tid, int id) {
+        boolean b = true;
+        String consulta = "INSERT INTO " + ConnectionClass.getSchema()
+                + "\"UsuarioXMaterias\"(\"UsuarioRegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid)
+                + ", " + String.valueOf(id) + ");";
+        try {
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+
     public boolean crearProfesor(Profesor profesor) {
         /*
          * Este método guarda un profesor en la BD, recibe un objeto de la clase
-         * profesor y hace que este persista en la BD . 
-         * Recibe: profesor -> Instancia de la clase Profesor, representa el profesor que quiere guardarse en la BD
+         * profesor y hace que este persista en la BD . Recibe: profesor -> Instancia de
+         * la clase Profesor, representa el profesor que quiere guardarse en la BD
          */
         boolean b = false; // Inicializo lo que retorno (Si el profesor se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
@@ -118,11 +216,11 @@ public class ControlProfesores {
         } catch (Exception e) {
             b = false; // Si hubo problemas
         }
+        int tid = this.getProfesorID(profesor.getEmail()); // El ID del profesor que acabo de insertar
         try {
-            // Toca insertar los comentarios si hay, si no hay, saltara un error o no se
+            // Toca insertar los comentarios y calificaciones si hay, si no hay, saltara un error o no se
             // ejecutara lo siguiente.
             if (profesor.getComentarios().size() > 0) {
-                int tid = this.getProfesorID(profesor.getEmail()); // El ID del profesor que acabo de insertar
                 for (Comentario comentario : profesor.getComentarios()) {
                     // Trato de encontrar un comentario para no repetir en la BD
                     int id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
@@ -132,7 +230,45 @@ public class ControlProfesores {
                         id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
                     }
                     // Inserto un comentario para el usuario
+                    this.insertarHorarioXProfesor(tid, id);
+                }
+            }
+        } catch (Exception e) { // No pasa nada
+        }
+        //Fin de insertar comentarios y calificaciones
+        try {
+            // Toca insertar los horarios de atencion si hay, si no hay, saltara un error o no se
+            // ejecutara lo siguiente.
+            if (profesor.getHorarioAtencion().size() > 0) {
+                for (String horario : profesor.getHorarioAtencion()) {
+                    // Trato de encontrar un comentario para no repetir en la BD
+                    int id = this.getHorarioID(horario);
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+                    if (id == 0) {
+                        this.insertarHorario(horario);
+                        id = this.getHorarioID(horario);
+                    }
+                    // Inserto un comentario para el usuario
                     this.insertarComentarioXProfesor(tid, id);
+                }
+            }
+        } catch (Exception e) { // No pasa nada
+        }
+        //Fin de insertar horarios
+        try {
+            // Toca insertar las materias si hay, si no hay, saltara un error o no se
+            // ejecutara lo siguiente.
+            if (profesor.getMaterias().size() > 0) {
+                for (String materia : profesor.getMaterias()) {
+                    // Trato de encontrar un comentario para no repetir en la BD
+                    int id = this.getMateriaID(materia);
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+                    if (id == 0) {
+                        this.insertarMateria(materia);
+                        id = this.getMateriaID(materia);
+                    }
+                    // Inserto un comentario para el usuario
+                    this.insertarMateriaXProfesor(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada
@@ -140,15 +276,26 @@ public class ControlProfesores {
         return b;
     }
 
-    public boolean eliminarProfesor(final String ID) {
-        boolean b = false;
-        String sql = "";
-        try {
-            this.statement = this.con.prepareStatement(sql);
-            this.statement.execute();
-            b = true;
-        } catch (Exception e) {
+    public boolean eliminarProfesor(String email) {
+        boolean b = true;
+        int id = this.getProfesorID(email);
+        if (id == 0)
             b = false;
+        else {
+            try {
+                String sql = "DELETE FROM " + ConnectionClass.getSchema()
+                        + "\"UsuarioXComentario\" WHERE \"UsuarioRegistradoID\"=" + String.valueOf(id);
+                this.statement = this.con.prepareStatement(sql);
+                this.result = this.statement.executeQuery();
+            } catch (Exception e) {
+                try {
+                    String sql = "DELETE FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" WHERE \"ID\"="
+                            + String.valueOf(id);
+                    this.statement = this.con.prepareStatement(sql);
+                    this.result = this.statement.executeQuery();
+                } catch (Exception e2) {
+                }
+            }
         }
         return b;
     }
