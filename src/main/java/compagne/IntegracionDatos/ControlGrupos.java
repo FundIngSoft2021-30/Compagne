@@ -6,16 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import compagne.Entidades.Comentario;
-import compagne.Entidades.Estudiante;
+import compagne.Entidades.Profesor;
 
-public class ControlEstudiantes {
+public class ControlGrupos {
     final ConnectionClass CONNECTION_CLASS = new ConnectionClass();
     private Connection con;
     private PreparedStatement statement;
     private ResultSet result;
 
-    public int getEstudianteID(String email) {
-        /* Este metodo retorna el ID de un estudiante al cual busca por su mail. Recibe : email -> String que representa un email */
+    public int getProfesorID(String email) {
+        /* Este metodo retorna el ID de un profesor al cual busca por su mail. Recibe : email -> String que representa un email */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -87,11 +87,62 @@ public class ControlEstudiantes {
         return comID;
     }
 
-    public boolean insertarComentarioXestudiante(int tid, int id) {
-        /* Inserta un comentario para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del comentario*/
+    public boolean insertarComentarioXProfesor(int tid, int id) {
+        /* Inserta un comentario para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXComentario\"(\"UsuarioRegistradoID\", \"ComentarioID\") VALUES (" + String.valueOf(tid)
+                + ", " + String.valueOf(id) + ");";
+        try {
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+
+    private boolean insertarHorario(String horario) {
+        /*Inserta un horario en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        boolean b = false;
+        String consulta = "";
+        try {
+            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"HorarioAtencion\" (\"Franja\") VALUES (\'"
+                    + horario + "\');";
+
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+            b = true;
+        } catch (Exception e) {
+            b = false;
+        }
+        return b;
+    }
+
+    private int getHorarioID(String horario) {
+        /*Retorna el id de un horario en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        int r = 0;
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        try {
+            this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
+                    + "\"HorarioAtencion\" WHERE \"Franja\"=\'" + horario + "\';");
+            this.result = this.statement.executeQuery();
+            if (this.result.next())
+                r = this.result.getInt(0 + offset);
+            else
+                throw new Exception("No encontrado");
+        } catch (Exception e) {
+            r = 0;
+        }
+        return r;
+    }
+
+    public boolean insertarHorarioXProfesor(int tid, int id) {
+        /* Inserta un horario para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
+        boolean b = true;
+        String consulta = "INSERT INTO " + ConnectionClass.getSchema()
+                + "\"UsuarioXHorarioAtencion\"(\"UsuarioRegistradoID\", \"HorarioID\") VALUES (" + String.valueOf(tid)
                 + ", " + String.valueOf(id) + ");";
         try {
             this.statement = this.con.prepareStatement(consulta);
@@ -138,8 +189,8 @@ public class ControlEstudiantes {
         return r;
     }
 
-    public boolean insertarMateriaXestudiante(int tid, int id) {
-        /* Inserta una materia para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del comentario*/
+    public boolean insertarMateriaXProfesor(int tid, int id) {
+        /* Inserta una materia para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXMaterias\"(\"UsuarioRegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid) + ", "
@@ -152,71 +203,20 @@ public class ControlEstudiantes {
         return b;
     }
 
-    private boolean insertarLogro(String logro) {
-        /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
-        boolean b = false;
-        String consulta = "";
-        try {
-            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Logro\" (\"Texto\") VALUES (\'" + logro
-                    + "\');";
-
-            this.statement = this.con.prepareStatement(consulta);
-            this.statement.executeQuery();
-            b = true;
-        } catch (Exception e) {
-            b = false;
-        }
-        return b;
-    }
-
-    private int getLogroID(String logro) {
-        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el el momento del horario*/
-        int r = 0;
-        int offset = 0;
-        if (ConnectionClass.usingPSQL())
-            offset = 1;
-        try {
-            this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
-                    + "\"Logro\" WHERE \"Texto\"=\'" + logro + "\';");
-            this.result = this.statement.executeQuery();
-            if (this.result.next())
-                r = this.result.getInt(0 + offset);
-            else
-                throw new Exception("No encontrado");
-        } catch (Exception e) {
-            r = 0;
-        }
-        return r;
-    }
-
-    public boolean insertarLogroXEstudiante(int tid, int id) {
-        /* Inserta una materia para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del logro*/
-        boolean b = true;
-        String consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"UsuarioXLogros\"(\"UsuarioRegistradoID\", \"LogroID\") VALUES (" + String.valueOf(tid) + ", "
-                + String.valueOf(id) + ");";
-        try {
-            this.statement = this.con.prepareStatement(consulta);
-            this.statement.executeQuery();
-        } catch (Exception e) {
-        }
-        return b;
-    }
-
-    public boolean crearEstudiante(Estudiante estudiante) {
+    public boolean crearProfesor(Profesor profesor) {
         /*
-         * Este método guarda un estudiante en la BD, recibe un objeto de la clase
-         * estudiante y hace que este persista en la BD . Recibe: estudiante -> Instancia de
-         * la clase estudiante, representa el estudiante que quiere guardarse en la BD
+         * Este método guarda un profesor en la BD, recibe un objeto de la clase
+         * profesor y hace que este persista en la BD . Recibe: profesor -> Instancia de
+         * la clase Profesor, representa el profesor que quiere guardarse en la BD
          */
-        boolean b = false; // Inicializo lo que retorno (Si el estudiante se guardo bien)
+        boolean b = false; // Inicializo lo que retorno (Si el profesor se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"UsuarioRegistrado\" (\"Nombre\",\"Tipo\", \"Email\",\"Contrasenia\") VALUES ('"
-                + estudiante.getNombre() + "', '" + "T" + "', '" + estudiante.getEmail() + "', '"
-                + estudiante.getContrasenia() + "');"; // Consulta SQL para insertar
+                + "\"UsuarioRegistrado\" (\"Nombre\",\"Tipo\", \"Email\",\"Contrasenia\", \"Experiencia\") VALUES ('"
+                + profesor.getNombre() + "', '" + "T" + "', '" + profesor.getEmail() + "', '"
+                + profesor.getContrasenia() + "', '" + profesor.getExperiencia() + "');"; // Consulta SQL para insertar
                                                                                           // un usuario registrado en la
                                                                                           // BD de tipo 'T' es decir
-                                                                                          // estudiante en la BD
+                                                                                          // profesor en la BD
         try {
             this.statement = this.con.prepareStatement(sql); // Preparando una consulta SQL
             this.statement.execute(); // Ejecutando una consulta SQL
@@ -224,13 +224,13 @@ public class ControlEstudiantes {
         } catch (Exception e) {
             b = false; // Si hubo problemas
         }
-        int tid = this.getEstudianteID(estudiante.getEmail()); // El ID del estudiante que acabo de insertar
+        int tid = this.getProfesorID(profesor.getEmail()); // El ID del profesor que acabo de insertar
         try {
             // Toca insertar los comentarios y calificaciones si hay, si no hay, saltara un
             // error o no se
             // ejecutara lo siguiente.
-            if (estudiante.getComentarios().size() > 0) {
-                for (Comentario comentario : estudiante.getComentarios()) {
+            if (profesor.getComentarios().size() > 0) {
+                for (Comentario comentario : profesor.getComentarios()) {
                     // Trato de encontrar un comentario para no repetir en la BD
                     int id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
                     // Si el ID es 0, entonces no existe y hay que crearlo
@@ -239,7 +239,7 @@ public class ControlEstudiantes {
                         id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
                     }
                     // Inserto un comentario para el usuario
-                    //this.insertarHorarioXestudiante(tid, id);
+                    this.insertarHorarioXProfesor(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada
@@ -249,8 +249,8 @@ public class ControlEstudiantes {
             // Toca insertar los horarios de atencion si hay, si no hay, saltara un error o
             // no se
             // ejecutara lo siguiente.
-            if (estudiante.getHorarioAtencion().size() > 0) {
-                for (String horario : estudiante.getHorarioAtencion()) {
+            if (profesor.getHorarioAtencion().size() > 0) {
+                for (String horario : profesor.getHorarioAtencion()) {
                     // Trato de encontrar un comentario para no repetir en la BD
                     int id = this.getHorarioID(horario);
                     // Si el ID es 0, entonces no existe y hay que crearlo
@@ -259,7 +259,7 @@ public class ControlEstudiantes {
                         id = this.getHorarioID(horario);
                     }
                     // Inserto un comentario para el usuario
-                    this.insertarComentarioXestudiante(tid, id);
+                    this.insertarComentarioXProfesor(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada
@@ -268,8 +268,8 @@ public class ControlEstudiantes {
         try {
             // Toca insertar las materias si hay, si no hay, saltara un error o no se
             // ejecutara lo siguiente.
-            if (estudiante.getMaterias().size() > 0) {
-                for (String materia : estudiante.getMaterias()) {
+            if (profesor.getMaterias().size() > 0) {
+                for (String materia : profesor.getMaterias()) {
                     // Trato de encontrar un comentario para no repetir en la BD
                     int id = this.getMateriaID(materia);
                     // Si el ID es 0, entonces no existe y hay que crearlo
@@ -278,7 +278,26 @@ public class ControlEstudiantes {
                         id = this.getMateriaID(materia);
                     }
                     // Inserto un comentario para el usuario
-                    this.insertarMateriaXestudiante(tid, id);
+                    this.insertarMateriaXProfesor(tid, id);
+                }
+            }
+        } catch (Exception e) { // No pasa nada
+        }
+        // Fin de insertar materias
+        try {
+            // Toca insertar las materias si hay, si no hay, saltara un error o no se
+            // ejecutara lo siguiente.
+            if (profesor.getMaterias().size() > 0) {
+                for (String materia : profesor.getMaterias()) {
+                    // Trato de encontrar un comentario para no repetir en la BD
+                    int id = this.getMateriaID(materia);
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+                    if (id == 0) {
+                        this.insertarMateria(materia);
+                        id = this.getMateriaID(materia);
+                    }
+                    // Inserto un comentario para el usuario
+                    this.insertarMateriaXProfesor(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada
@@ -286,10 +305,10 @@ public class ControlEstudiantes {
         return b;
     }
 
-    public boolean eliminarestudiante(String email) {
-        /* Elimina un estudiante de la BD. Recibe: email -> String que representa el email de un estudiante*/
+    public boolean eliminarProfesor(String email) {
+        /* Elimina un profesor de la BD. Recibe: email -> String que representa el email de un profesor*/
         boolean b = true;
-        int id = this.getEstudianteID(email);
+        int id = this.getProfesorID(email);
         if (id == 0)
             b = false;
         else {
@@ -325,10 +344,10 @@ public class ControlEstudiantes {
         return b;
     }
 
-    public boolean modificarestudiante(Estudiante estudiante) {
-        /* Modifica un estudiante en la BD. Recibe: estudiante -> Instancia de la clase estudiante que tiene los datos actualizados de un estudiante, sin embargo, su e-mail no cambia*/
+    public boolean modificarProfesor(Profesor profesor) {
+        /* Modifica un profesor en la BD. Recibe: profesor -> Instancia de la clase profesor que tiene los datos actualizados de un profesor, sin embargo, su e-mail no cambia*/
         boolean b = true;
-        String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"="+estudiante.getNombre()+", \"Contrasenia\"="+estudiante.getContrasenia()+", \"Tipo\"=\'T\', \"Experiencia\"="+estudiante.getExperiencia()+" WHERE \"Email\"="+estudiante.getEmail()+";";
+        String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"="+profesor.getNombre()+", \"Contrasenia\"="+profesor.getContrasenia()+", \"Tipo\"=\'T\', \"Experiencia\"="+profesor.getExperiencia()+" WHERE \"Email\"="+profesor.getEmail()+";";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
@@ -337,7 +356,7 @@ public class ControlEstudiantes {
         return b;
     }
 
-    public ControlEstudiantes() {
+    public ControlGrupos() {
         this.con = this.CONNECTION_CLASS.getCon();
         try {
             this.con.setAutoCommit(true);
