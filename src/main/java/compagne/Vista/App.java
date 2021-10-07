@@ -1,10 +1,17 @@
 package compagne.Vista;
-import compagne.IntegracionDatos.UsuarioControl;
+import java.util.HashSet;
+
+import compagne.Entidades.Comentario;
+import compagne.Entidades.Profesor;
+import compagne.IntegracionDatos.ControlProfesores;
 public class App 
 {    public static void main( String[] args )
     {
-        UsuarioControl usc=new UsuarioControl();
-        System.out.println(usc.findAllUsuariosRegistrados());
-        System.out.println(usc.deleteUsuarioRegistrado("5"));
+        ControlProfesores usc=new ControlProfesores();
+        HashSet <Comentario> comentarios=new HashSet<>();
+        comentarios.add(new Comentario(null, "Hola soy pepe"));
+        comentarios.add(new Comentario("4.5", null));
+        Profesor profe=new Profesor("Federico Lopez", "lopez.federico@javeriana.edu.co", null, comentarios, "Ninguna", "la_contradefed$", null);
+        System.out.println(usc.crearProfesor(profe));
     }
 }

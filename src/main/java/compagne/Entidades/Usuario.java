@@ -6,8 +6,10 @@ import java.util.Objects;
 public abstract class Usuario{
     private String nombre;
     private String email;
+    private String contrasenia;
     private HashSet<String> materias;
     private HashSet<Comentario> comentarios;
+
 
     public String getNombre() {
         return this.nombre;
@@ -15,6 +17,10 @@ public abstract class Usuario{
 
     public String getEmail() {
         return this.email;
+    }
+
+    public String getContrasenia() {
+        return this.contrasenia;
     }
 
     public HashSet<String> getMaterias() {
@@ -25,13 +31,6 @@ public abstract class Usuario{
         return this.comentarios;
     }
 
-    public Usuario(String nombre, String email, HashSet<String> materias, HashSet<Comentario> comentarios) {
-        this.nombre = nombre;
-        this.email = email;
-        this.materias = materias;
-        this.comentarios = comentarios;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -40,12 +39,12 @@ public abstract class Usuario{
             return false;
         }
         Usuario usuario = (Usuario) o;
-        return Objects.equals(nombre, usuario.nombre) && Objects.equals(email, usuario.email) && Objects.equals(materias, usuario.materias) && Objects.equals(comentarios, usuario.comentarios);
+        return Objects.equals(nombre, usuario.nombre) && Objects.equals(email, usuario.email) && Objects.equals(contrasenia, usuario.contrasenia) && Objects.equals(materias, usuario.materias) && Objects.equals(comentarios, usuario.comentarios);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, email, materias, comentarios);
+        return Objects.hash(nombre, email, contrasenia, materias, comentarios);
     }
 
     @Override
@@ -53,10 +52,19 @@ public abstract class Usuario{
         return "{" +
             " nombre='" + getNombre() + "'" +
             ", email='" + getEmail() + "'" +
+            ", contrasenia='" + getContrasenia() + "'" +
             ", materias='" + getMaterias() + "'" +
             ", comentarios='" + getComentarios() + "'" +
             "}";
     }
-    
+       
+
+    public Usuario(String nombre, String email, String contrasenia, HashSet<String> materias, HashSet<Comentario> comentarios) {
+        this.nombre = nombre;
+        this.email = email;
+        this.contrasenia = contrasenia;
+        this.materias = materias;
+        this.comentarios = comentarios;
+    }
     
 }
