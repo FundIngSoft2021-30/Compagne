@@ -326,6 +326,7 @@ public class ControlProfesores {
     }
 
     public boolean modificarProfesor(Profesor profesor) {
+        /* Modifica un profesor en la BD. Recibe: profesor -> Instancia de la clase profesor que tiene los datos actualizados de un profesor, sin embargo, su e-mail no cambia*/
         boolean b = true;
         String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"="+profesor.getNombre()+", \"Contrasenia\"="+profesor.getContrasenia()+", \"Tipo\"=\'T\', \"Experiencia\"="+profesor.getExperiencia()+" WHERE \"Email\"="+profesor.getEmail()+";";
         try {
