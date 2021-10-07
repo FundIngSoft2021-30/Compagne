@@ -153,6 +153,7 @@ public class ControlProfesores {
     }
 
     private boolean insertarMateria(String materia) {
+        /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
         boolean b = false;
         String consulta = "";
         try {
@@ -169,6 +170,7 @@ public class ControlProfesores {
     }
 
     private int getMateriaID(String materia) {
+        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el el momento del horario*/
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -188,6 +190,7 @@ public class ControlProfesores {
     }
 
     public boolean insertarMateriaXProfesor(int tid, int id) {
+        /* Inserta una materia para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXMaterias\"(\"UsuarioRegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid) + ", "
@@ -284,6 +287,7 @@ public class ControlProfesores {
     }
 
     public boolean eliminarProfesor(String email) {
+        /* Elimina un profesor de la BD. Recibe: email -> String que representa el email de un profesor*/
         boolean b = true;
         int id = this.getProfesorID(email);
         if (id == 0)
