@@ -307,7 +307,7 @@ public class ControlEstudiantes {
             }
             try {
                 String sql = "DELETE FROM " + ConnectionClass.getSchema()
-                        + "\"UsuarioXHorarioAtencion\" WHERE \"Usuario RegistradoID\"=" + String.valueOf(id);
+                        + "\"UsuarioXLogros\" WHERE \"Usuario RegistradoID\"=" + String.valueOf(id);
                 this.statement = this.con.prepareStatement(sql);
                 this.result = this.statement.executeQuery();
             } catch (Exception e) {
@@ -323,10 +323,10 @@ public class ControlEstudiantes {
         return b;
     }
 
-    public boolean modificarestudiante(Estudiante estudiante) {
+    public boolean modificarEstudiante(Estudiante estudiante) {
         /* Modifica un estudiante en la BD. Recibe: estudiante -> Instancia de la clase estudiante que tiene los datos actualizados de un estudiante, sin embargo, su e-mail no cambia*/
         boolean b = true;
-        String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"="+estudiante.getNombre()+", \"Contrasenia\"="+estudiante.getContrasenia()+", \"Tipo\"=\'S\' WHERE \"Email\"="+estudiante.getEmail()+";";
+        String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"=\'"+estudiante.getNombre()+"\', \"Contrasenia\"=\'"+estudiante.getContrasenia()+"\', \"Tipo\"=\'S\' WHERE \"Email\"=\'"+estudiante.getEmail()+"\';";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
