@@ -15,6 +15,7 @@ public class ControlProfesores {
     private ResultSet result;
 
     public int getProfesorID(String email) {
+        /* Este metodo retorna el ID de un profesor al cual busca por su mail. Recibe : email -> String que representa un email */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -34,6 +35,7 @@ public class ControlProfesores {
     }
 
     public boolean insertarComentario(String comentario, String calificacion) {
+        /*Inserta un comentario en la BD. Recibe: comentario -> String que tiene el texto, Calificacion -> String que tiene un numero con la calificacion*/
         boolean b = false;
         String consulta = "";
         try {
@@ -57,6 +59,7 @@ public class ControlProfesores {
     }
 
     public int getComentarioID(String comentario, String calificacion) {
+        /*Retorna el ID de un comentario en la BD. Recibe: comentario -> String que tiene el texto, Calificacion -> String que tiene un numero con la calificacion*/
         String consulta = "";
         int comID = 0;
         int offset = 0;
@@ -85,6 +88,7 @@ public class ControlProfesores {
     }
 
     public boolean insertarComentarioXProfesor(int tid, int id) {
+        /* Inserta un comentario y le agrega un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXComentario\"(\"UsuarioRegistradoID\", \"ComentarioID\") VALUES (" + String.valueOf(tid)
