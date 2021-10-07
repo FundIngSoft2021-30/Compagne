@@ -88,7 +88,7 @@ public class ControlProfesores {
     }
 
     public boolean insertarComentarioXProfesor(int tid, int id) {
-        /* Inserta un comentario y le agrega un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
+        /* Inserta un comentario para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXComentario\"(\"UsuarioRegistradoID\", \"ComentarioID\") VALUES (" + String.valueOf(tid)
@@ -102,6 +102,7 @@ public class ControlProfesores {
     }
 
     private boolean insertarHorario(String horario) {
+        /*Inserta un horario en la BD. Recibe: horario -> String que tiene el el momento del horario*/
         boolean b = false;
         String consulta = "";
         try {
@@ -118,6 +119,7 @@ public class ControlProfesores {
     }
 
     private int getHorarioID(String horario) {
+        /*Retorna el id de un horario en la BD. Recibe: horario -> String que tiene el el momento del horario*/
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -137,6 +139,7 @@ public class ControlProfesores {
     }
 
     public boolean insertarHorarioXProfesor(int tid, int id) {
+        /* Inserta un horario para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXHorarioAtencion\"(\"UsuarioRegistradoID\", \"HorarioID\") VALUES (" + String.valueOf(tid)
