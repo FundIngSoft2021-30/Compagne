@@ -1,4 +1,4 @@
-package compagne.model;
+package compagne.IntegracionDatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

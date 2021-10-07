@@ -1,10 +1,9 @@
-package compagne.view;
-import compagne.model.control.UsuarioRegistradoControl;
-
+package compagne.Vista;
+import compagne.IntegracionDatos.UsuarioControl;
 public class App 
 {    public static void main( String[] args )
     {
-        UsuarioRegistradoControl usc=new UsuarioRegistradoControl();
+        UsuarioControl usc=new UsuarioControl();
         System.out.println(usc.findAllUsuariosRegistrados());
         System.out.println(usc.deleteUsuarioRegistrado("5"));
     }

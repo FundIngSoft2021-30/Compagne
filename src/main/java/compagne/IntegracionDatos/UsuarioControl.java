@@ -1,22 +1,20 @@
-package compagne.model.control;
+package compagne.IntegracionDatos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import compagne.Entidades.Usuario;
 
-import compagne.model.ConnectionClass;
-import compagne.model.UsuarioRegistrado;
-
-public class UsuarioRegistradoControl {
+public class UsuarioControl {
     final ConnectionClass CONNECTION_CLASS = new ConnectionClass();
     private Connection con;
     private PreparedStatement statement;
     private ResultSet result;
 
-    public HashSet<UsuarioRegistrado> findAllUsuariosRegistrados() {
-        HashSet<UsuarioRegistrado> data = new HashSet<>();
+    public HashSet<Usuario> findAllUsuariosRegistrados() {
+        HashSet<Usuario> data = new HashSet<>();
         String sql = "SELECT * FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\"";
         try {
             this.statement = this.con.prepareStatement(sql);
@@ -25,7 +23,7 @@ public class UsuarioRegistradoControl {
             if (ConnectionClass.usingPSQL())
                 offset = 1;
             while (this.result.next())
-                data.add(new UsuarioRegistrado(this.result.getInt(0 + offset), this.result.getString(1 + offset),
+                data.add(new Usuario(this.result.getInt(0 + offset), this.result.getString(1 + offset),
                         this.result.getInt(5 + offset), this.result.getString(4 + offset).charAt(0), this.result.getString(2+offset)));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,7 +97,7 @@ public class UsuarioRegistradoControl {
         return b;
     }
 
-    public UsuarioRegistradoControl() {
+    public UsuarioControl() {
         this.con = this.CONNECTION_CLASS.getCon();
     }
 
