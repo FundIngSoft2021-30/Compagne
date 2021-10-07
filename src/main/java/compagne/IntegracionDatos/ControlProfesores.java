@@ -15,15 +15,18 @@ public class ControlProfesores {
     private ResultSet result;
 
     public boolean crearProfesor(Profesor profesor) {
-
-        int offset = 0;
+        /* 
+        Este método guarda un profesor en la BD, recibe un objeto de la clase profesor y hace que este persista en la BD . Recibe:
+            profesor -> Instancia de la clase Profesor, representa el profesor que quiere guardarse en la BD 
+        */
+        int offset = 0; //Variable necesario, porque algunas BD manejan columnas desde 0 y otras desde 1
         if (ConnectionClass.usingPSQL())
             offset = 1;
-        boolean b = false;
+        boolean b = false; //Inicializo lo que retorno (Si el profesor se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioRegistrado\" (\"Nombre\",\"Tipo\", \"Email\",\"Contrasenia\", \"Experiencia\") VALUES ('"
                 + profesor.getNombre() + "', '" + "T" + "', '" + profesor.getEmail() + "', '"
-                + profesor.getContrasenia() + "', '" + profesor.getExperiencia() + "');";
+                + profesor.getContrasenia() + "', '" + profesor.getExperiencia() + "');"; //Consulta SQL para insertar un usuario registrado en la BD de tipo 'T' es decir teacher en la BD
         try {
             this.statement = this.con.prepareStatement(sql);
             this.statement.execute();
@@ -98,7 +101,6 @@ public class ControlProfesores {
                         this.statement = this.con.prepareStatement(consulta);
                         this.statement.executeQuery();
                     } catch (Exception e) {
-
                     }
                 }
             }
