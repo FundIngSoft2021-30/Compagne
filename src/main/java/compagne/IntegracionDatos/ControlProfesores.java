@@ -97,15 +97,13 @@ public class ControlProfesores {
         return b;
     }
 
-
-
     private boolean insertarHorario(String horario) {
         boolean b = false;
         String consulta = "";
         try {
-                consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                        + "\"HorarioAtencion\" (\"Franja\") VALUES (\'" + horario + "\');";
-            
+            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"HorarioAtencion\" (\"Franja\") VALUES (\'"
+                    + horario + "\');";
+
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
             b = true;
@@ -151,9 +149,9 @@ public class ControlProfesores {
         boolean b = false;
         String consulta = "";
         try {
-                consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                        + "\"Materia\" (\"Nombre\") VALUES (\'" + materia + "\');";
-            
+            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Materia\" (\"Nombre\") VALUES (\'" + materia
+                    + "\');";
+
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
             b = true;
@@ -185,8 +183,8 @@ public class ControlProfesores {
     public boolean insertarMateriaXProfesor(int tid, int id) {
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"UsuarioXMaterias\"(\"UsuarioRegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid)
-                + ", " + String.valueOf(id) + ");";
+                + "\"UsuarioXMaterias\"(\"UsuarioRegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid) + ", "
+                + String.valueOf(id) + ");";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
@@ -218,7 +216,8 @@ public class ControlProfesores {
         }
         int tid = this.getProfesorID(profesor.getEmail()); // El ID del profesor que acabo de insertar
         try {
-            // Toca insertar los comentarios y calificaciones si hay, si no hay, saltara un error o no se
+            // Toca insertar los comentarios y calificaciones si hay, si no hay, saltara un
+            // error o no se
             // ejecutara lo siguiente.
             if (profesor.getComentarios().size() > 0) {
                 for (Comentario comentario : profesor.getComentarios()) {
@@ -235,9 +234,10 @@ public class ControlProfesores {
             }
         } catch (Exception e) { // No pasa nada
         }
-        //Fin de insertar comentarios y calificaciones
+        // Fin de insertar comentarios y calificaciones
         try {
-            // Toca insertar los horarios de atencion si hay, si no hay, saltara un error o no se
+            // Toca insertar los horarios de atencion si hay, si no hay, saltara un error o
+            // no se
             // ejecutara lo siguiente.
             if (profesor.getHorarioAtencion().size() > 0) {
                 for (String horario : profesor.getHorarioAtencion()) {
@@ -254,7 +254,7 @@ public class ControlProfesores {
             }
         } catch (Exception e) { // No pasa nada
         }
-        //Fin de insertar horarios
+        // Fin de insertar horarios
         try {
             // Toca insertar las materias si hay, si no hay, saltara un error o no se
             // ejecutara lo siguiente.
@@ -288,40 +288,39 @@ public class ControlProfesores {
                 this.statement = this.con.prepareStatement(sql);
                 this.result = this.statement.executeQuery();
             } catch (Exception e) {
-                try {
-                    String sql = "DELETE FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" WHERE \"ID\"="
-                            + String.valueOf(id);
-                    this.statement = this.con.prepareStatement(sql);
-                    this.result = this.statement.executeQuery();
-                } catch (Exception e2) {
-                }
+            }
+            try {
+                String sql = "DELETE FROM " + ConnectionClass.getSchema()
+                        + "\"UsuarioXMaterias\" WHERE \"Usuario RegistradoID\"=" + String.valueOf(id);
+                this.statement = this.con.prepareStatement(sql);
+                this.result = this.statement.executeQuery();
+            } catch (Exception e) {
+            }
+            try {
+                String sql = "DELETE FROM " + ConnectionClass.getSchema()
+                        + "\"UsuarioXHorarioAtencion\" WHERE \"Usuario RegistradoID\"=" + String.valueOf(id);
+                this.statement = this.con.prepareStatement(sql);
+                this.result = this.statement.executeQuery();
+            } catch (Exception e) {
+            }
+            try {
+                String sql = "DELETE FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" WHERE \"ID\"="
+                        + String.valueOf(id);
+                this.statement = this.con.prepareStatement(sql);
+                this.result = this.statement.executeQuery();
+            } catch (Exception e) {
             }
         }
         return b;
     }
 
-    public boolean updateUsuarioRegistradoName(final String ID, final String NAME) {
-        boolean b = false;
-        String sql = "";
+    public boolean modificarProfesor(Profesor profesor) {
+        boolean b = true;
+        String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"="+profesor.getNombre()+", \"Contrasenia\"="+profesor.getContrasenia()+", \"Tipo\"=\'T\', \"Experiencia\"="+profesor.getExperiencia()+" WHERE \"Email\"="+profesor.getEmail()+";";
         try {
-            this.statement = this.con.prepareStatement(sql);
-            this.statement.execute();
-            b = true;
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
         } catch (Exception e) {
-            b = false;
-        }
-        return b;
-    }
-
-    public boolean updateUsuarioRegistradoTipo(final String ID, final char TIPO) {
-        boolean b = false;
-        String sql = "";
-        try {
-            this.statement = this.con.prepareStatement(sql);
-            this.statement.execute();
-            b = true;
-        } catch (Exception e) {
-            b = false;
         }
         return b;
     }
