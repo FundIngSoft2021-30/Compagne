@@ -24,7 +24,9 @@ public class App
         logros.add("Probabilidad");
         Profesor profe=new Profesor("Federico Lopez", "lopez.federico@javeriana.edu.co", materias, comentarios, "Solo profes PT", "la_contradefed$", h_aHashSet, logros);
         usc.crearProfesor(profe);
-        System.out.println("Creado "+ profe);
+        profe.setExperiencia("Pase GTA a la primera");
+        usc.modificarProfesor(profe);
+        System.out.println("Modificado "+ profe);
         usc.eliminarProfesor(profe.getEmail());
         System.out.println("Eliminado" + profe);
     }
