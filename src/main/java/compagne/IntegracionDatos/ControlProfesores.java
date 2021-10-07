@@ -385,6 +385,13 @@ public class ControlProfesores {
             } catch (Exception e) {
             }
             try {
+                String sql = "DELETE FROM " + ConnectionClass.getSchema()
+                        + "\"UsuarioXLogros\" WHERE \"Usuario RegistradoID\"=" + String.valueOf(id);
+                this.statement = this.con.prepareStatement(sql);
+                this.result = this.statement.executeQuery();
+            } catch (Exception e) {
+            }
+            try {
                 String sql = "DELETE FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" WHERE \"ID\"="
                         + String.valueOf(id);
                 this.statement = this.con.prepareStatement(sql);

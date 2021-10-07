@@ -87,7 +87,7 @@ public class ControlEstudiantes {
         return comID;
     }
 
-    public boolean insertarComentarioXestudiante(int tid, int id) {
+    public boolean insertarComentarioXEstudiante(int tid, int id) {
         /* Inserta un comentario para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del comentario*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
@@ -276,7 +276,7 @@ public class ControlEstudiantes {
                         id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
                     }
                     // Inserto un comentario para el usuario
-                    this.insertarHorarioXProfesor(tid, id);
+                    this.insertarComentarioXEstudiante(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada
@@ -284,7 +284,7 @@ public class ControlEstudiantes {
         return b;
     }
 
-    public boolean eliminarestudiante(String email) {
+    public boolean eliminarEstudiante(String email) {
         /* Elimina un estudiante de la BD. Recibe: email -> String que representa el email de un estudiante*/
         boolean b = true;
         int id = this.getEstudianteID(email);
