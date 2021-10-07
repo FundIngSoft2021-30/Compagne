@@ -290,7 +290,7 @@ public class ControlProfesores {
                         id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
                     }
                     // Inserto un comentario para el usuario
-                    this.insertarHorarioXProfesor(tid, id);
+                    this.insertarComentarioXProfesor(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada

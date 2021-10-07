@@ -262,6 +262,25 @@ public class ControlEstudiantes {
             }
         } catch (Exception e) { // No pasa nada
         }
+        try {
+            // Toca insertar los comentarios y calificaciones si hay, si no hay, saltara un
+            // error o no se
+            // ejecutara lo siguiente.
+            if (estudiante.getComentarios().size() > 0) {
+                for (Comentario comentario : estudiante.getComentarios()) {
+                    // Trato de encontrar un comentario para no repetir en la BD
+                    int id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+                    if (id == 0) {
+                        this.insertarComentario(comentario.getComentario(), comentario.getCalificacion());
+                        id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
+                    }
+                    // Inserto un comentario para el usuario
+                    this.insertarHorarioXProfesor(tid, id);
+                }
+            }
+        } catch (Exception e) { // No pasa nada
+        }
         return b;
     }
 
