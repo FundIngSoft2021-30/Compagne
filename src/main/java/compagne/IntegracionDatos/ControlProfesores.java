@@ -283,6 +283,25 @@ public class ControlProfesores {
             }
         } catch (Exception e) { // No pasa nada
         }
+        // Fin de insertar materias
+        try {
+            // Toca insertar las materias si hay, si no hay, saltara un error o no se
+            // ejecutara lo siguiente.
+            if (profesor.getMaterias().size() > 0) {
+                for (String materia : profesor.getMaterias()) {
+                    // Trato de encontrar un comentario para no repetir en la BD
+                    int id = this.getMateriaID(materia);
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+                    if (id == 0) {
+                        this.insertarMateria(materia);
+                        id = this.getMateriaID(materia);
+                    }
+                    // Inserto un comentario para el usuario
+                    this.insertarMateriaXProfesor(tid, id);
+                }
+            }
+        } catch (Exception e) { // No pasa nada
+        }
         return b;
     }
 

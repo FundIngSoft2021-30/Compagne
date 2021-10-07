@@ -100,7 +100,7 @@ public class ControlEstudiantes {
         }
         return b;
     }
-    
+
     private boolean insertarMateria(String materia) {
         /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
         boolean b = false;
@@ -152,7 +152,7 @@ public class ControlEstudiantes {
         return b;
     }
 
-    public boolean crearestudiante(Estudiante estudiante) {
+    public boolean crearEstudiante(Estudiante estudiante) {
         /*
          * Este método guarda un estudiante en la BD, recibe un objeto de la clase
          * estudiante y hace que este persista en la BD . Recibe: estudiante -> Instancia de
@@ -160,9 +160,9 @@ public class ControlEstudiantes {
          */
         boolean b = false; // Inicializo lo que retorno (Si el estudiante se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"UsuarioRegistrado\" (\"Nombre\",\"Tipo\", \"Email\",\"Contrasenia\", \"Experiencia\") VALUES ('"
+                + "\"UsuarioRegistrado\" (\"Nombre\",\"Tipo\", \"Email\",\"Contrasenia\") VALUES ('"
                 + estudiante.getNombre() + "', '" + "T" + "', '" + estudiante.getEmail() + "', '"
-                + estudiante.getContrasenia() + "', '" + estudiante.getExperiencia() + "');"; // Consulta SQL para insertar
+                + estudiante.getContrasenia() + "');"; // Consulta SQL para insertar
                                                                                           // un usuario registrado en la
                                                                                           // BD de tipo 'T' es decir
                                                                                           // estudiante en la BD
