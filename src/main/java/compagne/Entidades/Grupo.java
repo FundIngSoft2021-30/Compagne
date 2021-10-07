@@ -10,6 +10,6 @@ public class Grupo {
     private boolean privado;
     // private HashSet<Rol> roles;
     private HashSet<Reunion> reuniones;
-    private HashSet<Chat> chats;
+    private HashSet<ChatG> chats;
     // private HashSet <Usuario> miembros;
 }

@@ -3,7 +3,7 @@ package compagne.Entidades;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Usuario{
+public abstract class Usuario{
     private String nombre;
     private String email;
     private HashSet<String> materias;

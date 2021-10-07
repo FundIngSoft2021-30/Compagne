@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.HashSet;
 
-public class Chat {
+public abstract class Chat {
     private Date fechaCreacion;
     private String codigo;
     private char tipo;
