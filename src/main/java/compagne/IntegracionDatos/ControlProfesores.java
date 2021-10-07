@@ -170,7 +170,7 @@ public class ControlProfesores {
     }
 
     private int getMateriaID(String materia) {
-        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el nombre de la materia*/
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -190,10 +190,61 @@ public class ControlProfesores {
     }
 
     public boolean insertarMateriaXProfesor(int tid, int id) {
-        /* Inserta una materia para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
+        /* Inserta una materia para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id de la materia*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXMaterias\"(\"UsuarioRegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid) + ", "
+                + String.valueOf(id) + ");";
+        try {
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+
+    private boolean insertarLogro(String logro) {
+        /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
+        boolean b = false;
+        String consulta = "";
+        try {
+            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Logro\" (\"Texto\") VALUES (\'" + logro
+                    + "\');";
+
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+            b = true;
+        } catch (Exception e) {
+            b = false;
+        }
+        return b;
+    }
+
+    private int getLogroID(String logro) {
+        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        int r = 0;
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        try {
+            this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
+                    + "\"Logro\" WHERE \"Texto\"=\'" + logro + "\';");
+            this.result = this.statement.executeQuery();
+            if (this.result.next())
+                r = this.result.getInt(0 + offset);
+            else
+                throw new Exception("No encontrado");
+        } catch (Exception e) {
+            r = 0;
+        }
+        return r;
+    }
+
+    public boolean insertarLogroXProfesor(int tid, int id) {
+        /* Inserta una materia para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del logro*/
+        boolean b = true;
+        String consulta = "INSERT INTO " + ConnectionClass.getSchema()
+                + "\"UsuarioXLogros\"(\"UsuarioRegistradoID\", \"LogroID\") VALUES (" + String.valueOf(tid) + ", "
                 + String.valueOf(id) + ");";
         try {
             this.statement = this.con.prepareStatement(consulta);
@@ -285,19 +336,19 @@ public class ControlProfesores {
         }
         // Fin de insertar materias
         try {
-            // Toca insertar las materias si hay, si no hay, saltara un error o no se
+            // Toca insertar los logros si hay, si no hay, saltara un error o no se
             // ejecutara lo siguiente.
-            if (profesor.getMaterias().size() > 0) {
-                for (String materia : profesor.getMaterias()) {
+            if (profesor.getLogros().size() > 0) {
+                for (String logro : profesor.getLogros()) {
                     // Trato de encontrar un comentario para no repetir en la BD
-                    int id = this.getMateriaID(materia);
+                    int id = this.getLogroID(logro);
                     // Si el ID es 0, entonces no existe y hay que crearlo
                     if (id == 0) {
-                        this.insertarMateria(materia);
-                        id = this.getMateriaID(materia);
+                        this.insertarLogro(logro);
+                        id = this.getLogroID(logro);
                     }
                     // Inserto un comentario para el usuario
-                    this.insertarMateriaXProfesor(tid, id);
+                    this.insertarLogroXProfesor(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada

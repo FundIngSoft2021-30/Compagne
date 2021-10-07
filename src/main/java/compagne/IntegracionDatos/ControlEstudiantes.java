@@ -152,6 +152,57 @@ public class ControlEstudiantes {
         return b;
     }
 
+    private boolean insertarLogro(String logro) {
+        /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
+        boolean b = false;
+        String consulta = "";
+        try {
+            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Logro\" (\"Texto\") VALUES (\'" + logro
+                    + "\');";
+
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+            b = true;
+        } catch (Exception e) {
+            b = false;
+        }
+        return b;
+    }
+
+    private int getLogroID(String logro) {
+        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        int r = 0;
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        try {
+            this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
+                    + "\"Logro\" WHERE \"Texto\"=\'" + logro + "\';");
+            this.result = this.statement.executeQuery();
+            if (this.result.next())
+                r = this.result.getInt(0 + offset);
+            else
+                throw new Exception("No encontrado");
+        } catch (Exception e) {
+            r = 0;
+        }
+        return r;
+    }
+
+    public boolean insertarLogroXEstudiante(int tid, int id) {
+        /* Inserta una materia para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del logro*/
+        boolean b = true;
+        String consulta = "INSERT INTO " + ConnectionClass.getSchema()
+                + "\"UsuarioXLogros\"(\"UsuarioRegistradoID\", \"LogroID\") VALUES (" + String.valueOf(tid) + ", "
+                + String.valueOf(id) + ");";
+        try {
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+
     public boolean crearEstudiante(Estudiante estudiante) {
         /*
          * Este método guarda un estudiante en la BD, recibe un objeto de la clase
