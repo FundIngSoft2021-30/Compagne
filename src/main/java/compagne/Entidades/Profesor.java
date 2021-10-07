@@ -38,9 +38,9 @@ public class Profesor extends Usuario {
                 + getHorarioAtencion() + "'" + "}";
     }
 
-    public Profesor(String nombre, String email, HashSet<String> materias, String experiencia,
+    public Profesor(String nombre, String email, HashSet<String> materias, HashSet<Comentario> comentarios, String experiencia,
             HashSet<String> horarioAtencion) {
-        super(nombre, email, materias);
+        super(nombre, email, materias, comentarios);
         this.experiencia = experiencia;
         this.horarioAtencion = horarioAtencion;
     }

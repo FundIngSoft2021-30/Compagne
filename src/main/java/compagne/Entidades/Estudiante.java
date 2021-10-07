@@ -43,9 +43,9 @@ public class Estudiante extends Usuario {
                 + ", intereses='" + getIntereses() + "'" + "}";
     }
 
-    public Estudiante(String nombre, String email, HashSet<String> materias, String carrera, String semestre,
+    public Estudiante(String nombre, String email, HashSet<String> materias, HashSet<Comentario> comentarios, String carrera, String semestre,
             HashSet<String> intereses) {
-        super(nombre, email, materias);
+        super(nombre, email, materias, comentarios);
         this.carrera = carrera;
         this.semestre = semestre;
         this.intereses = intereses;
