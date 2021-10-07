@@ -20,10 +20,10 @@ public class App
         logros.add("Logro1");
         logros.add("Logro2");
         HashSet <String> materias=new HashSet<>();
-        logros.add("PensamientoS");
-        logros.add("PensamientoA");
-        logros.add("TeoriaC");
-        logros.add("Probabilidad");
+        materias.add("PensamientoS");
+        materias.add("PensamientoA");
+        materias.add("TeoriaC");
+        materias.add("Probabilidad");
         Profesor profe=new Profesor("Federico Lopez", "lopez.federico@javeriana.edu.co", materias, comentarios, "Solo profes PT", "la_contradefed$", h_aHashSet, logros);
         usc.crearProfesor(profe);
         System.out.println("Creado "+profe);
