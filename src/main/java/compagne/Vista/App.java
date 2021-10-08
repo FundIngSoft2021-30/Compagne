@@ -64,6 +64,5 @@ public class App {
                 facade.eliminarPerfilEstudiante("nclsbayona@javeriana.edu.co");
                 facade.eliminarPerfilEstudiante("podolskiS@javeriana.edu.co");
                 sc.close();
-
         }
 }
