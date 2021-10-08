@@ -35,7 +35,10 @@ public class ControlEstudiantes {
     }
 
     public boolean insertarComentario(String comentario, String calificacion) {
-        /*Inserta un comentario en la BD. Recibe: comentario -> String que tiene el texto, Calificacion -> String que tiene un numero con la calificacion*/
+        /*
+         * Inserta un comentario en la BD. Recibe: comentario -> String que tiene el
+         * texto, Calificacion -> String que tiene un numero con la calificacion
+         */
         boolean b = false;
         String consulta = "";
         try {
@@ -59,7 +62,11 @@ public class ControlEstudiantes {
     }
 
     public int getComentarioID(String comentario, String calificacion) {
-        /*Retorna el ID de un comentario en la BD. Recibe: comentario -> String que tiene el texto, Calificacion -> String que tiene un numero con la calificacion*/
+        /*
+         * Retorna el ID de un comentario en la BD. Recibe: comentario -> String que
+         * tiene el texto, Calificacion -> String que tiene un numero con la
+         * calificacion
+         */
         String consulta = "";
         int comID = 0;
         int offset = 0;
@@ -88,7 +95,10 @@ public class ControlEstudiantes {
     }
 
     public boolean insertarComentarioXEstudiante(int tid, int id) {
-        /* Inserta un comentario para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del comentario*/
+        /*
+         * Inserta un comentario para un estudiante. Recibe: tid-> int con el id del
+         * estudiante, id-> int con el id del comentario
+         */
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXComentario\"(\"UsuarioRegistradoID\", \"ComentarioID\") VALUES (" + String.valueOf(tid)
@@ -102,7 +112,10 @@ public class ControlEstudiantes {
     }
 
     private boolean insertarMateria(String materia) {
-        /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
+        /*
+         * Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre
+         * de la materia
+         */
         boolean b = false;
         String consulta = "";
         try {
@@ -119,7 +132,10 @@ public class ControlEstudiantes {
     }
 
     private int getMateriaID(String materia) {
-        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
+         * nombre de la materia
+         */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -139,7 +155,10 @@ public class ControlEstudiantes {
     }
 
     public boolean insertarMateriaXEstudiante(int tid, int id) {
-        /* Inserta una materia para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del comentario*/
+        /*
+         * Inserta una materia para un estudiante. Recibe: tid-> int con el id del
+         * estudiante, id-> int con el id de la materia
+         */
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXMaterias\"(\"Usuario RegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid) + ", "
@@ -153,13 +172,15 @@ public class ControlEstudiantes {
     }
 
     private boolean insertarLogro(String logro) {
-        /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
+        /*
+         * Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre
+         * de la materia
+         */
         boolean b = false;
         String consulta = "";
         try {
-            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Logro\" (\"Texto\") VALUES (\'" + logro
+            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Logro\"(\"Texto\") VALUES (\'" + logro
                     + "\');";
-
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
             b = true;
@@ -170,7 +191,10 @@ public class ControlEstudiantes {
     }
 
     private int getLogroID(String logro) {
-        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
+         * el momento del horario
+         */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -190,7 +214,10 @@ public class ControlEstudiantes {
     }
 
     public boolean insertarLogroXEstudiante(int tid, int id) {
-        /* Inserta una materia para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del logro*/
+        /*
+         * Inserta una materia para un estudiante. Recibe: tid-> int con el id del
+         * estudiante, id-> int con el id del logro
+         */
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXLogros\"(\"Usuario RegistradoID\", \"LogroID\") VALUES (" + String.valueOf(tid) + ", "

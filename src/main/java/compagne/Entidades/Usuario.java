@@ -9,6 +9,21 @@ public abstract class Usuario{
     private String contrasenia;
     private HashSet<String> materias;
     private HashSet<Comentario> comentarios;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+    public void setMaterias(HashSet<String> materias) {
+        this.materias = materias;
+    }
+    public void setComentarios(HashSet<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
 
 
     public String getNombre() {
