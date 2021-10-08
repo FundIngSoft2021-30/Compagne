@@ -44,11 +44,11 @@ public class ControlEstudiantes {
         try {
             if (calificacion != null && comentario != null)
                 consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                        + "\"Comentario\" (\"Texto\", \"Estrellas\") VALUES (\'" + comentario + "\', " + calificacion
-                        + ");";
+                        + "\"Comentario\" (\"Texto\", \"Estrellas\") VALUES (\'" + comentario + "\', \'" + calificacion
+                        + "\');";
             else if (calificacion != null)
-                consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Estrellas\") VALUES ("
-                        + calificacion + ");";
+                consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Estrellas\") VALUES (\'"
+                        + calificacion + "\');";
             else
                 consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Texto\") VALUES (\'"
                         + comentario + "\');";
@@ -74,13 +74,13 @@ public class ControlEstudiantes {
             offset = 1;
         if (calificacion != null && comentario != null)
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
-                    + comentario + "\' AND \"Estrellas\"=" + calificacion;
-        else if (calificacion != null)
-            consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"="
-                    + calificacion;
-        else
+                    + comentario + "\' AND \"Estrellas\"=\'" + calificacion + "\'";
+        else if (calificacion != null && comentario==null) {
+            System.out.println("Valor de calificacion: " + Double.valueOf(calificacion));
+            consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"=\'" + calificacion + "\'";
+        } else
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
-                    + comentario + "\';";
+                    + comentario + "\'";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.result = this.statement.executeQuery();

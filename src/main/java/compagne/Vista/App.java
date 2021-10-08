@@ -58,7 +58,7 @@ public class App {
         Estudiante estudiante1 = new Estudiante("Nicolas Pinto", "pintop@javeriana.edu.co", materias, comentarios,
                 "LaContr@", intereses, logros);
         uec.crearEstudiante(estudiante1);
-        System.out.println("Creado " + profe);
+        System.out.println("Creado " + estudiante1);
         sc.nextLine();
         estudiante1.setContrasenia("admin456");
         uec.modificarEstudiante(estudiante1);

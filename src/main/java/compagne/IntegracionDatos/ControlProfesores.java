@@ -47,11 +47,11 @@ public class ControlProfesores {
         try {
             if (calificacion != null && comentario != null)
                 consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                        + "\"Comentario\" (\"Texto\", \"Estrellas\") VALUES (\'" + comentario + "\', " + calificacion
-                        + ");";
+                        + "\"Comentario\" (\"Texto\", \"Estrellas\") VALUES (\'" + comentario + "\', \'" + calificacion
+                        + "\');";
             else if (calificacion != null)
-                consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Estrellas\") VALUES ("
-                        + calificacion + ");";
+                consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Estrellas\") VALUES (\'"
+                        + calificacion + "\');";
             else
                 consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Texto\") VALUES (\'"
                         + comentario + "\');";
@@ -77,13 +77,13 @@ public class ControlProfesores {
             offset = 1;
         if (calificacion != null && comentario != null)
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
-                    + comentario + "\' AND \"Estrellas\"=" + calificacion;
-        else if (calificacion != null)
-            consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"="
-                    + calificacion;
-        else
+                    + comentario + "\' AND \"Estrellas\"=\'" + calificacion + "\'";
+        else if (calificacion != null && comentario==null) {
+            System.out.println("Valor de calificacion: " + Double.valueOf(calificacion));
+            consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"=\'" + calificacion + "\'";
+        } else
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
-                    + comentario + "\';";
+                    + comentario + "\'";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.result = this.statement.executeQuery();
@@ -324,10 +324,13 @@ public class ControlProfesores {
                     // Trato de encontrar un comentario para no repetir en la BD
                     int id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
                     // Si el ID es 0, entonces no existe y hay que crearlo
+                    System.out.println("Valor del id: " + id);
                     if (id == 0) {
                         this.insertarComentario(comentario.getComentario(), comentario.getCalificacion());
                         id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());
+                        System.out.println("Valor del id_final1: " + id);
                     }
+                    System.out.println("Valor del id_final2: " + id);
                     // Inserto un comentario para el usuario
                     this.insertarComentarioXProfesor(tid, id);
                 }
