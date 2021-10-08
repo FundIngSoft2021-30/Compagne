@@ -75,10 +75,9 @@ public class ControlEstudiantes {
         if (calificacion != null && comentario != null)
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
                     + comentario + "\' AND \"Estrellas\"=\'" + calificacion + "\'";
-        else if (calificacion != null && comentario==null) {
-            System.out.println("Valor de calificacion: " + Double.valueOf(calificacion));
+        else if (calificacion != null && comentario==null) 
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"=\'" + calificacion + "\'";
-        } else
+        else
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
                     + comentario + "\'";
         try {

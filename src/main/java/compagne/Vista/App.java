@@ -68,7 +68,7 @@ public class App {
         logros.clear();
         Estudiante estudiante2 = new Estudiante("Lucas Podolski", "podolskiS@javeriana.edu.co", materias, comentarios,
                 "Contra", intereses, logros);
-        uec.modificarEstudiante(estudiante2);
+        uec.crearEstudiante(estudiante2);
         System.out.println("Agregado" + estudiante2);
         sc.nextLine();
         usc.eliminarProfesor(profe.getEmail());
