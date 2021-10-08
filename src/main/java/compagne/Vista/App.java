@@ -34,8 +34,9 @@ public class App {
         usc.modificarProfesor(profe);
         System.out.println("Modificado " + profe);
         sc.nextLine();
-        materias.clear();
         comentarios.clear();
+        comentarios.add(new Comentario(null, "Alcornoque"));
+        comentarios.add(new Comentario(null, "Necio"));
         logros.add("No me desconcentro en clases virtuales");
         Profesor profe2 = new Profesor("Albert Perilla", "peri_al@javeriana.edu.co", materias, comentarios,
                 "Solo profes PT", "la_contradefed$", h_aHashSet, logros);

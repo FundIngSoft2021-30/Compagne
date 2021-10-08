@@ -15,7 +15,10 @@ public class ControlProfesores {
     private ResultSet result;
 
     public int getProfesorID(String email) {
-        /* Este metodo retorna el ID de un profesor al cual busca por su mail. Recibe : email -> String que representa un email */
+        /*
+         * Este metodo retorna el ID de un profesor al cual busca por su mail. Recibe :
+         * email -> String que representa un email
+         */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -35,7 +38,10 @@ public class ControlProfesores {
     }
 
     public boolean insertarComentario(String comentario, String calificacion) {
-        /*Inserta un comentario en la BD. Recibe: comentario -> String que tiene el texto, Calificacion -> String que tiene un numero con la calificacion*/
+        /*
+         * Inserta un comentario en la BD. Recibe: comentario -> String que tiene el
+         * texto, Calificacion -> String que tiene un numero con la calificacion
+         */
         boolean b = false;
         String consulta = "";
         try {
@@ -59,7 +65,11 @@ public class ControlProfesores {
     }
 
     public int getComentarioID(String comentario, String calificacion) {
-        /*Retorna el ID de un comentario en la BD. Recibe: comentario -> String que tiene el texto, Calificacion -> String que tiene un numero con la calificacion*/
+        /*
+         * Retorna el ID de un comentario en la BD. Recibe: comentario -> String que
+         * tiene el texto, Calificacion -> String que tiene un numero con la
+         * calificacion
+         */
         String consulta = "";
         int comID = 0;
         int offset = 0;
@@ -88,7 +98,10 @@ public class ControlProfesores {
     }
 
     public boolean insertarComentarioXProfesor(int tid, int id) {
-        /* Inserta un comentario para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
+        /*
+         * Inserta un comentario para un profesor. Recibe: tid-> int con el id del
+         * profesor, id-> int con el id del comentario
+         */
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXComentario\"(\"UsuarioRegistradoID\", \"ComentarioID\") VALUES (" + String.valueOf(tid)
@@ -102,7 +115,10 @@ public class ControlProfesores {
     }
 
     private boolean insertarHorario(String horario) {
-        /*Inserta un horario en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        /*
+         * Inserta un horario en la BD. Recibe: horario -> String que tiene el el
+         * momento del horario
+         */
         boolean b = false;
         String consulta = "";
         try {
@@ -119,7 +135,10 @@ public class ControlProfesores {
     }
 
     private int getHorarioID(String horario) {
-        /*Retorna el id de un horario en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        /*
+         * Retorna el id de un horario en la BD. Recibe: horario -> String que tiene el
+         * el momento del horario
+         */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -139,10 +158,13 @@ public class ControlProfesores {
     }
 
     public boolean insertarHorarioXProfesor(int tid, int id) {
-        /* Inserta un horario para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
+        /*
+         * Inserta un horario para un profesor. Recibe: tid-> int con el id del
+         * profesor, id-> int con el id del comentario
+         */
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"UsuarioXHorarioAtencion\"(\"UsuarioRegistradoID\", \"HorarioID\") VALUES (" + String.valueOf(tid)
+                + "\"UsuarioXHorarioAtencion\"(\"Usuario RegistradoID\", \"HorarioID\") VALUES (" + String.valueOf(tid)
                 + ", " + String.valueOf(id) + ");";
         try {
             this.statement = this.con.prepareStatement(consulta);
@@ -153,7 +175,10 @@ public class ControlProfesores {
     }
 
     private boolean insertarMateria(String materia) {
-        /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
+        /*
+         * Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre
+         * de la materia
+         */
         boolean b = false;
         String consulta = "";
         try {
@@ -170,7 +195,10 @@ public class ControlProfesores {
     }
 
     private int getMateriaID(String materia) {
-        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el nombre de la materia*/
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
+         * nombre de la materia
+         */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -190,10 +218,13 @@ public class ControlProfesores {
     }
 
     public boolean insertarMateriaXProfesor(int tid, int id) {
-        /* Inserta una materia para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id de la materia*/
+        /*
+         * Inserta una materia para un profesor. Recibe: tid-> int con el id del
+         * profesor, id-> int con el id de la materia
+         */
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"UsuarioXMaterias\"(\"UsuarioRegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid) + ", "
+                + "\"UsuarioXMaterias\"(\"Usuario RegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid) + ", "
                 + String.valueOf(id) + ");";
         try {
             this.statement = this.con.prepareStatement(consulta);
@@ -204,13 +235,15 @@ public class ControlProfesores {
     }
 
     private boolean insertarLogro(String logro) {
-        /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
+        /*
+         * Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre
+         * de la materia
+         */
         boolean b = false;
         String consulta = "";
         try {
-            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Logro\" (\"Texto\") VALUES (\'" + logro
+            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Logro\"(\"Texto\") VALUES (\'" + logro
                     + "\');";
-
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
             b = true;
@@ -221,7 +254,10 @@ public class ControlProfesores {
     }
 
     private int getLogroID(String logro) {
-        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
+         * el momento del horario
+         */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -241,10 +277,13 @@ public class ControlProfesores {
     }
 
     public boolean insertarLogroXProfesor(int tid, int id) {
-        /* Inserta una materia para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del logro*/
+        /*
+         * Inserta una materia para un profesor. Recibe: tid-> int con el id del
+         * profesor, id-> int con el id del logro
+         */
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"UsuarioXLogros\"(\"UsuarioRegistradoID\", \"LogroID\") VALUES (" + String.valueOf(tid) + ", "
+                + "\"UsuarioXLogros\"(\"Usuario RegistradoID\", \"LogroID\") VALUES (" + String.valueOf(tid) + ", "
                 + String.valueOf(id) + ");";
         try {
             this.statement = this.con.prepareStatement(consulta);
@@ -310,7 +349,7 @@ public class ControlProfesores {
                         id = this.getHorarioID(horario);
                     }
                     // Inserto un comentario para el usuario
-                    this.insertarComentarioXProfesor(tid, id);
+                    this.insertarHorarioXProfesor(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada
@@ -347,7 +386,7 @@ public class ControlProfesores {
                         this.insertarLogro(logro);
                         id = this.getLogroID(logro);
                     }
-                    // Inserto un comentario para el usuario
+                    // Inserto un logro para el usuario
                     this.insertarLogroXProfesor(tid, id);
                 }
             }
@@ -357,7 +396,10 @@ public class ControlProfesores {
     }
 
     public boolean eliminarProfesor(String email) {
-        /* Elimina un profesor de la BD. Recibe: email -> String que representa el email de un profesor*/
+        /*
+         * Elimina un profesor de la BD. Recibe: email -> String que representa el email
+         * de un profesor
+         */
         boolean b = true;
         int id = this.getProfesorID(email);
         if (id == 0)
@@ -403,9 +445,16 @@ public class ControlProfesores {
     }
 
     public boolean modificarProfesor(Profesor profesor) {
-        /* Modifica un profesor en la BD. Recibe: profesor -> Instancia de la clase profesor que tiene los datos actualizados de un profesor, sin embargo, su e-mail no cambia*/
+        /*
+         * Modifica un profesor en la BD. Recibe: profesor -> Instancia de la clase
+         * profesor que tiene los datos actualizados de un profesor, sin embargo, su
+         * e-mail no cambia
+         */
         boolean b = true;
-        String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"=\'"+profesor.getNombre()+"\', \"Contrasenia\"=\'"+profesor.getContrasenia()+"\', \"Tipo\"=\'T\', \"Experiencia\"=\'"+profesor.getExperiencia()+"\' WHERE \"Email\"=\'"+profesor.getEmail()+"\';";
+        String consulta = "UPDATE " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" SET \"Nombre\"=\'"
+                + profesor.getNombre() + "\', \"Contrasenia\"=\'" + profesor.getContrasenia()
+                + "\', \"Tipo\"=\'T\', \"Experiencia\"=\'" + profesor.getExperiencia() + "\' WHERE \"Email\"=\'"
+                + profesor.getEmail() + "\';";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();

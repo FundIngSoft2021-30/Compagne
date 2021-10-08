@@ -142,7 +142,7 @@ public class ControlEstudiantes {
         /* Inserta una materia para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del comentario*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"UsuarioXMaterias\"(\"UsuarioRegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid) + ", "
+                + "\"UsuarioXMaterias\"(\"Usuario RegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid) + ", "
                 + String.valueOf(id) + ");";
         try {
             this.statement = this.con.prepareStatement(consulta);
@@ -190,10 +190,10 @@ public class ControlEstudiantes {
     }
 
     public boolean insertarLogroXEstudiante(int tid, int id) {
-        /* Inserta una materia para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del logro*/
+        /* Inserta una materia para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del logro*/
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"UsuarioXLogros\"(\"UsuarioRegistradoID\", \"LogroID\") VALUES (" + String.valueOf(tid) + ", "
+                + "\"UsuarioXLogros\"(\"Usuario RegistradoID\", \"LogroID\") VALUES (" + String.valueOf(tid) + ", "
                 + String.valueOf(id) + ");";
         try {
             this.statement = this.con.prepareStatement(consulta);
@@ -237,7 +237,7 @@ public class ControlEstudiantes {
                         this.insertarLogro(logro);
                         id = this.getLogroID(logro);
                     }
-                    // Inserto un comentario para el usuario
+                    // Inserto un logro para el usuario
                     this.insertarLogroXEstudiante(tid, id);
                 }
             }
