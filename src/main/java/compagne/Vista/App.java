@@ -8,12 +8,12 @@ import compagne.Entidades.Estudiante;
 import compagne.Entidades.Profesor;
 import compagne.IntegracionDatos.ControlEstudiantes;
 import compagne.IntegracionDatos.ControlProfesores;
+import compagne.Negocio.FacadeCompagne;
 
 public class App {
         public static void main(String[] args) {
                 Scanner sc = new Scanner(System.in);
-                ControlProfesores usc = new ControlProfesores();
-                ControlEstudiantes uec = new ControlEstudiantes();
+                FacadeCompagne facade=new FacadeCompagne();
                 HashSet<Comentario> comentarios = new HashSet<>();
                 comentarios.add(new Comentario(null, "Hola soy pepe"));
                 comentarios.add(new Comentario("4.5", null));
@@ -28,23 +28,18 @@ public class App {
                 materias.add("PensamientoA");
                 materias.add("TeoriaC");
                 materias.add("Probabilidad");
-                Profesor profe = new Profesor("Federico Lopez", "lopez.federico@javeriana.edu.co", materias,
-                                comentarios, "Solo profes PT", "la_contradefed$", h_aHashSet, logros);
-                usc.crearProfesor(profe);
-                System.out.println("Creado " + profe);
+                facade.crearPerfilProfesor("Federico Lopez", "Solo profes PT", "lopez.federico@javeriana.edu.co", "JaveTE@cher123", h_aHashSet, materias, comentarios, logros);
+                System.out.println("Creado");
                 sc.nextLine();
-                profe.setExperiencia("Pase GTA a la primera");
-                usc.modificarProfesor(profe);
-                System.out.println("Modificado " + profe);
+                facade.modificarPerfilProfesor("Federico Lopez Triana", "Seriedad", "lopez.federico@javeriana.edu.co", "JaveTE@cher123");
+                System.out.println("Modificado ");
                 sc.nextLine();
                 comentarios.clear();
                 comentarios.add(new Comentario(null, "Alcornoque"));
                 comentarios.add(new Comentario(null, "Necio"));
                 logros.add("No me desconcentro en clases virtuales");
-                Profesor profe2 = new Profesor("Albert Perilla", "peri_al@javeriana.edu.co", materias, comentarios,
-                                "Solo profes PT", "la_contradefed$", h_aHashSet, logros);
-                usc.crearProfesor(profe2);
-                System.out.println("Agregado" + profe2);
+                facade.crearPerfilProfesor("Albert Perilla", "peri_al@javeriana.edu.co","Solo profes PT", "la_contradefed$", h_aHashSet, materias, comentarios, logros);
+                System.out.println("Agregado");
                 sc.nextLine();
                 System.out.println("-----------------------------\n-------------------------------");
                 comentarios.clear();
@@ -55,29 +50,24 @@ public class App {
                 HashSet<String> intereses = new HashSet<>();
                 intereses.add("Cloud Computing");
                 intereses.add("Las niñas");
-                Estudiante estudiante1 = new Estudiante("Nicolas Bayona", "nclsbayona@javeriana.edu.co", materias,
-                                comentarios, "LaContr@", intereses, logros);
-                uec.crearEstudiante(estudiante1);
-                System.out.println("Creado " + estudiante1);
+                facade.crearPerfilEstudiante("Nicolas Bayona", "nclsbayona@javeriana.edu.co","L@Contr@", materias, comentarios, intereses, logros);
+                System.out.println("Creado estudiante");
                 sc.nextLine();
-                estudiante1.setContrasenia("admin456");
-                uec.modificarEstudiante(estudiante1);
-                System.out.println("Modificado " + estudiante1);
+                facade.modificarPerfilEstudiante("Nicolas Bayona", "nclsbayona@javeriana.edu.co", "admin456");
+                System.out.println("Modificado el estudiante");
                 sc.nextLine();
                 intereses.clear();
                 intereses.add("Futbol");
                 comentarios.clear();
                 logros.clear();
-                Estudiante estudiante2 = new Estudiante("Lucas Podolski", "podolskiS@javeriana.edu.co", materias,
-                                comentarios, "Contra", intereses, logros);
-                uec.crearEstudiante(estudiante2);
-                System.out.println("Agregado" + estudiante2);
+                facade.crearPerfilEstudiante("Lucas Podolski", "podolskiS@javeriana.edu.co", "Contra", materias, comentarios, intereses, logros);
+                System.out.println("Agregado");
                 sc.nextLine();
-                usc.eliminarProfesor(profe.getEmail());
-                usc.eliminarProfesor(profe2.getEmail());
-                uec.eliminarEstudiante(estudiante1.getEmail());
-                uec.eliminarEstudiante(estudiante2.getEmail());
-                System.out.println("Eliminado" + profe + '\n' + profe2 + estudiante1 + '\n' + estudiante2);
+                facade.eliminarPerfilProfesor("lopez.federico@javeriana.edu.co");
+                facade.eliminarPerfilProfesor("peri_al@javeriana.edu.co");
+                facade.eliminarPerfilEstudiante("nclsbayona@javeriana.edu.co");
+                facade.eliminarPerfilEstudiante("podolskiS@javeriana.edu.co");
                 sc.close();
+
         }
 }
