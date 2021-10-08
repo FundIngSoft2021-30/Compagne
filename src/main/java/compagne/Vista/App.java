@@ -34,7 +34,7 @@ public class App {
                 comentarios.add(new Comentario(null, "Alcornoque"));
                 comentarios.add(new Comentario(null, "Necio"));
                 logros.add("No me desconcentro en clases virtuales");
-                facade.crearPerfilProfesor("Albert Perilla", "peri_al@javeriana.edu.co","Solo profes PT", "la_contradefed$", h_aHashSet, materias, comentarios, logros);
+                facade.crearPerfilProfesor("Albert Perilla", "Solo profes PT", "peri_al@javeriana.edu.co","la_contradefed$", h_aHashSet, materias, comentarios, logros);
                 System.out.println("Agregado");
                 sc.nextLine();
                 System.out.println("-----------------------------\n-------------------------------");

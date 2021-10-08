@@ -46,7 +46,7 @@ public class FacadeCompagne {
 
     public Estudiante modificarPerfilEstudiante(String nombre, String email, String contrasenia) {
         Estudiante estudiante = new Estudiante(nombre, email, null, null, contrasenia, null, null);
-        this.controlEstudiantes.crearEstudiante(estudiante);
+        this.controlEstudiantes.modificarEstudiante(estudiante);
         return estudiante;
     }
 
