@@ -50,13 +50,15 @@ public class ControlGrupos {
         return r;
     }
 
-    public boolean insertarUsuarioXGrupoEstudio(int grupoid, int idusuario, String admin) {
+    public boolean insertarUsuarioXGrupoEstudio(String cod, String email, String admin) {
         /*
          * Inserta un usuario en un grupo. Recibe: grupoid-> int con el idusuario del
          * grupo, idusuario-> int con el id del usuario, admin -> String (S/N) que determina
          * si el usuario es admin
          */
         boolean b = true;
+        int idusuario=this.getUsarioID(email);
+        int grupoid=this.getGrupoID(cod);
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioxGrupoEstudio\"(\"UsuarioRegistradoID\", \"GrupoEstudioID\", \"Admin\") VALUES (" + String.valueOf(idusuario) + ", "
                 + String.valueOf(grupoid) + ",\'" + admin.toUpperCase() + "\');";
@@ -68,13 +70,15 @@ public class ControlGrupos {
         return b;
     }
 
-    public boolean eliminarUsuarioXGrupoEstudio(int grupoid, int idusuario) {
+    public boolean eliminarUsuarioXGrupoEstudio(String cod, String email) {
         /*
          * Elimina un usuario en un grupo. Recibe: grupoid-> int con el idusuario del
          * grupo, idusuario-> int con el id del usuario, admin -> String (S/N) que determina
          * si el usuario es admin
          */
         boolean b = true;
+        int idusuario=this.getUsarioID(email);
+        int grupoid=this.getGrupoID(cod);
         String consulta = "DELETE FROM " + ConnectionClass.getSchema()
                         + "\"UsuarioxGrupoEstudio\" WHERE \"UsuarioRegistradoID\"=" + 
                 String.valueOf(idusuario) + " AND \"GrupoEstudioID\"= " + String.valueOf(grupoid) ;
@@ -122,13 +126,9 @@ public class ControlGrupos {
             this.statement.execute(); // Ejecutando una consulta SQL
         } catch (Exception e) {
         }
-        
-        //Cada vez que se crea un grupo se debe agregar a la persona como administradora
-        int usuarioid = this.getUsarioID(usuario.getEmail());// El ID del usuario que inserta el grupo
-        int grupoid = this.getGrupoID(grupo.getCodigo());
         try {
             // Toca insertar el usuario y el grupo en UsuarioXGrupoEstudio
-            this.insertarUsuarioXGrupoEstudio(grupoid, usuarioid, "S");
+            this.insertarUsuarioXGrupoEstudio(grupo.getCodigo(), usuario.getEmail(), "S");
         } catch (Exception e) { // No pasa nada
         }
         // Fin de crear grupo

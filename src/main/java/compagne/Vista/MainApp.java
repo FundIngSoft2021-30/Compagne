@@ -96,9 +96,9 @@ public class MainApp {
                 sc.nextLine();
                 System.out.println(facade.modificarGrupo("5inc0+1", "aasa", "S"));
                 sc.nextLine();
-                System.out.println(facade.agregarUsuarioAGrupo(1, 4, "N"));
+                System.out.println(facade.agregarUsuarioAGrupo("aasa", "peri_al@javeriana.edu.co", "N"));
                 sc.nextLine();
-                System.out.println(facade.eliminarUsuarioDeGrupo(1, 4));
+                System.out.println(facade.eliminarUsuarioDeGrupo("aasa", "peri_al@javeriana.edu.co"));
                 sc.nextLine();
                 System.out.println(facade.eliminarGrupo("aasa"));
                 sc.nextLine();

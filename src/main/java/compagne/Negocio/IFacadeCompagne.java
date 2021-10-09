@@ -39,8 +39,8 @@ public interface IFacadeCompagne {
     public Grupo crearGrupo(String nombre, String codigo, String publico, Usuario usuario);
     public Grupo modificarGrupo(String nombre, String codigo, String publico);
     public boolean eliminarGrupo(String codigo);
-    public boolean agregarUsuarioAGrupo(int grupoid, int idusuario, String admin);
-    public boolean eliminarUsuarioDeGrupo(int grupoid, int idusuario);
+    public boolean agregarUsuarioAGrupo(String grupocod, String email, String admin);
+    public boolean eliminarUsuarioDeGrupo(String grupocod, String email);
     public boolean hacerAdminDeGrupo(int grupoid, int idusuario);
     
     
