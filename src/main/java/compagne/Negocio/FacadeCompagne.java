@@ -7,20 +7,24 @@ import java.util.HashSet;
 
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
+import compagne.Entidades.Grupo;
 import compagne.Entidades.Profesor;
 import compagne.Entidades.Usuario;
 import compagne.IntegracionDatos.ControlProfesores;
 import compagne.IntegracionDatos.ConnectionClass;
 import compagne.IntegracionDatos.ControlEstudiantes;
+import compagne.IntegracionDatos.ControlGrupos;
 
 public class FacadeCompagne implements IFacadeCompagne {
     private ControlProfesores controlProfesores;
     private ControlEstudiantes controlEstudiantes;
+    private ControlGrupos controlGrupos;
     public static FacadeCompagne instance;
 
     public FacadeCompagne() {
         this.controlEstudiantes = new ControlEstudiantes();
         this.controlProfesores = new ControlProfesores();
+        this.controlGrupos = new ControlGrupos();
     }
 
     public static FacadeCompagne getInstance() {
@@ -266,4 +270,33 @@ public class FacadeCompagne implements IFacadeCompagne {
         }
         return usu;
     }
+    
+    public Grupo crearGrupo(String nombre, String codigo, String publico, Usuario usuario)
+    {
+        Grupo grupo = new Grupo(nombre, codigo, publico);
+        if (!this.controlGrupos.crearGrupo(grupo,usuario))
+            grupo = null;
+        return grupo;
+    }
+    public Grupo modificarGrupo(String nombre, String codigo, String publico)
+    {
+        Grupo grupo = new Grupo(nombre, codigo, publico);
+        if (!this.controlGrupos.modificarGrupo(grupo))
+            grupo = null;
+        return grupo;
+    }
+    public boolean eliminarGrupo(String codigo)
+    {
+        return this.controlGrupos.eliminarGrupo(codigo);
+    }
+    public boolean agregarUsuarioAGrupo(int grupoid, int idusuario, String admin)
+    {
+        return this.controlGrupos.insertarUsuarioXGrupoEstudio(grupoid, idusuario, admin);
+    }
+    public boolean eliminarUsuarioDeGrupo(int grupoid, int idusuario)
+    {
+        return this.controlGrupos.eliminarUsuarioXGrupoEstudio(grupoid, idusuario);
+    }
+
+
 }
