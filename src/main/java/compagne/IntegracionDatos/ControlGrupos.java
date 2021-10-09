@@ -14,15 +14,15 @@ public class ControlGrupos {
     private PreparedStatement statement;
     private ResultSet result;
 
-    public int getProfesorID(String email) {
-        /* Este metodo retorna el ID de un profesor al cual busca por su mail. Recibe : email -> String que representa un email */
+    public int getGrupoID(String codigo) {
+        /* Este metodo retorna el ID de un grupo al cual busca por su codigo. Recibe : codigo -> String que representa un codigo */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
             offset = 1;
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
-                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\';");
+                    + "\"GrupoEstudio\" WHERE \"Codigo\"=\'" + codigo + "\';");
             this.result = this.statement.executeQuery();
             if (this.result.next())
                 r = this.result.getInt(0 + offset);
@@ -33,6 +33,22 @@ public class ControlGrupos {
         }
         return r;
     }
+    
+    
+      public boolean insertarUsuarioXGrupoEstudio(int grupoid, int usuarioid) {
+        /* Inserta un comentario para un profesor. Recibe: grupoid-> int con el id del grupo, usuarioid-> int con el id del usuario*/
+        boolean b = true;
+        String consulta = "INSERT INTO " + ConnectionClass.getSchema()
+                + "\"UsuarioXGrupoEstudio\"(\"UsuarioRegistradoID\", \"GrupoEstudioID\") VALUES (" + String.valueOf(usuarioid)
+                + ", " + String.valueOf(grupoid) + ");";
+        try {
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+
 
     public boolean insertarComentario(String comentario, String calificacion) {
         /*Inserta un comentario en la BD. Recibe: comentario -> String que tiene el texto, Calificacion -> String que tiene un numero con la calificacion*/
@@ -87,20 +103,7 @@ public class ControlGrupos {
         return comID;
     }
 
-    public boolean insertarComentarioXProfesor(int tid, int id) {
-        /* Inserta un comentario para un profesor. Recibe: tid-> int con el id del profesor, id-> int con el id del comentario*/
-        boolean b = true;
-        String consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"UsuarioXComentario\"(\"UsuarioRegistradoID\", \"ComentarioID\") VALUES (" + String.valueOf(tid)
-                + ", " + String.valueOf(id) + ");";
-        try {
-            this.statement = this.con.prepareStatement(consulta);
-            this.statement.executeQuery();
-        } catch (Exception e) {
-        }
-        return b;
-    }
-
+  
     private boolean insertarHorario(String horario) {
         /*Inserta un horario en la BD. Recibe: horario -> String que tiene el el momento del horario*/
         boolean b = false;
