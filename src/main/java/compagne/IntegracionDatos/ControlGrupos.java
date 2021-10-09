@@ -114,8 +114,8 @@ public class ControlGrupos {
          */
         boolean b = false; // Inicializo lo que retorno (Si el grupo se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"GrupoEstudio\" (\"Nombre\",\"Privado\", \"Codigo\") VALUES ('"
-                + grupo.getNombre() + "'N'" + grupo.getCodigo() + "');"; 
+                + "\"GrupoEstudio\" (\"Nombre\",\"Publico\", \"Codigo\") VALUES ('"
+                + grupo.getNombre() + "','S','" + grupo.getCodigo() + "');"; 
         // Consulta SQL para insertar
         // un grupo registrado en la BD
 
@@ -124,6 +124,7 @@ public class ControlGrupos {
             this.statement.execute(); // Ejecutando una consulta SQL
             b = true; // No hubo problemas
         } catch (Exception e) {
+            e.printStackTrace();
             b = false; // Si hubo problemas
         }
         
@@ -181,7 +182,7 @@ public class ControlGrupos {
          */
         boolean b = true;
         String consulta = "UPDATE " + ConnectionClass.getSchema() + "\"GrupoEstudio\" SET \"Nombre\"=\'"
-                + grupo.getNombre() + "\', \"Privado\"=\'" + grupo.isPublico()
+                + grupo.getNombre() + "\', \"Publico\"=\'" + grupo.isPublico()
                 + "  WHERE \"Codigo\"=\'"
                 + grupo.getCodigo()+ "\';";
         try {
