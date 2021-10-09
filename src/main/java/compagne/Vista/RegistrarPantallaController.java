@@ -5,31 +5,36 @@
  */
 package compagne.Vista;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
-import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
+import compagne.IntegracionDatos.ControlEstudiantes;
+//=======
 import compagne.Negocio.FacadeCompagne;
+import compagne.Negocio.IFacadeCompagne;
+import java.awt.Color;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.layout.Background;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+///>>>>>>> 60a44a9f7d2519d87c29665bdb34fa070ea9e964
 
 /**
  * FXML Controller class
  *
  * @author samue
  */
-public class RegistrarPantallaController {
-
-    private FacadeCompagne facadeCompagne;
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
+public class RegistrarPantallaController implements Initializable {
+    
+    static IFacadeCompagne facade = FacadeCompagne.getInstance();
+    
     @FXML
     private CheckBox checkAcuerdo;
 
@@ -54,7 +59,41 @@ public class RegistrarPantallaController {
     @FXML
     private Button registrarse;
 
+    
+//<<<<<<< HEAD
     @FXML
+    void click(ActionEvent event) {
+        
+        if(event.getSource()==checkProfesor){
+            checkEstudiante.setSelected(false);
+        }
+        if(event.getSource()==checkEstudiante){
+            checkProfesor.setSelected(false);
+        }
+        if(event.getSource()==registrarse){
+            if(checkAcuerdo.isSelected() && (checkEstudiante.isSelected() || checkProfesor.isSelected())){
+                if(email.getText()!=null && nombre.getText()!=null && contraseña.getText()!=null && confirmarContraseña.getText()!=null && confirmarContraseña.getText().equals(contraseña.getText())){
+                    if(checkEstudiante.isSelected()){    
+                        facade.crearPerfilEstudiante(nombre.getText(), email.getText(), contraseña.getText(), null, null, null, null);
+                    }if(checkProfesor.isSelected()){
+                        facade.crearPerfilProfesor(nombre.getText(), null, email.getText(), contraseña.getText(), null, null, null, null);
+                    }
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("No se pudo registrar");
+                    alert.setContentText("Por favor llene todos los campos");
+                    alert.showAndWait();
+                }
+            }
+        }
+    }
+                    
+                            
+                
+    
+    
+//=======
     void registroAction(ActionEvent event) {
         try {
             boolean checkAcuerdo = this.checkAcuerdo.isSelected();
@@ -66,10 +105,10 @@ public class RegistrarPantallaController {
             String nombre = this.nombre.getText();
             // TODO faltan confirmaciones
             if ((contra.equals(confirmacion))&&((checkAcuerdo && checkEstudiante
-                    && this.facadeCompagne.crearPerfilEstudiante(nombre, email, contra, null, null, null, null)
+                    && this.facade.crearPerfilEstudiante(nombre, email, contra, null, null, null, null)
                             .getContrasenia() == null)
                     || (checkAcuerdo && checkProfesor
-                            && this.facadeCompagne
+                            && this.facade
                                     .crearPerfilProfesor(nombre, null, email, contra, null, null, null, null)
                                     .getContrasenia() == null)))
                 throw new Exception("Error");
@@ -78,9 +117,9 @@ public class RegistrarPantallaController {
         }
     }
 
-    @FXML
-    void initialize() {
-        this.facadeCompagne = new FacadeCompagne();
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
         assert checkAcuerdo != null
                 : "fx:id=\"checkAcuerdo\" was not injected: check your FXML file 'RegistrarPantalla.fxml'.";
         assert checkEstudiante != null
@@ -96,4 +135,6 @@ public class RegistrarPantallaController {
         assert registrarse != null
                 : "fx:id=\"registrarse\" was not injected: check your FXML file 'RegistrarPantalla.fxml'.";
     }
+//>>>>>>> 60a44a9f7d2519d87c29665bdb34fa070ea9e964
+
 }

@@ -14,7 +14,7 @@
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Vista.RegistrarPantallaController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="40.0" layoutX="111.0" layoutY="534.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
-      <Button fx:id="registrarse" layoutX="106.0" layoutY="527.0" mnemonicParsing="false" onAction="#registroAction" prefHeight="40.0" prefWidth="120.0" text="Registrarse">
+      <Button fx:id="registrarse" layoutX="106.0" layoutY="527.0" mnemonicParsing="false" onAction="#click" prefHeight="40.0" prefWidth="120.0" text="Registrarse">
          <font>
             <Font size="16.0" />
          </font>
@@ -24,44 +24,44 @@
             <Image url="@Compagne.png" />
          </image>
       </ImageView>
-      <TextField fx:id="nombre" layoutX="101.0" layoutY="259.0" prefHeight="25.0" prefWidth="225.0" />
-      <Text layoutX="11.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:">
+      <TextField fx:id="nombre" layoutX="155.0" layoutY="259.0" />
+      <Text layoutX="41.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="12.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+      <Text layoutX="41.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="9.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña:">
+      <Text layoutX="41.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña:">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="9.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmar Contraseña:" wrappingWidth="128.98602294921875">
+      <Text layoutX="41.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmar Contraseña:" wrappingWidth="106.765625">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="email" layoutX="94.0" layoutY="299.0" prefHeight="25.0" prefWidth="232.0" />
-      <CheckBox fx:id="checkProfesor" layoutX="30.0" layoutY="452.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="120.0" text="Soy profesor">
+      <TextField fx:id="email" layoutX="155.0" layoutY="299.0" />
+      <CheckBox fx:id="checkProfesor" layoutX="30.0" layoutY="452.0" mnemonicParsing="false" onAction="#click" prefWidth="104.0" text="Soy profesor">
          <font>
             <Font size="13.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="checkEstudiante" layoutX="193.0" layoutY="452.0" mnemonicParsing="false" text="Soy Estudiante">
+      <CheckBox fx:id="checkEstudiante" layoutX="193.0" layoutY="452.0" mnemonicParsing="false" onAction="#click" text="Soy Estudiante">
          <font>
             <Font size="13.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="checkAcuerdo" layoutX="30.0" layoutY="491.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="311.0" text="Estoy de acuerdo con los terminos y condiciones">
+      <CheckBox fx:id="checkAcuerdo" layoutX="16.0" layoutY="491.0" mnemonicParsing="false" text="Estoy de acuerdo con los terminos y condiciones">
          <font>
-            <Font size="10.0" />
+            <Font size="13.0" />
          </font>
       </CheckBox>
-      <PasswordField fx:id="contraseña" layoutX="137.0" layoutY="341.0" prefHeight="26.0" prefWidth="190.0" />
-      <PasswordField fx:id="confirmarContraseña" layoutX="137.0" layoutY="393.0" prefHeight="26.0" prefWidth="190.0" />
+      <PasswordField fx:id="contraseña" layoutX="155.0" layoutY="341.0" />
+      <PasswordField fx:id="confirmarContraseña" layoutX="155.0" layoutY="401.0" />
    </children>
 </AnchorPane>

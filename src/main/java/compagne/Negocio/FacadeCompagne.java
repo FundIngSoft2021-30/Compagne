@@ -9,13 +9,23 @@ import compagne.Entidades.Usuario;
 import compagne.IntegracionDatos.ControlProfesores;
 import compagne.IntegracionDatos.ControlEstudiantes;
 
-public class FacadeCompagne {
+public class FacadeCompagne implements IFacadeCompagne{
     private ControlProfesores controlProfesores;
     private ControlEstudiantes controlEstudiantes;
+    public static FacadeCompagne instance;
+    
+    
 
     public FacadeCompagne() {
         this.controlEstudiantes = new ControlEstudiantes();
         this.controlProfesores = new ControlProfesores();
+    }
+    
+    
+    public static FacadeCompagne getInstance(){
+        if(instance==null)
+            instance = new FacadeCompagne();
+        return instance;
     }
 
     public Profesor crearPerfilProfesor(String nombre, String experiencia, String email, String contrasenia,
