@@ -64,7 +64,6 @@ public class ControlGrupos {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return b;
     }
