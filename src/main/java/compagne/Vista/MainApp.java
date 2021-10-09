@@ -92,9 +92,9 @@ public class MainApp {
                 }
                 sc.nextLine();
                 System.out.println("Los metodos de grupo y eso");
-                System.out.println(facade.crearGrupo("5inc0+1", "aasa", "S", facade.iniciarSesion("nclsbayona@javeriana.edu.co", "admin456")));
+                System.out.println(facade.crearGrupo("5inc0+1", "aasa", "N", facade.iniciarSesion("nclsbayona@javeriana.edu.co", "admin456")));
                 sc.nextLine();
-                System.out.println(facade.modificarGrupo("5inc0+1", "aasa", "N"));
+                System.out.println(facade.modificarGrupo("5inc0+1", "aasa", "S"));
                 sc.nextLine();
                 System.out.println(facade.agregarUsuarioAGrupo(1, 4, "N"));
                 sc.nextLine();

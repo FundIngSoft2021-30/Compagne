@@ -37,7 +37,7 @@ public class ControlGrupos {
         }
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
-                    + "\"GrupoEstudio\" WHERE \"Codigo\"=\'" + codigo + ";");
+                    + "\"GrupoEstudio\" WHERE \"Codigo\"=\'" + codigo + "\';");
             this.result = this.statement.executeQuery();
             if (this.result.next()) {
                 r = this.result.getInt(0 + offset);
@@ -59,11 +59,12 @@ public class ControlGrupos {
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioxGrupoEstudio\"(\"UsuarioRegistradoID\", \"GrupoEstudioID\", \"Admin\") VALUES (" + String.valueOf(idusuario) + ", "
-                + String.valueOf(grupoid) + ", " + admin.toUpperCase() + ");";
+                + String.valueOf(grupoid) + ",\'" + admin.toUpperCase() + "\');";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return b;
     }
@@ -82,7 +83,6 @@ public class ControlGrupos {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
         } catch (Exception e) {
-            return false;
         }
         return b;
     }
@@ -95,13 +95,12 @@ public class ControlGrupos {
          */
          boolean b = true;
          String consulta = "UPDATE " + ConnectionClass.getSchema() + 
-                 "\"UsuarioxGrupoEstudio\" SET \"Admin\"=\"S\" WHERE \"UsuarioRegistradoID\" = \""
+                 "\"UsuarioxGrupoEstudio\" SET \"Admin\"=\'S\' WHERE \"UsuarioRegistradoID\" = \""
                 + idusuario+ "\" AND \"GrupoEstudioID\" =  \""+grupoid+"\" ;";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
         } catch (Exception e) {
-            return false;
         }
         return b;
         
@@ -112,19 +111,17 @@ public class ControlGrupos {
          * grupo y hace que este persista en la BD . Recibe: grupo -> Instancia de
          * la clase Grupo, representa el grupo que quiere guardarse en la BD
          */
-        boolean b = false; // Inicializo lo que retorno (Si el grupo se guardo bien)
+        boolean b = true; // Inicializo lo que retorno (Si el grupo se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"GrupoEstudio\" (\"Nombre\",\"Publico\", \"Codigo\") VALUES ('"
-                + grupo.getNombre() + "','S','" + grupo.getCodigo() + "');"; 
+                + grupo.getNombre() + "','"+grupo.isPublico()+"','" + grupo.getCodigo() + "');"; 
         // Consulta SQL para insertar
         // un grupo registrado en la BD
 
         try {
             this.statement = this.con.prepareStatement(sql); // Preparando una consulta SQL
             this.statement.execute(); // Ejecutando una consulta SQL
-            b = true; // No hubo problemas
         } catch (Exception e) {
-            b = false; // Si hubo problemas
         }
         
         //Cada vez que se crea un grupo se debe agregar a la persona como administradora
@@ -133,9 +130,7 @@ public class ControlGrupos {
         try {
             // Toca insertar el usuario y el grupo en UsuarioXGrupoEstudio
             this.insertarUsuarioXGrupoEstudio(grupoid, usuarioid, "S");
-            
         } catch (Exception e) { // No pasa nada
-            return false;
         }
         // Fin de crear grupo
         return b;
@@ -158,7 +153,6 @@ public class ControlGrupos {
                 this.statement = this.con.prepareStatement(sql);
                 this.result = this.statement.executeQuery();
             } catch (Exception e) {
-                return false;
             }       
             try {
                 //Borrar grupo de GrupoEstudio
@@ -167,7 +161,6 @@ public class ControlGrupos {
                 this.statement = this.con.prepareStatement(sql);
                 this.result = this.statement.executeQuery();
             } catch (Exception e) {
-                return false;
             }
         }
         return b;
@@ -182,13 +175,12 @@ public class ControlGrupos {
         boolean b = true;
         String consulta = "UPDATE " + ConnectionClass.getSchema() + "\"GrupoEstudio\" SET \"Nombre\"=\'"
                 + grupo.getNombre() + "\', \"Publico\"=\'" + grupo.isPublico()
-                + "  WHERE \"Codigo\"=\'"
+                + "\'  WHERE \"Codigo\"=\'"
                 + grupo.getCodigo()+ "\';";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
         } catch (Exception e) {
-            return false;
         }
         return b;
     }
@@ -205,14 +197,14 @@ public class ControlGrupos {
             offset = 1;
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
-                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + ";");
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\';");
             this.result = this.statement.executeQuery();
             if (this.result.next())
                 r = this.result.getInt(0 + offset);
             else
                 throw new Exception("No encontrado");
         } catch (Exception e) {
-            r = 0;
+            r=0;
         }
         return r;
     }
