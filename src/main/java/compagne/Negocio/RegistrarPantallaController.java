@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+    
 package compagne.Negocio;
 
 import javafx.event.ActionEvent;
@@ -98,5 +100,4 @@ public class RegistrarPantallaController implements Initializable {
                 : "fx:id=\"registrarse\" was not injected: check your FXML file 'RegistrarPantalla.fxml'.";
 
     }
-
 }
