@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import compagne.Entidades.Comentario;
 import compagne.Entidades.Grupo;
-import compagne.Entidades.Profesor;
 import compagne.Entidades.Usuario;
 
 public class ControlGrupos {
