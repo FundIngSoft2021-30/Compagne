@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-//<<<<<<< HEAD
 import compagne.IntegracionDatos.ControlEstudiantes;
 //=======
 import compagne.Negocio.FacadeCompagne;
@@ -32,16 +31,9 @@ import javax.swing.JOptionPane;
  *
  * @author samue
  */
-public class RegistrarPantallaController implements Initializable{    
+public class RegistrarPantallaController implements Initializable {
     
     static IFacadeCompagne facade = FacadeCompagne.getInstance();
-    
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
     
     @FXML
     private CheckBox checkAcuerdo;
