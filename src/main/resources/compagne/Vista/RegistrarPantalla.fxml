@@ -48,11 +48,9 @@
       </CheckBox>
       <PasswordField fx:id="contraseña" layoutX="155.0" layoutY="341.0" />
       <PasswordField fx:id="confirmarContraseña" layoutX="155.0" layoutY="401.0" />
-      <CheckBox fx:id="checkProfesor" layoutX="41.0" layoutY="453.0" mnemonicParsing="false" onAction="#click" text="Soy Profesor" />
-      <CheckBox fx:id="checkEstudiante" layoutX="179.0" layoutY="453.0" mnemonicParsing="false" onAction="#click" text="Soy Estudiante" />
-      <Button fx:id="registrarse" layoutX="103.0" layoutY="523.0" mnemonicParsing="false" onAction="#click" prefHeight="43.0" prefWidth="120.0" text="Registrarse">
+      <Button fx:id="registrarse" layoutX="106.0" layoutY="527.0" mnemonicParsing="false" onAction="#click" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #2b78e4; -fx-border-color: BLACK;" text="Registrarse" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="108.0">
          <font>
-            <Font size="15.0" />
+            <Font size="16.0" />
          </font>
       </Button>
    </children>
