@@ -20,8 +20,8 @@ public class Mensaje {
         if (!(o instanceof Mensaje)) {
             return false;
         }
-        Mensaje mensaje = (Mensaje) o;
-        return Objects.equals(hora, mensaje.hora) && Objects.equals(mensaje, mensaje.mensaje);
+        Mensaje objeto = (Mensaje) o;
+        return Objects.equals(hora, objeto.hora) && Objects.equals(mensaje, objeto.mensaje);
     }
 
     @Override

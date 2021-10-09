@@ -91,6 +91,18 @@ public class MainApp {
                         System.out.println("Fallo");
                 }
                 sc.nextLine();
+                System.out.println("Los metodos de grupo y eso");
+                System.out.println(facade.crearGrupo("5inc0+1", "aasa", "S", facade.iniciarSesion("nclsbayona@javeriana.edu.co", "admin456")));
+                sc.nextLine();
+                System.out.println(facade.modificarGrupo("5inc0+1", "aasa", "N"));
+                sc.nextLine();
+                System.out.println(facade.agregarUsuarioAGrupo(1, 4, "N"));
+                sc.nextLine();
+                System.out.println(facade.eliminarUsuarioDeGrupo(1, 4));
+                sc.nextLine();
+                System.out.println(facade.eliminarGrupo("aasa"));
+                sc.nextLine();
+                facade.eliminarGrupo("aasa");
                 facade.eliminarPerfilProfesor("lopez.federico@javeriana.edu.co");
                 facade.eliminarPerfilProfesor("peri_al@javeriana.edu.co");
                 facade.eliminarPerfilEstudiante("nclsbayona@javeriana.edu.co");

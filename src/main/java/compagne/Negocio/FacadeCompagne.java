@@ -1,6 +1,4 @@
 package compagne.Negocio;
-
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -278,6 +276,7 @@ public class FacadeCompagne implements IFacadeCompagne {
             grupo = null;
         return grupo;
     }
+
     public Grupo modificarGrupo(String nombre, String codigo, String publico)
     {
         Grupo grupo = new Grupo(nombre, codigo, publico);
@@ -285,14 +284,17 @@ public class FacadeCompagne implements IFacadeCompagne {
             grupo = null;
         return grupo;
     }
+
     public boolean eliminarGrupo(String codigo)
     {
         return this.controlGrupos.eliminarGrupo(codigo);
     }
+
     public boolean agregarUsuarioAGrupo(int grupoid, int idusuario, String admin)
     {
         return this.controlGrupos.insertarUsuarioXGrupoEstudio(grupoid, idusuario, admin);
     }
+    
     public boolean eliminarUsuarioDeGrupo(int grupoid, int idusuario)
     {
         return this.controlGrupos.eliminarUsuarioXGrupoEstudio(grupoid, idusuario);

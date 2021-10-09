@@ -1,6 +1,5 @@
 package compagne.Entidades;
 
-import java.util.Objects;
 import java.util.HashSet;
 
 public class Grupo {
