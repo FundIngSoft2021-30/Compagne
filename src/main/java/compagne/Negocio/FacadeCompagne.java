@@ -41,7 +41,8 @@ public class FacadeCompagne {
     public Estudiante crearPerfilEstudiante(String nombre, String email, String contrasenia, HashSet<String> materias,
             HashSet<Comentario> comentarios, HashSet<String> intereses, HashSet<String> logros) {
         Estudiante estudiante = new Estudiante(nombre, email, materias, comentarios, contrasenia, intereses, logros);
-        this.controlEstudiantes.crearEstudiante(estudiante);
+        if (!this.controlEstudiantes.crearEstudiante(estudiante))
+        estudiante = new Estudiante(null, null, null, null, null, null, null);
         return estudiante;
     }
 
