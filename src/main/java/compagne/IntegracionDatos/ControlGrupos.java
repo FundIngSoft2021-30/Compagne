@@ -124,7 +124,6 @@ public class ControlGrupos {
             this.statement.execute(); // Ejecutando una consulta SQL
             b = true; // No hubo problemas
         } catch (Exception e) {
-            e.printStackTrace();
             b = false; // Si hubo problemas
         }
         
