@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
+import compagne.Negocio.FacadeCompagne;
 /**
  * FXML Controller class
  *
@@ -21,6 +21,8 @@ import javafx.scene.control.TextField;
  */
 public class RegistrarPantallaController implements Initializable {
 
+    private FacadeCompagne facadeCompagne;
+    
     @FXML
     private CheckBox checkAcuerdo;
 

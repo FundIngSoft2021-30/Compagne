@@ -63,6 +63,5 @@
          </font>
       </CheckBox>
       <PasswordField fx:id="contraseña" layoutX="155.0" layoutY="341.0" />
-      <PasswordField fx:id="contraseña" layoutX="154.0" layoutY="404.0" />
    </children>
 </AnchorPane>
