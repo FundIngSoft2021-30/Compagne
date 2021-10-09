@@ -297,6 +297,23 @@ public class FacadeCompagne implements IFacadeCompagne {
     {
         return this.controlGrupos.eliminarUsuarioXGrupoEstudio(grupoid, idusuario);
     }
+    
+    public boolean hacerAdminDeGrupo(int grupoid, int idusuario)
+    {
+        return this.controlGrupos.hacerAdminDeGrupo(grupoid, idusuario);
+    }
+    
+    
+    
+    //BUSQUEDA
+    public int buscarIDUsuario(String email)
+    {
+        return this.controlGrupos.getUsarioID(email);
+    }
+    public int buscarIDGrupo(String codigo)
+    {
+        return this.controlGrupos.getGrupoID(codigo);
+    }
 
 
 }

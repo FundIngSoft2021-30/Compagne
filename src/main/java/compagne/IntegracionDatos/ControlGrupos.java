@@ -52,7 +52,6 @@ public class ControlGrupos {
         return r;
     }
 
-
     public boolean insertarUsuarioXGrupoEstudio(int grupoid, int idusuario, String admin) {
         /*
          * Inserta un usuario en un grupo. Recibe: grupoid-> int con el idusuario del
@@ -90,6 +89,25 @@ public class ControlGrupos {
         return b;
     }
 
+    public boolean hacerAdminDeGrupo(int grupoid, int idusuario)
+    {
+         /*
+         * Convierte a un usuario en administrador del grupo. Recibe: grupoid-> int con el idusuario del
+         * grupo, idusuario-> int con el id del usuario
+         */
+         boolean b = true;
+         String consulta = "UPDATE " + ConnectionClass.getSchema() + 
+                 "\"UsuarioxGrupoEstudio\" SET \"Admin\"=\"S\" WHERE \"UsuarioRegistradoID\" = \""
+                + idusuario+ "\" AND \"GrupoEstudioID\" =  \""+grupoid+"\" ;";
+        try {
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+        } catch (Exception e) {
+            return false;
+        }
+        return b;
+        
+    }
     public boolean crearGrupo(Grupo grupo, Usuario usuario) {
         /*
          * Este método guarda un grupo en la BD, recibe un objeto de la clase
@@ -172,6 +190,7 @@ public class ControlGrupos {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
         } catch (Exception e) {
+            return false;
         }
         return b;
     }
