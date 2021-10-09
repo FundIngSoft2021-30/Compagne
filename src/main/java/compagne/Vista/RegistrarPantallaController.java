@@ -5,6 +5,7 @@
  */
 package compagne.Vista;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import compagne.IntegracionDatos.ControlEstudiantes;
 
 /**
  * FXML Controller class
@@ -21,6 +23,7 @@ import javafx.scene.control.TextField;
  */
 public class RegistrarPantallaController implements Initializable {
 
+    
     @FXML
     private CheckBox checkAcuerdo;
 
@@ -42,6 +45,19 @@ public class RegistrarPantallaController implements Initializable {
     @FXML
     private Button registrarse;
 
+    @FXML
+    void click(ActionEvent event) {
+        
+        if(event.getSource()==checkProfesor){
+            checkEstudiante.setSelected(false);
+        }
+        if(event.getSource()==checkEstudiante){
+            checkProfesor.setSelected(false);
+        }
+        if(event.getSource()==registrarse){
+            
+        }
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

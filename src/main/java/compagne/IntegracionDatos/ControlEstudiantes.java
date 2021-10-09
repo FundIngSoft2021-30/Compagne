@@ -13,6 +13,10 @@ public class ControlEstudiantes {
     private Connection con;
     private PreparedStatement statement;
     private ResultSet result;
+    
+    public void instanceOf(){
+        
+    }
 
     public int getEstudianteID(String email) {
         /* Este metodo retorna el ID de un estudiante al cual busca por su mail. Recibe : email -> String que representa un email */
