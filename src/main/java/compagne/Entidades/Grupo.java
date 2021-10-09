@@ -1,6 +1,7 @@
 package compagne.Entidades;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 public class Grupo {
     private String nombre;
@@ -78,7 +79,36 @@ public class Grupo {
         this.chats = chats;
     }
     
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Grupo)) {
+            return false;
+        }
+        Grupo grupo = (Grupo) o;
+        return Objects.equals(nombre, grupo.nombre) && Objects.equals(codigo, grupo.codigo) && Objects.equals(publico, grupo.publico) && Objects.equals(roles, grupo.roles) && Objects.equals(miembros, grupo.miembros) && Objects.equals(reuniones, grupo.reuniones) && Objects.equals(chats, grupo.chats);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, codigo, publico, roles, miembros, reuniones, chats);
+    }
     
+
+    @Override
+    public String toString() {
+        return "{" +
+            " nombre='" + getNombre() + "'" +
+            ", codigo='" + getCodigo() + "'" +
+            ", publico='" + isPublico() + "'" +
+            ", roles='" + getRoles() + "'" +
+            ", miembros='" + getMiembros() + "'" +
+            ", reuniones='" + getReuniones() + "'" +
+            ", chats='" + getChats() + "'" +
+            "}";
+    }
     
     
 }
