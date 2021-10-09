@@ -5,7 +5,7 @@
  */
 package compagne.Negocio;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -14,9 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import compagne.Negocio.FacadeCompagne;
-import compagne.Negocio.IFacadeCompagne;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 
 /**
@@ -70,7 +67,7 @@ public class RegistrarPantallaController implements Initializable {
                         facade.crearPerfilEstudiante(nombre.getText(), email.getText(), contraseña.getText(), null,
                                 null, null, null);
                     }
-                    if (checkProfesor.isSelected()) {
+                   else if (checkProfesor.isSelected()) {
                         facade.crearPerfilProfesor(nombre.getText(), null, email.getText(), contraseña.getText(), null,
                                 null, null, null);
                     }

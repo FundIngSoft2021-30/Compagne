@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Vista.RegistrarPantallaController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.RegistrarPantallaController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="40.0" layoutX="111.0" layoutY="534.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
       <ImageView fitHeight="245.0" fitWidth="353.0" layoutX="-8.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
@@ -53,5 +53,7 @@
             <Font size="16.0" />
          </font>
       </Button>
+      <CheckBox fx:id="checkProfesor" layoutX="36.0" layoutY="455.0" mnemonicParsing="false" onAction="#click" text="Soy Profesor" />
+      <CheckBox fx:id="checkEstudiante" layoutX="187.0" layoutY="455.0" mnemonicParsing="false" onAction="#click" text="Soy Estudiante" />
    </children>
 </AnchorPane>
