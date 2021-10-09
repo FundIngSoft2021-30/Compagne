@@ -91,6 +91,12 @@ public class MainApp {
                         System.out.println("Fallo");
                 }
                 sc.nextLine();
+                System.out.println("Los metodos de grupo y eso");
+
+
+
+                sc.nextLine();
+                facade.eliminarGrupo("aasa");
                 facade.eliminarPerfilProfesor("lopez.federico@javeriana.edu.co");
                 facade.eliminarPerfilProfesor("peri_al@javeriana.edu.co");
                 facade.eliminarPerfilEstudiante("nclsbayona@javeriana.edu.co");
