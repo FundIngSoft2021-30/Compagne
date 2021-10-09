@@ -14,6 +14,16 @@ public class ControlProfesores {
     private PreparedStatement statement;
     private ResultSet result;
 
+    public ResultSet executeQuery(String query) {
+        try {
+            this.statement = this.con.prepareStatement(query);
+            this.result = this.statement.executeQuery();
+        } catch (SQLException e) {
+            this.result=null;
+        }
+        return this.result;
+    }
+
     public int getProfesorID(String email) {
         /*
          * Este metodo retorna el ID de un profesor al cual busca por su mail. Recibe :

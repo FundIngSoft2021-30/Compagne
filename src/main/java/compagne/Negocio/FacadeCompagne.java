@@ -1,5 +1,8 @@
 package compagne.Negocio;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 
 import compagne.Entidades.Comentario;
@@ -7,23 +10,21 @@ import compagne.Entidades.Estudiante;
 import compagne.Entidades.Profesor;
 import compagne.Entidades.Usuario;
 import compagne.IntegracionDatos.ControlProfesores;
+import compagne.IntegracionDatos.ConnectionClass;
 import compagne.IntegracionDatos.ControlEstudiantes;
 
-public class FacadeCompagne implements IFacadeCompagne{
+public class FacadeCompagne implements IFacadeCompagne {
     private ControlProfesores controlProfesores;
     private ControlEstudiantes controlEstudiantes;
     public static FacadeCompagne instance;
-    
-    
 
     public FacadeCompagne() {
         this.controlEstudiantes = new ControlEstudiantes();
         this.controlProfesores = new ControlProfesores();
     }
-    
-    
-    public static FacadeCompagne getInstance(){
-        if(instance==null)
+
+    public static FacadeCompagne getInstance() {
+        if (instance == null)
             instance = new FacadeCompagne();
         return instance;
     }
@@ -34,7 +35,7 @@ public class FacadeCompagne implements IFacadeCompagne{
         Profesor profesor = new Profesor(nombre, email, materias, comentarios, experiencia, contrasenia,
                 horariosAtencion, logros);
         if (!this.controlProfesores.crearProfesor(profesor))
-            profesor = new Profesor(null, null, null, null, null, null, null, null);
+            profesor = null;
         return profesor;
     }
 
@@ -53,7 +54,7 @@ public class FacadeCompagne implements IFacadeCompagne{
             HashSet<Comentario> comentarios, HashSet<String> intereses, HashSet<String> logros) {
         Estudiante estudiante = new Estudiante(nombre, email, materias, comentarios, contrasenia, intereses, logros);
         if (!this.controlEstudiantes.crearEstudiante(estudiante))
-            estudiante = new Estudiante(null, null, null, null, null, null, null);
+            estudiante = null;
         return estudiante;
     }
 
@@ -107,5 +108,63 @@ public class FacadeCompagne implements IFacadeCompagne{
             b = false;
         }
         return b;
+    }
+
+    public Usuario iniciarSesion(String email, String contra) {
+        Usuario usu = null;
+        String consulta = "";
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        int estID = this.controlEstudiantes.getEstudianteID(email);
+        int proID = this.controlProfesores.getProfesorID(email);
+        boolean b = false;
+        if (estID > 0) {
+            consulta = "SELECT \"Nombre\" FROM " + ConnectionClass.getSchema()
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=" + "\'" + email
+                    + "\' AND \"Tipo\"=\'S\' AND \"Contrasenia\"=\'" + contra + "\';";
+            ResultSet rs = this.controlEstudiantes.executeQuery(consulta);
+            try {
+                if (rs.next())
+                    b = true;
+            } catch (SQLException e) {
+                b=false;
+            }
+            if (b){
+                // Si hay
+                HashSet<String> logros = new HashSet<>();
+                HashSet<Comentario> comentarios = new HashSet<>();
+                HashSet<String> materias = new HashSet<>();
+                //Logros
+                consulta = "SELECT LO.\"Texto\" FROM " + ConnectionClass.getSchema() + "\"Logro\" AS LO, "
+                        + ConnectionClass.getSchema()
+                        + "\"UsuarioXLogros\" AS UXL WHERE UXL.\"Usuario RegistradoID\"=" + estID
+                        + " AND UXL.\"LogroID\"=LO.\"ID\";";
+                rs = this.controlEstudiantes.executeQuery(consulta);
+                try {
+                    while (rs.next()) {
+                        logros.add(rs.getString(0+offset));
+                    }
+                } catch (Exception e) {
+                    //Nada
+                }
+                //Comentarios
+                consulta = "SELECT CO.\"Texto\" FROM " + ConnectionClass.getSchema() + "\"Logro\" AS LO, "
+                        + ConnectionClass.getSchema()
+                        + "\"UsuarioXLogros\" AS UXL WHERE UXL.\"Usuario RegistradoID\"=" + estID
+                        + " AND UXL.\"LogroID\"=LO.\"ID\";";
+                rs = this.controlEstudiantes.executeQuery(consulta);
+                try {
+                    while (rs.next()) {
+                        logros.add(rs.getString(0+offset));
+                    }
+                } catch (Exception e) {
+                    //Nada
+                }
+            }
+        } else if (proID > 0) {
+
+        }
+        return usu;
     }
 }

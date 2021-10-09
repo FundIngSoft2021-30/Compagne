@@ -13,20 +13,33 @@ public class ControlEstudiantes {
     private Connection con;
     private PreparedStatement statement;
     private ResultSet result;
-    
-    public void instanceOf(){
-        
+
+    public void instanceOf() {
+
+    }
+
+    public ResultSet executeQuery(String query) {
+        try {
+            this.statement = this.con.prepareStatement(query);
+            this.result = this.statement.executeQuery();
+        } catch (SQLException e) {
+            this.result=null;
+        }
+        return this.result;
     }
 
     public int getEstudianteID(String email) {
-        /* Este metodo retorna el ID de un estudiante al cual busca por su mail. Recibe : email -> String que representa un email */
+        /*
+         * Este metodo retorna el ID de un estudiante al cual busca por su mail. Recibe
+         * : email -> String que representa un email
+         */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
             offset = 1;
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
-                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\';");
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\' AND TIPO=\'S\';");
             this.result = this.statement.executeQuery();
             if (this.result.next())
                 r = this.result.getInt(0 + offset);
@@ -79,8 +92,9 @@ public class ControlEstudiantes {
         if (calificacion != null && comentario != null)
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
                     + comentario + "\' AND \"Estrellas\"=\'" + calificacion + "\'";
-        else if (calificacion != null && comentario==null) 
-            consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"=\'" + calificacion + "\'";
+        else if (calificacion != null && comentario == null)
+            consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"=\'"
+                    + calificacion + "\'";
         else
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
                     + comentario + "\'";
@@ -236,17 +250,18 @@ public class ControlEstudiantes {
     public boolean crearEstudiante(Estudiante estudiante) {
         /*
          * Este método guarda un estudiante en la BD, recibe un objeto de la clase
-         * estudiante y hace que este persista en la BD . Recibe: estudiante -> Instancia de
-         * la clase estudiante, representa el estudiante que quiere guardarse en la BD
+         * estudiante y hace que este persista en la BD . Recibe: estudiante ->
+         * Instancia de la clase estudiante, representa el estudiante que quiere
+         * guardarse en la BD
          */
         boolean b = false; // Inicializo lo que retorno (Si el estudiante se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioRegistrado\" (\"Nombre\",\"Tipo\", \"Email\",\"Contrasenia\") VALUES ('"
                 + estudiante.getNombre() + "', '" + "S" + "', '" + estudiante.getEmail() + "', '"
                 + estudiante.getContrasenia() + "');"; // Consulta SQL para insertar
-                                                                                          // un usuario registrado en la
-                                                                                          // BD de tipo 'T' es decir
-                                                                                          // estudiante en la BD
+                                                       // un usuario registrado en la
+                                                       // BD de tipo 'T' es decir
+                                                       // estudiante en la BD
         try {
             this.statement = this.con.prepareStatement(sql); // Preparando una consulta SQL
             this.statement.execute(); // Ejecutando una consulta SQL
@@ -315,7 +330,10 @@ public class ControlEstudiantes {
     }
 
     public boolean eliminarEstudiante(String email) {
-        /* Elimina un estudiante de la BD. Recibe: email -> String que representa el email de un estudiante*/
+        /*
+         * Elimina un estudiante de la BD. Recibe: email -> String que representa el
+         * email de un estudiante
+         */
         boolean b = true;
         int id = this.getEstudianteID(email);
         if (id == 0)
@@ -354,9 +372,15 @@ public class ControlEstudiantes {
     }
 
     public boolean modificarEstudiante(Estudiante estudiante) {
-        /* Modifica un estudiante en la BD. Recibe: estudiante -> Instancia de la clase estudiante que tiene los datos actualizados de un estudiante, sin embargo, su e-mail no cambia*/
+        /*
+         * Modifica un estudiante en la BD. Recibe: estudiante -> Instancia de la clase
+         * estudiante que tiene los datos actualizados de un estudiante, sin embargo, su
+         * e-mail no cambia
+         */
         boolean b = true;
-        String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"=\'"+estudiante.getNombre()+"\', \"Contrasenia\"=\'"+estudiante.getContrasenia()+"\', \"Tipo\"=\'S\' WHERE \"Email\"=\'"+estudiante.getEmail()+"\';";
+        String consulta = "UPDATE " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" SET \"Nombre\"=\'"
+                + estudiante.getNombre() + "\', \"Contrasenia\"=\'" + estudiante.getContrasenia()
+                + "\', \"Tipo\"=\'S\' WHERE \"Email\"=\'" + estudiante.getEmail() + "\';";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
