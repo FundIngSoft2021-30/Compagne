@@ -14,6 +14,16 @@ public class ControlProfesores {
     private PreparedStatement statement;
     private ResultSet result;
 
+    public ResultSet executeQuery(String query) {
+        try {
+            this.statement = this.con.prepareStatement(query);
+            this.result = this.statement.executeQuery();
+        } catch (SQLException e) {
+            this.result=null;
+        }
+        return this.result;
+    }
+
     public int getProfesorID(String email) {
         /*
          * Este metodo retorna el ID de un profesor al cual busca por su mail. Recibe :
@@ -25,7 +35,7 @@ public class ControlProfesores {
             offset = 1;
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
-                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\';");
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\' AND \"Tipo\"=\'T\';");
             this.result = this.statement.executeQuery();
             if (this.result.next())
                 r = this.result.getInt(0 + offset);
@@ -47,11 +57,11 @@ public class ControlProfesores {
         try {
             if (calificacion != null && comentario != null)
                 consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                        + "\"Comentario\" (\"Texto\", \"Estrellas\") VALUES (\'" + comentario + "\', " + calificacion
-                        + ");";
+                        + "\"Comentario\" (\"Texto\", \"Estrellas\") VALUES (\'" + comentario + "\', \'" + calificacion
+                        + "\');";
             else if (calificacion != null)
-                consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Estrellas\") VALUES ("
-                        + calificacion + ");";
+                consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Estrellas\") VALUES (\'"
+                        + calificacion + "\');";
             else
                 consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Texto\") VALUES (\'"
                         + comentario + "\');";
@@ -77,13 +87,12 @@ public class ControlProfesores {
             offset = 1;
         if (calificacion != null && comentario != null)
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
-                    + comentario + "\' AND \"Estrellas\"=" + calificacion;
-        else if (calificacion != null)
-            consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"="
-                    + calificacion;
+                    + comentario + "\' AND \"Estrellas\"=\'" + calificacion + "\'";
+        else if (calificacion != null && comentario==null) 
+            consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"=\'" + calificacion + "\'";
         else
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
-                    + comentario + "\';";
+                    + comentario + "\'";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.result = this.statement.executeQuery();

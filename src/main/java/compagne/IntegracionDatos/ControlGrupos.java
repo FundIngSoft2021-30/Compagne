@@ -22,7 +22,11 @@ public class ControlGrupos {
             offset = 1;
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
+<<<<<<< HEAD
                     + "\"GrupoEstudio\" WHERE \"Codigo\"=\'" + codigo + "\';");
+=======
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\' AND TIPO=\'T\';");
+>>>>>>> 0a4ab575f8af7c2fa45075d4bc7f403f4378037f
             this.result = this.statement.executeQuery();
             if (this.result.next())
                 r = this.result.getInt(0 + offset);
@@ -227,7 +231,8 @@ public class ControlGrupos {
         } catch (Exception e) {
             b = false; // Si hubo problemas
         }
-        int tid = this.getProfesorID(profesor.getEmail()); // El ID del profesor que acabo de insertar
+        int tid=0;
+        //int tid = this.getProfesorID(profesor.getEmail()); // El ID del profesor que acabo de insertar
         try {
             // Toca insertar los comentarios y calificaciones si hay, si no hay, saltara un
             // error o no se
@@ -262,7 +267,7 @@ public class ControlGrupos {
                         id = this.getHorarioID(horario);
                     }
                     // Inserto un comentario para el usuario
-                    this.insertarComentarioXProfesor(tid, id);
+                    //this.insertarComentarioXProfesor(tid, id);
                 }
             }
         } catch (Exception e) { // No pasa nada
@@ -311,7 +316,8 @@ public class ControlGrupos {
     public boolean eliminarProfesor(String email) {
         /* Elimina un profesor de la BD. Recibe: email -> String que representa el email de un profesor*/
         boolean b = true;
-        int id = this.getProfesorID(email);
+        int id=0;
+        //int id = this.getProfesorID(email);
         if (id == 0)
             b = false;
         else {

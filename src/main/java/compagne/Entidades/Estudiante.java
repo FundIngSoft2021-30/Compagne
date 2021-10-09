@@ -4,18 +4,8 @@ import java.util.HashSet;
 import java.util.Objects;
 
 public class Estudiante extends Usuario {
-    private String carrera;
-    private String semestre;
     private HashSet<String> intereses;
     private HashSet<String> logros;
-
-    public String getCarrera() {
-        return this.carrera;
-    }
-
-    public String getSemestre() {
-        return this.semestre;
-    }
 
     public HashSet<String> getIntereses() {
         return this.intereses;
@@ -34,30 +24,26 @@ public class Estudiante extends Usuario {
             return false;
         }
         Estudiante estudiante = (Estudiante) o;
-        return Objects.equals(carrera, estudiante.carrera) && Objects.equals(semestre, estudiante.semestre) && Objects.equals(intereses, estudiante.intereses) && Objects.equals(logros, estudiante.logros);
+        return Objects.equals(intereses, estudiante.intereses) && Objects.equals(logros, estudiante.logros);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(carrera, semestre, intereses, logros);
+        return Objects.hash(intereses, logros);
     }
 
 
     @Override
     public String toString() {
         return "{" +
-            " carrera='" + getCarrera() + "'" +
-            ", semestre='" + getSemestre() + "'" +
-            ", intereses='" + getIntereses() + "'" +
+            super.toString()+", intereses='" + getIntereses() + "'" +
             ", logros='" + getLogros() + "'" +
             "}";
     }
 
-    public Estudiante(String nombre, String email, HashSet<String> materias, HashSet<Comentario> comentarios, String carrera, String semestre, String contrasenia,
+    public Estudiante(String nombre, String email, HashSet<String> materias, HashSet<Comentario> comentarios, String contrasenia,
             HashSet<String> intereses, HashSet<String> logros) {
         super(nombre, email, contrasenia, materias, comentarios);
-        this.carrera = carrera;
-        this.semestre = semestre;
         this.logros=logros;
         this.intereses = intereses;
     }

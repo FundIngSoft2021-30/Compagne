@@ -14,15 +14,32 @@ public class ControlEstudiantes {
     private PreparedStatement statement;
     private ResultSet result;
 
+    public void instanceOf() {
+
+    }
+
+    public ResultSet executeQuery(String query) {
+        try {
+            this.statement = this.con.prepareStatement(query);
+            this.result = this.statement.executeQuery();
+        } catch (SQLException e) {
+            this.result=null;
+        }
+        return this.result;
+    }
+
     public int getEstudianteID(String email) {
-        /* Este metodo retorna el ID de un estudiante al cual busca por su mail. Recibe : email -> String que representa un email */
+        /*
+         * Este metodo retorna el ID de un estudiante al cual busca por su mail. Recibe
+         * : email -> String que representa un email
+         */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
             offset = 1;
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
-                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\';");
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\' AND \"Tipo\"=\'S\';");
             this.result = this.statement.executeQuery();
             if (this.result.next())
                 r = this.result.getInt(0 + offset);
@@ -35,17 +52,20 @@ public class ControlEstudiantes {
     }
 
     public boolean insertarComentario(String comentario, String calificacion) {
-        /*Inserta un comentario en la BD. Recibe: comentario -> String que tiene el texto, Calificacion -> String que tiene un numero con la calificacion*/
+        /*
+         * Inserta un comentario en la BD. Recibe: comentario -> String que tiene el
+         * texto, Calificacion -> String que tiene un numero con la calificacion
+         */
         boolean b = false;
         String consulta = "";
         try {
             if (calificacion != null && comentario != null)
                 consulta = "INSERT INTO " + ConnectionClass.getSchema()
-                        + "\"Comentario\" (\"Texto\", \"Estrellas\") VALUES (\'" + comentario + "\', " + calificacion
-                        + ");";
+                        + "\"Comentario\" (\"Texto\", \"Estrellas\") VALUES (\'" + comentario + "\', \'" + calificacion
+                        + "\');";
             else if (calificacion != null)
-                consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Estrellas\") VALUES ("
-                        + calificacion + ");";
+                consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Estrellas\") VALUES (\'"
+                        + calificacion + "\');";
             else
                 consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Comentario\" (\"Texto\") VALUES (\'"
                         + comentario + "\');";
@@ -59,7 +79,11 @@ public class ControlEstudiantes {
     }
 
     public int getComentarioID(String comentario, String calificacion) {
-        /*Retorna el ID de un comentario en la BD. Recibe: comentario -> String que tiene el texto, Calificacion -> String que tiene un numero con la calificacion*/
+        /*
+         * Retorna el ID de un comentario en la BD. Recibe: comentario -> String que
+         * tiene el texto, Calificacion -> String que tiene un numero con la
+         * calificacion
+         */
         String consulta = "";
         int comID = 0;
         int offset = 0;
@@ -67,13 +91,13 @@ public class ControlEstudiantes {
             offset = 1;
         if (calificacion != null && comentario != null)
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
-                    + comentario + "\' AND \"Estrellas\"=" + calificacion;
-        else if (calificacion != null)
-            consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"="
-                    + calificacion;
+                    + comentario + "\' AND \"Estrellas\"=\'" + calificacion + "\'";
+        else if (calificacion != null && comentario == null)
+            consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"=\'"
+                    + calificacion + "\'";
         else
             consulta = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
-                    + comentario + "\';";
+                    + comentario + "\'";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.result = this.statement.executeQuery();
@@ -88,7 +112,10 @@ public class ControlEstudiantes {
     }
 
     public boolean insertarComentarioXEstudiante(int tid, int id) {
-        /* Inserta un comentario para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del comentario*/
+        /*
+         * Inserta un comentario para un estudiante. Recibe: tid-> int con el id del
+         * estudiante, id-> int con el id del comentario
+         */
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXComentario\"(\"UsuarioRegistradoID\", \"ComentarioID\") VALUES (" + String.valueOf(tid)
@@ -102,7 +129,10 @@ public class ControlEstudiantes {
     }
 
     private boolean insertarMateria(String materia) {
-        /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
+        /*
+         * Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre
+         * de la materia
+         */
         boolean b = false;
         String consulta = "";
         try {
@@ -119,7 +149,10 @@ public class ControlEstudiantes {
     }
 
     private int getMateriaID(String materia) {
-        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
+         * nombre de la materia
+         */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -139,7 +172,10 @@ public class ControlEstudiantes {
     }
 
     public boolean insertarMateriaXEstudiante(int tid, int id) {
-        /* Inserta una materia para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del comentario*/
+        /*
+         * Inserta una materia para un estudiante. Recibe: tid-> int con el id del
+         * estudiante, id-> int con el id de la materia
+         */
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXMaterias\"(\"Usuario RegistradoID\", \"MateriaID\") VALUES (" + String.valueOf(tid) + ", "
@@ -153,13 +189,15 @@ public class ControlEstudiantes {
     }
 
     private boolean insertarLogro(String logro) {
-        /*Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre de la materia*/
+        /*
+         * Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre
+         * de la materia
+         */
         boolean b = false;
         String consulta = "";
         try {
-            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Logro\" (\"Texto\") VALUES (\'" + logro
+            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Logro\"(\"Texto\") VALUES (\'" + logro
                     + "\');";
-
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
             b = true;
@@ -170,7 +208,10 @@ public class ControlEstudiantes {
     }
 
     private int getLogroID(String logro) {
-        /*Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el el momento del horario*/
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
+         * el momento del horario
+         */
         int r = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -190,7 +231,10 @@ public class ControlEstudiantes {
     }
 
     public boolean insertarLogroXEstudiante(int tid, int id) {
-        /* Inserta una materia para un estudiante. Recibe: tid-> int con el id del estudiante, id-> int con el id del logro*/
+        /*
+         * Inserta una materia para un estudiante. Recibe: tid-> int con el id del
+         * estudiante, id-> int con el id del logro
+         */
         boolean b = true;
         String consulta = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioXLogros\"(\"Usuario RegistradoID\", \"LogroID\") VALUES (" + String.valueOf(tid) + ", "
@@ -203,20 +247,80 @@ public class ControlEstudiantes {
         return b;
     }
 
+    private boolean insertarInteres(String interes) {
+        /*
+         * Inserta un interes en la BD. Recibe: interes -> String que tiene el nombre
+         * del interes
+         */
+        boolean b = false;
+        String consulta = "";
+        try {
+            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Interes\"(\"Nombre\") VALUES (\'" + interes
+                    + "\');";
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+            b = true;
+        } catch (Exception e) {
+            b = false;
+        }
+        return b;
+    }
+
+    private int getInteresID(String interes) {
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
+         * el momento del horario
+         */
+        int r = 0;
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        try {
+            this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
+                    + "\"Interes\" WHERE \"Nombre\"=\'" + interes + "\';");
+            this.result = this.statement.executeQuery();
+            if (this.result.next())
+                r = this.result.getInt(0 + offset);
+            else
+                throw new Exception("No encontrado");
+        } catch (Exception e) {
+            r = 0;
+        }
+        return r;
+    }
+
+    public boolean insertarInteresXEstudiante(int tid, int id) {
+        /*
+         * Inserta una materia para un estudiante. Recibe: tid-> int con el id del
+         * estudiante, id-> int con el id del logro
+         */
+        boolean b = true;
+        String consulta = "INSERT INTO " + ConnectionClass.getSchema()
+                + "\"UsuarioXIntereses\"(\"Usuario RegistradoID\", \"InteresID\") VALUES (" + String.valueOf(tid) + ", "
+                + String.valueOf(id) + ");";
+        try {
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+
     public boolean crearEstudiante(Estudiante estudiante) {
         /*
          * Este método guarda un estudiante en la BD, recibe un objeto de la clase
-         * estudiante y hace que este persista en la BD . Recibe: estudiante -> Instancia de
-         * la clase estudiante, representa el estudiante que quiere guardarse en la BD
+         * estudiante y hace que este persista en la BD . Recibe: estudiante ->
+         * Instancia de la clase estudiante, representa el estudiante que quiere
+         * guardarse en la BD
          */
         boolean b = false; // Inicializo lo que retorno (Si el estudiante se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
                 + "\"UsuarioRegistrado\" (\"Nombre\",\"Tipo\", \"Email\",\"Contrasenia\") VALUES ('"
                 + estudiante.getNombre() + "', '" + "S" + "', '" + estudiante.getEmail() + "', '"
                 + estudiante.getContrasenia() + "');"; // Consulta SQL para insertar
-                                                                                          // un usuario registrado en la
-                                                                                          // BD de tipo 'T' es decir
-                                                                                          // estudiante en la BD
+                                                       // un usuario registrado en la
+                                                       // BD de tipo 'T' es decir
+                                                       // estudiante en la BD
         try {
             this.statement = this.con.prepareStatement(sql); // Preparando una consulta SQL
             this.statement.execute(); // Ejecutando una consulta SQL
@@ -281,11 +385,33 @@ public class ControlEstudiantes {
             }
         } catch (Exception e) { // No pasa nada
         }
+        try {
+            // Toca insertar los intereses si hay, si no hay, saltara un
+            // error o no se
+            // ejecutara lo siguiente.
+            if (estudiante.getIntereses().size() > 0) {
+                for (String interes : estudiante.getIntereses()) {
+                    // Trato de encontrar un comentario para no repetir en la BD
+                    int id = this.getInteresID(interes);
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+                    if (id == 0) {
+                        this.insertarInteres(interes);
+                        id = this.getInteresID(interes);
+                    }
+                    // Inserto un comentario para el usuario
+                    this.insertarInteresXEstudiante(tid, id);
+                }
+            }
+        } catch (Exception e) { // No pasa nada
+        }
         return b;
     }
 
     public boolean eliminarEstudiante(String email) {
-        /* Elimina un estudiante de la BD. Recibe: email -> String que representa el email de un estudiante*/
+        /*
+         * Elimina un estudiante de la BD. Recibe: email -> String que representa el
+         * email de un estudiante
+         */
         boolean b = true;
         int id = this.getEstudianteID(email);
         if (id == 0)
@@ -313,6 +439,13 @@ public class ControlEstudiantes {
             } catch (Exception e) {
             }
             try {
+                String sql = "DELETE FROM " + ConnectionClass.getSchema()
+                        + "\"UsuarioXIntereses\" WHERE \"Usuario RegistradoID\"=" + String.valueOf(id);
+                this.statement = this.con.prepareStatement(sql);
+                this.result = this.statement.executeQuery();
+            } catch (Exception e) {
+            }
+            try {
                 String sql = "DELETE FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" WHERE \"ID\"="
                         + String.valueOf(id);
                 this.statement = this.con.prepareStatement(sql);
@@ -324,9 +457,15 @@ public class ControlEstudiantes {
     }
 
     public boolean modificarEstudiante(Estudiante estudiante) {
-        /* Modifica un estudiante en la BD. Recibe: estudiante -> Instancia de la clase estudiante que tiene los datos actualizados de un estudiante, sin embargo, su e-mail no cambia*/
+        /*
+         * Modifica un estudiante en la BD. Recibe: estudiante -> Instancia de la clase
+         * estudiante que tiene los datos actualizados de un estudiante, sin embargo, su
+         * e-mail no cambia
+         */
         boolean b = true;
-        String consulta = "UPDATE "+ConnectionClass.getSchema()+"\"UsuarioRegistrado\" SET \"Nombre\"=\'"+estudiante.getNombre()+"\', \"Contrasenia\"=\'"+estudiante.getContrasenia()+"\', \"Tipo\"=\'S\' WHERE \"Email\"=\'"+estudiante.getEmail()+"\';";
+        String consulta = "UPDATE " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" SET \"Nombre\"=\'"
+                + estudiante.getNombre() + "\', \"Contrasenia\"=\'" + estudiante.getContrasenia()
+                + "\', \"Tipo\"=\'S\' WHERE \"Email\"=\'" + estudiante.getEmail() + "\';";
         try {
             this.statement = this.con.prepareStatement(consulta);
             this.statement.executeQuery();
