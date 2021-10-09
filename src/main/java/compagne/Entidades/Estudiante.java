@@ -36,7 +36,7 @@ public class Estudiante extends Usuario {
     @Override
     public String toString() {
         return "{" +
-            "intereses='" + getIntereses() + "'" +
+            super.toString()+", intereses='" + getIntereses() + "'" +
             ", logros='" + getLogros() + "'" +
             "}";
     }

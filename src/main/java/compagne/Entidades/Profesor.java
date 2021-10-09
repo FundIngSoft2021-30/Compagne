@@ -33,7 +33,8 @@ public class Profesor extends Usuario {
     @Override
     public String toString() {
         return "{" +
-            " experiencia='" + getExperiencia() + "'" +
+        super.toString()+
+            ", experiencia='" + getExperiencia() + "'" +
             ", horarioAtencion='" + getHorarioAtencion() + "'" +
             ", logros='" + getLogros() + "'" +
             "}";

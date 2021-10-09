@@ -64,13 +64,12 @@ public abstract class Usuario{
 
     @Override
     public String toString() {
-        return "{" +
+        return
             " nombre='" + getNombre() + "'" +
             ", email='" + getEmail() + "'" +
             ", contrasenia='" + getContrasenia() + "'" +
             ", materias='" + getMaterias() + "'" +
-            ", comentarios='" + getComentarios() + "'" +
-            "}";
+            ", comentarios='" + getComentarios() + "'\n";
     }
        
 

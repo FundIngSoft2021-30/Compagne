@@ -35,7 +35,7 @@ public class ControlProfesores {
             offset = 1;
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
-                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\';");
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=\'" + email + "\' AND \"Tipo\"=\'T\';");
             this.result = this.statement.executeQuery();
             if (this.result.next())
                 r = this.result.getInt(0 + offset);

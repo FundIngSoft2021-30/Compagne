@@ -195,7 +195,7 @@ public class FacadeCompagne implements IFacadeCompagne {
         } else if (proID > 0) {
             consulta = "SELECT \"Nombre\" FROM " + ConnectionClass.getSchema()
                     + "\"UsuarioRegistrado\" WHERE \"Email\"=" + "\'" + email
-                    + "\' AND \"Tipo\"=\'S\' AND \"Contrasenia\"=\'" + contra + "\';";
+                    + "\' AND \"Tipo\"=\'T\' AND \"Contrasenia\"=\'" + contra + "\';";
             ResultSet rs = this.controlEstudiantes.executeQuery(consulta);
             try {
                 if (rs.next()) {
