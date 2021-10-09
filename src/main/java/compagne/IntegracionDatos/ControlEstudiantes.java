@@ -247,6 +247,65 @@ public class ControlEstudiantes {
         return b;
     }
 
+    private boolean insertarInteres(String interes) {
+        /*
+         * Inserta un interes en la BD. Recibe: interes -> String que tiene el nombre
+         * del interes
+         */
+        boolean b = false;
+        String consulta = "";
+        try {
+            consulta = "INSERT INTO " + ConnectionClass.getSchema() + "\"Interes\"(\"Nombre\") VALUES (\'" + interes
+                    + "\');";
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+            b = true;
+        } catch (Exception e) {
+            b = false;
+        }
+        return b;
+    }
+
+    private int getInteresID(String interes) {
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
+         * el momento del horario
+         */
+        int r = 0;
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        try {
+            this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
+                    + "\"Interes\" WHERE \"Nombre\"=\'" + interes + "\';");
+            this.result = this.statement.executeQuery();
+            if (this.result.next())
+                r = this.result.getInt(0 + offset);
+            else
+                throw new Exception("No encontrado");
+        } catch (Exception e) {
+            r = 0;
+        }
+        return r;
+    }
+
+    public boolean insertarInteresXEstudiante(int tid, int id) {
+        /*
+         * Inserta una materia para un estudiante. Recibe: tid-> int con el id del
+         * estudiante, id-> int con el id del logro
+         */
+        boolean b = true;
+        String consulta = "INSERT INTO " + ConnectionClass.getSchema()
+                + "\"UsuarioXIntereses\"(\"Usuario RegistradoID\", \"InteresID\") VALUES (" + String.valueOf(tid) + ", "
+                + String.valueOf(id) + ");";
+        try {
+            this.statement = this.con.prepareStatement(consulta);
+            this.statement.executeQuery();
+        } catch (Exception e) {
+        }
+        return b;
+    }
+
     public boolean crearEstudiante(Estudiante estudiante) {
         /*
          * Este método guarda un estudiante en la BD, recibe un objeto de la clase
@@ -326,6 +385,25 @@ public class ControlEstudiantes {
             }
         } catch (Exception e) { // No pasa nada
         }
+        try {
+            // Toca insertar los intereses si hay, si no hay, saltara un
+            // error o no se
+            // ejecutara lo siguiente.
+            if (estudiante.getIntereses().size() > 0) {
+                for (String interes : estudiante.getIntereses()) {
+                    // Trato de encontrar un comentario para no repetir en la BD
+                    int id = this.getInteresID(interes);
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+                    if (id == 0) {
+                        this.insertarInteres(interes);
+                        id = this.getInteresID(interes);
+                    }
+                    // Inserto un comentario para el usuario
+                    this.insertarInteresXEstudiante(tid, id);
+                }
+            }
+        } catch (Exception e) { // No pasa nada
+        }
         return b;
     }
 
@@ -356,6 +434,13 @@ public class ControlEstudiantes {
             try {
                 String sql = "DELETE FROM " + ConnectionClass.getSchema()
                         + "\"UsuarioXLogros\" WHERE \"Usuario RegistradoID\"=" + String.valueOf(id);
+                this.statement = this.con.prepareStatement(sql);
+                this.result = this.statement.executeQuery();
+            } catch (Exception e) {
+            }
+            try {
+                String sql = "DELETE FROM " + ConnectionClass.getSchema()
+                        + "\"UsuarioXIntereses\" WHERE \"Usuario RegistradoID\"=" + String.valueOf(id);
                 this.statement = this.con.prepareStatement(sql);
                 this.result = this.statement.executeQuery();
             } catch (Exception e) {
