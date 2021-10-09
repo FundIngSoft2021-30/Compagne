@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 import compagne.Entidades.Comentario;
+import compagne.Entidades.Estudiante;
 import compagne.Negocio.FacadeCompagne;
 
 public class App {
@@ -58,6 +59,9 @@ public class App {
                 logros.clear();
                 facade.crearPerfilEstudiante("Lucas Podolski", "podolskiS@javeriana.edu.co", "Contra", materias, comentarios, intereses, logros);
                 System.out.println("Agregado");
+                sc.nextLine();
+                facade.calificarUsuario(new Comentario("4.2", null), new Estudiante("nombre", "podolskiS@javeriana.edu.co", null, null, "contrasenia", null, null));
+                System.out.println("Calificado Podolski");
                 sc.nextLine();
                 facade.eliminarPerfilProfesor("lopez.federico@javeriana.edu.co");
                 facade.eliminarPerfilProfesor("peri_al@javeriana.edu.co");

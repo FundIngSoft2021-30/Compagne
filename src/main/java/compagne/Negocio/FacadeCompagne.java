@@ -5,6 +5,7 @@ import java.util.HashSet;
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
 import compagne.Entidades.Profesor;
+import compagne.Entidades.Usuario;
 import compagne.IntegracionDatos.ControlProfesores;
 import compagne.IntegracionDatos.ControlEstudiantes;
 
@@ -52,5 +53,42 @@ public class FacadeCompagne {
 
     public boolean eliminarPerfilEstudiante(String email) {
         return this.controlEstudiantes.eliminarEstudiante(email);
+    }
+
+    public boolean calificarUsuario(Comentario calificacion, Usuario usuario){
+        boolean b=true;
+        try{
+            if (usuario instanceof Estudiante){
+                Estudiante estudiante=(Estudiante)(usuario);
+                int user_id=this.controlEstudiantes.getEstudianteID(usuario.getEmail());
+                int comentario_id=this.controlEstudiantes.getComentarioID(calificacion.getComentario(), calificacion.getCalificacion());
+                if (user_id==0){
+                    this.controlEstudiantes.crearEstudiante(estudiante);
+                    user_id=this.controlEstudiantes.getEstudianteID(estudiante.getEmail());
+                }
+                if (comentario_id==0){
+                    this.controlEstudiantes.insertarComentario(calificacion.getComentario(), calificacion.getCalificacion());
+                    comentario_id=this.controlEstudiantes.getComentarioID(calificacion.getComentario(), calificacion.getCalificacion());
+                }
+                this.controlEstudiantes.insertarComentarioXEstudiante(user_id, comentario_id);
+            }
+            else{
+                Profesor profesor=(Profesor)(usuario);
+                int user_id=this.controlProfesores.getProfesorID(usuario.getEmail());
+                int comentario_id=this.controlEstudiantes.getComentarioID(calificacion.getComentario(), calificacion.getCalificacion());
+                if (user_id==0){
+                    this.controlProfesores.crearProfesor(profesor);
+                    user_id=this.controlProfesores.getProfesorID(profesor.getEmail());
+                }
+                if (comentario_id==0){
+                    this.controlProfesores.insertarComentario(calificacion.getComentario(), calificacion.getCalificacion());
+                    comentario_id=this.controlProfesores.getComentarioID(calificacion.getComentario(), calificacion.getCalificacion());
+                }
+                this.controlProfesores.insertarComentarioXProfesor(user_id, comentario_id);
+            }
+        }catch(Exception e){
+            b=false;
+        }
+        return b;
     }
 }
