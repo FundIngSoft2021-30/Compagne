@@ -7,6 +7,7 @@ package compagne.Negocio;
 
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
+import compagne.Entidades.Grupo;
 import compagne.Entidades.Profesor;
 import compagne.Entidades.Usuario;
 import java.util.HashSet;
@@ -16,6 +17,13 @@ import java.util.HashSet;
  * @author samue
  */
 public interface IFacadeCompagne {
+    
+    //BÚSQUEDA
+    public int buscarIDUsuario(String email);
+    public int buscarIDGrupo(String codigo);
+    
+    //USUARIOS
+    
     public Profesor crearPerfilProfesor(String nombre, String experiencia, String email, String contrasenia,
             HashSet<String> horariosAtencion, HashSet<String> materias, HashSet<Comentario> comentarios,
             HashSet<String> logros);
@@ -26,5 +34,14 @@ public interface IFacadeCompagne {
     public Estudiante modificarPerfilEstudiante(String nombre, String email, String contrasenia);
     public boolean eliminarPerfilEstudiante(String email);
     public boolean calificarUsuario(Comentario calificacion, Usuario usuario);
+    
+    //GRUPOS
+    public Grupo crearGrupo(String nombre, String codigo, String publico, Usuario usuario);
+    public Grupo modificarGrupo(String nombre, String codigo, String publico);
+    public boolean eliminarGrupo(String codigo);
+    public boolean agregarUsuarioAGrupo(String grupocod, String email, String admin);
+    public boolean eliminarUsuarioDeGrupo(String grupocod, String email);
+    public boolean hacerAdminDeGrupo(int grupoid, int idusuario);
+    
     
 }

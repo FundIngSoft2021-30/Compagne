@@ -1,13 +1,12 @@
 package compagne.Entidades;
 
-import java.util.Objects;
 import java.util.HashSet;
+import java.util.Objects;
 
 public class Grupo {
     private String nombre;
-    private String descripcion;
     private String codigo;
-    private boolean publico;
+    private String publico;
     private HashSet<Rol> roles;
     private HashSet <Usuario> miembros;
     
@@ -15,9 +14,8 @@ public class Grupo {
     private HashSet<Reunion> reuniones;
     private HashSet<ChatG> chats;
 
-    public Grupo(String nombre, String descripcion, String codigo, boolean publico) {
+    public Grupo(String nombre, String codigo, String publico) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.codigo = codigo;
         this.publico = publico;
         this.miembros = new HashSet<>();
@@ -33,14 +31,6 @@ public class Grupo {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public String getCodigo() {
         return codigo;
     }
@@ -49,11 +39,11 @@ public class Grupo {
         this.codigo = codigo;
     }
 
-    public boolean isPublico() {
+    public String isPublico() {
         return publico;
     }
 
-    public void setPublico(boolean publico) {
+    public void setPublico(String publico) {
         this.publico = publico;
     }
 
@@ -89,7 +79,36 @@ public class Grupo {
         this.chats = chats;
     }
     
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Grupo)) {
+            return false;
+        }
+        Grupo grupo = (Grupo) o;
+        return Objects.equals(nombre, grupo.nombre) && Objects.equals(codigo, grupo.codigo) && Objects.equals(publico, grupo.publico) && Objects.equals(roles, grupo.roles) && Objects.equals(miembros, grupo.miembros) && Objects.equals(reuniones, grupo.reuniones) && Objects.equals(chats, grupo.chats);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, codigo, publico, roles, miembros, reuniones, chats);
+    }
     
+
+    @Override
+    public String toString() {
+        return "{" +
+            " nombre='" + getNombre() + "'" +
+            ", codigo='" + getCodigo() + "'" +
+            ", publico='" + isPublico() + "'" +
+            ", roles='" + getRoles() + "'" +
+            ", miembros='" + getMiembros() + "'" +
+            ", reuniones='" + getReuniones() + "'" +
+            ", chats='" + getChats() + "'" +
+            "}";
+    }
     
     
 }

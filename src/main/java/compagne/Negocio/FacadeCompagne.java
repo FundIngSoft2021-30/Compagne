@@ -1,26 +1,28 @@
 package compagne.Negocio;
-
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
+import compagne.Entidades.Grupo;
 import compagne.Entidades.Profesor;
 import compagne.Entidades.Usuario;
 import compagne.IntegracionDatos.ControlProfesores;
 import compagne.IntegracionDatos.ConnectionClass;
 import compagne.IntegracionDatos.ControlEstudiantes;
+import compagne.IntegracionDatos.ControlGrupos;
 
 public class FacadeCompagne implements IFacadeCompagne {
     private ControlProfesores controlProfesores;
     private ControlEstudiantes controlEstudiantes;
+    private ControlGrupos controlGrupos;
     public static FacadeCompagne instance;
 
     public FacadeCompagne() {
         this.controlEstudiantes = new ControlEstudiantes();
         this.controlProfesores = new ControlProfesores();
+        this.controlGrupos = new ControlGrupos();
     }
 
     public static FacadeCompagne getInstance() {
@@ -266,4 +268,54 @@ public class FacadeCompagne implements IFacadeCompagne {
         }
         return usu;
     }
+    
+    public Grupo crearGrupo(String nombre, String codigo, String publico, Usuario usuario)
+    {
+        Grupo grupo = new Grupo(nombre, codigo, publico);
+        if (!this.controlGrupos.crearGrupo(grupo,usuario))
+            grupo = null;
+        return grupo;
+    }
+
+    public Grupo modificarGrupo(String nombre, String codigo, String publico)
+    {
+        Grupo grupo = new Grupo(nombre, codigo, publico);
+        if (!this.controlGrupos.modificarGrupo(grupo))
+            grupo = null;
+        return grupo;
+    }
+
+    public boolean eliminarGrupo(String codigo)
+    {
+        return this.controlGrupos.eliminarGrupo(codigo);
+    }
+
+    public boolean agregarUsuarioAGrupo(String grupocod, String email, String admin)
+    {
+        return this.controlGrupos.insertarUsuarioXGrupoEstudio(grupocod, email, admin);
+    }
+    
+    public boolean eliminarUsuarioDeGrupo(String grupocod, String email)
+    {
+        return this.controlGrupos.eliminarUsuarioXGrupoEstudio(grupocod, email);
+    }
+    
+    public boolean hacerAdminDeGrupo(int grupoid, int idusuario)
+    {
+        return this.controlGrupos.hacerAdminDeGrupo(grupoid, idusuario);
+    }
+    
+    
+    
+    //BUSQUEDA
+    public int buscarIDUsuario(String email)
+    {
+        return this.controlGrupos.getUsarioID(email);
+    }
+    public int buscarIDGrupo(String codigo)
+    {
+        return this.controlGrupos.getGrupoID(codigo);
+    }
+
+
 }
