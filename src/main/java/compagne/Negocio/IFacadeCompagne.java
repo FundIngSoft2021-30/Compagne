@@ -18,7 +18,12 @@ import java.util.HashSet;
  */
 public interface IFacadeCompagne {
     
+    //BÚSQUEDA
+    public int buscarIDUsuario(String email);
+    public int buscarIDGrupo(String codigo);
+    
     //USUARIOS
+    
     public Profesor crearPerfilProfesor(String nombre, String experiencia, String email, String contrasenia,
             HashSet<String> horariosAtencion, HashSet<String> materias, HashSet<Comentario> comentarios,
             HashSet<String> logros);
@@ -36,7 +41,7 @@ public interface IFacadeCompagne {
     public boolean eliminarGrupo(String codigo);
     public boolean agregarUsuarioAGrupo(int grupoid, int idusuario, String admin);
     public boolean eliminarUsuarioDeGrupo(int grupoid, int idusuario);
-    
+    public boolean hacerAdminDeGrupo(int grupoid, int idusuario);
     
     
 }
