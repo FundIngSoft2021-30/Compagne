@@ -70,11 +70,23 @@ public class MainApp {
                 System.out.println("Calificado Podolski");
                 sc.nextLine();
                 System.out.println("Iniciar sesion como Nicolas Bayona "
-                                + (Estudiante) facade.iniciarSesion("nclsbayona@javeriana.edu.co", "admin456"));
+                                +  facade.iniciarSesion("nclsbayona@javeriana.edu.co", "admin456"));
                 sc.nextLine();
                 System.out.println("Iniciar sesion como Nicolas Bayona (MAL)");
                 try {
                         System.out.println(facade.iniciarSesion("nclsbayona@javeriana.edu.co", "adm6"));
+                } catch (Exception e) {
+                        System.out.println("Fallo");
+                }
+                sc.nextLine();
+                System.out.println("Iniciar sesion como Albert Perilla "
+                                + facade.iniciarSesion("peri_al@javeriana.edu.co",
+                                "la_contradefed$"));
+                sc.nextLine();
+                System.out.println("Iniciar sesion como Albert Perilla (MAL)");
+                try {
+                        System.out.println(facade.iniciarSesion("peri_al@javeriana.edu.co",
+                        "la_contradfed$"));
                 } catch (Exception e) {
                         System.out.println("Fallo");
                 }
