@@ -22,8 +22,8 @@ public class Comentario {
         if (!(o instanceof Comentario)) {
             return false;
         }
-        Comentario comentario = (Comentario) o;
-        return Objects.equals(calificacion, comentario.calificacion) && Objects.equals(comentario, comentario.comentario);
+        Comentario objeto = (Comentario) o;
+        return Objects.equals(calificacion, objeto.calificacion) && Objects.equals(comentario, objeto.comentario);
     }
 
     @Override
