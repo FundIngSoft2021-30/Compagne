@@ -54,25 +54,22 @@ public class RegistrarPantallaController implements Initializable {
 
         if (event.getSource() == this.checkProfesor) {
             checkEstudiante.setSelected(false);
-        }
-        else if (event.getSource() == this.checkEstudiante) {
+        } else if (event.getSource() == this.checkEstudiante) {
             checkProfesor.setSelected(false);
-        }
-        else if (event.getSource() == this.registrarse) {
+        } else if (event.getSource() == this.registrarse) {
             if (checkAcuerdo.isSelected() && (checkEstudiante.isSelected() || checkProfesor.isSelected())) {
-                if (email.getText() != null && nombre.getText() != null && contraseña.getText() != null
-                        && confirmarContraseña.getText() != null
+                if (!email.getText().equals("") && !nombre.getText().equals("") && !contraseña.getText().equals("")
+                        && !confirmarContraseña.getText().equals("")
                         && confirmarContraseña.getText().equals(contraseña.getText())) {
                     if (checkEstudiante.isSelected()) {
                         facade.crearPerfilEstudiante(nombre.getText(), email.getText(), contraseña.getText(), null,
                                 null, null, null);
-                    }
-                   else if (checkProfesor.isSelected()) {
+                    } else if (checkProfesor.isSelected()) {
                         facade.crearPerfilProfesor(nombre.getText(), null, email.getText(), contraseña.getText(), null,
                                 null, null, null);
                     }
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("No se pudo registrar");
                     alert.setContentText("Por favor llene todos los campos");
@@ -99,7 +96,7 @@ public class RegistrarPantallaController implements Initializable {
         assert nombre != null : "fx:id=\"nombre\" was not injected: check your FXML file 'RegistrarPantalla.fxml'.";
         assert registrarse != null
                 : "fx:id=\"registrarse\" was not injected: check your FXML file 'RegistrarPantalla.fxml'.";
-        
+
     }
 
 }
