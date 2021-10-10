@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="25.0" prefHeight="35.0" prefWidth="150.0" text="Compañeros">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@menus.png" />
+         </image>
+      </ImageView>
+      <ListView fixedCellSize="2.0" layoutX="43.0" layoutY="200.0" prefHeight="370.0" prefWidth="250.0" style="-fx-background-color: #2b78e4;" />
+      <AnchorPane layoutX="25.0" layoutY="95.0">
+         <children>
+            <TextField prefHeight="25.0" prefWidth="200.0" promptText="Buscar Compañeros">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="15.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <Button layoutX="241.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Buscar" textFill="#2b78e4">
+         <font>
+            <Font name="Franklin Gothic Medium" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

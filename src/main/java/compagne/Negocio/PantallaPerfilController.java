@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -48,7 +49,8 @@ public class PantallaPerfilController implements Initializable {
     private Polygon t3;
 
     private Polygon t4;
-
+    
+     @FXML
     void click(ActionEvent event) {
         if (event.getSource() == ButtonDescription) {
             l1.setEndY(l1.getEndY() + 62);

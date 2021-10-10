@@ -11,8 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="compagne.Negocio.CrearGrupoController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.CrearGrupoController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="25.0" prefHeight="35.0" prefWidth="110.0" text="Grupos">
          <font>
@@ -69,7 +68,7 @@
             <Font name="Franklin Gothic Medium" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="90.0" layoutY="478.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: WHITE;" text="Agregar Integrante" textFill="#2b78e4">
+      <Button layoutX="214.0" layoutY="478.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: WHITE;" text="Agregar" textFill="#2b78e4">
          <font>
             <Font name="Franklin Gothic Medium" size="15.0" />
          </font>
@@ -80,5 +79,10 @@
             <Font name="Franklin Gothic Medium" size="20.0" />
          </font>
       </Button>
+      <TextField fx:id="email1" layoutX="54.0" layoutY="485.0" prefHeight="22.0" prefWidth="137.0" promptText="Email Integrante">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="12.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>
