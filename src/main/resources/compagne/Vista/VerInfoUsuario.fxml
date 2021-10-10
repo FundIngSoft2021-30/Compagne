@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.VerInfoController">
+   <Circle fill="WHITE" layoutX="62.0" layoutY="162.0" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+<ImageView fitHeight="44.0" fitWidth="36.0" layoutX="45.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@user_icon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="63.0" layoutY="34.0" prefHeight="45.0" prefWidth="232.0" text="Mi perfil" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="52.0" />
+         </font>
+      </Label>
+   <Text fill="WHITE" layoutX="120.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fx:id="nombre_text" fill="WHITE" layoutX="191.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXX">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="122.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fx:id="email_text" fill="WHITE" layoutX="191.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXX">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="122.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar contraseña">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <PasswordField fx:id="nueva_password_field" layoutX="103.0" layoutY="190.0" prefHeight="25.0" prefWidth="190.0" />
+   <Button fx:id="cambiar_btn" layoutX="223.0" layoutY="223.0" mnemonicParsing="false" onAction="#cambiarContrasenia" text="Cambiar" />
+   <ListView fx:id="comentarios_list" layoutX="14.0" layoutY="290.0" prefHeight="296.0" prefWidth="146.0" />
+   <ListView fx:id="materias_list" layoutX="176.0" layoutY="290.0" prefHeight="296.0" prefWidth="146.0" />
+   <Text fill="WHITE" layoutX="45.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comentarios">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="217.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Materias">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+</AnchorPane>
