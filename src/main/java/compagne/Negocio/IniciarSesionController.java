@@ -2,6 +2,8 @@ package compagne.Negocio;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import compagne.Vista.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +50,7 @@ public class IniciarSesionController {
         Parent root = null;
 
         try {
-            root = FXMLLoader.load(getClass().getResource(nomFXML));
+            root = FXMLLoader.load(App.class.getResource(nomFXML));
         } catch (Exception e) {
 
         }
@@ -62,14 +64,10 @@ public class IniciarSesionController {
 
     @FXML
     void initialize() {
-        assert contra_field != null
-                : "fx:id=\"contra_field\" was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.";
-        assert nombre_field != null
-                : "fx:id=\"nombre_field\" was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.";
-        assert registrarse != null
-                : "fx:id=\"registrarse\" was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.";
-        assert registrate_button != null
-                : "fx:id=\"registrate_button\" was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.";
+        assert contra_field != null : "fx:id=\"contra_field\" was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.";
+        assert nombre_field != null : "fx:id=\"nombre_field\" was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.";
+        assert registrarse != null : "fx:id=\"registrarse\" was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.";
+        assert registrate_button != null : "fx:id=\"registrate_button\" was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.";
         assert main != null : "fx:id=\"main\" was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.";
 
     }
