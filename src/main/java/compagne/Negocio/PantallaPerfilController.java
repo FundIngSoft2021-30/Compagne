@@ -44,7 +44,11 @@ public class PantallaPerfilController implements Initializable {
 
     private TextField TextThemes;
     
-    private Label NombrePersona;
+    private TextField CarreraText;
+
+    private TextField NombreEstudiante;
+
+    private TextField SemestreText;
 
     private Line l1;
 
@@ -162,6 +166,6 @@ public class PantallaPerfilController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        NombrePersona.setText(FacadeCompagne.getInstance().usu);
+        NombreEstudiante.setText(FacadeCompagne.getInstance().usu);
     }
 }
