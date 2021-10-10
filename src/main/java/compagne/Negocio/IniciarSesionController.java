@@ -47,7 +47,7 @@ public class IniciarSesionController {
     void click(ActionEvent event) {
         Usuario usu = this.facadeCompagne.iniciarSesion(this.nombre_field.getText(), this.contra_field.getText());
         if (usu != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Correcto");
             alert.setHeaderText("Ingreso correctamente");
             alert.setContentText("Enhorabuena!");
