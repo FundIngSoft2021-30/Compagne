@@ -317,5 +317,10 @@ public class FacadeCompagne implements IFacadeCompagne {
         return this.controlGrupos.getGrupoID(codigo);
     }
 
+    @Override
+    public HashSet<Grupo> listarGruposPublicos() {
+        return this.controlGrupos.getGruposPublicos();
+    }
+
 
 }

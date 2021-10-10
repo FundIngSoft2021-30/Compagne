@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 
 import compagne.Entidades.Grupo;
 import compagne.Entidades.Usuario;
@@ -23,6 +24,27 @@ public class ControlGrupos {
             this.result = null;
         }
         return this.result;
+    }
+
+    public HashSet<Grupo> getGruposPublicos(){
+        int offset = 0;
+        if (ConnectionClass.usingPSQL()) {
+            offset = 1;
+        }
+        HashSet<Grupo> grupos=new HashSet<>();
+        Grupo grupo;
+        String query="SELECT \"Nombre\",\"Codigo\", \"Publico\" FROM "+ConnectionClass.getSchema()+"\"GrupoEstudio\" WHERE \"Publico\"=\'S\';";
+        try {
+            this.statement = this.con.prepareStatement(query);
+            this.result = this.statement.executeQuery();
+            while(this.result.next()){
+                grupo=new Grupo(this.result.getString(0+offset), this.result.getString(1+offset), this.result.getString(2+offset));
+                grupos.add(grupo);
+            }
+        } catch (SQLException e) {
+            this.result = null;
+        }
+        return grupos;
     }
 
     public int getGrupoID(String codigo) {

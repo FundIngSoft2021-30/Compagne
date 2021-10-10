@@ -42,6 +42,7 @@ public interface IFacadeCompagne {
     public boolean agregarUsuarioAGrupo(String grupocod, String email, String admin);
     public boolean eliminarUsuarioDeGrupo(String grupocod, String email);
     public boolean hacerAdminDeGrupo(int grupoid, int idusuario);
+    public HashSet<Grupo> listarGruposPublicos();
     
     
 }
