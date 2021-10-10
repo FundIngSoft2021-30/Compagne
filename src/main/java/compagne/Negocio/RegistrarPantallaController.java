@@ -9,6 +9,8 @@ package compagne.Negocio;
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import compagne.Entidades.Usuario;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,7 +26,7 @@ import javafx.scene.control.Alert;
  */
 public class RegistrarPantallaController implements Initializable {
 
-    private static IFacadeCompagne facade = FacadeCompagne.getInstance();
+    private IFacadeCompagne facade = FacadeCompagne.getInstance();
 
     @FXML
     private CheckBox checkAcuerdo;
@@ -59,23 +61,52 @@ public class RegistrarPantallaController implements Initializable {
             checkProfesor.setSelected(false);
         } else if (event.getSource() == this.registrarse) {
             if (checkAcuerdo.isSelected() && (checkEstudiante.isSelected() || checkProfesor.isSelected())) {
+                Usuario usu = null;
                 if (!email.getText().equals("") && !nombre.getText().equals("") && !contraseña.getText().equals("")
                         && !confirmarContraseña.getText().equals("")
                         && confirmarContraseña.getText().equals(contraseña.getText())) {
                     if (checkEstudiante.isSelected()) {
-                        facade.crearPerfilEstudiante(nombre.getText(), email.getText(), contraseña.getText(), null,
-                                null, null, null);
-                    } else if (checkProfesor.isSelected()) {
-                        facade.crearPerfilProfesor(nombre.getText(), null, email.getText(), contraseña.getText(), null,
-                                null, null, null);
+                        usu = this.facade.crearPerfilEstudiante(nombre.getText(), email.getText(), contraseña.getText(),
+                                null, null, null, null);
+                        if (usu != null) {
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Correcto");
+                            alert.setHeaderText("Ingreso correctamente");
+                            alert.setContentText("Enhorabuena!");
+                            alert.showAndWait();
+                            // TODO Linkear con la pantalla principal y pasar usu
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("No se pudo registrar");
+                            alert.setContentText("Intentelo nuevamente...");
+                            alert.showAndWait();
+                        }
                     }
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("No se pudo registrar");
-                    alert.setContentText("Por favor llene todos los campos");
-                    alert.showAndWait();
+                } else if (checkProfesor.isSelected()) {
+                    usu = this.facade.crearPerfilProfesor(nombre.getText(), null, email.getText(), contraseña.getText(),
+                            null, null, null, null);
+                    if (usu != null) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Correcto");
+                        alert.setHeaderText("Ingreso correctamente");
+                        alert.setContentText("Enhorabuena!");
+                        alert.showAndWait();
+                        // TODO Linkear con la pantalla principal y pasar usu
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("No se pudo registrar");
+                        alert.setContentText("Intentelo nuevamente...");
+                        alert.showAndWait();
+                    }
                 }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("No se pudo registrar");
+                alert.setContentText("Por favor llene todos los campos correctamente");
+                alert.showAndWait();
             }
         }
     }
