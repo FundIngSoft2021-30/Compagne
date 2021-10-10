@@ -11,52 +11,47 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.RegistrarPantallaController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.RegistrarPantallaController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="31.0" layoutX="111.0" layoutY="543.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
-      <ImageView fitHeight="245.0" fitWidth="353.0" layoutX="-8.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Compagne.png" />
-         </image>
-      </ImageView>
-      <TextField fx:id="nombre" layoutX="155.0" layoutY="259.0">
+      <TextField fx:id="nombre" layoutX="160.0" layoutY="273.0">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="12.0" />
          </font></TextField>
-      <Text layoutX="41.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:">
+      <Text fill="#2b78e4" layoutX="60.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:">
          <font>
             <Font name="Franklin Gothic Medium" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="41.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+      <Text fill="#2b78e4" layoutX="60.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
          <font>
             <Font name="Franklin Gothic Medium" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="41.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña:">
+      <Text fill="#2b78e4" layoutX="60.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña:">
          <font>
             <Font name="Franklin Gothic Medium" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="41.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmar Contraseña:" wrappingWidth="109.4326171875">
+      <Text fill="#2b78e4" layoutX="60.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmar Contraseña:" wrappingWidth="109.4326171875">
          <font>
             <Font name="Franklin Gothic Medium" size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="email" layoutX="155.0" layoutY="299.0">
+      <TextField fx:id="email" layoutX="160.0" layoutY="313.0">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="12.0" />
          </font></TextField>
-      <CheckBox fx:id="checkAcuerdo" layoutX="27.0" layoutY="491.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="297.0" text="Estoy de acuerdo con los terminos y condiciones">
+      <CheckBox fx:id="checkAcuerdo" layoutX="27.0" layoutY="491.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="297.0" text="Estoy de acuerdo con los terminos y condiciones" textFill="#2b78e4">
          <font>
             <Font name="Franklin Gothic Medium" size="12.0" />
          </font>
       </CheckBox>
-      <PasswordField fx:id="contraseña" layoutX="155.0" layoutY="341.0">
+      <PasswordField fx:id="contraseña" layoutX="160.0" layoutY="353.0">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="12.0" />
          </font></PasswordField>
-      <PasswordField fx:id="confirmarContraseña" layoutX="155.0" layoutY="401.0">
+      <PasswordField fx:id="confirmarContraseña" layoutX="160.0" layoutY="403.0">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="12.0" />
          </font></PasswordField>
@@ -65,13 +60,23 @@
             <Font name="Franklin Gothic Medium" size="16.0" />
          </font>
       </Button>
-      <CheckBox fx:id="checkProfesor" layoutX="36.0" layoutY="455.0" mnemonicParsing="false" onAction="#click" text="Soy Profesor">
+      <CheckBox fx:id="checkProfesor" layoutX="52.0" layoutY="455.0" mnemonicParsing="false" onAction="#click" text="Soy Profesor" textFill="#2b78e4">
          <font>
             <Font name="Franklin Gothic Medium" size="12.0" />
          </font></CheckBox>
-      <CheckBox fx:id="checkEstudiante" layoutX="187.0" layoutY="455.0" mnemonicParsing="false" onAction="#click" text="Soy Estudiante">
+      <CheckBox fx:id="checkEstudiante" layoutX="187.0" layoutY="455.0" mnemonicParsing="false" onAction="#click" text="Soy Estudiante" textFill="#2b78e4">
          <font>
             <Font name="Franklin Gothic Medium" size="12.0" />
          </font></CheckBox>
+      <ImageView fitHeight="148.0" fitWidth="171.0" layoutX="82.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Logo%20compagne.png" />
+         </image>
+      </ImageView>
+      <Text fill="#2b78e4" layoutX="81.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrarse">
+         <font>
+            <Font name="Franklin Gothic Medium" size="35.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
