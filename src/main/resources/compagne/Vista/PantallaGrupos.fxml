@@ -19,7 +19,7 @@
          </font>
       </Label>
       <Line endX="208.0" layoutX="103.0" layoutY="128.0" startX="-79.5" strokeWidth="2.0" AnchorPane.leftAnchor="22.5" AnchorPane.rightAnchor="23.0" />
-      <Button fx:id="crearGrupo" layoutX="104.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#crearGrupo" prefHeight="53.0" prefWidth="178.0" style="-fx-background-color: #WHITE;" text="Crear grupo" textAlignment="CENTER" textFill="#2b78e4">
+      <Button fx:id="crearGrupo" layoutX="104.0" layoutY="58.0" mnemonicParsing="false" onAction="#crearGrupo" prefHeight="53.0" prefWidth="178.0" style="-fx-background-color: #WHITE;" text="Crear grupo" textAlignment="CENTER" textFill="#2b78e4">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="24.0" />
          </font>
@@ -42,7 +42,7 @@
       <ListView fx:id="listaGrupos" layoutX="17.0" layoutY="286.0" prefHeight="300.0" prefWidth="200.0" style="-fx-background-color: #WHITE;" />
       <Line endX="208.0" layoutX="103.0" layoutY="275.0" startX="-79.5" strokeWidth="2.0" />
       <Text fx:id="Agregado1" fill="WHITE" layoutX="100.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
-      <Button fx:id="unirme2_button" layoutX="224.0" layoutY="396.0" mnemonicParsing="false" onAction="#Unirme2" onMouseClicked="#Unirme2" prefHeight="41.0" prefWidth="99.0" style="-fx-background-color: #WHITE;" text="Unirme" textFill="#2b78e4">
+      <Button fx:id="unirme2_button" layoutX="224.0" layoutY="396.0" mnemonicParsing="false" onAction="#Unirme2" prefHeight="41.0" prefWidth="99.0" style="-fx-background-color: #WHITE;" text="Unirme" textFill="#2b78e4">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="20.0" />
          </font>

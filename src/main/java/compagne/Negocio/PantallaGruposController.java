@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import compagne.Entidades.Grupo;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.fxml.Initializable;
@@ -57,13 +58,13 @@ public class PantallaGruposController implements Initializable {
         }
 
         @FXML
-        private void crearGrupo(MouseEvent event) {
+        private void crearGrupo(ActionEvent event) {
                 // TODO linkear a otra pantalla
         }
 
         @FXML
-        private void Unirme(MouseEvent event) {
-                if (this.codigoGrupo.getText().length() == 0) {
+        private void Unirme(ActionEvent event) {
+                if (this.codigoGrupo.getText().length() == 0 || this.email==null) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
                         alert.setHeaderText("No se pudo Unir");
@@ -85,11 +86,11 @@ public class PantallaGruposController implements Initializable {
         }
 
         @FXML
-        private void Unirme2(MouseEvent event) {
+        private void Unirme2(ActionEvent event) {
         }
 
         @FXML
-        private void desplegarMenu(MouseEvent event) {
+        private void desplegarMenu(ActionEvent event) {
                 //TODO
         }
 
