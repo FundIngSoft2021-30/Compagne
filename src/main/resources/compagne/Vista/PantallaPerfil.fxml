@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.PantallaPerfilController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.PantallaPerfilController">
    <children>
       <TextField fx:id="TextDescription" alignment="TOP_LEFT" layoutX="28.0" layoutY="312.0" prefHeight="44.0" prefWidth="287.0" promptText="cuentanos sobre ti">
          <font>
@@ -36,9 +36,9 @@
             <Image url="@user_icon.png" />
          </image>
       </ImageView>
-      <Label layoutX="53.0" layoutY="14.0" prefHeight="44.0" prefWidth="138.0" text="Mi perfil">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="25.0" prefHeight="35.0" prefWidth="110.0" text="Mi perfil">
          <font>
-            <Font name="Franklin Gothic Medium Cond" size="27.0" />
+            <Font name="Franklin Gothic Medium Cond" size="30.0" />
          </font>
       </Label>
       <Line endX="208.0" layoutX="105.0" layoutY="237.0" startX="-79.5" strokeWidth="2.0" AnchorPane.leftAnchor="24.5" AnchorPane.rightAnchor="17.5" />
@@ -74,5 +74,10 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="25.0">
+         <image>
+            <Image url="@menus.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
