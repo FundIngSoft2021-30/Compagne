@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -63,10 +64,14 @@ public class PantallaPerfilController implements Initializable {
 
     private Polygon t4;
     
+
     private Polygon t5;
 
     private ListView<Grupo> listGroups;
     
+
+     @FXML
+
     void click(ActionEvent event) {
         if (event.getSource() == ButtonDescription && !TextDescription.isVisible()) {
             l1.setEndY(l1.getEndY() - 62);

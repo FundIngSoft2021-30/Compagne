@@ -26,11 +26,6 @@
             <Font name="Franklin Gothic Medium" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="65.0" layoutY="280.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: WHITE;" text="Agregar Integrante" textFill="#2b78e4">
-         <font>
-            <Font name="Franklin Gothic Medium" size="20.0" />
-         </font>
-      </Button>
       <TextField layoutX="118.0" layoutY="364.0" promptText="Código" style="-fx-background-color: #2b78e4;">
          <font>
             <Font name="Franklin Gothic Medium" size="15.0" />
@@ -57,5 +52,15 @@
             <Image url="@menus.png" />
          </image>
       </ImageView>
+      <Button layoutX="208.0" layoutY="294.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: WHITE;" text="Agregar" textFill="#2b78e4">
+         <font>
+            <Font name="Franklin Gothic Medium" size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="email1" layoutX="48.0" layoutY="301.0" prefHeight="22.0" prefWidth="137.0" promptText="Email Integrante">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="12.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>
