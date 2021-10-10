@@ -5,7 +5,6 @@
  */
 package compagne.Negocio;
 
-
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,9 +31,7 @@ public class PantallaPerfilController implements Initializable {
 
     private Button ButtonThemes;
 
-
     private TextField TextInterest;
-
 
     private Line l1;
 
@@ -51,39 +48,43 @@ public class PantallaPerfilController implements Initializable {
     private Polygon t3;
 
     private Polygon t4;
+
     void click(ActionEvent event) {
-        if(event.getSource()==ButtonDescription){
-            l1.setEndY(l1.getEndY()+62);
-            l2.setEndY(l2.getEndY()+62);
-            l3.setEndY(l3.getEndY()+62);
-            l4.setEndY(l4.getEndY()+62);
-            ButtonGoals.setLayoutY(ButtonGoals.getLayoutY()+62);
-            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY()+62);
-            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY()+62);
+        if (event.getSource() == ButtonDescription) {
+            l1.setEndY(l1.getEndY() + 62);
+            l2.setEndY(l2.getEndY() + 62);
+            l3.setEndY(l3.getEndY() + 62);
+            l4.setEndY(l4.getEndY() + 62);
+            ButtonGoals.setLayoutY(ButtonGoals.getLayoutY() + 62);
+            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + 62);
+            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + 62);
             t1.setRotate(-90);
-        }if(event.getSource()==ButtonGoals){
-            l2.setEndY(l2.getEndY()+62);
-            l3.setEndY(l3.getEndY()+62);
-            l4.setEndY(l4.getEndY()+62);
-            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY()+62);
-            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY()+62);
+        }
+        if (event.getSource() == ButtonGoals) {
+            l2.setEndY(l2.getEndY() + 62);
+            l3.setEndY(l3.getEndY() + 62);
+            l4.setEndY(l4.getEndY() + 62);
+            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + 62);
+            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + 62);
             t2.setRotate(-90);
-        }if(event.getSource()==ButtonThemes){
-            l3.setEndY(l3.getEndY()+62);
-            l4.setEndY(l4.getEndY()+62);
-            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY()+62);
+        }
+        if (event.getSource() == ButtonThemes) {
+            l3.setEndY(l3.getEndY() + 62);
+            l4.setEndY(l4.getEndY() + 62);
+            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + 62);
             t3.setRotate(-90);
-        }if(event.getSource()==ButtonInterest){
-            l4.setEndY(l4.getEndY()+62);
+        }
+        if (event.getSource() == ButtonInterest) {
+            l4.setEndY(l4.getEndY() + 62);
             TextInterest.setDisable(false);
             t4.setRotate(-90);
         }
-        
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
