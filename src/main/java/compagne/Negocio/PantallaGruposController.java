@@ -21,6 +21,7 @@ import javafx.scene.text.Text;
 public class PantallaGruposController implements Initializable {
 
         private IFacadeCompagne facade = FacadeCompagne.getInstance();
+
         private String email;
         @FXML
         private Button crearGrupo;
@@ -49,20 +50,19 @@ public class PantallaGruposController implements Initializable {
                                 : "fx:id=\"codigoGrupo\" was not injected: check your FXML file 'RegistrarPantalla.fxml'.";
                 assert listaGrupos != null
                                 : "fx:id=\"Unirme\" was not injected: check your FXML file 'RegistrarPantalla.fxml'.";
-                this.poblarGrupos();
         }
 
-        private void poblarGrupos(){
+        public void poblarGrupos(){
                 this.listaGrupos.getItems().addAll(this.facade.listarGruposPublicos());
         }
 
         @FXML
-        private void crearGrupo(ActionEvent event) {
+        public void crearGrupo(ActionEvent event) {
                 // TODO linkear a otra pantalla
         }
 
         @FXML
-        private void Unirme(ActionEvent event) {
+        public void Unirme(ActionEvent event) {
                 if (this.codigoGrupo.getText().length() == 0 || this.email==null) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
@@ -85,15 +85,15 @@ public class PantallaGruposController implements Initializable {
         }
 
         @FXML
-        private void Unirme2(ActionEvent event) {
+        public void Unirme2(ActionEvent event) {
         }
 
         @FXML
-        private void desplegarMenu(ActionEvent event) {
+        public void desplegarMenu(ActionEvent event) {
                 //TODO
         }
 
-        private void start(String email) {
+        public void start(String email) {
                 this.email = email;
         }
 }
