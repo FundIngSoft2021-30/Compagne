@@ -24,57 +24,33 @@ import javafx.scene.control.Label;
  */
 public class PantallaPerfilController implements Initializable {
 
-    @FXML
     private Button ButtonDescription;
 
-    @FXML
     private Button ButtonGoals;
 
-    @FXML
     private Button ButtonInterest;
 
-    @FXML
     private Button ButtonThemes;
 
-    @FXML
-    private Label NombrePersona;
 
-    @FXML
-    private TextField TextDescription;
-
-    @FXML
-    private TextField TextGoals;
-
-    @FXML
     private TextField TextInterest;
 
-    @FXML
-    private TextField TextThemes;
 
-    @FXML
     private Line l1;
 
-    @FXML
     private Line l2;
 
-    @FXML
     private Line l3;
 
-    @FXML
     private Line l4;
 
-    @FXML
     private Polygon t1;
 
-    @FXML
     private Polygon t2;
 
-    @FXML
     private Polygon t3;
 
-    @FXML
     private Polygon t4;
-    @FXML
     void click(ActionEvent event) {
         if(event.getSource()==ButtonDescription){
             l1.setEndY(l1.getEndY()+62);

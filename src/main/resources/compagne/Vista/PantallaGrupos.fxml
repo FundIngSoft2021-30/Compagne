@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.PantallaGruposController">
+   <children>
+      <Label layoutX="75.0" layoutY="17.0" prefHeight="44.0" prefWidth="138.0" text="Grupos">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="27.0" />
+         </font>
+      </Label>
+      <Line endX="208.0" layoutX="103.0" layoutY="128.0" startX="-79.5" strokeWidth="2.0" AnchorPane.leftAnchor="22.5" AnchorPane.rightAnchor="23.0" />
+      <Button fx:id="crearGrupo" layoutX="104.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#crearGrupo" prefHeight="52.0" prefWidth="138.0" style="-fx-background-color: #WHITE;" text="Crear grupo" textAlignment="CENTER" textFill="#2b78e4">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="24.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="86.0" layoutY="127.0" prefHeight="44.0" prefWidth="164.0" text="Unirme a un grupo">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="codigoGrupo" layoutX="108.0" layoutY="171.0" promptText="Código del grupo" style="-fx-background-color: #2b78e4; -fx-border-color: #000000;">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="12.0" />
+         </font>
+      </TextField>
+      <Button fx:id="Unirme" layoutX="126.0" layoutY="204.0" mnemonicParsing="false" onMouseClicked="#Unirme" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #WHITE;" text="Unirme" textFill="#2b78e4">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="20.0" />
+         </font>
+      </Button>
+      <ListView fx:id="listaGrupos" layoutX="17.0" layoutY="286.0" prefHeight="300.0" prefWidth="200.0" style="-fx-background-color: #WHITE;" />
+      <Line endX="208.0" layoutX="103.0" layoutY="275.0" startX="-79.5" strokeWidth="2.0" />
+      <Text fx:id="Agregado1" fill="WHITE" layoutX="100.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+      <Button fx:id="Unirme2" layoutX="233.0" layoutY="396.0" mnemonicParsing="false" onMouseClicked="#Unirme2" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #WHITE;" text="Unirme" textFill="#2b78e4">
+         <font>
+            <Font name="Franklin Gothic Medium Cond" size="20.0" />
+         </font>
+      </Button>
+      <Text fx:id="Agregado2" fill="WHITE" layoutX="225.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" textAlignment="CENTER" wrappingWidth="99.359375" />
+      <Button fx:id="menu" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#desplegarMenu" style="-fx-background-color: #2b78e4;">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@menus.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+   </children>
+</AnchorPane>
