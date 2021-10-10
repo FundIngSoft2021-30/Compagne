@@ -26,7 +26,7 @@ import javafx.scene.control.Alert;
  */
 public class RegistrarPantallaController implements Initializable {
 
-    private IFacadeCompagne facade = FacadeCompagne.getInstance();
+    private FacadeCompagne facade = FacadeCompagne.getInstance();
 
     @FXML
     private CheckBox checkAcuerdo;

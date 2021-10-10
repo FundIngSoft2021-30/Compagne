@@ -52,6 +52,20 @@ public class IniciarSesionController {
             alert.setHeaderText("Ingreso correctamente");
             alert.setContentText("Enhorabuena!");
             alert.showAndWait();
+            String nomFXML = "PantallaPerfil.fxml";
+            Parent root = null;
+
+            try {
+                root = FXMLLoader.load(App.class.getResource(nomFXML));
+            } catch (Exception e) {
+
+            }
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Perfil");
+            stage.setScene(scene);
+            stage.showAndWait();
             //TODO Linkear con la pantalla principal y pasar usu
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

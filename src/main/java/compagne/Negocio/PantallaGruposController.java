@@ -20,7 +20,7 @@ import javafx.scene.text.Text;
 
 public class PantallaGruposController implements Initializable {
 
-        private IFacadeCompagne facade = FacadeCompagne.getInstance();
+        private FacadeCompagne facade = FacadeCompagne.getInstance();
         private String email;
         @FXML
         private Button crearGrupo;
