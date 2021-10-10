@@ -69,7 +69,7 @@ public class RegistrarPantallaController implements Initializable {
                         usu = this.facade.crearPerfilEstudiante(nombre.getText(), email.getText(), contraseña.getText(),
                                 null, null, null, null);
                         if (usu != null) {
-                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Correcto");
                             alert.setHeaderText("Ingreso correctamente");
                             alert.setContentText("Enhorabuena!");
@@ -87,7 +87,7 @@ public class RegistrarPantallaController implements Initializable {
                     usu = this.facade.crearPerfilProfesor(nombre.getText(), null, email.getText(), contraseña.getText(),
                             null, null, null, null);
                     if (usu != null) {
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Correcto");
                         alert.setHeaderText("Ingreso correctamente");
                         alert.setContentText("Enhorabuena!");
