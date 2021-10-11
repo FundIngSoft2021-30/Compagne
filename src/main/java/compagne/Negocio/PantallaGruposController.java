@@ -107,20 +107,22 @@ public class PantallaGruposController implements Initializable {
         @FXML
         public void Unirme2(ActionEvent event) {
                 Grupo g = this.listaGrupos.getSelectionModel().getSelectedItem();
-                if (g != null) {
-                        this.facade.agregarUsuarioAGrupo(g.getCodigo(), this.email, "N");
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Correcto");
-                        alert.setHeaderText("Se unio correctamente");
-                        alert.setContentText("Enhorabuena!");
-                        alert.showAndWait();
-                } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error");
-                        alert.setHeaderText("No se pudo Unir");
-                        alert.setContentText("Por favor revise el codigo ingresado");
-                        alert.showAndWait();
+                String nomFXML = "PVerInfoGrupo.fxml";
+                Parent root = null;
+                try {
+                        FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+                        root = loader.load();
+                        VerInfoGrupoController pgc = loader.getController();
+                        pgc.start(g);
+                } catch (Exception e) {
+
                 }
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Ver info grupo");
+                stage.setScene(scene);
+                stage.showAndWait();
         }
 
         @FXML
