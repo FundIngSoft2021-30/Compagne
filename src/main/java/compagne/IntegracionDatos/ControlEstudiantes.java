@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
+import compagne.Entidades.Usuario;
 
 public class ControlEstudiantes {
     final ConnectionClass CONNECTION_CLASS = new ConnectionClass();
@@ -19,13 +23,14 @@ public class ControlEstudiantes {
     }
 
     public ResultSet executeQuery(String query) {
+        ResultSet rs;
         try {
             this.statement = this.con.prepareStatement(query);
-            this.result = this.statement.executeQuery();
+            rs = this.statement.executeQuery();
         } catch (SQLException e) {
-            this.result=null;
+            rs = null;
         }
-        return this.result;
+        return rs;
     }
 
     public int getEstudianteID(String email) {
@@ -482,4 +487,171 @@ public class ControlEstudiantes {
         }
     }
 
+    public HashSet<Usuario> listarCompas() {
+        int offset = 0;
+        if (ConnectionClass.usingPSQL()) {
+            offset = 1;
+        }
+        HashSet<Usuario> compas = new HashSet<>();
+        Estudiante usu;
+        String consulta;
+        String nombre;
+        String email;
+        int estID = 0;
+        consulta = "SELECT \"Nombre\", \"Email\", \"ID\" FROM " + ConnectionClass.getSchema()
+                + "\"UsuarioRegistrado\" WHERE \"Tipo\"=\'S\'";
+        ResultSet rs = this.executeQuery(consulta);
+        ResultSet rs2;
+        int count=0;
+        try {
+            while (rs.next()) {
+                count++;
+                nombre = rs.getString(0 + offset);
+                estID = rs.getInt(2 + offset);
+                email = rs.getString(1 + offset);
+                // Si hay
+                HashSet<String> logros = new HashSet<>();
+                HashSet<Comentario> comentarios = new HashSet<>();
+                HashSet<String> materias = new HashSet<>();
+                HashSet<String> intereses = new HashSet<>();
+                // Logros
+                consulta = "SELECT LO.\"Texto\" FROM " + ConnectionClass.getSchema() + "\"Logro\" AS LO, "
+                        + ConnectionClass.getSchema() + "\"UsuarioXLogros\" AS UXL WHERE UXL.\"Usuario RegistradoID\"="
+                        + estID + " AND UXL.\"LogroID\"=LO.\"ID\";";
+                rs2 = this.executeQuery(consulta);
+                try {
+                    while (rs2.next()) {
+                        logros.add(rs2.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Comentarios
+                consulta = "SELECT CO.\"Texto\", CO.\"Estrellas\" FROM " + ConnectionClass.getSchema()
+                        + "\"Comentario\" AS CO, " + ConnectionClass.getSchema()
+                        + "\"UsuarioXComentario\" AS UXC WHERE UXC.\"UsuarioRegistradoID\"=" + estID
+                        + " AND UXC.\"ComentarioID\"=CO.\"ID\";";
+                rs2 = this.executeQuery(consulta);
+                try {
+                    while (rs2.next()) {
+                        comentarios.add(new Comentario(rs2.getString(1 + offset), rs2.getString(0 + offset)));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Materias
+                consulta = "SELECT LO.\"Nombre\" FROM " + ConnectionClass.getSchema() + "\"Materia\" AS LO, "
+                        + ConnectionClass.getSchema()
+                        + "\"UsuarioXMaterias\" AS UXL WHERE UXL.\"Usuario RegistradoID\"=" + estID
+                        + " AND UXL.\"MateriaID\"=LO.\"ID\";";
+                rs2 = this.executeQuery(consulta);
+                try {
+                    while (rs2.next()) {
+                        materias.add(rs2.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Intereses
+                consulta = "SELECT LO.\"Nombre\" FROM " + ConnectionClass.getSchema() + "\"Interes\" AS LO, "
+                        + ConnectionClass.getSchema()
+                        + "\"UsuarioXIntereses\" AS UXL WHERE UXL.\"Usuario RegistradoID\"=" + estID
+                        + " AND UXL.\"InteresID\"=LO.\"ID\";";
+                rs2 = this.executeQuery(consulta);
+                try {
+                    while (rs2.next()) {
+                        intereses.add(rs2.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                usu = new Estudiante(nombre, email, materias, comentarios, "", intereses, logros);
+                compas.add(usu);
+            }
+        } catch (Exception e) {
+        }
+        return compas;
+    }
+
+    public HashSet<Usuario> listarCompas(String nombre) {
+        int offset = 0;
+        if (ConnectionClass.usingPSQL()) {
+            offset = 1;
+        }
+        HashSet<Usuario> compas = new HashSet<>();
+        Estudiante usu;
+        String consulta;
+        String email;
+        int estID = 0;
+        consulta = "SELECT \"Email\", \"ID\" FROM " + ConnectionClass.getSchema()
+                + "\"UsuarioRegistrado\" WHERE \"Tipo\"=\'S\' AND \"Nombre\"=\'"+nombre+"\';";
+        ResultSet rs = this.executeQuery(consulta);
+        ResultSet rs2;
+        try {
+            while (rs.next()) {
+                estID = rs.getInt(1 + offset);
+                email = rs.getString(0 + offset);
+                // Si hay
+                HashSet<String> logros = new HashSet<>();
+                HashSet<Comentario> comentarios = new HashSet<>();
+                HashSet<String> materias = new HashSet<>();
+                HashSet<String> intereses = new HashSet<>();
+                // Logros
+                consulta = "SELECT LO.\"Texto\" FROM " + ConnectionClass.getSchema() + "\"Logro\" AS LO, "
+                        + ConnectionClass.getSchema() + "\"UsuarioXLogros\" AS UXL WHERE UXL.\"Usuario RegistradoID\"="
+                        + estID + " AND UXL.\"LogroID\"=LO.\"ID\";";
+                rs2 = executeQuery(consulta);
+                try {
+                    while (rs2.next()) {
+                        logros.add(rs2.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Comentarios
+                consulta = "SELECT CO.\"Texto\", CO.\"Estrellas\" FROM " + ConnectionClass.getSchema()
+                        + "\"Comentario\" AS CO, " + ConnectionClass.getSchema()
+                        + "\"UsuarioXComentario\" AS UXC WHERE UXC.\"UsuarioRegistradoID\"=" + estID
+                        + " AND UXC.\"ComentarioID\"=CO.\"ID\";";
+                rs2 = this.executeQuery(consulta);
+                try {
+                    while (rs2.next()) {
+                        comentarios.add(new Comentario(rs2.getString(1 + offset), rs2.getString(0 + offset)));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Materias
+                consulta = "SELECT LO.\"Nombre\" FROM " + ConnectionClass.getSchema() + "\"Materia\" AS LO, "
+                        + ConnectionClass.getSchema()
+                        + "\"UsuarioXMaterias\" AS UXL WHERE UXL.\"Usuario RegistradoID\"=" + estID
+                        + " AND UXL.\"MateriaID\"=LO.\"ID\";";
+                rs2 = this.executeQuery(consulta);
+                try {
+                    while (rs2.next()) {
+                        materias.add(rs2.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Intereses
+                consulta = "SELECT LO.\"Nombre\" FROM " + ConnectionClass.getSchema() + "\"Interes\" AS LO, "
+                        + ConnectionClass.getSchema()
+                        + "\"UsuarioXIntereses\" AS UXL WHERE UXL.\"Usuario RegistradoID\"=" + estID
+                        + " AND UXL.\"InteresID\"=LO.\"ID\";";
+                rs2 = this.executeQuery(consulta);
+                try {
+                    while (rs2.next()) {
+                        intereses.add(rs2.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                usu = new Estudiante(nombre, email, materias, comentarios, "", intereses, logros);
+                compas.add(usu);
+            }
+        } catch (Exception e) {
+        }
+        return compas;
+    }
 }

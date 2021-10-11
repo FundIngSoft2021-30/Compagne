@@ -40,7 +40,21 @@ public class PantallaMenuController {
 
     @FXML
     void cambiarACompanieros(ActionEvent event) {
-        // TODO Linkear a compañeros
+        String nomFXML ="PantallaVerCompaneros.fxml";
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+            root = loader.load();
+            CompaController cc=loader.getController();
+            cc.actualizar();
+        } catch (Exception e) {
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Registrarse");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     @FXML
