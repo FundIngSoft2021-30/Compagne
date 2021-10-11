@@ -36,5 +36,10 @@
             <Font name="Franklin Gothic Medium" size="15.0" />
          </font>
       </Button>
+      <TextField layoutX="16.0" layoutY="143.0" prefHeight="47.0" prefWidth="304.0" promptText="Compañeros Recomendados" style="-fx-background-color: #2b78e4;">
+         <font>
+            <Font name="Franklin Gothic Medium" size="22.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>
