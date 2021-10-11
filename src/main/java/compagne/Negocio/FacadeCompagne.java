@@ -329,4 +329,12 @@ public class FacadeCompagne {
     public HashSet<Grupo> listarGruposPublicos() {
         return this.controlGrupos.getGruposPublicos();
     }
+
+    public HashSet<Usuario> listarCompas(){
+        return this.controlEstudiantes.listarCompas();
+    }
+
+    public HashSet<Usuario> listarCompas(String nombre){
+        return this.controlEstudiantes.listarCompas(nombre);
+    }
 }

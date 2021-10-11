@@ -40,23 +40,6 @@ public class Profesor extends Usuario {
             "}";
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Profesor)) {
-            return false;
-        }
-        Profesor profesor = (Profesor) o;
-        return Objects.equals(experiencia, profesor.experiencia) && Objects.equals(horarioAtencion, profesor.horarioAtencion) && Objects.equals(logros, profesor.logros);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(experiencia, horarioAtencion, logros);
-    }
-
     public Profesor(String nombre, String email, HashSet<String> materias, HashSet<Comentario> comentarios, String experiencia, String contrasenia,
             HashSet<String> horarioAtencion, HashSet<String> logros) {
         super(nombre, email, contrasenia, materias, comentarios);

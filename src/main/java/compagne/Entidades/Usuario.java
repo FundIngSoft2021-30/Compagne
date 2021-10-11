@@ -54,12 +54,12 @@ public abstract class Usuario{
             return false;
         }
         Usuario usuario = (Usuario) o;
-        return Objects.equals(nombre, usuario.nombre) && Objects.equals(email, usuario.email) && Objects.equals(contrasenia, usuario.contrasenia) && Objects.equals(materias, usuario.materias) && Objects.equals(comentarios, usuario.comentarios);
+        return Objects.equals(email, usuario.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, email, contrasenia, materias, comentarios);
+        return Objects.hash(email);
     }
 
     @Override
