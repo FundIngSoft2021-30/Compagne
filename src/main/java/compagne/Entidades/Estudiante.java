@@ -6,6 +6,8 @@ import java.util.Objects;
 public class Estudiante extends Usuario {
     private HashSet<String> intereses;
     private HashSet<String> logros;
+    
+    
 
     public HashSet<String> getIntereses() {
         return this.intereses;

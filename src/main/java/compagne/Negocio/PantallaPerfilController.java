@@ -24,39 +24,59 @@ import javafx.scene.control.ListView;
 public class PantallaPerfilController {
 
     private String usu;
-
-    @FXML
-    private TextField TextDescription;
-
-    @FXML
-    private TextField TextThemes;
-
-    @FXML
-    private TextField TextGoals;
+    
+    
 
     @FXML
     private Button ButtonDescription;
 
     @FXML
-    private Line l1;
-
-    @FXML
     private Button ButtonGoals;
 
     @FXML
-    private Line l2;
-
-    @FXML
-    private Button ButtonThemes;
-
-    @FXML
-    private Line l3;
+    private Button ButtonGroups;
 
     @FXML
     private Button ButtonInterest;
 
     @FXML
+    private Button ButtonThemes;
+
+    @FXML
+    private ListView<?> ListGroups;
+
+    @FXML
+    private TextField NombreEstudiante;
+
+    @FXML
+    private TextField TextDescription;
+
+    @FXML
+    private TextField TextGoals;
+
+    @FXML
+    private TextField TextInterest;
+
+    @FXML
+    private TextField TextThemes;
+
+    @FXML
+    private Line l1;
+
+    @FXML
+    private Line l2;
+
+    @FXML
+    private Line l3;
+
+    @FXML
     private Line l4;
+
+    @FXML
+    private Line l5;
+
+    @FXML
+    private ListView<?> listGroups;
 
     @FXML
     private Polygon t1;
@@ -71,31 +91,9 @@ public class PantallaPerfilController {
     private Polygon t4;
 
     @FXML
-    private TextField TextInterest;
-
-    @FXML
-    private Button ButtonGroups;
-
-    @FXML
-    private Line l5;
-
-    @FXML
     private Polygon t5;
-
+    
     @FXML
-    private ListView<Grupo> listGroups;
-
-    @FXML
-    private TextField NombreEstudiante;
-
-    @FXML
-    private TextField CarreraText;
-
-    @FXML
-    private TextField SemestreText;
-
-    @FXML
-
     void click(ActionEvent event) {
         if (event.getSource() == ButtonDescription && TextDescription.isVisible()) {
             l1.setLayoutY(l1.getLayoutY() - 62);
@@ -202,10 +200,13 @@ public class PantallaPerfilController {
             t5.setRotate(0);
             listGroups.setVisible(false);
         }
+        
     }
 
     public void start(String u) {
         this.usu = u;
+        FacadeCompagne.getInstance().buscarIDUsuario(u);
+        
         this.NombreEstudiante.setText(u);
     }
 }
