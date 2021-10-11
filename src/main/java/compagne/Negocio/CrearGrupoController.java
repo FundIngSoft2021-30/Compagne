@@ -56,6 +56,7 @@ public class CrearGrupoController {
                 alert.setHeaderText("Ingreso correctamente");
                 alert.setContentText("Enhorabuena!");
                 alert.showAndWait();
+                this.actualizar();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -102,6 +103,7 @@ public class CrearGrupoController {
                 alert.setHeaderText("Creado correctamente");
                 alert.setContentText("Enhorabuena!");
                 alert.showAndWait();
+                this.actualizar();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
