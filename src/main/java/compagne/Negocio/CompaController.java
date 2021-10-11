@@ -2,8 +2,6 @@ package compagne.Negocio;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-
 import compagne.Entidades.Usuario;
 import java.util.Collection;
 import javafx.event.ActionEvent;
