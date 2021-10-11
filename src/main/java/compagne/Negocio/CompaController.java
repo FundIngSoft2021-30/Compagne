@@ -32,16 +32,18 @@ public class CompaController {
 
     public void actualizar() {
         this.lista_compa.getItems().clear();
-        Collection<Usuario> col=this.facadeCompagne.listarCompas();
-        this.lista_compa.getItems().addAll(FXCollections.observableArrayList(col));
+        Collection<Usuario> col = this.facadeCompagne.listarCompas();
+        for (Usuario e : col)
+            this.lista_compa.getItems().add(e);
     }
 
     @FXML
     void buscarC(ActionEvent event) {
         if (this.buscar_field.getText().length() > 0) {
             this.lista_compa.getItems().clear();
-            Collection<Usuario> col=this.facadeCompagne.listarCompas(buscar_field.getText());
-            this.lista_compa.getItems().addAll(FXCollections.observableArrayList(col));
+            Collection<Usuario> col = this.facadeCompagne.listarCompas(buscar_field.getText());
+            for (Usuario e : col)
+            this.lista_compa.getItems().add(e);
         } else
             this.actualizar();
     }
