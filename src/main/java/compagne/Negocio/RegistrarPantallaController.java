@@ -123,7 +123,7 @@ public class RegistrarPantallaController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
                     root = loader.load();
                     PantallaMenuController pmc = loader.getController();
-                    pmc.start(((Usuario)(usu)).getEmail());
+                    pmc.start(((Usuario) (usu)).getEmail());
                 } catch (Exception e) {
 
                 }
