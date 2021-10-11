@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -48,7 +46,7 @@
          </font>
       </Button>
       <Text fx:id="Agregado2" fill="WHITE" layoutX="225.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" textAlignment="CENTER" wrappingWidth="99.359375" />
-      <Button fx:id="menu" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#desplegarMenu" style="-fx-background-color: #2b78e4;">
+      <Button fx:id="menu" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#desplegarMenu" style="-fx-background-color: #2b78e4;">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -56,11 +54,5 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <TableView fx:id="listaGrupos" layoutX="52.0" layoutY="324.0" prefHeight="200.0" prefWidth="223.0" style="-fx-background-color: #2b78e4;">
-        <columns>
-          <TableColumn prefWidth="122.0" text="Nombre" />
-          <TableColumn prefWidth="100.0" text="Código" />
-        </columns>
-      </TableView>
    </children>
 </AnchorPane>

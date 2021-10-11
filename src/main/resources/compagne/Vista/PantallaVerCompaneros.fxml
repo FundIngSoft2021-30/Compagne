@@ -16,11 +16,6 @@
             <Font name="Franklin Gothic Medium Cond" size="30.0" />
          </font>
       </Label>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@menus.png" />
-         </image>
-      </ImageView>
       <ListView fx:id="lista_compa" layoutX="43.0" layoutY="200.0" prefHeight="370.0" prefWidth="250.0" style="-fx-background-color: #2b78e4;" />
       <AnchorPane layoutX="25.0" layoutY="95.0">
          <children>
@@ -41,5 +36,10 @@
             <Font name="Franklin Gothic Medium" size="22.0" />
          </font>
       </TextField>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@menus.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

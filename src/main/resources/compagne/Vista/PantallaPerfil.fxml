@@ -12,7 +12,6 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.PantallaPerfilController">
    <children>
       <Button fx:id="ButtonDescription" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="210.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mi Descripción" textFill="WHITE">
@@ -70,11 +69,6 @@
       <Polygon fx:id="t2" fill="#000407" layoutX="65.0" layoutY="205.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
       <Polygon fx:id="t3" fill="#000407" layoutX="65.0" layoutY="265.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
       <Polygon fx:id="t4" fill="#000407" layoutX="65.0" layoutY="325.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="25.0">
-         <image>
-            <Image url="@menus.png" />
-         </image>
-      </ImageView>
       <ListView fx:id="listGroups" layoutX="25.0" layoutY="500.0" prefHeight="60.0" prefWidth="290.0" style="-fx-background-color: WHITE;" visible="false" />
       <TextField fx:id="NombreEstudiante" alignment="CENTER_RIGHT" editable="false" layoutX="112.0" layoutY="135.0" prefHeight="35.0" prefWidth="200.0" promptText="Nombre Estudiante" style="-fx-background-color: #2b78e4;">
          <font>
@@ -104,5 +98,14 @@
       </Button>
       <Polygon fx:id="t5" fill="#000407" layoutX="65.0" layoutY="385.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
       <Line fx:id="l5" endX="210.0" layoutX="109.0" layoutY="505.0" startX="-80.0" strokeWidth="2.0" />
+      <Button fx:id="menu" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#desplegarMenu" style="-fx-background-color: #2b78e4;">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@menus.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
