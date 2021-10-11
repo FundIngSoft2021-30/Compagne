@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 
-import javax.naming.spi.DirStateFactory.Result;
 
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
