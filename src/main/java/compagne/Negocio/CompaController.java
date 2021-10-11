@@ -33,7 +33,7 @@ public class CompaController {
     public void actualizar() {
         this.lista_compa.getItems().clear();
         Collection<Usuario> col=this.facadeCompagne.listarCompas();
-        this.lista_compa.getItems().addAll(col);
+        this.lista_compa.getItems().addAll(FXCollections.observableArrayList(col));
     }
 
     @FXML
