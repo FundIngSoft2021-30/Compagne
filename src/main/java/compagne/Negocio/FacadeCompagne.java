@@ -306,6 +306,10 @@ public class FacadeCompagne {
         return this.controlGrupos.hacerAdminDeGrupo(grupoid, idusuario);
     }
     
+    public HashSet<Usuario> listarCompasGrupo(String codigo){
+        HashSet<Usuario> losU=this.controlEstudiantes.listarCompasGrupo(codigo);
+        return losU;
+    }
     
     
     //BUSQUEDA

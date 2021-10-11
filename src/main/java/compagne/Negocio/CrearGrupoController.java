@@ -50,7 +50,7 @@ public class CrearGrupoController {
     @FXML
     void addIntegrante(ActionEvent event) {
         if (this.email1.getText().length() > 0) {
-            if (this.facade.agregarUsuarioAGrupo(this.g.getCodigo(), this.emai, "N")) {
+            if (this.facade.agregarUsuarioAGrupo(this.g.getCodigo(), this.email1.getText(), "N")) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Correcto");
                 alert.setHeaderText("Ingreso correctamente");
@@ -84,8 +84,8 @@ public class CrearGrupoController {
     }
 
     public void actualizar() {
-        // TODO
-        // this.integrantes_list.getItems().addAll(this.facade(this.g.getCodigo()));
+        this.integrantes_list.getItems().clear();
+        this.integrantes_list.getItems().addAll(this.facade.listarCompasGrupo(this.g.getCodigo()));
     }
 
     @FXML
