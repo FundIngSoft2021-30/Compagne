@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package compagne.Negocio;
 
+import compagne.Entidades.Grupo;
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +13,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
 /**
  * FXML Controller class
@@ -73,93 +71,138 @@ public class PantallaPerfilController implements Initializable {
     private TextField TextInterest;
 
     @FXML
-    private Label NombrePersona;
-    
-    boolean abierto = false;
+    private Button ButtonGroups;
+
+    @FXML
+    private Line l5;
+
+    @FXML
+    private Polygon t5;
+
+    @FXML
+    private ListView<Grupo> listGroups;
+
+    @FXML
+    private TextField NombreEstudiante;
+
+    @FXML
+    private TextField CarreraText;
+
+    @FXML
+    private TextField SemestreText;
+
      @FXML
+
     void click(ActionEvent event) {
-        
-        if (event.getSource() == this.ButtonDescription && abierto == false) {
-                l1.setLayoutY(l1.getLayoutY()+62);
-                l2.setLayoutY(l2.getLayoutY()+62);
-                l3.setLayoutY(l3.getLayoutY()+62);
-                l4.setLayoutY(l4.getLayoutY()+62);
-                ButtonGoals.setLayoutY(ButtonGoals.getLayoutY() + 62);
-                ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + 62);
-                ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + 62);
-                t1.setRotate(-90);
-                t2.setLayoutY(t2.getLayoutY() + 62);
-                t3.setLayoutY(t3.getLayoutY() + 62);
-                t4.setLayoutY(t4.getLayoutY() + 62);
-                abierto = true;
-        }else if (event.getSource() == this.ButtonDescription && abierto == true) {
-                l1.setLayoutY(l1.getLayoutY()-62);
-                l2.setLayoutY(l2.getLayoutY()-62);
-                l3.setLayoutY(l3.getLayoutY()-62);
-                l4.setLayoutY(l4.getLayoutY()-62);
-                ButtonGoals.setLayoutY(ButtonGoals.getLayoutY() - 62);
-                ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() - 62);
-                ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() - 62);
-                t1.setRotate(0);
-                t2.setLayoutY(t2.getLayoutY() - 62);
-                t3.setLayoutY(t3.getLayoutY() - 62);
-                t4.setLayoutY(t4.getLayoutY() - 62);
-                abierto = false;
-        }
-        if (event.getSource() == this.ButtonGoals && abierto == false) {
-            l2.setLayoutY(l2.getLayoutY()+62);
-            l3.setLayoutY(l3.getLayoutY()+62);
-            l4.setLayoutY(l4.getLayoutY()+62);
-            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + 62);
-            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + 62);
-            t2.setRotate(-90);
-            t3.setLayoutY(t3.getLayoutY() + 62);
-            t4.setLayoutY(t4.getLayoutY() + 62);
-            abierto = true;
-        } else if (event.getSource() == this.ButtonGoals && abierto == true) {
+        if (event.getSource() == ButtonDescription && TextDescription.isVisible()) {
+            l1.setLayoutY(l1.getLayoutY()-62);
             l2.setLayoutY(l2.getLayoutY()-62);
             l3.setLayoutY(l3.getLayoutY()-62);
             l4.setLayoutY(l4.getLayoutY()-62);
+            l5.setLayoutY(l5.getLayoutY()-62);
+            ButtonGoals.setLayoutY(ButtonGoals.getLayoutY() - 62);
             ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() - 62);
             ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() - 62);
-            t2.setRotate(0);
-            t3.setLayoutY(t3.getLayoutY() - 62);
-            t4.setLayoutY(t4.getLayoutY() - 62);
-            abierto = false;
-        }
-        if (event.getSource() == ButtonThemes && abierto == false) {
+            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - 62);
+            t1.setRotate(0);
+            t2.setLayoutY(t2.getLayoutY()-62);
+            t3.setLayoutY(t3.getLayoutY()-62);
+            t4.setLayoutY(t4.getLayoutY()-62);
+            t5.setLayoutY(t5.getLayoutY()-62);
+            TextDescription.setVisible(false);
+        }else if(event.getSource() == ButtonDescription && !TextDescription.isVisible()){
+            l1.setLayoutY(l1.getLayoutY()+62);
+            l2.setLayoutY(l2.getLayoutY()+62);
             l3.setLayoutY(l3.getLayoutY()+62);
             l4.setLayoutY(l4.getLayoutY()+62);
+            l5.setLayoutY(l5.getLayoutY()+62);
+            ButtonGoals.setLayoutY(ButtonGoals.getLayoutY() + 62);
             ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + 62);
-            t3.setRotate(-90);
-            t4.setLayoutY(t4.getLayoutY() + 62);
-            abierto = true;
-        } else if (event.getSource() == ButtonThemes && abierto == true) {
+            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + 62);
+            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + 62);
+            t1.setRotate(-90);
+            t2.setLayoutY(t2.getLayoutY()+62);
+            t3.setLayoutY(t3.getLayoutY()+62);
+            t4.setLayoutY(t4.getLayoutY()+62);
+            t5.setLayoutY(t5.getLayoutY()+62);
+            TextDescription.setVisible(true);
+        }
+        if (event.getSource() == ButtonGoals && TextGoals.isVisible()) {
+            l2.setLayoutY(l2.getLayoutY()-62);
             l3.setLayoutY(l3.getLayoutY()-62);
             l4.setLayoutY(l4.getLayoutY()-62);
-            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() -62);
-            t3.setRotate(0);
-            t4.setLayoutY(t4.getLayoutY() - 62);
-            abierto = false;
-        }
-        
-        if (event.getSource() == ButtonInterest && abierto == true) {
-            l4.setLayoutY(l4.getLayoutY()-62);
-            TextInterest.setOpacity(0);
-            t4.setRotate(0);
-            abierto = false;
-        }else if (event.getSource() == ButtonInterest && abierto == false) {
+            l5.setLayoutY(l5.getLayoutY()-62);
+            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() - 62);
+            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() - 62);
+            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - 62);
+            t2.setRotate(0);
+            t3.setLayoutY(t3.getLayoutY()-62);
+            t4.setLayoutY(t4.getLayoutY()-62);
+            t5.setLayoutY(t5.getLayoutY()-62);
+            TextGoals.setVisible(false);
+        }else if (event.getSource() == ButtonGoals && !TextGoals.isVisible()) {
+            l2.setLayoutY(l2.getLayoutY()+62);
+            l3.setLayoutY(l3.getLayoutY()+62);
             l4.setLayoutY(l4.getLayoutY()+62);
-            TextInterest.setOpacity(1);
-            t4.setRotate(-90);
-            abierto = true;
+            l5.setLayoutY(l5.getLayoutY()+62);
+            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + 62);
+            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + 62);
+            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + 62);
+            t2.setRotate(-90);
+            t3.setLayoutY(t3.getLayoutY()+62);
+            t4.setLayoutY(t4.getLayoutY()+62);
+            t5.setLayoutY(t5.getLayoutY()+62);
+            TextGoals.setVisible(true);
         }
-
+        if (event.getSource() == ButtonThemes && !TextThemes.isVisible()) {
+            l3.setLayoutY(l3.getLayoutY()+62);
+            l4.setLayoutY(l4.getLayoutY()+62);
+            l5.setLayoutY(l5.getLayoutY()+62);
+            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + 62);
+            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + 62);
+            t3.setRotate(-90);
+            t4.setLayoutY(t4.getLayoutY()+62);
+            t5.setLayoutY(t5.getLayoutY()+62);
+            TextThemes.setVisible(true);
+        }else if (event.getSource() == ButtonThemes && TextThemes.isVisible()) {
+            l3.setLayoutY(l3.getLayoutY()-62);
+            l4.setLayoutY(l4.getLayoutY()-62);
+            l5.setLayoutY(l5.getLayoutY()-62);
+            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() - 62);
+            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - 62);
+            t3.setRotate(0);
+            t4.setLayoutY(t4.getLayoutY()-62);
+            t5.setLayoutY(t5.getLayoutY()-62);
+            TextThemes.setVisible(false);
+        }
+        if (event.getSource() == ButtonInterest && !TextInterest.isVisible()) {
+            l4.setLayoutY(l4.getLayoutY()+62);
+            l5.setLayoutY(l5.getLayoutY()+62);
+            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + 62);
+            t4.setRotate(-90);
+            t5.setLayoutY(t5.getLayoutY()+62);
+            TextInterest.setVisible(true);
+        }else if (event.getSource() == ButtonInterest && TextInterest.isVisible()) {
+            l4.setLayoutY(l4.getLayoutY()-62);
+            l5.setLayoutY(l5.getLayoutY()-62);
+            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - 62);
+            t4.setRotate(0);
+            t5.setLayoutY(t5.getLayoutY()-62);
+            TextInterest.setVisible(false);
+        }
+        if (event.getSource() == ButtonGroups && !listGroups.isVisible()) {
+            l5.setLayoutY(l5.getLayoutY()+62);
+            t5.setRotate(-90);
+            listGroups.setVisible(true);
+        }else if (event.getSource() == ButtonGroups && listGroups.isVisible()) {
+            l5.setLayoutY(l5.getLayoutY()-62);
+            t5.setRotate(0);
+            listGroups.setVisible(false);
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        NombreEstudiante.setText(FacadeCompagne.getInstance().usu);
     }
-
 }

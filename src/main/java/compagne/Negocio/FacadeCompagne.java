@@ -13,11 +13,12 @@ import compagne.IntegracionDatos.ConnectionClass;
 import compagne.IntegracionDatos.ControlEstudiantes;
 import compagne.IntegracionDatos.ControlGrupos;
 
-public class FacadeCompagne implements IFacadeCompagne {
+public class FacadeCompagne {
     private ControlProfesores controlProfesores;
     private ControlEstudiantes controlEstudiantes;
     private ControlGrupos controlGrupos;
     public static FacadeCompagne instance;
+    public String usu;
 
     public FacadeCompagne() {
         this.controlEstudiantes = new ControlEstudiantes();
@@ -266,6 +267,7 @@ public class FacadeCompagne implements IFacadeCompagne {
                 usu = new Profesor(nombre, email, materias, comentarios, experiencia, contra, horarioAtencion, logros);
             }
         }
+        this.usu=usu.getNombre();
         return usu;
     }
     
@@ -317,10 +319,8 @@ public class FacadeCompagne implements IFacadeCompagne {
         return this.controlGrupos.getGrupoID(codigo);
     }
 
-    @Override
+    
     public HashSet<Grupo> listarGruposPublicos() {
         return this.controlGrupos.getGruposPublicos();
     }
-
-
 }

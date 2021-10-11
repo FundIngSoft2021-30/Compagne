@@ -52,7 +52,22 @@ public class IniciarSesionController {
             alert.setHeaderText("Ingreso correctamente");
             alert.setContentText("Enhorabuena!");
             alert.showAndWait();
-            //TODO Linkear con la pantalla principal y pasar usu
+            String nomFXML = "PantallaMenu.fxml";
+            Parent root = null;
+            try {
+                FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+                root = loader.load();
+                PantallaMenuController pmc = loader.getController();
+                pmc.start(((Usuario) (usu)).getEmail());
+            } catch (Exception e) {
+
+            }
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Menu");
+            stage.setScene(scene);
+            stage.showAndWait();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

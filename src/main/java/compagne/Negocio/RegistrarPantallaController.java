@@ -9,6 +9,12 @@ package compagne.Negocio;
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import compagne.Vista.App;
 
 import compagne.Entidades.Usuario;
 import javafx.fxml.Initializable;
@@ -26,7 +32,7 @@ import javafx.scene.control.Alert;
  */
 public class RegistrarPantallaController implements Initializable {
 
-    private IFacadeCompagne facade = FacadeCompagne.getInstance();
+    private FacadeCompagne facade = FacadeCompagne.getInstance();
 
     @FXML
     private CheckBox checkAcuerdo;
@@ -60,8 +66,10 @@ public class RegistrarPantallaController implements Initializable {
         } else if (event.getSource() == this.checkEstudiante) {
             checkProfesor.setSelected(false);
         } else if (event.getSource() == this.registrarse) {
+            boolean b = false;
+
+            Usuario usu = null;
             if (checkAcuerdo.isSelected() && (checkEstudiante.isSelected() || checkProfesor.isSelected())) {
-                Usuario usu = null;
                 if (!email.getText().equals("") && !nombre.getText().equals("") && !contraseña.getText().equals("")
                         && !confirmarContraseña.getText().equals("")
                         && confirmarContraseña.getText().equals(contraseña.getText())) {
@@ -74,7 +82,7 @@ public class RegistrarPantallaController implements Initializable {
                             alert.setHeaderText("Ingreso correctamente");
                             alert.setContentText("Enhorabuena!");
                             alert.showAndWait();
-                            // TODO Linkear con la pantalla principal y pasar usu
+                            b = true;
                         } else {
                             Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setTitle("Error");
@@ -92,7 +100,7 @@ public class RegistrarPantallaController implements Initializable {
                         alert.setHeaderText("Ingreso correctamente");
                         alert.setContentText("Enhorabuena!");
                         alert.showAndWait();
-                        // TODO Linkear con la pantalla principal y pasar usu
+                        b = true;
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
@@ -107,6 +115,24 @@ public class RegistrarPantallaController implements Initializable {
                 alert.setHeaderText("No se pudo registrar");
                 alert.setContentText("Por favor llene todos los campos correctamente");
                 alert.showAndWait();
+            }
+            if (b) {
+                String nomFXML = "PantallaMenu.fxml";
+                Parent root = null;
+                try {
+                    FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+                    root = loader.load();
+                    PantallaMenuController pmc = loader.getController();
+                    pmc.start(((Usuario)(usu)).getEmail());
+                } catch (Exception e) {
+
+                }
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Menu");
+                stage.setScene(scene);
+                stage.showAndWait();
             }
         }
     }
