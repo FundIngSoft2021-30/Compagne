@@ -568,6 +568,7 @@ public class ControlEstudiantes {
             }
         } catch (Exception e) {
         }
+        System.out.println(compas);
         return compas;
     }
 
@@ -650,6 +651,7 @@ public class ControlEstudiantes {
             }
         } catch (Exception e) {
         }
+        System.out.println(compas);
         return compas;
     }
 }
