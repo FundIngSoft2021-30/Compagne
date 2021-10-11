@@ -85,7 +85,7 @@ public class PantallaPerfilController{
 
     @FXML
     void click(ActionEvent event) {
-        int tam = 60;
+        int tam = 62;
         if (event.getSource() == ButtonDescription && TextDescription.isVisible()) {
             l1.setLayoutY(l1.getLayoutY()-tam);
             l2.setLayoutY(l2.getLayoutY()-tam);
