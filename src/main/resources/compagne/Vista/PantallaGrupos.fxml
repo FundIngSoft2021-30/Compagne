@@ -56,7 +56,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <TableView layoutX="52.0" layoutY="324.0" prefHeight="200.0" prefWidth="223.0" style="-fx-background-color: #2b78e4;">
+      <TableView fx:id="listaGrupos" layoutX="52.0" layoutY="324.0" prefHeight="200.0" prefWidth="223.0" style="-fx-background-color: #2b78e4;">
         <columns>
           <TableColumn prefWidth="122.0" text="Nombre" />
           <TableColumn prefWidth="100.0" text="Código" />

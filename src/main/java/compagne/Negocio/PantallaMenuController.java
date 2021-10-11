@@ -51,7 +51,7 @@ public class PantallaMenuController {
             FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
             root=loader.load();
             PantallaGruposController pgc=loader.getController();
-            pgc.start(email);
+            pgc.start(this.email);
         } catch (Exception e) {
 
         }

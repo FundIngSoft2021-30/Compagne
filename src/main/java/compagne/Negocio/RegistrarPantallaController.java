@@ -15,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import compagne.Vista.App;
-import javafx.scene.Node;
 
 import compagne.Entidades.Usuario;
 import javafx.fxml.Initializable;

@@ -7,14 +7,15 @@ package compagne.Negocio;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import javafx.scene.Node;
+import javafx.stage.Stage;
 import compagne.Entidades.Grupo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -29,7 +30,7 @@ public class PantallaGruposController implements Initializable {
         @FXML
         private TextField codigoGrupo;
         @FXML
-        private ListView<Grupo> listaGrupos;
+        private TableView<Grupo> listaGrupos;
         @FXML
         private Button unirme2_button;
         @FXML
@@ -51,18 +52,18 @@ public class PantallaGruposController implements Initializable {
                                 : "fx:id=\"Unirme\" was not injected: check your FXML file 'RegistrarPantalla.fxml'.";
         }
 
-        public void poblarGrupos(){
+        public void poblarGrupos() {
                 this.listaGrupos.getItems().addAll(this.facade.listarGruposPublicos());
         }
 
         @FXML
         public void crearGrupo(ActionEvent event) {
-                // TODO linkear a otra pantalla
+                // TODO
         }
 
         @FXML
         public void Unirme(ActionEvent event) {
-                if (this.codigoGrupo.getText().length() == 0 || this.email==null) {
+                if (this.codigoGrupo.getText().length() == 0 || this.email == null) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
                         alert.setHeaderText("No se pudo Unir");
@@ -75,7 +76,7 @@ public class PantallaGruposController implements Initializable {
                         alert.setContentText("Por favor revise el codigo ingresado");
                         alert.showAndWait();
                 } else {
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Correcto");
                         alert.setHeaderText("Se unio correctamente");
                         alert.setContentText("Enhorabuena!");
@@ -85,11 +86,28 @@ public class PantallaGruposController implements Initializable {
 
         @FXML
         public void Unirme2(ActionEvent event) {
+                Grupo g = this.listaGrupos.getSelectionModel().getSelectedItem();
+                if (g != null) {
+                        this.facade.agregarUsuarioAGrupo(g.getCodigo(), this.email, "N");
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Correcto");
+                        alert.setHeaderText("Se unio correctamente");
+                        alert.setContentText("Enhorabuena!");
+                        alert.showAndWait();
+                } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("No se pudo Unir");
+                        alert.setContentText("Por favor revise el codigo ingresado");
+                        alert.showAndWait();
+                }
         }
 
         @FXML
         public void desplegarMenu(ActionEvent event) {
-                //TODO
+                Node source = (Node) event.getSource();
+                Stage stage = (Stage) source.getScene().getWindow();
+                stage.close();
         }
 
         public void start(String email) {
