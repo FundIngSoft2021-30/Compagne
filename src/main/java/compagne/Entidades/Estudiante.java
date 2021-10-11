@@ -1,7 +1,6 @@
 package compagne.Entidades;
 
 import java.util.HashSet;
-import java.util.Objects;
 
 public class Estudiante extends Usuario {
     private HashSet<String> intereses;
