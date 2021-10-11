@@ -130,7 +130,7 @@ public class ControlGrupos {
         return b;
         
     }
-    public boolean crearGrupo(Grupo grupo, Usuario usuario) {
+    public boolean crearGrupo(Grupo grupo, String usuario) {
         /*
          * Este método guarda un grupo en la BD, recibe un objeto de la clase
          * grupo y hace que este persista en la BD . Recibe: grupo -> Instancia de
@@ -150,7 +150,7 @@ public class ControlGrupos {
         }
         try {
             // Toca insertar el usuario y el grupo en UsuarioXGrupoEstudio
-            this.insertarUsuarioXGrupoEstudio(grupo.getCodigo(), usuario.getEmail(), "S");
+            this.insertarUsuarioXGrupoEstudio(grupo.getCodigo(), usuario, "S");
         } catch (Exception e) { // No pasa nada
         }
         // Fin de crear grupo

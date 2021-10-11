@@ -5,10 +5,15 @@
  */
 package compagne.Negocio;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.Modality;
+import compagne.Vista.App;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.Node;
-import javafx.stage.Stage;
 import compagne.Entidades.Grupo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,7 +63,22 @@ public class PantallaGruposController implements Initializable {
 
         @FXML
         public void crearGrupo(ActionEvent event) {
-                // TODO
+                String nomFXML = "crearGrupo.fxml";
+                Parent root = null;
+                try {
+                        FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+                        root = loader.load();
+                        CrearGrupoController pgc = loader.getController();
+                        pgc.start(this.email);
+                } catch (Exception e) {
+
+                }
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Registrarse");
+                stage.setScene(scene);
+                stage.showAndWait();
         }
 
         @FXML

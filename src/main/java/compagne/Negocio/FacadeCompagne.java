@@ -271,7 +271,7 @@ public class FacadeCompagne {
         return usu;
     }
     
-    public Grupo crearGrupo(String nombre, String codigo, String publico, Usuario usuario)
+    public Grupo crearGrupo(String nombre, String codigo, String publico, String usuario)
     {
         Grupo grupo = new Grupo(nombre, codigo, publico);
         if (!this.controlGrupos.crearGrupo(grupo,usuario))
