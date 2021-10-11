@@ -72,7 +72,7 @@ public class PantallaGruposController implements Initializable {
                 } else if (!this.facade.agregarUsuarioAGrupo(this.codigoGrupo.getText(), email, "N")) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
-                        alert.setHeaderText("No se pudo Unir");
+                        alert.setHeaderText("No se pudo unir");
                         alert.setContentText("Por favor revise el codigo ingresado");
                         alert.showAndWait();
                 } else {
