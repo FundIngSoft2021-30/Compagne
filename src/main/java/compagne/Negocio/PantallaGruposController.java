@@ -112,5 +112,6 @@ public class PantallaGruposController implements Initializable {
 
         public void start(String email) {
                 this.email = email;
+                this.poblarGrupos();
         }
 }
