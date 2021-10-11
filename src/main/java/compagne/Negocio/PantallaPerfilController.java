@@ -4,16 +4,11 @@ package compagne.Negocio;
 
 import compagne.Entidades.Grupo;
 import javafx.event.ActionEvent;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 /**

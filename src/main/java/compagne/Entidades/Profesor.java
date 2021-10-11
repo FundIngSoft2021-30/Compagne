@@ -1,7 +1,6 @@
 package compagne.Entidades;
 
 import java.util.HashSet;
-import java.util.Objects;
 
 public class Profesor extends Usuario {
     private String experiencia;
