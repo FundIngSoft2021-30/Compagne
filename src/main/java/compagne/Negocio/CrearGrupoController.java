@@ -109,6 +109,12 @@ public class CrearGrupoController {
                 alert.setContentText("Intentelo nuevamente...");
                 alert.showAndWait();
             }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No se pudo registrar");
+            alert.setContentText("Intentelo nuevamente...");
+            alert.showAndWait();
         }
 
     }
