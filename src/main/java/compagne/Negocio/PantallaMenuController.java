@@ -70,7 +70,22 @@ public class PantallaMenuController {
 
     @FXML
     void cambiarAMiPerfil(ActionEvent event) {
-        // TODO pantalla
+        String nomFXML = "PantallaPerfil.fxml";
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+            root = loader.load();
+            PantallaPerfilController pfc = loader.getController();
+            pfc.start(this.email);
+        } catch (Exception e) {
+
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Registrarse");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     @FXML
