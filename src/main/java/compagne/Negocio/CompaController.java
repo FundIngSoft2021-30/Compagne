@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import compagne.Entidades.Usuario;
-import javafx.collections.ObservableSet;
+import java.util.Collection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,14 +31,16 @@ public class CompaController {
 
     public void actualizar() {
         this.lista_compa.getItems().clear();
-        this.lista_compa.getItems().addAll(this.facadeCompagne.listarCompas());
+        Collection<Usuario> col=this.facadeCompagne.listarCompas();
+        this.lista_compa.getItems().addAll(col);
     }
 
     @FXML
     void buscarC(ActionEvent event) {
         if (this.buscar_field.getText().length() > 0) {
             this.lista_compa.getItems().clear();
-            this.lista_compa.getItems().addAll(this.facadeCompagne.listarCompas(buscar_field.getText()));
+            Collection<Usuario> col=this.facadeCompagne.listarCompas(buscar_field.getText());
+            this.lista_compa.getItems().addAll(col);
         } else
             this.actualizar();
     }

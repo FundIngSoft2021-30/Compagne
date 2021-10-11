@@ -14,25 +14,7 @@ public class Estudiante extends Usuario {
     public HashSet<String> getLogros() {
         return this.logros;
     }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Estudiante)) {
-            return false;
-        }
-        Estudiante estudiante = (Estudiante) o;
-        return Objects.equals(intereses, estudiante.intereses) && Objects.equals(logros, estudiante.logros);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(intereses, logros);
-    }
-
-
+    
     @Override
     public String toString() {
         return "{" +

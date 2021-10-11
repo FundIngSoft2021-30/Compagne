@@ -497,18 +497,17 @@ public class ControlEstudiantes {
         String consulta;
         String nombre;
         String email;
-        int estID = 0;
+        int estID;
         consulta = "SELECT \"Nombre\", \"Email\", \"ID\" FROM " + ConnectionClass.getSchema()
-                + "\"UsuarioRegistrado\" WHERE \"Tipo\"=\'S\'";
+                + "\"UsuarioRegistrado\" WHERE \"Tipo\"=\'S\';";
         ResultSet rs = this.executeQuery(consulta);
         ResultSet rs2;
-        int count=0;
         try {
             while (rs.next()) {
-                count++;
                 nombre = rs.getString(0 + offset);
                 estID = rs.getInt(2 + offset);
                 email = rs.getString(1 + offset);
+                System.out.println("Nombre: "+nombre+" email "+email);
                 // Si hay
                 HashSet<String> logros = new HashSet<>();
                 HashSet<Comentario> comentarios = new HashSet<>();
@@ -582,7 +581,7 @@ public class ControlEstudiantes {
         Estudiante usu;
         String consulta;
         String email;
-        int estID = 0;
+        int estID;
         consulta = "SELECT \"Email\", \"ID\" FROM " + ConnectionClass.getSchema()
                 + "\"UsuarioRegistrado\" WHERE \"Tipo\"=\'S\' AND \"Nombre\"=\'"+nombre+"\';";
         ResultSet rs = this.executeQuery(consulta);
