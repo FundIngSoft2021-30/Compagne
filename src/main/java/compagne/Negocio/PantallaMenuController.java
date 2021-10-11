@@ -49,8 +49,8 @@ public class PantallaMenuController {
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
-            root=loader.load();
-            PantallaGruposController pgc=loader.getController();
+            root = loader.load();
+            PantallaGruposController pgc = loader.getController();
             pgc.start(this.email);
         } catch (Exception e) {
 
@@ -65,12 +65,12 @@ public class PantallaMenuController {
 
     @FXML
     void cambiarAMensajes(ActionEvent event) {
-        //TODO Mensajes
+        // TODO Mensajes
     }
 
     @FXML
     void cambiarAMiPerfil(ActionEvent event) {
-        //TODO pantalla
+        // TODO pantalla
     }
 
     @FXML
@@ -80,8 +80,8 @@ public class PantallaMenuController {
         stage.close();
     }
 
-    public void start(String usu){
-        this.email=usu;
+    public void start(String usu) {
+        this.email = usu;
     }
 
     @FXML
