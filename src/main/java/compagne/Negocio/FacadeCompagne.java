@@ -48,12 +48,6 @@ public class FacadeCompagne {
         this.controlProfesores.modificarProfesor(profesor);
         return profesor;
     }
-    
-    public Estudiante modificarEstudainte(String nombre, String desce){
-        Estudiante estudiante = new Estudiante(nombre, email, null, null, usu, intereses, logros);
-        this.controlEstudiantes.modificarEstudiante(estudiante);
-        return estudiante;
-    }
 
     public boolean eliminarPerfilProfesor(String email) {
         return this.controlProfesores.eliminarProfesor(email);
