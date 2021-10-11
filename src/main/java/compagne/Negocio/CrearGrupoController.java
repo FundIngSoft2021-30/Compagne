@@ -99,7 +99,7 @@ public class CrearGrupoController {
             if (this.g != null) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Correcto");
-                alert.setHeaderText("Ingreso correctamente");
+                alert.setHeaderText("Creado correctamente");
                 alert.setContentText("Enhorabuena!");
                 alert.showAndWait();
             } else {
