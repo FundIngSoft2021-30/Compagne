@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.CompaController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.CompaController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="25.0" prefHeight="35.0" prefWidth="150.0" text="Compañeros">
          <font>
@@ -21,7 +21,7 @@
             <Image url="@menus.png" />
          </image>
       </ImageView>
-      <ListView fx:id="lista_compa" fixedCellSize="2.0" layoutX="43.0" layoutY="200.0" prefHeight="370.0" prefWidth="250.0" style="-fx-background-color: #2b78e4;" />
+      <ListView fx:id="lista_compa" layoutX="43.0" layoutY="200.0" prefHeight="370.0" prefWidth="250.0" style="-fx-background-color: #2b78e4;" />
       <AnchorPane layoutX="25.0" layoutY="95.0">
          <children>
             <TextField fx:id="buscar_field" prefHeight="25.0" prefWidth="200.0" promptText="Buscar Compañeros">
