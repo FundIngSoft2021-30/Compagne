@@ -2,6 +2,7 @@ package compagne.Negocio;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 
 import compagne.Entidades.Usuario;
 import java.util.Collection;
@@ -40,7 +41,7 @@ public class CompaController {
         if (this.buscar_field.getText().length() > 0) {
             this.lista_compa.getItems().clear();
             Collection<Usuario> col=this.facadeCompagne.listarCompas(buscar_field.getText());
-            this.lista_compa.getItems().addAll(col);
+            this.lista_compa.getItems().addAll(FXCollections.observableArrayList(col));
         } else
             this.actualizar();
     }
