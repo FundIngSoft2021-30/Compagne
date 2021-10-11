@@ -267,7 +267,6 @@ public class FacadeCompagne {
                 usu = new Profesor(nombre, email, materias, comentarios, experiencia, contra, horarioAtencion, logros);
             }
         }
-        this.usu=usu.getNombre();
         return usu;
     }
     
