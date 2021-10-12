@@ -606,7 +606,7 @@ public class ControlEstudiantes {
         String email;
         int estID;
         consulta = "SELECT \"Email\", \"ID\" FROM " + ConnectionClass.getSchema()
-                + "\"UsuarioRegistrado\" WHERE \"Tipo\"=\'S\' AND \"Nombre\"=\'"+nombre+"\';";
+                + "\"UsuarioRegistrado\" WHERE \"Nombre\"=\'"+nombre+"\';";
         ResultSet rs = this.executeQuery(consulta);
         ResultSet rs2;
         try {
