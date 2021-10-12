@@ -3,25 +3,28 @@ package compagne.Negocio;
 import compagne.Entidades.Usuario;
 import javafx.scene.control.Alert;
 import compagne.Entidades.Grupo;
+import compagne.Vista.App;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class CrearGrupoController {
 
     private FacadeCompagne facade = new FacadeCompagne();
     private String emai;
     private Grupo g;
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button agregarIntegrante_btn;
@@ -46,6 +49,8 @@ public class CrearGrupoController {
 
     @FXML
     private TextField nombre;
+    @FXML
+    private ImageView menu;
 
     @FXML
     void addIntegrante(ActionEvent event) {
@@ -125,7 +130,6 @@ public class CrearGrupoController {
         this.emai = email;
     }
 
-    @FXML
     void initialize() {
         assert agregarIntegrante_btn != null
                 : "fx:id=\"agregarIntegrante_btn\" was not injected: check your FXML file 'crearGrupo.fxml'.";
@@ -140,6 +144,25 @@ public class CrearGrupoController {
                 : "fx:id=\"integrantes_list\" was not injected: check your FXML file 'crearGrupo.fxml'.";
         assert nombre != null : "fx:id=\"nombre\" was not injected: check your FXML file 'crearGrupo.fxml'.";
 
+    }
+
+    @FXML
+    private void verMenu(MouseEvent event) {
+        String nomFXML = "PantallaMenu.fxml";
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+            root = loader.load();
+            CompaController cc = loader.getController();
+            cc.actualizar();
+        } catch (Exception e) {
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Perfil");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
 }

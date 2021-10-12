@@ -5,13 +5,19 @@ import javafx.stage.Stage;
 
 import javafx.scene.Node;
 import compagne.Entidades.Grupo;
+import compagne.Vista.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 
 /**
  * FXML Controller class
@@ -84,6 +90,8 @@ public class PantallaPerfilController {
 
     @FXML
     private Line l5;
+    @FXML
+    private Button menu;
 
     @FXML
     void click(ActionEvent event) {
@@ -205,5 +213,24 @@ public class PantallaPerfilController {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void verMenu(MouseEvent event) {
+        String nomFXML = "PantallaMenu.fxml";
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+            root = loader.load();
+            CompaController cc = loader.getController();
+            cc.actualizar();
+        } catch (Exception e) {
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Perfil");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }

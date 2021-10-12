@@ -2,26 +2,27 @@ package compagne.Negocio;
 
 import javafx.stage.Stage;
 import compagne.Entidades.Comentario;
+import compagne.Vista.App;
 import javafx.scene.Node;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.stage.Modality;
 
 public class PantallaPerfilProfesorController {
 
     private String usu;
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button ButtonComentarios;
@@ -207,12 +208,23 @@ public class PantallaPerfilProfesorController {
 
     @FXML
     public void desplegarMenu(ActionEvent event) {
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+        String nomFXML = "PantallaMenu.fxml";
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+            root = loader.load();
+            CompaController cc = loader.getController();
+            cc.actualizar();
+        } catch (Exception e) {
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Perfil");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
-    @FXML
     void initialize() {
         assert ButtonComentarios != null : "fx:id=\"ButtonComentarios\" was not injected: check your FXML file 'PantallaPefilProfesor.fxml'.";
         assert ButtonExperiencia != null : "fx:id=\"ButtonExperiencia\" was not injected: check your FXML file 'PantallaPefilProfesor.fxml'.";
