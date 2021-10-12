@@ -208,13 +208,7 @@ public class PantallaPerfilController {
         this.NombreEstudiante.setText(u);
     }
 
-    @FXML
-    public void desplegarMenu(ActionEvent event) {
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
-    }
-
+    
     @FXML
     private void verMenu(MouseEvent event) {
         String nomFXML = "PantallaMenu.fxml";

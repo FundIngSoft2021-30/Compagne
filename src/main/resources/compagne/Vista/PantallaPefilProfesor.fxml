@@ -29,26 +29,11 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="ButtonExperiencia" alignment="CENTER_RIGHT" layoutX="30.0" layoutY="221.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Experiencia" textFill="WHITE">
+      <Button fx:id="ButtonExperiencia" alignment="CENTER_RIGHT" layoutX="29.0" layoutY="220.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Experiencia" textFill="WHITE">
          <font>
             <Font name="Franklin Gothic Medium" size="23.0" />
          </font>
       </Button>
-      <TextField fx:id="TextDescription" alignment="TOP_LEFT" layoutX="25.0" layoutY="276.0" prefHeight="50.0" prefWidth="290.0" promptText="cuentanos sobre ti" visible="false">
-         <font>
-            <Font name="Franklin Gothic Medium Cond" size="12.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="TextThemes" alignment="TOP_LEFT" layoutX="25.0" layoutY="396.0" prefHeight="50.0" prefWidth="290.0" promptText="Añade una materia" visible="false">
-         <font>
-            <Font name="Franklin Gothic Medium Cond" size="12.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="TextGoals" alignment="TOP_LEFT" layoutX="23.0" layoutY="336.0" prefHeight="50.0" prefWidth="287.0" promptText="Añade un logro" visible="false">
-         <font>
-            <Font name="Franklin Gothic Medium Cond" size="12.0" />
-         </font>
-      </TextField>
       <Circle fill="DODGERBLUE" layoutX="60.0" layoutY="165.0" radius="35.0" stroke="BLACK" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="5.0" />
       <ImageView fitHeight="44.0" fitWidth="36.0" layoutX="42.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -63,13 +48,13 @@
          </font>
       </Button>
       <Line fx:id="l2" endX="210.0" layoutX="105.0" layoutY="336.0" startX="-80.0" strokeWidth="2.0" />
-      <Button fx:id="ButtonMaterias" alignment="CENTER_RIGHT" layoutX="30.0" layoutY="401.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Materias" textFill="WHITE">
+      <Button fx:id="ButtonMaterias" alignment="CENTER_RIGHT" layoutX="30.0" layoutY="400.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Materias" textFill="WHITE">
          <font>
             <Font name="Franklin Gothic Medium" size="23.0" />
          </font>
       </Button>
       <Line fx:id="l3" endX="210.0" layoutX="105.0" layoutY="396.0" startX="-80.0" strokeWidth="2.0" />
-      <Button fx:id="ButtonHorarios" alignment="CENTER_RIGHT" layoutX="30.0" layoutY="341.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Horarios de atención" textFill="WHITE">
+      <Button fx:id="ButtonHorarios" alignment="CENTER_RIGHT" layoutX="28.0" layoutY="341.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Horarios de atención" textFill="WHITE">
          <font>
             <Font name="Franklin Gothic Medium" size="23.0" />
          </font>
@@ -78,7 +63,6 @@
       <Polygon fx:id="t2" fill="#000407" layoutX="63.0" layoutY="216.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
       <Polygon fx:id="t3" fill="#000407" layoutX="63.0" layoutY="276.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
       <Polygon fx:id="t4" fill="#000407" layoutX="63.0" layoutY="336.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
-      <ListView fx:id="listGroups" layoutX="23.0" layoutY="511.0" prefHeight="60.0" prefWidth="290.0" style="-fx-background-color: WHITE;" visible="false" />
       <TextField fx:id="NombreEstudiante" alignment="CENTER_RIGHT" editable="false" layoutX="110.0" layoutY="146.0" prefHeight="35.0" prefWidth="200.0" promptText="Nombre Estudiante" style="-fx-background-color: #2b78e4;">
          <font>
             <Font name="Franklin Gothic Medium" size="20.0" />
@@ -95,11 +79,6 @@
             <Font name="Franklin Gothic Medium" size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="TextInterest" alignment="TOP_LEFT" editable="false" layoutX="25.0" layoutY="456.0" onAction="#click" prefHeight="50.0" prefWidth="283.0" promptText="Cuentanos sobre ti" visible="false">
-         <font>
-            <Font name="Franklin Gothic Medium" size="12.0" />
-         </font>
-      </TextField>
       <Button fx:id="ButtonComentarios" alignment="CENTER_RIGHT" layoutX="30.0" layoutY="461.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Comentarios" textFill="WHITE">
          <font>
             <Font name="Franklin Gothic Medium" size="23.0" />
@@ -112,5 +91,15 @@
             <Font name="Franklin Gothic Medium Cond" size="30.0" />
          </font>
       </Label>
+      <TableView fx:id="comentarios" layoutX="36.0" layoutY="462.0" prefHeight="120.0" prefWidth="276.0">
+        <columns>
+          <TableColumn prefWidth="145.0" text="Calificacion" />
+          <TableColumn prefWidth="137.0" text="comentario" />
+        </columns>
+      </TableView>
+      <ListView fx:id="materias" layoutX="34.0" layoutY="400.0" prefHeight="50.0" prefWidth="276.0" />
+      <ListView fx:id="horarios" layoutX="29.0" layoutY="342.0" prefHeight="50.0" prefWidth="283.0" />
+      <ListView fx:id="logros" layoutX="34.0" layoutY="281.0" prefHeight="50.0" prefWidth="270.0" />
+      <TextArea fx:id="Experiencia" layoutX="29.0" layoutY="220.0" prefHeight="50.0" prefWidth="283.0" />
    </children>
 </AnchorPane>
