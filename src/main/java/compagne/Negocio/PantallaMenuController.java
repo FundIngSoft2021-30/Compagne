@@ -15,6 +15,8 @@ import javafx.scene.Node;
 
 public class PantallaMenuController {
 
+    private FacadeCompagne fc=new FacadeCompagne();
+
     private String email;
 
     @FXML
@@ -84,6 +86,7 @@ public class PantallaMenuController {
 
     @FXML
     void cambiarAMiPerfil(ActionEvent event) {
+        if (this.fc.isEstudiante(email)){
         String nomFXML = "PantallaPerfil.fxml";
         Parent root = null;
         try {
@@ -100,6 +103,25 @@ public class PantallaMenuController {
         stage.setTitle("Perfil");
         stage.setScene(scene);
         stage.showAndWait();
+        }
+        else{
+            String nomFXML = "PantallaPerfilProfesor.fxml";
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+            root = loader.load();
+            PantallaPerfilPController pfc = loader.getController();
+            pfc.start(this.email);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Perfil");
+        stage.setScene(scene);
+        stage.showAndWait();
+        }
     }
 
     @FXML

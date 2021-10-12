@@ -321,6 +321,9 @@ public class FacadeCompagne {
     {
         return this.controlGrupos.getGrupoID(codigo);
     }
+    public boolean isEstudiante(String email){
+        return (this.controlEstudiantes.getEstudianteID(email)>0);
+    }
 
     
     public HashSet<Grupo> listarGruposPublicos() {
