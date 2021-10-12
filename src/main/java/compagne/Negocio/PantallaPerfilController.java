@@ -180,7 +180,7 @@ public class PantallaPerfilController {
         if (event.getSource() == ButtonThemes && !TextThemes.isVisible()) {
             l4.setLayoutY(l4.getLayoutY() + tam);
             l5.setLayoutY(l5.getLayoutY() + tam);
-            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + tam);
+            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY()+ tam);
             t4.setRotate(-90);
             t5.setLayoutY(t5.getLayoutY() + tam);
             TextThemes.setVisible(true);
@@ -190,7 +190,7 @@ public class PantallaPerfilController {
             ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - tam);
             t4.setRotate(0);
             t5.setLayoutY(t5.getLayoutY() - tam);
-            TextThemes.setVisible(false);
+            TextThemes.setVisible(false);            
         }
         if (event.getSource() == ButtonGroups && !listGroups.isVisible()) {
             l5.setLayoutY(l5.getLayoutY() + tam);
@@ -228,3 +228,4 @@ public class PantallaPerfilController {
         stage.showAndWait();
     }
 }
+
