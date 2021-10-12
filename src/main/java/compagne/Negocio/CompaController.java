@@ -21,13 +21,13 @@ import javafx.stage.Stage;
 public class CompaController {
     private FacadeCompagne facadeCompagne = new FacadeCompagne();
 
-
+    
     @FXML
     private Button btn;
-
+    
     @FXML
     private TextField buscar_field;
-
+    
     @FXML
     private ListView<Usuario> lista_compa;
     @FXML
@@ -51,7 +51,7 @@ public class CompaController {
             this.actualizar();
     }
 
-    @FXML
+
     void initialize() {
         assert btn != null : "fx:id=\"btn\" was not injected: check your FXML file 'PantallaVerCompaneros.fxml'.";
         assert buscar_field != null
