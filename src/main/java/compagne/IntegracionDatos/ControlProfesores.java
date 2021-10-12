@@ -479,5 +479,10 @@ public class ControlProfesores {
         } catch (SQLException e) {
         }
     }
-
+    
+    public void Llenar (String email){
+        int id = this.getProfesorID(email);     
+        this.insertarHorario("Lunes 7 a 9");
+        this.insertarHorarioXProfesor(id,this.getHorarioID("Lunes 7 a 9"));
+    }
 }

@@ -16,7 +16,7 @@
             <Font name="Franklin Gothic Medium Cond" size="30.0" />
          </font>
       </Label>
-      <ListView fx:id="lista_compa" layoutX="43.0" layoutY="200.0" prefHeight="370.0" prefWidth="250.0" style="-fx-background-color: #2b78e4;" />
+      <ListView fx:id="lista_compa" layoutX="43.0" layoutY="200.0" prefHeight="338.0" prefWidth="250.0" style="-fx-background-color: #2b78e4;" />
       <AnchorPane layoutX="25.0" layoutY="95.0">
          <children>
             <TextField fx:id="buscar_field" prefHeight="25.0" prefWidth="200.0" promptText="Buscar Compañeros">
@@ -26,7 +26,7 @@
             </TextField>
          </children>
       </AnchorPane>
-      <Button fx:id="btn" layoutX="241.0" layoutY="94.0" mnemonicParsing="false" onAction="#buscarC" prefHeight="25.0" prefWidth="80.0" text="Buscar" textFill="#2b78e4">
+      <Button fx:id="btn" layoutX="241.0" layoutY="94.0" mnemonicParsing="false" onAction="#buscarC" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Buscar" textFill="#2b78e4">
          <font>
             <Font name="Franklin Gothic Medium" size="15.0" />
          </font>
@@ -44,6 +44,11 @@
                </image>
             </ImageView>
          </graphic>
+      </Button>
+      <Button fx:id="VerC" layoutX="108.0" layoutY="546.0" mnemonicParsing="false" onAction="#Ver" style="-fx-background-color: #ffffff;" text="Ver Compañero" textFill="#2b78e4">
+         <font>
+            <Font name="Franklin Gothic Medium" size="15.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

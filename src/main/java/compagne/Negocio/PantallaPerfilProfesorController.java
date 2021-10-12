@@ -2,9 +2,11 @@ package compagne.Negocio;
 
 import javafx.stage.Stage;
 import compagne.Entidades.Comentario;
+import compagne.Entidades.Profesor;
 import javafx.scene.Node;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,7 +16,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 
 public class PantallaPerfilProfesorController {
-
+    
+    private FacadeCompagne facade = FacadeCompagne.getInstance();
     private String usu;
 
     @FXML
@@ -24,55 +27,40 @@ public class PantallaPerfilProfesorController {
     private URL location;
 
     @FXML
-    private Button ButtonComentarios;
+    private Button menu;
+
+    @FXML
+    private ListView<String> TextThemes;
+
+    @FXML
+    private ListView<String> TextGoals;
+
+    @FXML
+    private ListView<String> TextInterest;
 
     @FXML
     private Button ButtonExperiencia;
 
     @FXML
-    private Button ButtonHorarios;
-
-    @FXML
-    private Button ButtonLogros;
-
-    @FXML
-    private Button ButtonMaterias;
-
-    @FXML
-    private TextField NombreEstudiante;
-
-    @FXML
     private TextField TextDescription;
-
-    @FXML
-    private TextField TextGoals;
-
-    @FXML
-    private TextField TextInterest;
-
-    @FXML
-    private TextField TextThemes;
 
     @FXML
     private Line l1;
 
     @FXML
+    private Button ButtonLogros;
+
+    @FXML
     private Line l2;
+
+    @FXML
+    private Button ButtonMaterias;
 
     @FXML
     private Line l3;
 
     @FXML
-    private Line l4;
-
-    @FXML
-    private Line l5;
-
-    @FXML
-    private ListView<Comentario> listGroups;
-
-    @FXML
-    private Button menu;
+    private Button ButtonHorarios;
 
     @FXML
     private Polygon t1;
@@ -87,8 +75,31 @@ public class PantallaPerfilProfesorController {
     private Polygon t4;
 
     @FXML
+    private ListView<Comentario> listGroups;
+
+    @FXML
+    private TextField NombreEstudiante;
+
+    @FXML
+    private Line l4;
+
+    @FXML
+    private Button ButtonComentarios;
+
+    @FXML
     private Polygon t5;
 
+    @FXML
+    private Line l5;
+
+    @FXML
+    private Button BEditarP;
+    
+     @FXML
+    void Modificar(ActionEvent event) {
+
+    }
+    
     @FXML
     void click(ActionEvent event) {
         int tam = 62;
@@ -201,8 +212,16 @@ public class PantallaPerfilProfesorController {
     }
 
     public void start(String u) {
+        //facade.Llenar(u);
         this.usu = u;
-        this.NombreEstudiante.setText(u);
+        Profesor p = (Profesor) facade.informacionUsuario(u);
+        this.NombreEstudiante.setText(p.getNombre());
+        this.TextDescription.setText(p.getExperiencia());
+        this.TextGoals.setItems(FXCollections.observableArrayList(p.getLogros()));
+        this.TextInterest.setItems(FXCollections.observableArrayList(p.getHorarioAtencion()));
+        this.TextThemes.setItems(FXCollections.observableArrayList(p.getMaterias()));
+        this.listGroups.setItems(FXCollections.observableArrayList(p.getComentarios()));
+        
     }
 
     @FXML

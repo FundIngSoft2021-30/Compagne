@@ -10,6 +10,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import compagne.Entidades.Usuario;
+import javafx.scene.Node;
+import javafx.stage.Stage;
 
 public class VerInfoGrupoController {
 
@@ -39,6 +41,9 @@ public class VerInfoGrupoController {
 
     @FXML
     private TextField pubPriv;
+
+    @FXML
+    private Button menu;
 
     @FXML
     void addIntegrante(ActionEvent event) {
@@ -87,6 +92,14 @@ public class VerInfoGrupoController {
         this.nombre.setText(g.getNombre());
         this.codigo.setText(g.getCodigo());
         this.pubPriv.setText((g.isPublico().equals("S")?"Publico":"Privado"));
+        this.actualizar();
+    }
+    
+    @FXML
+    void desplegarMenu(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
 
 }

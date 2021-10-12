@@ -20,7 +20,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -28,22 +28,30 @@ public class PantallaGruposController implements Initializable {
 
         private FacadeCompagne facade = FacadeCompagne.getInstance();
         private String email;
-        @FXML
-        private Button crearGrupo;
-        @FXML
-        private Button unirme_button;
-        @FXML
-        private TextField codigoGrupo;
-        @FXML
-        private TableView<Grupo> listaGrupos;
-        @FXML
-        private Button unirme2_button;
-        @FXML
-        private Text Agregado1;
-        @FXML
-        private Text Agregado2;
-        @FXML
-        private Button menu;
+        
+    @FXML
+    private Button crearGrupo;
+
+    @FXML
+    private TextField codigoGrupo;
+
+    @FXML
+    private Button unirme_button;
+
+    @FXML
+    private Text Agregado1;
+
+    @FXML
+    private Button unirme2_button;
+
+    @FXML
+    private Text Agregado2;
+
+    @FXML
+    private Button menu;
+
+    @FXML
+    private ListView<Grupo> listaGrupos;
 
         @Override
         public void initialize(URL url, ResourceBundle rb) {

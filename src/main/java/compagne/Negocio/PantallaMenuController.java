@@ -104,7 +104,7 @@ public class PantallaMenuController {
             stage.setScene(scene);
             stage.showAndWait();
         } else {
-            String nomFXML = "PantallaPerfilProfesor.fxml";
+            String nomFXML = "PantallaPefilProfesor.fxml";
             Parent root = null;
             try {
                 FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
