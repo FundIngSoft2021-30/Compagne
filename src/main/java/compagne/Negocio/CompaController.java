@@ -6,9 +6,11 @@ import compagne.Entidades.Usuario;
 import java.util.Collection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class CompaController {
     private FacadeCompagne facadeCompagne = new FacadeCompagne();
@@ -27,6 +29,9 @@ public class CompaController {
 
     @FXML
     private ListView<Usuario> lista_compa;
+    
+    @FXML
+    private Button menu;
 
     public void actualizar() {
         this.lista_compa.getItems().clear();
@@ -44,6 +49,12 @@ public class CompaController {
             this.lista_compa.getItems().add(e);
         } else
             this.actualizar();
+    }
+    @FXML
+        public void desplegarMenu(ActionEvent event) {
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
     }
 
     @FXML

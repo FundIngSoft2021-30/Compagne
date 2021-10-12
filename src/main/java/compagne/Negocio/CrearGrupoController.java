@@ -7,10 +7,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class CrearGrupoController {
 
@@ -46,6 +48,9 @@ public class CrearGrupoController {
 
     @FXML
     private TextField nombre;
+    
+    @FXML
+    private Button menu;
 
     @FXML
     void addIntegrante(ActionEvent event) {
@@ -119,6 +124,13 @@ public class CrearGrupoController {
             alert.showAndWait();
         }
 
+    }
+    
+    @FXML
+        public void desplegarMenu(ActionEvent event) {
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
     }
 
     public void start(String email) {
