@@ -109,7 +109,7 @@ public class PantallaMenuController {
             try {
                 FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
                 root = loader.load();
-                PantallaPerfilPController pfc = loader.getController();
+                PantallaPerfilProfesorController pfc = loader.getController();
                 pfc.start(this.email);
             } catch (Exception e) {
             }

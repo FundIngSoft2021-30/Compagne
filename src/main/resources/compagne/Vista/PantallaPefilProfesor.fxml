@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Vista.PantallaPerfilPController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.PantallaPerfilProfesorController">
    <children>
       <Button fx:id="menu" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#desplegarMenu" style="-fx-background-color: #2b78e4;">
          <graphic>
