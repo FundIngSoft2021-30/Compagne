@@ -564,6 +564,6 @@ public class FacadeCompagne {
     }
     
     public void Llenar(String email){
-        this.controlEstudiantes.Llenar(email);
+        this.controlProfesores.Llenar(email);
     }
 }

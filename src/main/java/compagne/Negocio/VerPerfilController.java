@@ -1,33 +1,38 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package compagne.Negocio;
 
+import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
-import javafx.stage.Stage;
-
-import javafx.scene.Node;
 import compagne.Entidades.Grupo;
 import compagne.Entidades.Usuario;
-import compagne.IntegracionDatos.ControlEstudiantes;
-import java.util.Collection;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
- * @author samue
+ * @author USUARIO
  */
-public class PantallaPerfilController {
-    
+public class VerPerfilController implements Initializable {
+
     private FacadeCompagne facade = FacadeCompagne.getInstance();
-    private String usu;
+    private Estudiante u;
     
     @FXML
     private ListView<String> TextThemes;
@@ -39,13 +44,10 @@ public class PantallaPerfilController {
     private ListView<String> TextInterest;
 
     @FXML
-    private Button ButtonGroups;
+    private Button ButtonDescription;
 
     @FXML
     private TextField TextDescription;
-
-    @FXML
-    private Button ButtonDescription;
 
     @FXML
     private Line l1;
@@ -60,7 +62,7 @@ public class PantallaPerfilController {
     private Button ButtonThemes;
 
     @FXML
-    private Line l4;
+    private Line l3;
 
     @FXML
     private Button ButtonInterest;
@@ -78,31 +80,41 @@ public class PantallaPerfilController {
     private Polygon t4;
 
     @FXML
-    private ListView<Grupo> listGroups;
+    private ListView<Comentario> listGroups;
 
     @FXML
     private TextField NombreEstudiante;
 
     @FXML
-    private Line l3;
+    private Line l4;
+
+    @FXML
+    private Button ButtonGroups;
 
     @FXML
     private Polygon t5;
 
     @FXML
     private Line l5;
+
+    @FXML
+    private Button menu;
     
     @FXML
-    private Button BEditarP;
+    private Button EnviarCom;
     
+     @FXML
+    private TextField Comentario;
     
     @FXML
-    void Modificar(ActionEvent event) {
-        
-        
-    }
-    
-    
+    private TextField Calificacion;
+
+    @FXML
+    private Label LComent;
+
+    @FXML
+    private Label LCali;
+
     @FXML
     void click(ActionEvent event) {
         int tam = 62;
@@ -206,30 +218,58 @@ public class PantallaPerfilController {
             l5.setLayoutY(l5.getLayoutY() + tam);
             t5.setRotate(-90);
             listGroups.setVisible(true);
+            Calificacion.setVisible(true);
+            Comentario.setVisible(true);
+            EnviarCom.setVisible(true);
+            LCali.setVisible(true);
+            LComent.setVisible(true);
         } else if (event.getSource() == ButtonGroups && listGroups.isVisible()) {
             l5.setLayoutY(l5.getLayoutY() - tam);
             t5.setRotate(0);
             listGroups.setVisible(false);
+            Calificacion.setVisible(false);
+            Comentario.setVisible(false);
+            EnviarCom.setVisible(false);
+            LCali.setVisible(false);
+            LComent.setVisible(false);
         }
     }
+    
+    public void actualizar(){
+        this.listGroups.getItems().clear();
+        this.u = (Estudiante) facade.informacionUsuario(u.getEmail());
+        this.listGroups.getItems().addAll(u.getComentarios());
+    }
 
-    public void start(String u) {
-        
-        this.usu = u;
-        Estudiante user = (Estudiante) facade.informacionUsuario(u);
-        this.NombreEstudiante.setText(user.getNombre());
-        TextDescription.setText(user.getNombre());
-        TextGoals.setItems(FXCollections.observableArrayList(user.getLogros()));
-        TextInterest.setItems(FXCollections.observableArrayList(user.getIntereses()));
-        TextThemes.setItems(FXCollections.observableArrayList(user.getMaterias()));
-
-        
+    public void start(Estudiante usu) {
+        this.u = usu;
+        this.NombreEstudiante.setText(u.getNombre());
+        TextDescription.setText(u.getNombre());
+        TextGoals.setItems(FXCollections.observableArrayList(u.getLogros()));
+        TextInterest.setItems(FXCollections.observableArrayList(u.getIntereses()));
+        TextThemes.setItems(FXCollections.observableArrayList(u.getMaterias()));
+        this.actualizar();
     }
 
     @FXML
-    public void desplegarMenu(ActionEvent event) {
+    void desplegarMenu(ActionEvent event) {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
+    
+    @FXML
+    void enviar(ActionEvent event) {
+        Comentario com = new Comentario(this.Calificacion.getText(),this.Comentario.getText());
+        facade.calificarUsuario(com, u);
+        this.actualizar();
+        this.Calificacion.setText("");
+        this.Comentario.setText("");
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+    
 }
