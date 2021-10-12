@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,88 +13,91 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.PantallaPerfilController">
-   <children>
-      <ListView fx:id="TextThemes" layoutX="20.0" layoutY="445.0" prefHeight="55.0" prefWidth="290.0" visible="false" />
-      <ListView fx:id="TextGoals" layoutX="20.0" layoutY="325.0" prefHeight="55.0" prefWidth="290.0" visible="false" />
-      <ListView fx:id="TextInterest" layoutX="20.0" layoutY="385.0" prefHeight="55.0" prefWidth="290.0" visible="false" />
-      <Button fx:id="ButtonDescription" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="210.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mi Descripción" textFill="WHITE">
-         <font>
-            <Font name="Franklin Gothic Medium" size="23.0" />
-         </font>
-      </Button>
-      <TextField fx:id="TextDescription" alignment="TOP_LEFT" layoutX="20.0" layoutY="265.0" prefHeight="55.0" prefWidth="290.0" promptText="cuentanos sobre ti" visible="false">
-         <font>
-            <Font name="Franklin Gothic Medium Cond" size="12.0" />
-         </font>
-      </TextField>
-      <Circle fill="DODGERBLUE" layoutX="62.0" layoutY="154.0" radius="35.0" stroke="BLACK" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="5.0" />
-      <ImageView fitHeight="44.0" fitWidth="36.0" layoutX="44.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@user_icon.png" />
-         </image>
-      </ImageView>
-      
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="20.0" prefHeight="35.0" prefWidth="150.0" text="Mi perfil">
-         <font>
-            <Font name="Franklin Gothic Medium Cond" size="30.0" />
-         </font>
-      </Label>
-      <Line endX="210.0" layoutX="100.0" layoutY="205.0" startX="-80.0" strokeWidth="2.0" AnchorPane.leftAnchor="23.5" AnchorPane.rightAnchor="22.0" />
-      <Line fx:id="l1" endX="210.0" layoutX="104.0" layoutY="265.0" startX="-80.0" strokeWidth="2.0" />
-      <Button fx:id="ButtonGoals" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="270.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mis Logros" textFill="WHITE">
-         <font>
-            <Font name="Franklin Gothic Medium" size="23.0" />
-         </font>
-      </Button>
-      <Line fx:id="l2" endX="210.0" layoutX="104.0" layoutY="325.0" startX="-80.0" strokeWidth="2.0" />
-      <Button fx:id="ButtonThemes" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="390.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mis Materias" textFill="WHITE">
-         <font>
-            <Font name="Franklin Gothic Medium" size="23.0" />
-         </font>
-      </Button>
-      <Line fx:id="l3" endX="210.0" layoutX="104.0" layoutY="385.0" startX="-80.0" strokeWidth="2.0" />
-      <Button fx:id="ButtonInterest" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="330.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mis Intereses" textFill="WHITE">
-         <font>
-            <Font name="Franklin Gothic Medium" size="23.0" />
-         </font>
-      </Button>
-      <Polygon fx:id="t1" fill="#000407" layoutX="65.0" layoutY="145.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" style="-fx-rotate: 0;" />
-      <Polygon fx:id="t2" fill="#000407" layoutX="65.0" layoutY="205.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
-      <Polygon fx:id="t3" fill="#000407" layoutX="65.0" layoutY="265.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
-      <Polygon fx:id="t4" fill="#000407" layoutX="65.0" layoutY="325.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
-      <ListView fx:id="listGroups" layoutX="20.0" layoutY="500.0" prefHeight="55.0" prefWidth="290.0" style="-fx-background-color: WHITE;" visible="false" />
-      <TextField fx:id="NombreEstudiante" alignment="CENTER_RIGHT" editable="false" layoutX="112.0" layoutY="135.0" prefHeight="35.0" prefWidth="200.0" promptText="Nombre Estudiante" style="-fx-background-color: #2b78e4;">
-         <font>
-            <Font name="Franklin Gothic Medium" size="20.0" />
-         </font>
-      </TextField>
-      <Label layoutX="29.0" layoutY="81.0" text="Estudiante">
-         <font>
-            <Font name="Franklin Gothic Medium" size="20.0" />
-         </font>
-      </Label>
-      <Line fx:id="l4" endX="210.0" layoutX="107.0" layoutY="445.0" startX="-80.0" strokeWidth="2.0" />
-      <Button fx:id="ButtonGroups" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="450.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mis Grupos" textFill="WHITE">
-         <font>
-            <Font name="Franklin Gothic Medium" size="23.0" />
-         </font>
-      </Button>
-      <Polygon fx:id="t5" fill="#000407" layoutX="65.0" layoutY="385.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
-      <Line fx:id="l5" endX="210.0" layoutX="109.0" layoutY="505.0" startX="-80.0" strokeWidth="2.0" />
-      <Button fx:id="menu" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#desplegarMenu" style="-fx-background-color: #2b78e4;">
-         <graphic>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+<ScrollPane prefWidth="337.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.PantallaPerfilController">
+   <content>
+      <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;">
+         <children>
+            <Button fx:id="ButtonDescription" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="210.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mi Descripción" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="23.0" />
+               </font>
+            </Button>
+            <TextField fx:id="TextDescription" alignment="TOP_LEFT" layoutX="27.0" layoutY="265.0" prefHeight="50.0" prefWidth="290.0" promptText="cuentanos sobre ti" visible="false">
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="TextThemes" alignment="TOP_LEFT" layoutX="25.0" layoutY="451.0" prefHeight="50.0" prefWidth="290.0" promptText="Añade una materia" visible="false">
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="TextGoals" alignment="TOP_LEFT" layoutX="25.0" layoutY="325.0" prefHeight="50.0" prefWidth="287.0" promptText="Añade un logro" visible="false">
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="12.0" />
+               </font>
+            </TextField>
+            <Circle fill="DODGERBLUE" layoutX="62.0" layoutY="154.0" radius="35.0" stroke="BLACK" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="5.0" />
+            <ImageView fitHeight="44.0" fitWidth="36.0" layoutX="44.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@menus.png" />
+                  <Image url="@user_icon.png" />
                </image>
             </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="BEditarP" layoutX="251.0" layoutY="172.0" mnemonicParsing="false" onAction="#Modificar" style="-fx-background-color: #2b78e4;" text="Editar" textFill="#c9b8b8">
-         <font>
-            <Font name="Franklin Gothic Medium" size="15.0" />
-         </font>
-      </Button>
-   </children>
-</AnchorPane>
+            
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="20.0" prefHeight="35.0" prefWidth="150.0" text="Mi perfil">
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="30.0" />
+               </font>
+            </Label>
+            <Line endX="210.0" layoutX="100.0" layoutY="205.0" startX="-80.0" strokeWidth="2.0" AnchorPane.leftAnchor="23.5" AnchorPane.rightAnchor="22.0" />
+            <Line fx:id="l1" endX="210.0" layoutX="104.0" layoutY="265.0" startX="-80.0" strokeWidth="2.0" />
+            <Button fx:id="ButtonGoals" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="270.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mis Logros" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="23.0" />
+               </font>
+            </Button>
+            <Line fx:id="l2" endX="210.0" layoutX="104.0" layoutY="325.0" startX="-80.0" strokeWidth="2.0" />
+            <Button fx:id="ButtonThemes" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="390.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mis Materias" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="23.0" />
+               </font>
+            </Button>
+            <Line fx:id="l3" endX="210.0" layoutX="104.0" layoutY="385.0" startX="-80.0" strokeWidth="2.0" />
+            <Button fx:id="ButtonInterest" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="330.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mis Intereses" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="23.0" />
+               </font>
+            </Button>
+            <Polygon fx:id="t1" fill="#000407" layoutX="65.0" layoutY="145.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" style="-fx-rotate: 0;" />
+            <Polygon fx:id="t2" fill="#000407" layoutX="65.0" layoutY="205.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="t3" fill="#000407" layoutX="65.0" layoutY="265.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="t4" fill="#000407" layoutX="65.0" layoutY="325.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
+            <ListView fx:id="listGroups" layoutX="27.0" layoutY="513.0" prefHeight="60.0" prefWidth="290.0" style="-fx-background-color: WHITE;" visible="false" />
+            <TextField fx:id="NombreEstudiante" alignment="CENTER_RIGHT" editable="false" layoutX="112.0" layoutY="135.0" prefHeight="35.0" prefWidth="200.0" promptText="Nombre Estudiante" style="-fx-background-color: #2b78e4;">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="20.0" />
+               </font>
+            </TextField>
+            <Label layoutX="29.0" layoutY="81.0" text="Estudiante">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="20.0" />
+               </font>
+            </Label>
+            <Line fx:id="l4" endX="210.0" layoutX="107.0" layoutY="445.0" startX="-80.0" strokeWidth="2.0" />
+            <TextField fx:id="TextInterest" alignment="TOP_LEFT" editable="false" layoutX="26.0" layoutY="391.0" onAction="#click" prefHeight="50.0" prefWidth="283.0" promptText="Cuentanos sobre ti" visible="false">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="12.0" />
+               </font>
+            </TextField>
+            <Button fx:id="ButtonGroups" alignment="CENTER_RIGHT" layoutX="25.0" layoutY="450.0" mnemonicParsing="false" onAction="#click" prefHeight="50.0" prefWidth="290.0" style="-fx-background-color: #2b78e4;" text="Mis Grupos" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Medium" size="23.0" />
+               </font>
+            </Button>
+            <Polygon fx:id="t5" fill="#000407" layoutX="65.0" layoutY="385.0" points="-12.0, 83.0, 24.0, 83.0, 6.0, 98.0" stroke="BLACK" strokeType="INSIDE" />
+            <Line fx:id="l5" endX="210.0" layoutX="109.0" layoutY="505.0" startX="-80.0" strokeWidth="2.0" />
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
+
