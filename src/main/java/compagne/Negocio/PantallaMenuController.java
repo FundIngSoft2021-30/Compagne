@@ -112,6 +112,7 @@ public class PantallaMenuController {
                 PantallaPerfilPController pfc = loader.getController();
                 pfc.start(this.email);
             } catch (Exception e) {
+                System.out.println("X");
                 e.printStackTrace();
             }
             Scene scene = new Scene(root);

@@ -1,8 +1,8 @@
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 
 package compagne.Negocio;
 
@@ -90,23 +90,23 @@ public class RegistrarPantallaController implements Initializable {
                             alert.setContentText("Intentelo nuevamente...");
                             alert.showAndWait();
                         }
-                    }
-                } else if (checkProfesor.isSelected()) {
-                    usu = this.facade.crearPerfilProfesor(nombre.getText(), null, email.getText(), contraseña.getText(),
-                            null, null, null, null);
-                    if (usu != null) {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Correcto");
-                        alert.setHeaderText("Ingreso correctamente");
-                        alert.setContentText("Enhorabuena!");
-                        alert.showAndWait();
-                        b = true;
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error");
-                        alert.setHeaderText("No se pudo registrar");
-                        alert.setContentText("Intentelo nuevamente...");
-                        alert.showAndWait();
+                    } else if (checkProfesor.isSelected()) {
+                        usu = this.facade.crearPerfilProfesor(nombre.getText(), "", email.getText(),
+                                contraseña.getText(), null, null, null, null);
+                        if (usu != null) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Correcto");
+                            alert.setHeaderText("Ingreso correctamente");
+                            alert.setContentText("Enhorabuena!");
+                            alert.showAndWait();
+                            b = true;
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("No se pudo registrar");
+                            alert.setContentText("Intentelo nuevamente...");
+                            alert.showAndWait();
+                        }
                     }
                 }
             } else {
