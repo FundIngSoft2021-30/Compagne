@@ -237,7 +237,8 @@ public class VerPerfilController implements Initializable {
     
     public void actualizar(){
         this.listGroups.getItems().clear();
-        this.listGroups.setItems(FXCollections.observableArrayList(u.getComentarios()));
+        this.u = (Estudiante) facade.informacionUsuario(u.getEmail());
+        this.listGroups.getItems().addAll(u.getComentarios());
     }
 
     public void start(Estudiante usu) {
@@ -247,7 +248,7 @@ public class VerPerfilController implements Initializable {
         TextGoals.setItems(FXCollections.observableArrayList(u.getLogros()));
         TextInterest.setItems(FXCollections.observableArrayList(u.getIntereses()));
         TextThemes.setItems(FXCollections.observableArrayList(u.getMaterias()));
-        actualizar();
+        this.actualizar();
     }
 
     @FXML

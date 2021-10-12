@@ -90,7 +90,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="BEditarP" layoutX="251.0" layoutY="172.0" mnemonicParsing="false" onAction="#Modificar" style="-fx-background-color: #2b78e4;" text="Editar" textFill="#c9b8b8">
+      <Button fx:id="BEditarP" layoutX="251.0" layoutY="172.0" mnemonicParsing="false" onAction="#Modificar" style="-fx-background-color: #2b78e4;" text="Editar" textFill="#c9b8b8" visible="false">
          <font>
             <Font name="Franklin Gothic Medium" size="15.0" />
          </font>
