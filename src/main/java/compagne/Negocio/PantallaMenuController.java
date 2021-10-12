@@ -92,7 +92,7 @@ public class PantallaMenuController {
             PantallaPerfilController pfc = loader.getController();
             pfc.start(this.email);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         Scene scene = new Scene(root);
         Stage stage = new Stage();
