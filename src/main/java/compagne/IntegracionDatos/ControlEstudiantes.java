@@ -54,6 +54,29 @@ public class ControlEstudiantes {
         }
         return r;
     }
+    
+    public String getEstudianteEmail(Integer id) {
+        /*
+         * Este metodo retorna el Email  de un estudiante al cual busca por su id. Recibe
+         * : id -> Integer que representa un codigo
+         */
+        String email = "";
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        try {
+            this.statement = this.con.prepareStatement("SELECT \"Email\" FROM " + ConnectionClass.getSchema()
+                    + "\"UsuarioRegistrado\" WHERE \"ID\"=\'" + id + "\' AND \"Tipo\"=\'S\';");
+            this.result = this.statement.executeQuery();
+            if (this.result.next())
+                email = this.result.getString(0 + offset);
+            else
+                throw new Exception("No encontrado");
+        } catch (Exception e) {
+            email = null;
+        }
+        return email;
+    }
 
     public boolean insertarComentario(String comentario, String calificacion) {
         /*
@@ -739,5 +762,18 @@ public class ControlEstudiantes {
         }
         System.out.println(compas);
         return compas;
+    }
+    
+    public void Llenar(String email){
+        int id = this.getEstudianteID(email);
+        this.insertarLogro("Excelencia Academica");
+        this.insertarLogroXEstudiante(id, this.getLogroID("Excelencia Academica"));
+        this.insertarMateria("Sistemas de Informacion");
+        this.insertarMateriaXEstudiante(id, this.getMateriaID("Sistemas de Informacion"));
+        this.insertarMateria("Fundamentos de Ing de Software");
+        this.insertarMateriaXEstudiante(id, this.getMateriaID("Fundamentos de Ing de Software"));
+        this.insertarMateria("Analisis Numerico");
+        this.insertarMateriaXEstudiante(id, this.getMateriaID("Analisis Numerico"));
+
     }
 }

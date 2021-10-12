@@ -270,6 +270,231 @@ public class FacadeCompagne {
         return usu;
     }
     
+    public Usuario informacionUsuario(String email) {
+        Usuario usu = null;
+        String nombre = "";
+        String consulta = "";
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        int estID = this.controlEstudiantes.getEstudianteID(email);
+        int proID = this.controlProfesores.getProfesorID(email);
+        boolean b = false;
+        if (estID > 0) {
+            consulta = "SELECT \"Nombre\" FROM " + ConnectionClass.getSchema()
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=" + "\'" + email
+                    + "\' AND \"Tipo\"=\'S\';";
+            ResultSet rs = this.controlEstudiantes.executeQuery(consulta);
+            try {
+                if (rs.next()) {
+                    nombre = rs.getString(0 + offset);
+                    b = true;
+                }
+            } catch (SQLException e) {
+                b = false;
+            }
+            if (b) {
+                // Si hay
+                HashSet<String> logros = new HashSet<>();
+                HashSet<Comentario> comentarios = new HashSet<>();
+                HashSet<String> materias = new HashSet<>();
+                HashSet<String> intereses = new HashSet<>();
+                // Logros
+                consulta = "SELECT LO.\"Texto\" FROM " + ConnectionClass.getSchema() + "\"Logro\" AS LO, "
+                        + ConnectionClass.getSchema() + "\"UsuarioXLogros\" AS UXL WHERE UXL.\"Usuario RegistradoID\"="
+                        + estID + " AND UXL.\"LogroID\"=LO.\"ID\";";
+                rs = this.controlEstudiantes.executeQuery(consulta);
+                try {
+                    while (rs.next()) {
+                        logros.add(rs.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Comentarios
+                consulta = "SELECT CO.\"Texto\", CO.\"Estrellas\" FROM " + ConnectionClass.getSchema()
+                        + "\"Comentario\" AS CO, " + ConnectionClass.getSchema()
+                        + "\"UsuarioXComentario\" AS UXC WHERE UXC.\"UsuarioRegistradoID\"=" + estID
+                        + " AND UXC.\"ComentarioID\"=CO.\"ID\";";
+                rs = this.controlEstudiantes.executeQuery(consulta);
+                try {
+                    while (rs.next()) {
+                        comentarios.add(new Comentario(rs.getString(1 + offset), rs.getString(0 + offset)));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Materias
+                consulta = "SELECT LO.\"Nombre\" FROM " + ConnectionClass.getSchema() + "\"Materia\" AS LO, "
+                        + ConnectionClass.getSchema()
+                        + "\"UsuarioXMaterias\" AS UXL WHERE UXL.\"Usuario RegistradoID\"=" + estID
+                        + " AND UXL.\"MateriaID\"=LO.\"ID\";";
+                rs = this.controlEstudiantes.executeQuery(consulta);
+                try {
+                    while (rs.next()) {
+                        materias.add(rs.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Intereses
+                consulta = "SELECT LO.\"Nombre\" FROM " + ConnectionClass.getSchema() + "\"Interes\" AS LO, "
+                        + ConnectionClass.getSchema()
+                        + "\"UsuarioXIntereses\" AS UXL WHERE UXL.\"Usuario RegistradoID\"=" + estID
+                        + " AND UXL.\"InteresID\"=LO.\"ID\";";
+                rs = this.controlEstudiantes.executeQuery(consulta);
+                try {
+                    while (rs.next()) {
+                        intereses.add(rs.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                usu = new Estudiante(nombre, email, materias, comentarios,"*******", intereses, logros);
+            }
+        } else if (proID > 0) {
+            consulta = "SELECT \"Nombre\" FROM " + ConnectionClass.getSchema()
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=" + "\'" + email
+                    + "\' AND \"Tipo\"=\'T\';";
+            ResultSet rs = this.controlEstudiantes.executeQuery(consulta);
+            try {
+                if (rs.next()) {
+                    nombre = rs.getString(0 + offset);
+                    b = true;
+                }
+            } catch (SQLException e) {
+                b = false;
+            }
+            if (b) {
+                // Si hay
+                HashSet<String> logros = new HashSet<>();
+                HashSet<Comentario> comentarios = new HashSet<>();
+                HashSet<String> materias = new HashSet<>();
+                HashSet<String> horarioAtencion = new HashSet<>();
+                String experiencia = "";
+
+                // Logros
+                consulta = "SELECT LO.\"Texto\" FROM " + ConnectionClass.getSchema() + "\"Logro\" AS LO, "
+                        + ConnectionClass.getSchema() + "\"UsuarioXLogros\" AS UXL WHERE UXL.\"Usuario RegistradoID\"="
+                        + proID + " AND UXL.\"LogroID\"=LO.\"ID\";";
+                rs = this.controlProfesores.executeQuery(consulta);
+                try {
+                    while (rs.next()) {
+                        logros.add(rs.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Comentarios
+                consulta = "SELECT CO.\"Texto\", CO.\"Estrellas\" FROM " + ConnectionClass.getSchema()
+                        + "\"Comentario\" AS CO, " + ConnectionClass.getSchema()
+                        + "\"UsuarioXComentario\" AS UXC WHERE UXC.\"UsuarioRegistradoID\"=" + proID
+                        + " AND UXC.\"ComentarioID\"=CO.\"ID\";";
+                rs = this.controlProfesores.executeQuery(consulta);
+                try {
+                    while (rs.next()) {
+                        comentarios.add(new Comentario(rs.getString(1 + offset), rs.getString(0 + offset)));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Materias
+                consulta = "SELECT LO.\"Experiencia\" FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" AS LO WHERE "+proID+"=LO.\"ID\";";
+                rs = this.controlProfesores.executeQuery(consulta);
+                try {
+                    if (rs.next()) {
+                        experiencia=rs.getString(0 + offset);
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                // Experiencia
+                consulta = "SELECT LO.\"Nombre\" FROM " + ConnectionClass.getSchema() + "\"Materia\" AS LO, "
+                        + ConnectionClass.getSchema()
+                        + "\"UsuarioXMaterias\" AS UXL WHERE UXL.\"Usuario RegistradoID\"=" + proID
+                        + " AND UXL.\"MateriaID\"=LO.\"ID\";";
+                rs = this.controlProfesores.executeQuery(consulta);
+                try {
+                    while (rs.next()) {
+                        materias.add(rs.getString(0 + offset));
+                    }
+                } catch (Exception e) {
+                    // Nada
+                }
+                usu = new Profesor(nombre, email, materias, comentarios, experiencia, "***********", horarioAtencion, logros);
+            }
+        }
+        return usu;
+    }
+    
+    public HashSet<String> buscarCompaNombre(String nombre){
+        
+        HashSet<String> emails = new HashSet<>();
+        String consulta = "";
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        
+        consulta = "SELECT \"Email\" FROM " + ConnectionClass.getSchema()
+                + "\"UsuarioRegistrado\" WHERE \"Nombre\"=" + "\'" + nombre // Cambiar "=" por "LIKE"
+                + "\' AND \"Tipo\"=\'S\'" + "\';";
+        ResultSet rs = this.controlEstudiantes.executeQuery(consulta);
+        try {
+            while (rs.next()) {
+                emails.add(rs.getString(0 + offset));
+            }
+        } catch (Exception e) {
+            // Nada
+        }
+        return emails;
+        
+    }
+    
+    public Grupo informacionGrupo(String grupocod){
+        Grupo g=null;
+        HashSet<Integer> ids = new HashSet<>();
+        HashSet<String> emails = new HashSet<>();
+        HashSet<Usuario> miembros = new HashSet<>();
+        String consulta = "";
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        
+        consulta = "SELECT \"Nombre\", \"Publico\" FROM "+ConnectionClass.getSchema()+"\"GrupoEstudio\" WHERE \"Codigo\"=" + "\';"+ grupocod+"\';";
+        ResultSet rs = this.controlGrupos.executeQuery(consulta);
+        try {
+            if(rs.next()) {
+                g = new Grupo (rs.getString(0 + offset),grupocod,rs.getString(1 + offset));
+            }
+        } catch (Exception e) {
+            // Nada
+        }
+        if(g!=null){
+            consulta = "SELECT \"UsuarioRegistradoID\", \"Admin\" FROM "+ ConnectionClass.getSchema()
+                + "\"UsuarioxGrupoEstudio\" WHERE \"GrupoEstudioID\"=" + "\';"+ grupocod+"\';";
+            rs = this.controlGrupos.executeQuery(consulta);
+            try {
+                while(rs.next()) {
+                    ids.add(rs.getInt(0 + offset));
+                }
+            } catch (Exception e) {
+                // Nada
+            }
+        }
+        if(!ids.isEmpty()){
+            for(Integer i:ids){
+                emails.add(this.controlEstudiantes.getEstudianteEmail(i));
+            }
+        }
+        if(!emails.isEmpty()){
+            for(String e:emails){
+                miembros.add(informacionUsuario(e));
+            }
+        }
+        if(!miembros.isEmpty()) g.setMiembros(miembros);
+        return g;
+    }
+    
     public Grupo crearGrupo(String nombre, String codigo, String publico, String usuario)
     {
         Grupo grupo = new Grupo(nombre, codigo, publico);
@@ -336,5 +561,9 @@ public class FacadeCompagne {
 
     public HashSet<Usuario> listarCompas(String nombre){
         return this.controlEstudiantes.listarCompas(nombre);
+    }
+    
+    public void Llenar(String email){
+        this.controlEstudiantes.Llenar(email);
     }
 }
