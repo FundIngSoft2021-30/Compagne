@@ -5,6 +5,8 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import compagne.Entidades.Comentario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,6 +69,9 @@ public class PantallaPerfilPController {
     private Line l5;
 
     @FXML
+    private ListView<Comentario> listGroups;
+
+    @FXML
     private Button menu;
 
     @FXML
@@ -86,6 +91,112 @@ public class PantallaPerfilPController {
 
     @FXML
     void click(ActionEvent event) {
+        int tam = 62;
+        if (event.getSource() == ButtonExperiencia && TextDescription.isVisible()) {
+            l1.setLayoutY(l1.getLayoutY() - tam);
+            l2.setLayoutY(l2.getLayoutY() - tam);
+            l3.setLayoutY(l3.getLayoutY() - tam);
+            l4.setLayoutY(l4.getLayoutY() - tam);
+            l5.setLayoutY(l5.getLayoutY() - tam);
+            ButtonLogros.setLayoutY(ButtonLogros.getLayoutY() - tam);
+            ButtonHorarios.setLayoutY(ButtonHorarios.getLayoutY() - tam);
+            ButtonMaterias.setLayoutY(ButtonMaterias.getLayoutY() - tam);
+            ButtonComentarios.setLayoutY(ButtonComentarios.getLayoutY() - tam);
+            t1.setRotate(0);
+            t2.setLayoutY(t2.getLayoutY() - tam);
+            t3.setLayoutY(t3.getLayoutY() - tam);
+            t4.setLayoutY(t4.getLayoutY() - tam);
+            t5.setLayoutY(t5.getLayoutY() - tam);
+            TextDescription.setVisible(false);
+        } else if (event.getSource() == ButtonExperiencia && !TextDescription.isVisible()) {
+            l1.setLayoutY(l1.getLayoutY() + tam);
+            l2.setLayoutY(l2.getLayoutY() + tam);
+            l3.setLayoutY(l3.getLayoutY() + tam);
+            l4.setLayoutY(l4.getLayoutY() + tam);
+            l5.setLayoutY(l5.getLayoutY() + tam);
+            ButtonLogros.setLayoutY(ButtonLogros.getLayoutY() + tam);
+            ButtonHorarios.setLayoutY(ButtonHorarios.getLayoutY() + tam);
+            ButtonMaterias.setLayoutY(ButtonMaterias.getLayoutY() + tam);
+            ButtonComentarios.setLayoutY(ButtonComentarios.getLayoutY() + tam);
+            t1.setRotate(-90);
+            t2.setLayoutY(t2.getLayoutY() + tam);
+            t3.setLayoutY(t3.getLayoutY() + tam);
+            t4.setLayoutY(t4.getLayoutY() + tam);
+            t5.setLayoutY(t5.getLayoutY() + tam);
+            TextDescription.setVisible(true);
+        }
+        if (event.getSource() == ButtonLogros && TextGoals.isVisible()) {
+            l2.setLayoutY(l2.getLayoutY() - tam);
+            l3.setLayoutY(l3.getLayoutY() - tam);
+            l4.setLayoutY(l4.getLayoutY() - tam);
+            l5.setLayoutY(l5.getLayoutY() - tam);
+            ButtonHorarios.setLayoutY(ButtonHorarios.getLayoutY() - tam);
+            ButtonMaterias.setLayoutY(ButtonMaterias.getLayoutY() - tam);
+            ButtonComentarios.setLayoutY(ButtonComentarios.getLayoutY() - tam);
+            t2.setRotate(0);
+            t3.setLayoutY(t3.getLayoutY() - tam);
+            t4.setLayoutY(t4.getLayoutY() - tam);
+            t5.setLayoutY(t5.getLayoutY() - tam);
+            TextGoals.setVisible(false);
+        } else if (event.getSource() == ButtonLogros && !TextGoals.isVisible()) {
+            l2.setLayoutY(l2.getLayoutY() + tam);
+            l3.setLayoutY(l3.getLayoutY() + tam);
+            l4.setLayoutY(l4.getLayoutY() + tam);
+            l5.setLayoutY(l5.getLayoutY() + tam);
+            ButtonHorarios.setLayoutY(ButtonHorarios.getLayoutY() + tam);
+            ButtonMaterias.setLayoutY(ButtonMaterias.getLayoutY() + tam);
+            ButtonComentarios.setLayoutY(ButtonComentarios.getLayoutY() + tam);
+            t2.setRotate(-90);
+            t3.setLayoutY(t3.getLayoutY() + tam);
+            t4.setLayoutY(t4.getLayoutY() + tam);
+            t5.setLayoutY(t5.getLayoutY() + tam);
+            TextGoals.setVisible(true);
+        }
+        if (event.getSource() == ButtonHorarios && !TextInterest.isVisible()) {
+            l3.setLayoutY(l3.getLayoutY() + tam);
+            l4.setLayoutY(l4.getLayoutY() + tam);
+            l5.setLayoutY(l5.getLayoutY() + tam);
+            ButtonMaterias.setLayoutY(ButtonMaterias.getLayoutY() + tam);
+            ButtonComentarios.setLayoutY(ButtonComentarios.getLayoutY() + tam);
+            t3.setRotate(-90);
+            t4.setLayoutY(t4.getLayoutY() + tam);
+            t5.setLayoutY(t5.getLayoutY() + tam);
+            TextInterest.setVisible(true);
+        } else if (event.getSource() == ButtonHorarios && TextInterest.isVisible()) {
+            l3.setLayoutY(l3.getLayoutY() - tam);
+            l4.setLayoutY(l4.getLayoutY() - tam);
+            l5.setLayoutY(l5.getLayoutY() - tam);
+            ButtonMaterias.setLayoutY(ButtonMaterias.getLayoutY() - tam);
+            ButtonComentarios.setLayoutY(ButtonComentarios.getLayoutY() - tam);
+            t3.setRotate(0);
+            t4.setLayoutY(t4.getLayoutY() - tam);
+            t5.setLayoutY(t5.getLayoutY() - tam);
+            TextInterest.setVisible(false);
+        }
+        if (event.getSource() == ButtonMaterias && !TextThemes.isVisible()) {
+            l4.setLayoutY(l4.getLayoutY() + tam);
+            l5.setLayoutY(l5.getLayoutY() + tam);
+            ButtonComentarios.setLayoutY(ButtonComentarios.getLayoutY() + tam);
+            t4.setRotate(-90);
+            t5.setLayoutY(t5.getLayoutY() + tam);
+            TextThemes.setVisible(true);
+        } else if (event.getSource() == ButtonMaterias && TextThemes.isVisible()) {
+            l4.setLayoutY(l4.getLayoutY() - tam);
+            l5.setLayoutY(l5.getLayoutY() - tam);
+            ButtonComentarios.setLayoutY(ButtonComentarios.getLayoutY() - tam);
+            t4.setRotate(0);
+            t5.setLayoutY(t5.getLayoutY() - tam);
+            TextThemes.setVisible(false);
+        }
+        if (event.getSource() == ButtonComentarios && !listGroups.isVisible()) {
+            l5.setLayoutY(l5.getLayoutY() + tam);
+            t5.setRotate(-90);
+            listGroups.setVisible(true);
+        } else if (event.getSource() == ButtonComentarios && listGroups.isVisible()) {
+            l5.setLayoutY(l5.getLayoutY() - tam);
+            t5.setRotate(0);
+            listGroups.setVisible(false);
+        }
 
     }
 
