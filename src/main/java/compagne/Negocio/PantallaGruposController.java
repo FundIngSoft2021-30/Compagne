@@ -76,7 +76,7 @@ public class PantallaGruposController implements Initializable {
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Registrarse");
+                stage.setTitle("Crear Grupo");
                 stage.setScene(scene);
                 stage.showAndWait();
         }

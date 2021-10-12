@@ -72,7 +72,7 @@ public class PantallaMenuController {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Registrarse");
+        stage.setTitle("Grupos");
         stage.setScene(scene);
         stage.showAndWait();
     }
@@ -97,7 +97,7 @@ public class PantallaMenuController {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Registrarse");
+        stage.setTitle("Perfil");
         stage.setScene(scene);
         stage.showAndWait();
     }
