@@ -1,5 +1,3 @@
-
-
 package compagne.Negocio;
 
 import javafx.stage.Stage;
@@ -96,7 +94,7 @@ public class PantallaPerfilController {
 
     @FXML
     void click(ActionEvent event) {
-        int tam = 62;
+        int tam = 63;
         if (event.getSource() == ButtonDescription && TextDescription.isVisible()) {
             l1.setLayoutY(l1.getLayoutY() - tam);
             l2.setLayoutY(l2.getLayoutY() - tam);
@@ -107,6 +105,10 @@ public class PantallaPerfilController {
             ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() - tam);
             ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() - tam);
             ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - tam);
+            TextGoals.setLayoutY(TextGoals.getLayoutY() - tam);
+            TextInterest.setLayoutY(TextInterest.getLayoutY() - tam);
+            TextThemes.setLayoutY(TextThemes.getLayoutY() - tam);
+            listGroups.setLayoutY(listGroups.getLayoutY() - tam);
             t1.setRotate(0);
             t2.setLayoutY(t2.getLayoutY() - tam);
             t3.setLayoutY(t3.getLayoutY() - tam);
@@ -123,6 +125,10 @@ public class PantallaPerfilController {
             ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + tam);
             ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + tam);
             ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + tam);
+            TextGoals.setLayoutY(TextGoals.getLayoutY() + tam);
+            TextInterest.setLayoutY(TextInterest.getLayoutY() + tam);
+            TextThemes.setLayoutY(TextThemes.getLayoutY() + tam);
+            listGroups.setLayoutY(listGroups.getLayoutY() + tam);
             t1.setRotate(-90);
             t2.setLayoutY(t2.getLayoutY() + tam);
             t3.setLayoutY(t3.getLayoutY() + tam);
@@ -138,6 +144,9 @@ public class PantallaPerfilController {
             ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() - tam);
             ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() - tam);
             ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - tam);
+            TextInterest.setLayoutY(TextInterest.getLayoutY() - tam);
+            TextThemes.setLayoutY(TextThemes.getLayoutY() - tam);
+            listGroups.setLayoutY(listGroups.getLayoutY() - tam);
             t2.setRotate(0);
             t3.setLayoutY(t3.getLayoutY() - tam);
             t4.setLayoutY(t4.getLayoutY() - tam);
@@ -148,6 +157,9 @@ public class PantallaPerfilController {
             l3.setLayoutY(l3.getLayoutY() + tam);
             l4.setLayoutY(l4.getLayoutY() + tam);
             l5.setLayoutY(l5.getLayoutY() + tam);
+            TextInterest.setLayoutY(TextInterest.getLayoutY() + tam);
+            TextThemes.setLayoutY(TextThemes.getLayoutY() + tam);
+            listGroups.setLayoutY(listGroups.getLayoutY() + tam);
             ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + tam);
             ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + tam);
             ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + tam);
@@ -163,6 +175,8 @@ public class PantallaPerfilController {
             l5.setLayoutY(l5.getLayoutY() + tam);
             ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + tam);
             ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + tam);
+            TextThemes.setLayoutY(TextThemes.getLayoutY() + tam);
+            listGroups.setLayoutY(listGroups.getLayoutY() + tam);
             t3.setRotate(-90);
             t4.setLayoutY(t4.getLayoutY() + tam);
             t5.setLayoutY(t5.getLayoutY() + tam);
@@ -171,8 +185,10 @@ public class PantallaPerfilController {
             l3.setLayoutY(l3.getLayoutY() - tam);
             l4.setLayoutY(l4.getLayoutY() - tam);
             l5.setLayoutY(l5.getLayoutY() - tam);
+            listGroups.setLayoutY(listGroups.getLayoutY() - tam);
             ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() - tam);
             ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - tam);
+            TextThemes.setLayoutY(TextThemes.getLayoutY() - tam);
             t3.setRotate(0);
             t4.setLayoutY(t4.getLayoutY() - tam);
             t5.setLayoutY(t5.getLayoutY() - tam);
@@ -181,24 +197,26 @@ public class PantallaPerfilController {
         if (event.getSource() == ButtonThemes && !TextThemes.isVisible()) {
             l4.setLayoutY(l4.getLayoutY() + tam);
             l5.setLayoutY(l5.getLayoutY() + tam);
-            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY()+ tam);
+            listGroups.setLayoutY(listGroups.getLayoutY() + tam);
+            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + tam);
             t4.setRotate(-90);
             t5.setLayoutY(t5.getLayoutY() + tam);
             TextThemes.setVisible(true);
         } else if (event.getSource() == ButtonThemes && TextThemes.isVisible()) {
             l4.setLayoutY(l4.getLayoutY() - tam);
             l5.setLayoutY(l5.getLayoutY() - tam);
+            listGroups.setLayoutY(listGroups.getLayoutY() - tam);
             ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - tam);
             t4.setRotate(0);
             t5.setLayoutY(t5.getLayoutY() - tam);
-            TextThemes.setVisible(false);            
+            TextThemes.setVisible(false);
         }
         if (event.getSource() == ButtonGroups && !listGroups.isVisible()) {
-            l5.setLayoutY(l5.getLayoutY() + tam);
+            l5.setLayoutY(l5.getLayoutY() + (listGroups.getHeight() + 20));
             t5.setRotate(-90);
             listGroups.setVisible(true);
         } else if (event.getSource() == ButtonGroups && listGroups.isVisible()) {
-            l5.setLayoutY(l5.getLayoutY() - tam);
+            l5.setLayoutY(l5.getLayoutY() - (listGroups.getHeight() + 20));
             t5.setRotate(0);
             listGroups.setVisible(false);
         }
@@ -209,7 +227,6 @@ public class PantallaPerfilController {
         this.NombreEstudiante.setText(u);
     }
 
-    
     @FXML
     private void verMenu(MouseEvent event) {
         String nomFXML = "PantallaMenu.fxml";
@@ -229,7 +246,3 @@ public class PantallaPerfilController {
         stage.showAndWait();
     }
 }
-
-
-
-
