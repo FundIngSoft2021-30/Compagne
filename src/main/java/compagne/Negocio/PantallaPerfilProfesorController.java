@@ -2,6 +2,7 @@ package compagne.Negocio;
 
 import javafx.stage.Stage;
 import compagne.Entidades.Comentario;
+import compagne.Entidades.Profesor;
 import compagne.Vista.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -198,7 +199,6 @@ public class PantallaPerfilProfesorController {
 
     public void start(String u) {
         this.usu = u;
-        
     }
 
     @FXML
