@@ -2,11 +2,7 @@ package compagne.Negocio;
 
 import javafx.stage.Stage;
 import compagne.Entidades.Comentario;
-import compagne.Entidades.Profesor;
 import compagne.Vista.App;
-import javafx.scene.Node;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
