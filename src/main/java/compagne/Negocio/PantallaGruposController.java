@@ -103,12 +103,24 @@ public class PantallaGruposController implements Initializable {
                         alert.setHeaderText("No se pudo unir");
                         alert.setContentText("Por favor revise el codigo ingresado");
                         alert.showAndWait();
-                } else {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Correcto");
-                        alert.setHeaderText("Se unio correctamente");
-                        alert.setContentText("Enhorabuena!");
-                        alert.showAndWait();
+                } else { 
+                    this.codigoGrupo.setText("");
+                    String nomFXML = "PantallaExito.fxml";
+                    Parent root = null;
+                    try {
+                            FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+                            root = loader.load();
+                            PantallaExitoController pec = loader.getController();
+                            pec.start();
+                    } catch (Exception e) {
+
+                    }
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setTitle("Exito");
+                    stage.setScene(scene);
+                    stage.showAndWait();
                 }
         }
 

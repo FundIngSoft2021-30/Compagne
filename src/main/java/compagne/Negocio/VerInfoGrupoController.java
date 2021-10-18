@@ -10,7 +10,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import compagne.Entidades.Usuario;
+import compagne.Vista.App;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class VerInfoGrupoController {
@@ -49,11 +54,23 @@ public class VerInfoGrupoController {
     void addIntegrante(ActionEvent event) {
         if (this.email1.getText().length() > 0) {
             if (this.facade.agregarUsuarioAGrupo(this.g.getCodigo(), this.email1.getText(), "N")) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Correcto");
-                alert.setHeaderText("Ingreso correctamente");
-                alert.setContentText("Enhorabuena!");
-                alert.showAndWait();
+                this.email1.setText("");
+                    String nomFXML = "PantallaExito.fxml";
+                    Parent root = null;
+                    try {
+                            FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
+                            root = loader.load();
+                            PantallaExitoController pec = loader.getController();
+                            pec.start();
+                    } catch (Exception e) {
+
+                    }
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setTitle("Exito");
+                    stage.setScene(scene);
+                    stage.showAndWait();
                 this.actualizar();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

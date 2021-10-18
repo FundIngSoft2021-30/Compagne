@@ -218,7 +218,7 @@ public class PantallaPerfilController {
         this.usu = u;
         Estudiante user = (Estudiante) facade.informacionUsuario(u);
         this.NombreEstudiante.setText(user.getNombre());
-        TextDescription.setText(user.getNombre());
+        TextDescription.setText("Hola! soy una persona comprometida y proactiva ");
         TextGoals.setItems(FXCollections.observableArrayList(user.getLogros()));
         TextInterest.setItems(FXCollections.observableArrayList(user.getIntereses()));
         TextThemes.setItems(FXCollections.observableArrayList(user.getMaterias()));

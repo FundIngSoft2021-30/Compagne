@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.VerInfoGrupoController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #2b78e4;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="compagne.Negocio.VerInfoGrupoController">
    <children>
-      <TextField fx:id="nombre" alignment="CENTER" layoutX="20.0" layoutY="14.0" promptText="NombreGrupo" style="-fx-background-color: #2b78e4;">
+      <TextField fx:id="nombre" alignment="CENTER" editable="false" layoutX="20.0" layoutY="14.0" promptText="NombreGrupo" style="-fx-background-color: #2b78e4;">
          <font>
             <Font name="Franklin Gothic Medium" size="25.0" />
          </font>
@@ -36,7 +36,7 @@
             <Font name="Franklin Gothic Medium" size="20.0" />
          </font>
       </Button>
-      <ListView fx:id="integrantes_list" layoutX="72.0" layoutY="101.0" prefHeight="154.0" prefWidth="187.0" style="-fx-background-color: #2b78e4;" />
+      <ListView fx:id="integrantes_list" layoutX="72.0" layoutY="116.0" prefHeight="154.0" prefWidth="187.0" style="-fx-background-color: #2b78e4;" />
       <Label layoutX="39.0" layoutY="402.0" text="Seguridad:">
          <font>
             <Font name="Franklin Gothic Medium" size="20.0" />
