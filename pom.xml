@@ -16,7 +16,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>14</maven.compiler.source>
     <maven.compiler.target>14</maven.compiler.target>
-    <junit.version>4.13.1</junit.version>
+    <junit.version>4.13.2</junit.version>
     <postgres.driver.version>42.3.0</postgres.driver.version>
     <javafx.version>17.0.1</javafx.version>
   </properties>
