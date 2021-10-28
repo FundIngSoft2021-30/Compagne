@@ -18,7 +18,7 @@
     <maven.compiler.target>14</maven.compiler.target>
     <junit.version>4.13.1</junit.version>
     <postgres.driver.version>42.2.24</postgres.driver.version>
-    <javafx.version>15.0.1</javafx.version>
+    <javafx.version>17.0.1</javafx.version>
   </properties>
 
   <dependencies>
@@ -76,7 +76,7 @@
         <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
+          <version>3.9.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
