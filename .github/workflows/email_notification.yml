@@ -1,6 +1,6 @@
-name: Greetings
+name: Send Notification
 
-on: [pull_request, issues]
+on: push
 
 jobs:
   MAVEN:
