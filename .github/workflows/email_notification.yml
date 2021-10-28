@@ -28,7 +28,7 @@ jobs:
         # email subject
         subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
         # email body as text
-        body: ${{ github.actor }} created commit: ${{ github.event.commits[0].message }} on https://github.com/${{ github.repository }}/commit/${{github.sha}}
+        body: "${{ github.actor }} created commit: ${{ github.event.commits[0].message }} on https://github.com/${{ github.repository }}/commit/${{github.sha}}"
         # comma-separated string, send email to
         to: cinc0m4s1bb@gmail.com
         # from email name
