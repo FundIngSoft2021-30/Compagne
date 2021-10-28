@@ -3,8 +3,6 @@ name: Send Notification
 on:
   push:
     branches: [ main ]
-  schedule:
-    - cron: '38 0 * * *'
 
 jobs:
   MAVEN:

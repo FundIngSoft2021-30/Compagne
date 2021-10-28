@@ -15,11 +15,6 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
 
-/**
- * FXML Controller class
- *
- * @author samue
- */
 public class PantallaPerfilController {
     
     private FacadeCompagne facade = FacadeCompagne.getInstance();
