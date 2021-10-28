@@ -1,0 +1,31 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  MAVEN:
+    name: Maven Stuff
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Run TESTS
+      run: mvn test
+    - name: Send mail
+      if: always()
+      uses: dawidd6/action-send-mail@v2
+      with:
+        # mail server settings
+        server_address: smtp.gmail.com
+        server_port: 465
+        # user credentials
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        # email subject
+        subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+        # email body as text
+        body: ${{ github.actor }} created commit: ${{ github.event.commits[0].message }} on https://github.com/${{ github.repository }}/commit/${{github.sha}}
+        # comma-separated string, send email to
+        to: cinc0m4s1bb@gmail.com
+        # from email name
+        from: Compagne APP
