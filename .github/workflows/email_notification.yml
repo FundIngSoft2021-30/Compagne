@@ -13,8 +13,13 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Run TESTS
-      run: mvn test
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '14'
+        cache: 'maven'
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
     - name: Send mail
       if: always()
       uses: dawidd6/action-send-mail@v2
