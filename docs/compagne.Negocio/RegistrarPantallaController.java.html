@@ -75,7 +75,7 @@ import javafx.scene.control.Alert;
 <span class="nc bnc" id="L75" title="All 2 branches missed.">                        &amp;&amp; confirmarContraseña.getText().equals(contraseña.getText())) {</span>
 <span class="nc bnc" id="L76" title="All 2 branches missed.">                    if (checkEstudiante.isSelected()) {</span>
 <span class="nc" id="L77">                        usu = this.facade.crearPerfilEstudiante(nombre.getText(), email.getText(), contraseña.getText(),</span>
-                                null, null, null, null);
+<span class="nc" id="L78">                                null, null, null, null);</span>
 <span class="nc bnc" id="L79" title="All 2 branches missed.">                        if (usu != null) {</span>
 <span class="nc" id="L80">                            Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
 <span class="nc" id="L81">                            alert.setTitle(&quot;Correcto&quot;);</span>
@@ -89,7 +89,7 @@ import javafx.scene.control.Alert;
 <span class="nc" id="L89">                            alert.setHeaderText(&quot;No se pudo registrar&quot;);</span>
 <span class="nc" id="L90">                            alert.setContentText(&quot;Intentelo nuevamente...&quot;);</span>
 <span class="nc" id="L91">                            alert.showAndWait();</span>
-<span class="nc" id="L92">                        }</span>
+                        }
 <span class="nc bnc" id="L93" title="All 2 branches missed.">                    } else if (checkProfesor.isSelected()) {</span>
 <span class="nc" id="L94">                        usu = this.facade.crearPerfilProfesor(nombre.getText(), &quot;&quot;, email.getText(),</span>
 <span class="nc" id="L95">                                contraseña.getText(), null, null, null, null);</span>
@@ -106,10 +106,10 @@ import javafx.scene.control.Alert;
 <span class="nc" id="L106">                            alert.setHeaderText(&quot;No se pudo registrar&quot;);</span>
 <span class="nc" id="L107">                            alert.setContentText(&quot;Intentelo nuevamente...&quot;);</span>
 <span class="nc" id="L108">                            alert.showAndWait();</span>
-<span class="nc" id="L109">                        }</span>
+                        }
                     }
                 }
-            } else {
+<span class="nc" id="L112">            } else {</span>
 <span class="nc" id="L113">                Alert alert = new Alert(Alert.AlertType.ERROR);</span>
 <span class="nc" id="L114">                alert.setTitle(&quot;Error&quot;);</span>
 <span class="nc" id="L115">                alert.setHeaderText(&quot;No se pudo registrar&quot;);</span>
@@ -126,7 +126,7 @@ import javafx.scene.control.Alert;
 <span class="nc" id="L126">                    pmc.start(((Usuario) (usu)).getEmail());</span>
 <span class="nc" id="L127">                } catch (Exception e) {</span>
 
-<span class="nc" id="L129">                }</span>
+                }
 <span class="nc" id="L130">                Scene scene = new Scene(root);</span>
 <span class="nc" id="L131">                Stage stage = new Stage();</span>
 <span class="nc" id="L132">                stage.initModality(Modality.APPLICATION_MODAL);</span>
@@ -141,19 +141,19 @@ import javafx.scene.control.Alert;
     public void initialize(URL location, ResourceBundle resources) {
 
 <span class="nc bnc" id="L143" title="All 4 branches missed.">        assert checkAcuerdo != null</span>
-                : &quot;fx:id=\&quot;checkAcuerdo\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;
+<span class="nc" id="L144">                : &quot;fx:id=\&quot;checkAcuerdo\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;</span>
 <span class="nc bnc" id="L145" title="All 4 branches missed.">        assert checkEstudiante != null</span>
-                : &quot;fx:id=\&quot;checkEstudiante\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;
+<span class="nc" id="L146">                : &quot;fx:id=\&quot;checkEstudiante\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;</span>
 <span class="nc bnc" id="L147" title="All 4 branches missed.">        assert checkProfesor != null</span>
-                : &quot;fx:id=\&quot;checkProfesor\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;
+<span class="nc" id="L148">                : &quot;fx:id=\&quot;checkProfesor\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;</span>
 <span class="nc bnc" id="L149" title="All 4 branches missed.">        assert confirmarContraseña != null</span>
-                : &quot;fx:id=\&quot;confirmarContraseña\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;
+<span class="nc" id="L150">                : &quot;fx:id=\&quot;confirmarContraseña\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;</span>
 <span class="nc bnc" id="L151" title="All 4 branches missed.">        assert contraseña != null</span>
-                : &quot;fx:id=\&quot;contraseña\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;
+<span class="nc" id="L152">                : &quot;fx:id=\&quot;contraseña\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;</span>
 <span class="nc bnc" id="L153" title="All 4 branches missed.">        assert email != null : &quot;fx:id=\&quot;email\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;</span>
 <span class="nc bnc" id="L154" title="All 4 branches missed.">        assert nombre != null : &quot;fx:id=\&quot;nombre\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;</span>
 <span class="nc bnc" id="L155" title="All 4 branches missed.">        assert registrarse != null</span>
-                : &quot;fx:id=\&quot;registrarse\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;
+<span class="nc" id="L156">                : &quot;fx:id=\&quot;registrarse\&quot; was not injected: check your FXML file 'RegistrarPantalla.fxml'.&quot;;</span>
 
 <span class="nc" id="L158">    }</span>
 }
