@@ -22,7 +22,7 @@
    <children>
       <Button fx:id="menu" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#desplegarMenu" style="-fx-background-color: #2b78e4;">
          <graphic>
-            <ImageView fx:id="menu" fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="25.0" onMouseClicked="#verMenu" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="menu" fitHeight="25.0" fitWidth="25.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@menus.png" />
                </image>

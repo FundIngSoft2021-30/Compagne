@@ -194,7 +194,6 @@ public class PantallaPerfilProfesorController {
             t5.setRotate(0);
             comentarios.setVisible(false);
         }
-
     }
 
     public void start(String u) {
@@ -245,24 +244,4 @@ public class PantallaPerfilProfesorController {
         assert t5 != null : "fx:id=\"t5\" was not injected: check your FXML file 'PantallaPefilProfesor.fxml'.";
 
     }
-
-    @FXML
-    private void verMenu(MouseEvent event) {
-        String nomFXML = "PantallaMenu.fxml";
-        Parent root = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
-            root = loader.load();
-            CompaController cc = loader.getController();
-            cc.actualizar();
-        } catch (Exception e) {
-        }
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Grupos");
-        stage.setScene(scene);
-        stage.showAndWait();
-    }
-
 }

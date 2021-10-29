@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 
-
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
 import compagne.Entidades.Usuario;

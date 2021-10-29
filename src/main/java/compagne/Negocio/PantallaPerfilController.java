@@ -1,10 +1,10 @@
 
 package compagne.Negocio;
 
-import compagne.Entidades.Estudiante;
 import javafx.stage.Stage;
 
 import javafx.scene.Node;
+import compagne.Entidades.Estudiante;
 import compagne.Entidades.Grupo;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -89,8 +89,7 @@ public class PantallaPerfilController {
     
     @FXML
     void Modificar(ActionEvent event) {
-        
-        
+        //TODO: Modificar
     }
     
     
@@ -204,8 +203,7 @@ public class PantallaPerfilController {
         }
     }
 
-    public void start(String u) {
-        
+    public void start(String u) {        
         this.usu = u;
         Estudiante user = (Estudiante) facade.informacionUsuario(this.usu);
         this.NombreEstudiante.setText(user.getNombre());
@@ -213,8 +211,6 @@ public class PantallaPerfilController {
         TextGoals.setItems(FXCollections.observableArrayList(user.getLogros()));
         TextInterest.setItems(FXCollections.observableArrayList(user.getIntereses()));
         TextThemes.setItems(FXCollections.observableArrayList(user.getMaterias()));
-
-        
     }
 
     @FXML
