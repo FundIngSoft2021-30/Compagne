@@ -18,6 +18,8 @@ jobs:
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Create local changes
       run: mvn clean install test clean
+    - name: Remove directories
+      run: rm -rf src .classpath .project
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
