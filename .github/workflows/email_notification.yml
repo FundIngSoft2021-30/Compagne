@@ -2,8 +2,8 @@ name: Send Notification
 
 on:
   push:
-    paths:
-      - "src/*"
+    branches:
+      - main
 
 jobs:
   MAVEN:
