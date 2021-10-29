@@ -41,4 +41,10 @@ public class Reunion {
     }
 
 
+    public Reunion(Date fecha, String codigo) {
+        this.fecha = fecha;
+        this.codigo = codigo;
+    }
+
+
 }

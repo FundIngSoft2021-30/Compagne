@@ -24,7 +24,7 @@ test-coverage,compagne.Entidades,ChatP,55,13,8,0,12,4,9,1,5,1
 test-coverage,compagne.Entidades,ChatG,30,10,4,0,10,3,6,1,4,1
 test-coverage,compagne.Entidades,Comentario,55,9,8,0,12,4,9,1,5,1
 test-coverage,compagne.Entidades,Mensaje,55,9,8,0,12,4,9,1,5,1
-test-coverage,compagne.Entidades,Reunion,55,3,8,0,12,1,9,1,5,1
+test-coverage,compagne.Entidades,Reunion,55,9,8,0,12,4,9,1,5,1
 test-coverage,compagne.Entidades,Usuario,75,18,4,0,28,7,15,1,13,1
 test-coverage,compagne.Entidades,Grupo,163,27,18,0,36,8,26,1,17,1
 test-coverage,compagne.Entidades,Chat,87,15,12,0,16,6,13,1,7,1
