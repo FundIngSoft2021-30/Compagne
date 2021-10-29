@@ -66,4 +66,15 @@ public class EntidadesTest{
     {
         assertNotNull( reunion );
     }
+    @Test
+    public void impresionNoNula(){
+        assertNotNull(chatG.toString());
+        assertNotNull(chatP.toString());
+        assertNotNull(comentario.toString());
+        assertNotNull(estudiante.toString());
+        assertNotNull(grupo.toString());
+        assertNotNull(mensaje.toString());
+        assertNotNull(profesor.toString());
+        assertNotNull(reunion.toString());
+    }
 }
