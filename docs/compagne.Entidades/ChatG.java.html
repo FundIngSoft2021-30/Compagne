@@ -29,16 +29,16 @@ public class ChatG extends Chat{
     }
 
     public ChatG(Date fechaCreacion, String codigo, char tipo, HashSet&lt;Mensaje&gt; mensajes, Grupo pertenece) {
-<span class="nc" id="L32">        super(fechaCreacion, codigo, tipo, mensajes);</span>
-<span class="nc" id="L33">        this.pertenece=pertenece;</span>
-<span class="nc" id="L34">    }</span>
+<span class="fc" id="L32">        super(fechaCreacion, codigo, tipo, mensajes);</span>
+<span class="fc" id="L33">        this.pertenece=pertenece;</span>
+<span class="fc" id="L34">    }</span>
 
 
     @Override
     public String toString() {
 <span class="nc" id="L39">        return &quot;{&quot; +</span>
 <span class="nc" id="L40">            &quot; pertenece='&quot; + getPertenece() + &quot;'&quot; +</span>
-<span class="nc" id="L41">            &quot;}&quot;;</span>
+            &quot;}&quot;;
     }
 
     

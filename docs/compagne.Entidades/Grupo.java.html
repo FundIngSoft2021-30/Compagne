@@ -14,14 +14,14 @@ public class Grupo {
     private HashSet&lt;Reunion&gt; reuniones;
     private HashSet&lt;ChatG&gt; chats;
 
-<span class="nc" id="L17">    public Grupo(String nombre, String codigo, String publico) {</span>
-<span class="nc" id="L18">        this.nombre = nombre;</span>
-<span class="nc" id="L19">        this.codigo = codigo;</span>
-<span class="nc" id="L20">        this.publico = publico;</span>
-<span class="nc" id="L21">        this.miembros = new HashSet&lt;&gt;();</span>
-<span class="nc" id="L22">        this.reuniones = new HashSet&lt;&gt;();</span>
-<span class="nc" id="L23">        this.chats = new HashSet&lt;&gt;();</span>
-<span class="nc" id="L24">    }</span>
+<span class="fc" id="L17">    public Grupo(String nombre, String codigo, String publico) {</span>
+<span class="fc" id="L18">        this.nombre = nombre;</span>
+<span class="fc" id="L19">        this.codigo = codigo;</span>
+<span class="fc" id="L20">        this.publico = publico;</span>
+<span class="fc" id="L21">        this.miembros = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L22">        this.reuniones = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L23">        this.chats = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L24">    }</span>
 
     public String getNombre() {
 <span class="nc" id="L27">        return nombre;</span>
@@ -107,7 +107,7 @@ public class Grupo {
 <span class="nc" id="L107">            &quot;, miembros='&quot; + getMiembros() + &quot;'&quot; +</span>
 <span class="nc" id="L108">            &quot;, reuniones='&quot; + getReuniones() + &quot;'&quot; +</span>
 <span class="nc" id="L109">            &quot;, chats='&quot; + getChats() + &quot;'&quot; +</span>
-<span class="nc" id="L110">            &quot;}&quot;;</span>
+            &quot;}&quot;;
     }
     
     

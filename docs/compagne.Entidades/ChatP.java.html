@@ -18,10 +18,10 @@ public class ChatP extends Chat{
     }
 
     public ChatP(Date fechaCreacion, String codigo, char tipo, HashSet&lt;Mensaje&gt; mensajes, Usuario usuario1, Usuario usuario2) {
-<span class="nc" id="L21">        super(fechaCreacion, codigo, tipo, mensajes);</span>
-<span class="nc" id="L22">        this.usuario1=usuario1;</span>
-<span class="nc" id="L23">        this.usuario2=usuario2;</span>
-<span class="nc" id="L24">    }</span>
+<span class="fc" id="L21">        super(fechaCreacion, codigo, tipo, mensajes);</span>
+<span class="fc" id="L22">        this.usuario1=usuario1;</span>
+<span class="fc" id="L23">        this.usuario2=usuario2;</span>
+<span class="fc" id="L24">    }</span>
 
     @Override
     public boolean equals(Object o) {
@@ -44,7 +44,7 @@ public class ChatP extends Chat{
 <span class="nc" id="L44">        return &quot;{&quot; +</span>
 <span class="nc" id="L45">            &quot; usuario1='&quot; + getUsuario1() + &quot;'&quot; +</span>
 <span class="nc" id="L46">            &quot;, usuario2='&quot; + getUsuario2() + &quot;'&quot; +</span>
-<span class="nc" id="L47">            &quot;}&quot;;</span>
+            &quot;}&quot;;
     }
     
 }

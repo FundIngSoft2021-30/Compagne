@@ -19,7 +19,7 @@ public class ControlGrupos {
 <span class="nc" id="L19">            this.result = this.statement.executeQuery();</span>
 <span class="nc" id="L20">        } catch (SQLException e) {</span>
 <span class="nc" id="L21">            this.result = null;</span>
-        }
+<span class="nc" id="L22">        }</span>
 <span class="nc" id="L23">        return this.result;</span>
     }
 
@@ -40,7 +40,7 @@ public class ControlGrupos {
             }
 <span class="nc" id="L41">        } catch (SQLException e) {</span>
 <span class="nc" id="L42">            this.result = null;</span>
-        }
+<span class="nc" id="L43">        }</span>
 <span class="nc" id="L44">        return grupos;</span>
     }
 
@@ -56,16 +56,16 @@ public class ControlGrupos {
         }
         try {
 <span class="nc" id="L58">            this.statement = this.con.prepareStatement(&quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L59">                    + &quot;\&quot;GrupoEstudio\&quot; WHERE \&quot;Codigo\&quot;=\'&quot; + codigo + &quot;\';&quot;);</span>
+                    + &quot;\&quot;GrupoEstudio\&quot; WHERE \&quot;Codigo\&quot;=\'&quot; + codigo + &quot;\';&quot;);
 <span class="nc" id="L60">            this.result = this.statement.executeQuery();</span>
 <span class="nc bnc" id="L61" title="All 2 branches missed.">            if (this.result.next()) {</span>
 <span class="nc" id="L62">                r = this.result.getInt(0 + offset);</span>
-<span class="nc" id="L63">            } else {</span>
+            } else {
 <span class="nc" id="L64">                throw new Exception(&quot;No encontrado&quot;);</span>
             }
 <span class="nc" id="L66">        } catch (Exception e) {</span>
 <span class="nc" id="L67">            r = 0;</span>
-        }
+<span class="nc" id="L68">        }</span>
 <span class="nc" id="L69">        return r;</span>
     }
 
@@ -85,7 +85,7 @@ public class ControlGrupos {
 <span class="nc" id="L85">            this.statement = this.con.prepareStatement(consulta);</span>
 <span class="nc" id="L86">            this.statement.executeQuery();</span>
 <span class="nc" id="L87">        } catch (Exception e) {</span>
-        }
+<span class="nc" id="L88">        }</span>
 <span class="nc" id="L89">        return b;</span>
     }
 
@@ -99,13 +99,13 @@ public class ControlGrupos {
 <span class="nc" id="L99">        int idusuario=this.getUsarioID(email);</span>
 <span class="nc" id="L100">        int grupoid=this.getGrupoID(cod);</span>
 <span class="nc" id="L101">        String consulta = &quot;DELETE FROM &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L102">                        + &quot;\&quot;UsuarioxGrupoEstudio\&quot; WHERE \&quot;UsuarioRegistradoID\&quot;=&quot; + </span>
+                        + &quot;\&quot;UsuarioxGrupoEstudio\&quot; WHERE \&quot;UsuarioRegistradoID\&quot;=&quot; + 
 <span class="nc" id="L103">                String.valueOf(idusuario) + &quot; AND \&quot;GrupoEstudioID\&quot;= &quot; + String.valueOf(grupoid) ;</span>
         try {
 <span class="nc" id="L105">            this.statement = this.con.prepareStatement(consulta);</span>
 <span class="nc" id="L106">            this.statement.executeQuery();</span>
 <span class="nc" id="L107">        } catch (Exception e) {</span>
-        }
+<span class="nc" id="L108">        }</span>
 <span class="nc" id="L109">        return b;</span>
     }
 
@@ -117,13 +117,13 @@ public class ControlGrupos {
          */
 <span class="nc" id="L118">         boolean b = true;</span>
 <span class="nc" id="L119">         String consulta = &quot;UPDATE &quot; + ConnectionClass.getSchema() + </span>
-<span class="nc" id="L120">                 &quot;\&quot;UsuarioxGrupoEstudio\&quot; SET \&quot;Admin\&quot;=\'S\' WHERE \&quot;UsuarioRegistradoID\&quot; = \&quot;&quot;</span>
-<span class="nc" id="L121">                + idusuario+ &quot;\&quot; AND \&quot;GrupoEstudioID\&quot; =  \&quot;&quot;+grupoid+&quot;\&quot; ;&quot;;</span>
+                 &quot;\&quot;UsuarioxGrupoEstudio\&quot; SET \&quot;Admin\&quot;=\'S\' WHERE \&quot;UsuarioRegistradoID\&quot; = \&quot;&quot;
+                + idusuario+ &quot;\&quot; AND \&quot;GrupoEstudioID\&quot; =  \&quot;&quot;+grupoid+&quot;\&quot; ;&quot;;
         try {
 <span class="nc" id="L123">            this.statement = this.con.prepareStatement(consulta);</span>
 <span class="nc" id="L124">            this.statement.executeQuery();</span>
 <span class="nc" id="L125">        } catch (Exception e) {</span>
-        }
+<span class="nc" id="L126">        }</span>
 <span class="nc" id="L127">        return b;</span>
         
     }
@@ -135,7 +135,7 @@ public class ControlGrupos {
          */
 <span class="nc" id="L136">        boolean b = true; // Inicializo lo que retorno (Si el grupo se guardo bien)</span>
 <span class="nc" id="L137">        String sql = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L138">                + &quot;\&quot;GrupoEstudio\&quot; (\&quot;Nombre\&quot;,\&quot;Publico\&quot;, \&quot;Codigo\&quot;) VALUES ('&quot;</span>
+                + &quot;\&quot;GrupoEstudio\&quot; (\&quot;Nombre\&quot;,\&quot;Publico\&quot;, \&quot;Codigo\&quot;) VALUES ('&quot;
 <span class="nc" id="L139">                + grupo.getNombre() + &quot;','&quot;+grupo.isPublico()+&quot;','&quot; + grupo.getCodigo() + &quot;');&quot;; </span>
         // Consulta SQL para insertar
         // un grupo registrado en la BD
@@ -144,12 +144,12 @@ public class ControlGrupos {
 <span class="nc" id="L144">            this.statement = this.con.prepareStatement(sql); // Preparando una consulta SQL</span>
 <span class="nc" id="L145">            this.statement.execute(); // Ejecutando una consulta SQL</span>
 <span class="nc" id="L146">        } catch (Exception e) {</span>
-        }
+<span class="nc" id="L147">        }</span>
         try {
             // Toca insertar el usuario y el grupo en UsuarioXGrupoEstudio
 <span class="nc" id="L150">            this.insertarUsuarioXGrupoEstudio(grupo.getCodigo(), usuario, &quot;S&quot;);</span>
 <span class="nc" id="L151">        } catch (Exception e) { // No pasa nada</span>
-        }
+<span class="nc" id="L152">        }</span>
         // Fin de crear grupo
 <span class="nc" id="L154">        return b;</span>
     }
@@ -163,7 +163,7 @@ public class ControlGrupos {
 <span class="nc" id="L163">        int id = this.getGrupoID(codigo);</span>
 <span class="nc bnc" id="L164" title="All 2 branches missed.">        if (id == 0) {</span>
 <span class="nc" id="L165">            b = false;</span>
-<span class="nc" id="L166">        } else {</span>
+        } else {
             try {
                 //Borrar registros de grupo de UsuarioXGrupoEstudio
 <span class="nc" id="L169">                String sql = &quot;DELETE FROM &quot; + ConnectionClass.getSchema()</span>
@@ -171,7 +171,7 @@ public class ControlGrupos {
 <span class="nc" id="L171">                this.statement = this.con.prepareStatement(sql);</span>
 <span class="nc" id="L172">                this.result = this.statement.executeQuery();</span>
 <span class="nc" id="L173">            } catch (Exception e) {</span>
-            }       
+<span class="nc" id="L174">            }       </span>
             try {
                 //Borrar grupo de GrupoEstudio
 <span class="nc" id="L177">                String sql = &quot;DELETE FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;GrupoEstudio\&quot; WHERE \&quot;ID\&quot;=&quot;</span>
@@ -179,7 +179,7 @@ public class ControlGrupos {
 <span class="nc" id="L179">                this.statement = this.con.prepareStatement(sql);</span>
 <span class="nc" id="L180">                this.result = this.statement.executeQuery();</span>
 <span class="nc" id="L181">            } catch (Exception e) {</span>
-            }
+<span class="nc" id="L182">            }</span>
         }
 <span class="nc" id="L184">        return b;</span>
     }
@@ -193,13 +193,13 @@ public class ControlGrupos {
 <span class="nc" id="L193">        boolean b = true;</span>
 <span class="nc" id="L194">        String consulta = &quot;UPDATE &quot; + ConnectionClass.getSchema() + &quot;\&quot;GrupoEstudio\&quot; SET \&quot;Nombre\&quot;=\'&quot;</span>
 <span class="nc" id="L195">                + grupo.getNombre() + &quot;\', \&quot;Publico\&quot;=\'&quot; + grupo.isPublico()</span>
-<span class="nc" id="L196">                + &quot;\'  WHERE \&quot;Codigo\&quot;=\'&quot;</span>
+                + &quot;\'  WHERE \&quot;Codigo\&quot;=\'&quot;
 <span class="nc" id="L197">                + grupo.getCodigo()+ &quot;\';&quot;;</span>
         try {
 <span class="nc" id="L199">            this.statement = this.con.prepareStatement(consulta);</span>
 <span class="nc" id="L200">            this.statement.executeQuery();</span>
 <span class="nc" id="L201">        } catch (Exception e) {</span>
-        }
+<span class="nc" id="L202">        }</span>
 <span class="nc" id="L203">        return b;</span>
     }
 
@@ -215,7 +215,7 @@ public class ControlGrupos {
 <span class="nc" id="L215">            offset = 1;</span>
         try {
 <span class="nc" id="L217">            this.statement = this.con.prepareStatement(&quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L218">                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=\'&quot; + email + &quot;\';&quot;);</span>
+                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=\'&quot; + email + &quot;\';&quot;);
 <span class="nc" id="L219">            this.result = this.statement.executeQuery();</span>
 <span class="nc bnc" id="L220" title="All 2 branches missed.">            if (this.result.next())</span>
 <span class="nc" id="L221">                r = this.result.getInt(0 + offset);</span>
@@ -223,7 +223,7 @@ public class ControlGrupos {
 <span class="nc" id="L223">                throw new Exception(&quot;No encontrado&quot;);</span>
 <span class="nc" id="L224">        } catch (Exception e) {</span>
 <span class="nc" id="L225">            r=0;</span>
-        }
+<span class="nc" id="L226">        }</span>
 <span class="nc" id="L227">        return r;</span>
     }
 
@@ -233,7 +233,7 @@ public class ControlGrupos {
         try {
 <span class="nc" id="L234">            this.con.setAutoCommit(true);</span>
 <span class="nc" id="L235">        } catch (SQLException e) {</span>
-        }
+<span class="nc" id="L236">        }</span>
 <span class="nc" id="L237">    }</span>
 
 }

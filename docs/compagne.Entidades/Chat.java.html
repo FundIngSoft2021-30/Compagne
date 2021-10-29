@@ -27,12 +27,12 @@ public abstract class Chat {
 <span class="nc" id="L27">        return this.mensajes;</span>
     }
 
-<span class="nc" id="L30">    public Chat(Date fechaCreacion, String codigo, char tipo, HashSet&lt;Mensaje&gt; mensajes) {</span>
-<span class="nc" id="L31">        this.fechaCreacion = fechaCreacion;</span>
-<span class="nc" id="L32">        this.codigo = codigo;</span>
-<span class="nc" id="L33">        this.tipo = tipo;</span>
-<span class="nc" id="L34">        this.mensajes = mensajes;</span>
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L30">    public Chat(Date fechaCreacion, String codigo, char tipo, HashSet&lt;Mensaje&gt; mensajes) {</span>
+<span class="fc" id="L31">        this.fechaCreacion = fechaCreacion;</span>
+<span class="fc" id="L32">        this.codigo = codigo;</span>
+<span class="fc" id="L33">        this.tipo = tipo;</span>
+<span class="fc" id="L34">        this.mensajes = mensajes;</span>
+<span class="fc" id="L35">    }</span>
 
     @Override
     public boolean equals(Object o) {
@@ -58,7 +58,7 @@ public abstract class Chat {
 <span class="nc" id="L58">            &quot;, codigo='&quot; + getCodigo() + &quot;'&quot; +</span>
 <span class="nc" id="L59">            &quot;, tipo='&quot; + getTipo() + &quot;'&quot; +</span>
 <span class="nc" id="L60">            &quot;, mensajes='&quot; + getMensajes() + &quot;'&quot; +</span>
-<span class="nc" id="L61">            &quot;}&quot;;</span>
+            &quot;}&quot;;
     }
     
 

@@ -36,7 +36,7 @@ public class FacadeCompagne {
             HashSet&lt;String&gt; horariosAtencion, HashSet&lt;String&gt; materias, HashSet&lt;Comentario&gt; comentarios,
             HashSet&lt;String&gt; logros) {
 <span class="nc" id="L38">        Profesor profesor = new Profesor(nombre, email, materias, comentarios, experiencia, contrasenia,</span>
-<span class="nc" id="L39">                horariosAtencion, logros);</span>
+                horariosAtencion, logros);
 <span class="nc bnc" id="L40" title="All 2 branches missed.">        if (!this.controlProfesores.crearProfesor(profesor))</span>
 <span class="nc" id="L41">            profesor = null;</span>
 <span class="nc" id="L42">        return profesor;</span>
@@ -109,7 +109,7 @@ public class FacadeCompagne {
             }
 <span class="nc" id="L110">        } catch (Exception e) {</span>
 <span class="nc" id="L111">            b = false;</span>
-        }
+<span class="nc" id="L112">        }</span>
 <span class="nc" id="L113">        return b;</span>
     }
 
@@ -125,8 +125,8 @@ public class FacadeCompagne {
 <span class="nc" id="L125">        boolean b = false;</span>
 <span class="nc bnc" id="L126" title="All 2 branches missed.">        if (estID &gt; 0) {</span>
 <span class="nc" id="L127">            consulta = &quot;SELECT \&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L128">                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=&quot; + &quot;\'&quot; + email</span>
-<span class="nc" id="L129">                    + &quot;\' AND \&quot;Tipo\&quot;=\'S\' AND \&quot;Contrasenia\&quot;=\'&quot; + contra + &quot;\';&quot;;</span>
+                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=&quot; + &quot;\'&quot; + email
+                    + &quot;\' AND \&quot;Tipo\&quot;=\'S\' AND \&quot;Contrasenia\&quot;=\'&quot; + contra + &quot;\';&quot;;
 <span class="nc" id="L130">            ResultSet rs = this.controlEstudiantes.executeQuery(consulta);</span>
             try {
 <span class="nc bnc" id="L132" title="All 2 branches missed.">                if (rs.next()) {</span>
@@ -135,7 +135,7 @@ public class FacadeCompagne {
                 }
 <span class="nc" id="L136">            } catch (SQLException e) {</span>
 <span class="nc" id="L137">                b = false;</span>
-            }
+<span class="nc" id="L138">            }</span>
 <span class="nc bnc" id="L139" title="All 2 branches missed.">            if (b) {</span>
                 // Si hay
 <span class="nc" id="L141">                HashSet&lt;String&gt; logros = new HashSet&lt;&gt;();</span>
@@ -145,7 +145,7 @@ public class FacadeCompagne {
                 // Logros
 <span class="nc" id="L146">                consulta = &quot;SELECT LO.\&quot;Texto\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Logro\&quot; AS LO, &quot;</span>
 <span class="nc" id="L147">                        + ConnectionClass.getSchema() + &quot;\&quot;UsuarioXLogros\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot;</span>
-<span class="nc" id="L148">                        + estID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
+                        + estID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L149">                rs = this.controlEstudiantes.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L151" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -153,12 +153,12 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L154">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L156">                }</span>
                 // Comentarios
 <span class="nc" id="L158">                consulta = &quot;SELECT CO.\&quot;Texto\&quot;, CO.\&quot;Estrellas\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
 <span class="nc" id="L159">                        + &quot;\&quot;Comentario\&quot; AS CO, &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L160">                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + estID</span>
-<span class="nc" id="L161">                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;</span>
+                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L162">                rs = this.controlEstudiantes.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L164" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -166,12 +166,12 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L167">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L169">                }</span>
                 // Materias
 <span class="nc" id="L171">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Materia\&quot; AS LO, &quot;</span>
 <span class="nc" id="L172">                        + ConnectionClass.getSchema()</span>
-<span class="nc" id="L173">                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID</span>
-<span class="nc" id="L174">                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
+                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L175">                rs = this.controlEstudiantes.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L177" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -179,12 +179,12 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L180">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L182">                }</span>
                 // Intereses
 <span class="nc" id="L184">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Interes\&quot; AS LO, &quot;</span>
 <span class="nc" id="L185">                        + ConnectionClass.getSchema()</span>
-<span class="nc" id="L186">                        + &quot;\&quot;UsuarioXIntereses\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID</span>
-<span class="nc" id="L187">                        + &quot; AND UXL.\&quot;InteresID\&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
+                        + &quot;\&quot;UsuarioXIntereses\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXL.\&quot;InteresID\&quot;=LO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L188">                rs = this.controlEstudiantes.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L190" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -192,13 +192,13 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L193">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L195">                }</span>
 <span class="nc" id="L196">                usu = new Estudiante(nombre, email, materias, comentarios, contra, intereses, logros);</span>
             }
 <span class="nc bnc" id="L198" title="All 2 branches missed.">        } else if (proID &gt; 0) {</span>
 <span class="nc" id="L199">            consulta = &quot;SELECT \&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L200">                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=&quot; + &quot;\'&quot; + email</span>
-<span class="nc" id="L201">                    + &quot;\' AND \&quot;Tipo\&quot;=\'T\' AND \&quot;Contrasenia\&quot;=\'&quot; + contra + &quot;\';&quot;;</span>
+                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=&quot; + &quot;\'&quot; + email
+                    + &quot;\' AND \&quot;Tipo\&quot;=\'T\' AND \&quot;Contrasenia\&quot;=\'&quot; + contra + &quot;\';&quot;;
 <span class="nc" id="L202">            ResultSet rs = this.controlEstudiantes.executeQuery(consulta);</span>
             try {
 <span class="nc bnc" id="L204" title="All 2 branches missed.">                if (rs.next()) {</span>
@@ -207,7 +207,7 @@ public class FacadeCompagne {
                 }
 <span class="nc" id="L208">            } catch (SQLException e) {</span>
 <span class="nc" id="L209">                b = false;</span>
-            }
+<span class="nc" id="L210">            }</span>
 <span class="nc bnc" id="L211" title="All 2 branches missed.">            if (b) {</span>
                 // Si hay
 <span class="nc" id="L213">                HashSet&lt;String&gt; logros = new HashSet&lt;&gt;();</span>
@@ -219,7 +219,7 @@ public class FacadeCompagne {
                 // Logros
 <span class="nc" id="L220">                consulta = &quot;SELECT LO.\&quot;Texto\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Logro\&quot; AS LO, &quot;</span>
 <span class="nc" id="L221">                        + ConnectionClass.getSchema() + &quot;\&quot;UsuarioXLogros\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot;</span>
-<span class="nc" id="L222">                        + proID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
+                        + proID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L223">                rs = this.controlProfesores.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L225" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -227,12 +227,12 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L228">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L230">                }</span>
                 // Comentarios
 <span class="nc" id="L232">                consulta = &quot;SELECT CO.\&quot;Texto\&quot;, CO.\&quot;Estrellas\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
 <span class="nc" id="L233">                        + &quot;\&quot;Comentario\&quot; AS CO, &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L234">                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + proID</span>
-<span class="nc" id="L235">                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;</span>
+                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + proID
+                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L236">                rs = this.controlProfesores.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L238" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -240,7 +240,7 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L241">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L243">                }</span>
                 // Materias
 <span class="nc" id="L245">                consulta = &quot;SELECT LO.\&quot;Experiencia\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;UsuarioRegistrado\&quot; AS LO WHERE &quot;+proID+&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
 <span class="nc" id="L246">                rs = this.controlProfesores.executeQuery(consulta);</span>
@@ -250,12 +250,12 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L251">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L253">                }</span>
                 // Experiencia
 <span class="nc" id="L255">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Materia\&quot; AS LO, &quot;</span>
 <span class="nc" id="L256">                        + ConnectionClass.getSchema()</span>
-<span class="nc" id="L257">                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + proID</span>
-<span class="nc" id="L258">                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
+                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + proID
+                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L259">                rs = this.controlProfesores.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L261" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -263,7 +263,7 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L264">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L266">                }</span>
 <span class="nc" id="L267">                usu = new Profesor(nombre, email, materias, comentarios, experiencia, contra, horarioAtencion, logros);</span>
             }
         }
@@ -282,8 +282,8 @@ public class FacadeCompagne {
 <span class="nc" id="L282">        boolean b = false;</span>
 <span class="nc bnc" id="L283" title="All 2 branches missed.">        if (estID &gt; 0) {</span>
 <span class="nc" id="L284">            consulta = &quot;SELECT \&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L285">                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=&quot; + &quot;\'&quot; + email</span>
-<span class="nc" id="L286">                    + &quot;\' AND \&quot;Tipo\&quot;=\'S\';&quot;;</span>
+                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=&quot; + &quot;\'&quot; + email
+                    + &quot;\' AND \&quot;Tipo\&quot;=\'S\';&quot;;
 <span class="nc" id="L287">            ResultSet rs = this.controlEstudiantes.executeQuery(consulta);</span>
             try {
 <span class="nc bnc" id="L289" title="All 2 branches missed.">                if (rs.next()) {</span>
@@ -292,7 +292,7 @@ public class FacadeCompagne {
                 }
 <span class="nc" id="L293">            } catch (SQLException e) {</span>
 <span class="nc" id="L294">                b = false;</span>
-            }
+<span class="nc" id="L295">            }</span>
 <span class="nc bnc" id="L296" title="All 2 branches missed.">            if (b) {</span>
                 // Si hay
 <span class="nc" id="L298">                HashSet&lt;String&gt; logros = new HashSet&lt;&gt;();</span>
@@ -302,7 +302,7 @@ public class FacadeCompagne {
                 // Logros
 <span class="nc" id="L303">                consulta = &quot;SELECT LO.\&quot;Texto\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Logro\&quot; AS LO, &quot;</span>
 <span class="nc" id="L304">                        + ConnectionClass.getSchema() + &quot;\&quot;UsuarioXLogros\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot;</span>
-<span class="nc" id="L305">                        + estID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
+                        + estID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L306">                rs = this.controlEstudiantes.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L308" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -310,12 +310,12 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L311">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L313">                }</span>
                 // Comentarios
 <span class="nc" id="L315">                consulta = &quot;SELECT CO.\&quot;Texto\&quot;, CO.\&quot;Estrellas\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
 <span class="nc" id="L316">                        + &quot;\&quot;Comentario\&quot; AS CO, &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L317">                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + estID</span>
-<span class="nc" id="L318">                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;</span>
+                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L319">                rs = this.controlEstudiantes.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L321" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -323,12 +323,12 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L324">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L326">                }</span>
                 // Materias
 <span class="nc" id="L328">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Materia\&quot; AS LO, &quot;</span>
 <span class="nc" id="L329">                        + ConnectionClass.getSchema()</span>
-<span class="nc" id="L330">                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID</span>
-<span class="nc" id="L331">                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
+                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L332">                rs = this.controlEstudiantes.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L334" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -336,12 +336,12 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L337">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L339">                }</span>
                 // Intereses
 <span class="nc" id="L341">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Interes\&quot; AS LO, &quot;</span>
 <span class="nc" id="L342">                        + ConnectionClass.getSchema()</span>
-<span class="nc" id="L343">                        + &quot;\&quot;UsuarioXIntereses\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID</span>
-<span class="nc" id="L344">                        + &quot; AND UXL.\&quot;InteresID\&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
+                        + &quot;\&quot;UsuarioXIntereses\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXL.\&quot;InteresID\&quot;=LO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L345">                rs = this.controlEstudiantes.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L347" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -349,13 +349,13 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L350">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L352">                }</span>
 <span class="nc" id="L353">                usu = new Estudiante(nombre, email, materias, comentarios,&quot;*******&quot;, intereses, logros);</span>
             }
 <span class="nc bnc" id="L355" title="All 2 branches missed.">        } else if (proID &gt; 0) {</span>
 <span class="nc" id="L356">            consulta = &quot;SELECT \&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L357">                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=&quot; + &quot;\'&quot; + email</span>
-<span class="nc" id="L358">                    + &quot;\' AND \&quot;Tipo\&quot;=\'T\';&quot;;</span>
+                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=&quot; + &quot;\'&quot; + email
+                    + &quot;\' AND \&quot;Tipo\&quot;=\'T\';&quot;;
 <span class="nc" id="L359">            ResultSet rs = this.controlEstudiantes.executeQuery(consulta);</span>
             try {
 <span class="nc bnc" id="L361" title="All 2 branches missed.">                if (rs.next()) {</span>
@@ -364,7 +364,7 @@ public class FacadeCompagne {
                 }
 <span class="nc" id="L365">            } catch (SQLException e) {</span>
 <span class="nc" id="L366">                b = false;</span>
-            }
+<span class="nc" id="L367">            }</span>
 <span class="nc bnc" id="L368" title="All 2 branches missed.">            if (b) {</span>
                 // Si hay
 <span class="nc" id="L370">                HashSet&lt;String&gt; logros = new HashSet&lt;&gt;();</span>
@@ -376,7 +376,7 @@ public class FacadeCompagne {
                 // Logros
 <span class="nc" id="L377">                consulta = &quot;SELECT LO.\&quot;Texto\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Logro\&quot; AS LO, &quot;</span>
 <span class="nc" id="L378">                        + ConnectionClass.getSchema() + &quot;\&quot;UsuarioXLogros\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot;</span>
-<span class="nc" id="L379">                        + proID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
+                        + proID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L380">                rs = this.controlProfesores.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L382" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -384,12 +384,12 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L385">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L387">                }</span>
                 // Comentarios
 <span class="nc" id="L389">                consulta = &quot;SELECT CO.\&quot;Texto\&quot;, CO.\&quot;Estrellas\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
 <span class="nc" id="L390">                        + &quot;\&quot;Comentario\&quot; AS CO, &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L391">                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + proID</span>
-<span class="nc" id="L392">                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;</span>
+                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + proID
+                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L393">                rs = this.controlProfesores.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L395" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -397,7 +397,7 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L398">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L400">                }</span>
                 // Materias
 <span class="nc" id="L402">                consulta = &quot;SELECT LO.\&quot;Experiencia\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;UsuarioRegistrado\&quot; AS LO WHERE &quot;+proID+&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
 <span class="nc" id="L403">                rs = this.controlProfesores.executeQuery(consulta);</span>
@@ -407,12 +407,12 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L408">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L410">                }</span>
                 // Experiencia
 <span class="nc" id="L412">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Materia\&quot; AS LO, &quot;</span>
 <span class="nc" id="L413">                        + ConnectionClass.getSchema()</span>
-<span class="nc" id="L414">                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + proID</span>
-<span class="nc" id="L415">                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;</span>
+                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + proID
+                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;
 <span class="nc" id="L416">                rs = this.controlProfesores.executeQuery(consulta);</span>
                 try {
 <span class="nc bnc" id="L418" title="All 2 branches missed.">                    while (rs.next()) {</span>
@@ -420,7 +420,7 @@ public class FacadeCompagne {
                     }
 <span class="nc" id="L421">                } catch (Exception e) {</span>
                     // Nada
-                }
+<span class="nc" id="L423">                }</span>
 <span class="nc" id="L424">                usu = new Profesor(nombre, email, materias, comentarios, experiencia, &quot;***********&quot;, horarioAtencion, logros);</span>
             }
         }
@@ -436,8 +436,8 @@ public class FacadeCompagne {
 <span class="nc" id="L436">            offset = 1;</span>
         
 <span class="nc" id="L438">        consulta = &quot;SELECT \&quot;Email\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
-<span class="nc" id="L439">                + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Nombre\&quot;=&quot; + &quot;\'&quot; + nombre // Cambiar &quot;=&quot; por &quot;LIKE&quot;</span>
-<span class="nc" id="L440">                + &quot;\' AND \&quot;Tipo\&quot;=\'S\'&quot; + &quot;\';&quot;;</span>
+                + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Nombre\&quot;=&quot; + &quot;\'&quot; + nombre // Cambiar &quot;=&quot; por &quot;LIKE&quot;
+                + &quot;\' AND \&quot;Tipo\&quot;=\'S\'&quot; + &quot;\';&quot;;
 <span class="nc" id="L441">        ResultSet rs = this.controlEstudiantes.executeQuery(consulta);</span>
         try {
 <span class="nc bnc" id="L443" title="All 2 branches missed.">            while (rs.next()) {</span>
@@ -445,7 +445,7 @@ public class FacadeCompagne {
             }
 <span class="nc" id="L446">        } catch (Exception e) {</span>
             // Nada
-        }
+<span class="nc" id="L448">        }</span>
 <span class="nc" id="L449">        return emails;</span>
         
     }
@@ -468,10 +468,10 @@ public class FacadeCompagne {
             }
 <span class="nc" id="L469">        } catch (Exception e) {</span>
             // Nada
-        }
+<span class="nc" id="L471">        }</span>
 <span class="nc bnc" id="L472" title="All 2 branches missed.">        if(g!=null){</span>
 <span class="nc" id="L473">            consulta = &quot;SELECT \&quot;UsuarioRegistradoID\&quot;, \&quot;Admin\&quot; FROM &quot;+ ConnectionClass.getSchema()</span>
-<span class="nc" id="L474">                + &quot;\&quot;UsuarioxGrupoEstudio\&quot; WHERE \&quot;GrupoEstudioID\&quot;=&quot; + &quot;\';&quot;+ grupocod+&quot;\';&quot;;</span>
+                + &quot;\&quot;UsuarioxGrupoEstudio\&quot; WHERE \&quot;GrupoEstudioID\&quot;=&quot; + &quot;\';&quot;+ grupocod+&quot;\';&quot;;
 <span class="nc" id="L475">            rs = this.controlGrupos.executeQuery(consulta);</span>
             try {
 <span class="nc bnc" id="L477" title="All 2 branches missed.">                while(rs.next()) {</span>
@@ -479,17 +479,17 @@ public class FacadeCompagne {
                 }
 <span class="nc" id="L480">            } catch (Exception e) {</span>
                 // Nada
-            }
+<span class="nc" id="L482">            }</span>
         }
 <span class="nc bnc" id="L484" title="All 2 branches missed.">        if(!ids.isEmpty()){</span>
 <span class="nc bnc" id="L485" title="All 2 branches missed.">            for(Integer i:ids){</span>
 <span class="nc" id="L486">                emails.add(this.controlEstudiantes.getEstudianteEmail(i));</span>
-            }
+<span class="nc" id="L487">            }</span>
         }
 <span class="nc bnc" id="L489" title="All 2 branches missed.">        if(!emails.isEmpty()){</span>
 <span class="nc bnc" id="L490" title="All 2 branches missed.">            for(String e:emails){</span>
 <span class="nc" id="L491">                miembros.add(informacionUsuario(e));</span>
-            }
+<span class="nc" id="L492">            }</span>
         }
 <span class="nc bnc" id="L494" title="All 2 branches missed.">        if(!miembros.isEmpty()) g.setMiembros(miembros);</span>
 <span class="nc" id="L495">        return g;</span>

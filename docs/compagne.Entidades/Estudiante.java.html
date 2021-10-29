@@ -21,14 +21,14 @@ public class Estudiante extends Usuario {
 <span class="nc" id="L21">        return &quot;{&quot; +</span>
 <span class="nc" id="L22">            super.toString()+&quot;, intereses='&quot; + getIntereses() + &quot;'&quot; +</span>
 <span class="nc" id="L23">            &quot;, logros='&quot; + getLogros() + &quot;'&quot; +</span>
-<span class="nc" id="L24">            &quot;}&quot;;</span>
+            &quot;}&quot;;
     }
 
     public Estudiante(String nombre, String email, HashSet&lt;String&gt; materias, HashSet&lt;Comentario&gt; comentarios, String contrasenia,
             HashSet&lt;String&gt; intereses, HashSet&lt;String&gt; logros) {
-<span class="nc" id="L29">        super(nombre, email, contrasenia, materias, comentarios);</span>
-<span class="nc" id="L30">        this.logros=logros;</span>
-<span class="nc" id="L31">        this.intereses = intereses;</span>
-<span class="nc" id="L32">    }</span>
+<span class="fc" id="L29">        super(nombre, email, contrasenia, materias, comentarios);</span>
+<span class="fc" id="L30">        this.logros=logros;</span>
+<span class="fc" id="L31">        this.intereses = intereses;</span>
+<span class="fc" id="L32">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
