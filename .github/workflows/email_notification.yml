@@ -19,7 +19,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Send e-mail
-      if: always()
+      if: ${{ failure() }}
       uses: dawidd6/action-send-mail@v2
       with:
         # mail server settings
