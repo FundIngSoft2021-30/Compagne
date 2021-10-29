@@ -84,7 +84,7 @@
           <execution>
             <configuration>
               <title>test-coverage</title>
-              <outputDirectory>jacoco-reports/</outputDirectory>
+              <outputDirectory>docs/</outputDirectory>
             </configuration>
             <id>jacoco-report</id>
             <phase>test</phase>
