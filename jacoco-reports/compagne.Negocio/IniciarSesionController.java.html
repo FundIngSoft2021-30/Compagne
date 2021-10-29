@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IniciarSesionController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">test-coverage</a> &gt; <a href="index.source.html" class="el_package">compagne.Negocio</a> &gt; <span class="el_source">IniciarSesionController.java</span></div><h1>IniciarSesionController.java</h1><pre class="source lang-java linenums">package compagne.Negocio;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import compagne.Vista.App;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import compagne.Entidades.Usuario;
+import javafx.stage.Stage;
+
+<span class="nc bnc" id="L21" title="All 2 branches missed.">public class IniciarSesionController {</span>
+
+<span class="nc" id="L23">    private FacadeCompagne facadeCompagne = new FacadeCompagne();</span>
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane main;
+
+    @FXML
+    private PasswordField contra_field;
+
+    @FXML
+    private TextField nombre_field;
+
+    @FXML
+    private Button registrarse;
+
+    @FXML
+    private Button registrate_button;
+
+    @FXML
+    void click(ActionEvent event) {
+<span class="nc" id="L48">        Usuario usu = this.facadeCompagne.iniciarSesion(this.nombre_field.getText(), this.contra_field.getText());</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (usu != null) {</span>
+<span class="nc" id="L50">            Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L51">            alert.setTitle(&quot;Correcto&quot;);</span>
+<span class="nc" id="L52">            alert.setHeaderText(&quot;Ingreso correctamente&quot;);</span>
+<span class="nc" id="L53">            alert.setContentText(&quot;Enhorabuena!&quot;);</span>
+<span class="nc" id="L54">            alert.showAndWait();</span>
+<span class="nc" id="L55">            String nomFXML = &quot;PantallaMenu.fxml&quot;;</span>
+<span class="nc" id="L56">            Parent root = null;</span>
+            try {
+<span class="nc" id="L58">                FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));</span>
+<span class="nc" id="L59">                root = loader.load();</span>
+<span class="nc" id="L60">                PantallaMenuController pmc = loader.getController();</span>
+<span class="nc" id="L61">                pmc.start(((Usuario) (usu)).getEmail());</span>
+<span class="nc" id="L62">            } catch (Exception e) {</span>
+
+<span class="nc" id="L64">            }</span>
+<span class="nc" id="L65">            Scene scene = new Scene(root);</span>
+<span class="nc" id="L66">            Stage stage = new Stage();</span>
+<span class="nc" id="L67">            stage.initModality(Modality.APPLICATION_MODAL);</span>
+<span class="nc" id="L68">            stage.setTitle(&quot;Menu&quot;);</span>
+<span class="nc" id="L69">            stage.setScene(scene);</span>
+<span class="nc" id="L70">            stage.showAndWait();</span>
+<span class="nc" id="L71">        } else {</span>
+<span class="nc" id="L72">            Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L73">            alert.setTitle(&quot;Error&quot;);</span>
+<span class="nc" id="L74">            alert.setHeaderText(&quot;Credenciales incorrectas&quot;);</span>
+<span class="nc" id="L75">            alert.setContentText(&quot;Por favor intente nuevamente&quot;);</span>
+<span class="nc" id="L76">            alert.showAndWait();</span>
+        }
+<span class="nc" id="L78">    }</span>
+
+    @FXML
+    void registro(ActionEvent event) {
+<span class="nc" id="L82">        String nomFXML = &quot;RegistrarPantalla.fxml&quot;;</span>
+<span class="nc" id="L83">        Parent root = null;</span>
+
+        try {
+<span class="nc" id="L86">            root = FXMLLoader.load(App.class.getResource(nomFXML));</span>
+<span class="nc" id="L87">        } catch (Exception e) {</span>
+
+<span class="nc" id="L89">        }</span>
+<span class="nc" id="L90">        Scene scene = new Scene(root);</span>
+<span class="nc" id="L91">        Stage stage = new Stage();</span>
+<span class="nc" id="L92">        stage.initModality(Modality.APPLICATION_MODAL);</span>
+<span class="nc" id="L93">        stage.setTitle(&quot;Registrarse&quot;);</span>
+<span class="nc" id="L94">        stage.setScene(scene);</span>
+<span class="nc" id="L95">        stage.showAndWait();</span>
+<span class="nc" id="L96">    }</span>
+
+    @FXML
+    void initialize() {
+<span class="nc bnc" id="L100" title="All 4 branches missed.">        assert contra_field != null</span>
+                : &quot;fx:id=\&quot;contra_field\&quot; was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.&quot;;
+<span class="nc bnc" id="L102" title="All 4 branches missed.">        assert nombre_field != null</span>
+                : &quot;fx:id=\&quot;nombre_field\&quot; was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.&quot;;
+<span class="nc bnc" id="L104" title="All 4 branches missed.">        assert registrarse != null</span>
+                : &quot;fx:id=\&quot;registrarse\&quot; was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.&quot;;
+<span class="nc bnc" id="L106" title="All 4 branches missed.">        assert registrate_button != null</span>
+                : &quot;fx:id=\&quot;registrate_button\&quot; was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.&quot;;
+<span class="nc bnc" id="L108" title="All 4 branches missed.">        assert main != null : &quot;fx:id=\&quot;main\&quot; was not injected: check your FXML file 'PantallaIniciarSesion.fxml'.&quot;;</span>
+
+<span class="nc" id="L110">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

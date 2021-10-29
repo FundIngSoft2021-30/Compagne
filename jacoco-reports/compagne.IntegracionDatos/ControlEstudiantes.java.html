@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControlEstudiantes.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">test-coverage</a> &gt; <a href="index.source.html" class="el_package">compagne.IntegracionDatos</a> &gt; <span class="el_source">ControlEstudiantes.java</span></div><h1>ControlEstudiantes.java</h1><pre class="source lang-java linenums">package compagne.IntegracionDatos;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashSet;
+
+import compagne.Entidades.Comentario;
+import compagne.Entidades.Estudiante;
+import compagne.Entidades.Usuario;
+
+public class ControlEstudiantes {
+<span class="nc" id="L14">    final ConnectionClass CONNECTION_CLASS = new ConnectionClass();</span>
+    private Connection con;
+    private PreparedStatement statement;
+    private ResultSet result;
+
+    public void instanceOf() {
+
+<span class="nc" id="L21">    }</span>
+
+    public ResultSet executeQuery(String query) {
+        ResultSet rs;
+        try {
+<span class="nc" id="L26">            this.statement = this.con.prepareStatement(query);</span>
+<span class="nc" id="L27">            rs = this.statement.executeQuery();</span>
+<span class="nc" id="L28">        } catch (SQLException e) {</span>
+<span class="nc" id="L29">            rs = null;</span>
+<span class="nc" id="L30">        }</span>
+<span class="nc" id="L31">        return rs;</span>
+    }
+
+    public int getEstudianteID(String email) {
+        /*
+         * Este metodo retorna el ID de un estudiante al cual busca por su mail. Recibe
+         * : email -&gt; String que representa un email
+         */
+<span class="nc" id="L39">        int r = 0;</span>
+<span class="nc" id="L40">        int offset = 0;</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL())</span>
+<span class="nc" id="L42">            offset = 1;</span>
+        try {
+<span class="nc" id="L44">            this.statement = this.con.prepareStatement(&quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=\'&quot; + email + &quot;\' AND \&quot;Tipo\&quot;=\'S\';&quot;);
+<span class="nc" id="L46">            this.result = this.statement.executeQuery();</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            if (this.result.next())</span>
+<span class="nc" id="L48">                r = this.result.getInt(0 + offset);</span>
+            else
+<span class="nc" id="L50">                throw new Exception(&quot;No encontrado&quot;);</span>
+<span class="nc" id="L51">        } catch (Exception e) {</span>
+<span class="nc" id="L52">            r = 0;</span>
+<span class="nc" id="L53">        }</span>
+<span class="nc" id="L54">        return r;</span>
+    }
+    
+    public String getEstudianteEmail(Integer id) {
+        /*
+         * Este metodo retorna el Email  de un estudiante al cual busca por su id. Recibe
+         * : id -&gt; Integer que representa un codigo
+         */
+<span class="nc" id="L62">        String email = &quot;&quot;;</span>
+<span class="nc" id="L63">        int offset = 0;</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL())</span>
+<span class="nc" id="L65">            offset = 1;</span>
+        try {
+<span class="nc" id="L67">            this.statement = this.con.prepareStatement(&quot;SELECT \&quot;Email\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;ID\&quot;=\'&quot; + id + &quot;\' AND \&quot;Tipo\&quot;=\'S\';&quot;);
+<span class="nc" id="L69">            this.result = this.statement.executeQuery();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">            if (this.result.next())</span>
+<span class="nc" id="L71">                email = this.result.getString(0 + offset);</span>
+            else
+<span class="nc" id="L73">                throw new Exception(&quot;No encontrado&quot;);</span>
+<span class="nc" id="L74">        } catch (Exception e) {</span>
+<span class="nc" id="L75">            email = null;</span>
+<span class="nc" id="L76">        }</span>
+<span class="nc" id="L77">        return email;</span>
+    }
+
+    public boolean insertarComentario(String comentario, String calificacion) {
+        /*
+         * Inserta un comentario en la BD. Recibe: comentario -&gt; String que tiene el
+         * texto, Calificacion -&gt; String que tiene un numero con la calificacion
+         */
+<span class="nc" id="L85">        boolean b = false;</span>
+<span class="nc" id="L86">        String consulta = &quot;&quot;;</span>
+        try {
+<span class="nc bnc" id="L88" title="All 4 branches missed.">            if (calificacion != null &amp;&amp; comentario != null)</span>
+<span class="nc" id="L89">                consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
+                        + &quot;\&quot;Comentario\&quot; (\&quot;Texto\&quot;, \&quot;Estrellas\&quot;) VALUES (\'&quot; + comentario + &quot;\', \'&quot; + calificacion
+                        + &quot;\');&quot;;
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            else if (calificacion != null)</span>
+<span class="nc" id="L93">                consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema() + &quot;\&quot;Comentario\&quot; (\&quot;Estrellas\&quot;) VALUES (\'&quot;</span>
+                        + calificacion + &quot;\');&quot;;
+            else
+<span class="nc" id="L96">                consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema() + &quot;\&quot;Comentario\&quot; (\&quot;Texto\&quot;) VALUES (\'&quot;</span>
+                        + comentario + &quot;\');&quot;;
+<span class="nc" id="L98">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L99">            this.statement.executeQuery();</span>
+<span class="nc" id="L100">            b = true;</span>
+<span class="nc" id="L101">        } catch (Exception e) {</span>
+<span class="nc" id="L102">            b = false;</span>
+<span class="nc" id="L103">        }</span>
+<span class="nc" id="L104">        return b;</span>
+    }
+
+    public int getComentarioID(String comentario, String calificacion) {
+        /*
+         * Retorna el ID de un comentario en la BD. Recibe: comentario -&gt; String que
+         * tiene el texto, Calificacion -&gt; String que tiene un numero con la
+         * calificacion
+         */
+<span class="nc" id="L113">        String consulta = &quot;&quot;;</span>
+<span class="nc" id="L114">        int comID = 0;</span>
+<span class="nc" id="L115">        int offset = 0;</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL())</span>
+<span class="nc" id="L117">            offset = 1;</span>
+<span class="nc bnc" id="L118" title="All 4 branches missed.">        if (calificacion != null &amp;&amp; comentario != null)</span>
+<span class="nc" id="L119">            consulta = &quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Comentario\&quot; WHERE \&quot;Texto\&quot;=\'&quot;</span>
+                    + comentario + &quot;\' AND \&quot;Estrellas\&quot;=\'&quot; + calificacion + &quot;\'&quot;;
+<span class="nc bnc" id="L121" title="All 4 branches missed.">        else if (calificacion != null &amp;&amp; comentario == null)</span>
+<span class="nc" id="L122">            consulta = &quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Comentario\&quot; WHERE \&quot;Estrellas\&quot;=\'&quot;</span>
+                    + calificacion + &quot;\'&quot;;
+        else
+<span class="nc" id="L125">            consulta = &quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Comentario\&quot; WHERE \&quot;Texto\&quot;=\'&quot;</span>
+                    + comentario + &quot;\'&quot;;
+        try {
+<span class="nc" id="L128">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L129">            this.result = this.statement.executeQuery();</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">            if (this.result.next())</span>
+<span class="nc" id="L131">                comID = this.result.getInt(0 + offset);</span>
+            else
+<span class="nc" id="L133">                throw new Exception(&quot;No encontrado&quot;);</span>
+<span class="nc" id="L134">        } catch (Exception e) {</span>
+<span class="nc" id="L135">            comID = 0;</span>
+<span class="nc" id="L136">        }</span>
+<span class="nc" id="L137">        return comID;</span>
+    }
+
+    public boolean insertarComentarioXEstudiante(int tid, int id) {
+        /*
+         * Inserta un comentario para un estudiante. Recibe: tid-&gt; int con el id del
+         * estudiante, id-&gt; int con el id del comentario
+         */
+<span class="nc" id="L145">        boolean b = true;</span>
+<span class="nc" id="L146">        String consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L147">                + &quot;\&quot;UsuarioXComentario\&quot;(\&quot;UsuarioRegistradoID\&quot;, \&quot;ComentarioID\&quot;) VALUES (&quot; + String.valueOf(tid)</span>
+<span class="nc" id="L148">                + &quot;, &quot; + String.valueOf(id) + &quot;);&quot;;</span>
+        try {
+<span class="nc" id="L150">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L151">            this.statement.executeQuery();</span>
+<span class="nc" id="L152">        } catch (Exception e) {</span>
+<span class="nc" id="L153">        }</span>
+<span class="nc" id="L154">        return b;</span>
+    }
+
+    private boolean insertarMateria(String materia) {
+        /*
+         * Inserta una materia en la BD. Recibe: materia -&gt; String que tiene el nombre
+         * de la materia
+         */
+<span class="nc" id="L162">        boolean b = false;</span>
+<span class="nc" id="L163">        String consulta = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L165">            consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema() + &quot;\&quot;Materia\&quot; (\&quot;Nombre\&quot;) VALUES (\'&quot; + materia</span>
+                    + &quot;\');&quot;;
+
+<span class="nc" id="L168">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L169">            this.statement.executeQuery();</span>
+<span class="nc" id="L170">            b = true;</span>
+<span class="nc" id="L171">        } catch (Exception e) {</span>
+<span class="nc" id="L172">            b = false;</span>
+<span class="nc" id="L173">        }</span>
+<span class="nc" id="L174">        return b;</span>
+    }
+
+    private int getMateriaID(String materia) {
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -&gt; String que tiene el
+         * nombre de la materia
+         */
+<span class="nc" id="L182">        int r = 0;</span>
+<span class="nc" id="L183">        int offset = 0;</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL())</span>
+<span class="nc" id="L185">            offset = 1;</span>
+        try {
+<span class="nc" id="L187">            this.statement = this.con.prepareStatement(&quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+                    + &quot;\&quot;Materia\&quot; WHERE \&quot;Nombre\&quot;=\'&quot; + materia + &quot;\';&quot;);
+<span class="nc" id="L189">            this.result = this.statement.executeQuery();</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">            if (this.result.next())</span>
+<span class="nc" id="L191">                r = this.result.getInt(0 + offset);</span>
+            else
+<span class="nc" id="L193">                throw new Exception(&quot;No encontrado&quot;);</span>
+<span class="nc" id="L194">        } catch (Exception e) {</span>
+<span class="nc" id="L195">            r = 0;</span>
+<span class="nc" id="L196">        }</span>
+<span class="nc" id="L197">        return r;</span>
+    }
+
+    public boolean insertarMateriaXEstudiante(int tid, int id) {
+        /*
+         * Inserta una materia para un estudiante. Recibe: tid-&gt; int con el id del
+         * estudiante, id-&gt; int con el id de la materia
+         */
+<span class="nc" id="L205">        boolean b = true;</span>
+<span class="nc" id="L206">        String consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L207">                + &quot;\&quot;UsuarioXMaterias\&quot;(\&quot;Usuario RegistradoID\&quot;, \&quot;MateriaID\&quot;) VALUES (&quot; + String.valueOf(tid) + &quot;, &quot;</span>
+<span class="nc" id="L208">                + String.valueOf(id) + &quot;);&quot;;</span>
+        try {
+<span class="nc" id="L210">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L211">            this.statement.executeQuery();</span>
+<span class="nc" id="L212">        } catch (Exception e) {</span>
+<span class="nc" id="L213">        }</span>
+<span class="nc" id="L214">        return b;</span>
+    }
+
+    private boolean insertarLogro(String logro) {
+        /*
+         * Inserta una materia en la BD. Recibe: materia -&gt; String que tiene el nombre
+         * de la materia
+         */
+<span class="nc" id="L222">        boolean b = false;</span>
+<span class="nc" id="L223">        String consulta = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L225">            consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema() + &quot;\&quot;Logro\&quot;(\&quot;Texto\&quot;) VALUES (\'&quot; + logro</span>
+                    + &quot;\');&quot;;
+<span class="nc" id="L227">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L228">            this.statement.executeQuery();</span>
+<span class="nc" id="L229">            b = true;</span>
+<span class="nc" id="L230">        } catch (Exception e) {</span>
+<span class="nc" id="L231">            b = false;</span>
+<span class="nc" id="L232">        }</span>
+<span class="nc" id="L233">        return b;</span>
+    }
+
+    private int getLogroID(String logro) {
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -&gt; String que tiene el
+         * el momento del horario
+         */
+<span class="nc" id="L241">        int r = 0;</span>
+<span class="nc" id="L242">        int offset = 0;</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL())</span>
+<span class="nc" id="L244">            offset = 1;</span>
+        try {
+<span class="nc" id="L246">            this.statement = this.con.prepareStatement(&quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+                    + &quot;\&quot;Logro\&quot; WHERE \&quot;Texto\&quot;=\'&quot; + logro + &quot;\';&quot;);
+<span class="nc" id="L248">            this.result = this.statement.executeQuery();</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">            if (this.result.next())</span>
+<span class="nc" id="L250">                r = this.result.getInt(0 + offset);</span>
+            else
+<span class="nc" id="L252">                throw new Exception(&quot;No encontrado&quot;);</span>
+<span class="nc" id="L253">        } catch (Exception e) {</span>
+<span class="nc" id="L254">            r = 0;</span>
+<span class="nc" id="L255">        }</span>
+<span class="nc" id="L256">        return r;</span>
+    }
+
+    public boolean insertarLogroXEstudiante(int tid, int id) {
+        /*
+         * Inserta una materia para un estudiante. Recibe: tid-&gt; int con el id del
+         * estudiante, id-&gt; int con el id del logro
+         */
+<span class="nc" id="L264">        boolean b = true;</span>
+<span class="nc" id="L265">        String consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L266">                + &quot;\&quot;UsuarioXLogros\&quot;(\&quot;Usuario RegistradoID\&quot;, \&quot;LogroID\&quot;) VALUES (&quot; + String.valueOf(tid) + &quot;, &quot;</span>
+<span class="nc" id="L267">                + String.valueOf(id) + &quot;);&quot;;</span>
+        try {
+<span class="nc" id="L269">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L270">            this.statement.executeQuery();</span>
+<span class="nc" id="L271">        } catch (Exception e) {</span>
+<span class="nc" id="L272">        }</span>
+<span class="nc" id="L273">        return b;</span>
+    }
+
+    private boolean insertarInteres(String interes) {
+        /*
+         * Inserta un interes en la BD. Recibe: interes -&gt; String que tiene el nombre
+         * del interes
+         */
+<span class="nc" id="L281">        boolean b = false;</span>
+<span class="nc" id="L282">        String consulta = &quot;&quot;;</span>
+        try {
+<span class="nc" id="L284">            consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema() + &quot;\&quot;Interes\&quot;(\&quot;Nombre\&quot;) VALUES (\'&quot; + interes</span>
+                    + &quot;\');&quot;;
+<span class="nc" id="L286">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L287">            this.statement.executeQuery();</span>
+<span class="nc" id="L288">            b = true;</span>
+<span class="nc" id="L289">        } catch (Exception e) {</span>
+<span class="nc" id="L290">            b = false;</span>
+<span class="nc" id="L291">        }</span>
+<span class="nc" id="L292">        return b;</span>
+    }
+
+    private int getInteresID(String interes) {
+        /*
+         * Retorna el id de una materia en la BD. Recibe: horario -&gt; String que tiene el
+         * el momento del horario
+         */
+<span class="nc" id="L300">        int r = 0;</span>
+<span class="nc" id="L301">        int offset = 0;</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL())</span>
+<span class="nc" id="L303">            offset = 1;</span>
+        try {
+<span class="nc" id="L305">            this.statement = this.con.prepareStatement(&quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+                    + &quot;\&quot;Interes\&quot; WHERE \&quot;Nombre\&quot;=\'&quot; + interes + &quot;\';&quot;);
+<span class="nc" id="L307">            this.result = this.statement.executeQuery();</span>
+<span class="nc bnc" id="L308" title="All 2 branches missed.">            if (this.result.next())</span>
+<span class="nc" id="L309">                r = this.result.getInt(0 + offset);</span>
+            else
+<span class="nc" id="L311">                throw new Exception(&quot;No encontrado&quot;);</span>
+<span class="nc" id="L312">        } catch (Exception e) {</span>
+<span class="nc" id="L313">            r = 0;</span>
+<span class="nc" id="L314">        }</span>
+<span class="nc" id="L315">        return r;</span>
+    }
+
+    public boolean insertarInteresXEstudiante(int tid, int id) {
+        /*
+         * Inserta una materia para un estudiante. Recibe: tid-&gt; int con el id del
+         * estudiante, id-&gt; int con el id del logro
+         */
+<span class="nc" id="L323">        boolean b = true;</span>
+<span class="nc" id="L324">        String consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L325">                + &quot;\&quot;UsuarioXIntereses\&quot;(\&quot;Usuario RegistradoID\&quot;, \&quot;InteresID\&quot;) VALUES (&quot; + String.valueOf(tid) + &quot;, &quot;</span>
+<span class="nc" id="L326">                + String.valueOf(id) + &quot;);&quot;;</span>
+        try {
+<span class="nc" id="L328">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L329">            this.statement.executeQuery();</span>
+<span class="nc" id="L330">        } catch (Exception e) {</span>
+<span class="nc" id="L331">        }</span>
+<span class="nc" id="L332">        return b;</span>
+    }
+
+    public boolean crearEstudiante(Estudiante estudiante) {
+        /*
+         * Este método guarda un estudiante en la BD, recibe un objeto de la clase
+         * estudiante y hace que este persista en la BD . Recibe: estudiante -&gt;
+         * Instancia de la clase estudiante, representa el estudiante que quiere
+         * guardarse en la BD
+         */
+<span class="nc" id="L342">        boolean b = false; // Inicializo lo que retorno (Si el estudiante se guardo bien)</span>
+<span class="nc" id="L343">        String sql = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
+                + &quot;\&quot;UsuarioRegistrado\&quot; (\&quot;Nombre\&quot;,\&quot;Tipo\&quot;, \&quot;Email\&quot;,\&quot;Contrasenia\&quot;) VALUES ('&quot;
+<span class="nc" id="L345">                + estudiante.getNombre() + &quot;', '&quot; + &quot;S&quot; + &quot;', '&quot; + estudiante.getEmail() + &quot;', '&quot;</span>
+<span class="nc" id="L346">                + estudiante.getContrasenia() + &quot;');&quot;; // Consulta SQL para insertar</span>
+                                                       // un usuario registrado en la
+                                                       // BD de tipo 'T' es decir
+                                                       // estudiante en la BD
+        try {
+<span class="nc" id="L351">            this.statement = this.con.prepareStatement(sql); // Preparando una consulta SQL</span>
+<span class="nc" id="L352">            this.statement.execute(); // Ejecutando una consulta SQL</span>
+<span class="nc" id="L353">            b = true; // No hubo problemas</span>
+<span class="nc" id="L354">        } catch (Exception e) {</span>
+<span class="nc" id="L355">            b = false; // Si hubo problemas</span>
+<span class="nc" id="L356">        }</span>
+<span class="nc" id="L357">        int tid = this.getEstudianteID(estudiante.getEmail()); // El ID del estudiante que acabo de insertar</span>
+        try {
+            // Toca insertar los logros si hay, si no hay, saltara un error o no se
+            // ejecutara lo siguiente.
+<span class="nc bnc" id="L361" title="All 2 branches missed.">            if (estudiante.getLogros().size() &gt; 0) {</span>
+<span class="nc bnc" id="L362" title="All 2 branches missed.">                for (String logro : estudiante.getLogros()) {</span>
+                    // Trato de encontrar un comentario para no repetir en la BD
+<span class="nc" id="L364">                    int id = this.getLogroID(logro);</span>
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+<span class="nc bnc" id="L366" title="All 2 branches missed.">                    if (id == 0) {</span>
+<span class="nc" id="L367">                        this.insertarLogro(logro);</span>
+<span class="nc" id="L368">                        id = this.getLogroID(logro);</span>
+                    }
+                    // Inserto un logro para el usuario
+<span class="nc" id="L371">                    this.insertarLogroXEstudiante(tid, id);</span>
+<span class="nc" id="L372">                }</span>
+            }
+<span class="nc" id="L374">        } catch (Exception e) { // No pasa nada</span>
+<span class="nc" id="L375">        }</span>
+        // Fin de insertar logros
+        try {
+            // Toca insertar las materias si hay, si no hay, saltara un error o no se
+            // ejecutara lo siguiente.
+<span class="nc bnc" id="L380" title="All 2 branches missed.">            if (estudiante.getMaterias().size() &gt; 0) {</span>
+<span class="nc bnc" id="L381" title="All 2 branches missed.">                for (String materia : estudiante.getMaterias()) {</span>
+                    // Trato de encontrar un comentario para no repetir en la BD
+<span class="nc" id="L383">                    int id = this.getMateriaID(materia);</span>
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+<span class="nc bnc" id="L385" title="All 2 branches missed.">                    if (id == 0) {</span>
+<span class="nc" id="L386">                        this.insertarMateria(materia);</span>
+<span class="nc" id="L387">                        id = this.getMateriaID(materia);</span>
+                    }
+                    // Inserto un comentario para el usuario
+<span class="nc" id="L390">                    this.insertarMateriaXEstudiante(tid, id);</span>
+<span class="nc" id="L391">                }</span>
+            }
+<span class="nc" id="L393">        } catch (Exception e) { // No pasa nada</span>
+<span class="nc" id="L394">        }</span>
+        try {
+            // Toca insertar los comentarios y calificaciones si hay, si no hay, saltara un
+            // error o no se
+            // ejecutara lo siguiente.
+<span class="nc bnc" id="L399" title="All 2 branches missed.">            if (estudiante.getComentarios().size() &gt; 0) {</span>
+<span class="nc bnc" id="L400" title="All 2 branches missed.">                for (Comentario comentario : estudiante.getComentarios()) {</span>
+                    // Trato de encontrar un comentario para no repetir en la BD
+<span class="nc" id="L402">                    int id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());</span>
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+<span class="nc bnc" id="L404" title="All 2 branches missed.">                    if (id == 0) {</span>
+<span class="nc" id="L405">                        this.insertarComentario(comentario.getComentario(), comentario.getCalificacion());</span>
+<span class="nc" id="L406">                        id = this.getComentarioID(comentario.getComentario(), comentario.getCalificacion());</span>
+                    }
+                    // Inserto un comentario para el usuario
+<span class="nc" id="L409">                    this.insertarComentarioXEstudiante(tid, id);</span>
+<span class="nc" id="L410">                }</span>
+            }
+<span class="nc" id="L412">        } catch (Exception e) { // No pasa nada</span>
+<span class="nc" id="L413">        }</span>
+        try {
+            // Toca insertar los intereses si hay, si no hay, saltara un
+            // error o no se
+            // ejecutara lo siguiente.
+<span class="nc bnc" id="L418" title="All 2 branches missed.">            if (estudiante.getIntereses().size() &gt; 0) {</span>
+<span class="nc bnc" id="L419" title="All 2 branches missed.">                for (String interes : estudiante.getIntereses()) {</span>
+                    // Trato de encontrar un comentario para no repetir en la BD
+<span class="nc" id="L421">                    int id = this.getInteresID(interes);</span>
+                    // Si el ID es 0, entonces no existe y hay que crearlo
+<span class="nc bnc" id="L423" title="All 2 branches missed.">                    if (id == 0) {</span>
+<span class="nc" id="L424">                        this.insertarInteres(interes);</span>
+<span class="nc" id="L425">                        id = this.getInteresID(interes);</span>
+                    }
+                    // Inserto un comentario para el usuario
+<span class="nc" id="L428">                    this.insertarInteresXEstudiante(tid, id);</span>
+<span class="nc" id="L429">                }</span>
+            }
+<span class="nc" id="L431">        } catch (Exception e) { // No pasa nada</span>
+<span class="nc" id="L432">        }</span>
+<span class="nc" id="L433">        return b;</span>
+    }
+
+    public boolean eliminarEstudiante(String email) {
+        /*
+         * Elimina un estudiante de la BD. Recibe: email -&gt; String que representa el
+         * email de un estudiante
+         */
+<span class="nc" id="L441">        boolean b = true;</span>
+<span class="nc" id="L442">        int id = this.getEstudianteID(email);</span>
+<span class="nc bnc" id="L443" title="All 2 branches missed.">        if (id == 0)</span>
+<span class="nc" id="L444">            b = false;</span>
+        else {
+            try {
+<span class="nc" id="L447">                String sql = &quot;DELETE FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L448">                        + &quot;\&quot;UsuarioXComentario\&quot; WHERE \&quot;UsuarioRegistradoID\&quot;=&quot; + String.valueOf(id);</span>
+<span class="nc" id="L449">                this.statement = this.con.prepareStatement(sql);</span>
+<span class="nc" id="L450">                this.result = this.statement.executeQuery();</span>
+<span class="nc" id="L451">            } catch (Exception e) {</span>
+<span class="nc" id="L452">            }</span>
+            try {
+<span class="nc" id="L454">                String sql = &quot;DELETE FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L455">                        + &quot;\&quot;UsuarioXMaterias\&quot; WHERE \&quot;Usuario RegistradoID\&quot;=&quot; + String.valueOf(id);</span>
+<span class="nc" id="L456">                this.statement = this.con.prepareStatement(sql);</span>
+<span class="nc" id="L457">                this.result = this.statement.executeQuery();</span>
+<span class="nc" id="L458">            } catch (Exception e) {</span>
+<span class="nc" id="L459">            }</span>
+            try {
+<span class="nc" id="L461">                String sql = &quot;DELETE FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L462">                        + &quot;\&quot;UsuarioXLogros\&quot; WHERE \&quot;Usuario RegistradoID\&quot;=&quot; + String.valueOf(id);</span>
+<span class="nc" id="L463">                this.statement = this.con.prepareStatement(sql);</span>
+<span class="nc" id="L464">                this.result = this.statement.executeQuery();</span>
+<span class="nc" id="L465">            } catch (Exception e) {</span>
+<span class="nc" id="L466">            }</span>
+            try {
+<span class="nc" id="L468">                String sql = &quot;DELETE FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L469">                        + &quot;\&quot;UsuarioXIntereses\&quot; WHERE \&quot;Usuario RegistradoID\&quot;=&quot; + String.valueOf(id);</span>
+<span class="nc" id="L470">                this.statement = this.con.prepareStatement(sql);</span>
+<span class="nc" id="L471">                this.result = this.statement.executeQuery();</span>
+<span class="nc" id="L472">            } catch (Exception e) {</span>
+<span class="nc" id="L473">            }</span>
+            try {
+<span class="nc" id="L475">                String sql = &quot;DELETE FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;ID\&quot;=&quot;</span>
+<span class="nc" id="L476">                        + String.valueOf(id);</span>
+<span class="nc" id="L477">                this.statement = this.con.prepareStatement(sql);</span>
+<span class="nc" id="L478">                this.result = this.statement.executeQuery();</span>
+<span class="nc" id="L479">            } catch (Exception e) {</span>
+<span class="nc" id="L480">            }</span>
+        }
+<span class="nc" id="L482">        return b;</span>
+    }
+
+    public boolean modificarEstudiante(Estudiante estudiante) {
+        /*
+         * Modifica un estudiante en la BD. Recibe: estudiante -&gt; Instancia de la clase
+         * estudiante que tiene los datos actualizados de un estudiante, sin embargo, su
+         * e-mail no cambia
+         */
+<span class="nc" id="L491">        boolean b = true;</span>
+<span class="nc" id="L492">        String consulta = &quot;UPDATE &quot; + ConnectionClass.getSchema() + &quot;\&quot;UsuarioRegistrado\&quot; SET \&quot;Nombre\&quot;=\'&quot;</span>
+<span class="nc" id="L493">                + estudiante.getNombre() + &quot;\', \&quot;Contrasenia\&quot;=\'&quot; + estudiante.getContrasenia()</span>
+<span class="nc" id="L494">                + &quot;\', \&quot;Tipo\&quot;=\'S\' WHERE \&quot;Email\&quot;=\'&quot; + estudiante.getEmail() + &quot;\';&quot;;</span>
+        try {
+<span class="nc" id="L496">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L497">            this.statement.executeQuery();</span>
+<span class="nc" id="L498">        } catch (Exception e) {</span>
+<span class="nc" id="L499">        }</span>
+<span class="nc" id="L500">        return b;</span>
+    }
+
+<span class="nc" id="L503">    public ControlEstudiantes() {</span>
+<span class="nc" id="L504">        this.con = this.CONNECTION_CLASS.getCon();</span>
+        try {
+<span class="nc" id="L506">            this.con.setAutoCommit(true);</span>
+<span class="nc" id="L507">        } catch (SQLException e) {</span>
+<span class="nc" id="L508">        }</span>
+<span class="nc" id="L509">    }</span>
+
+    public HashSet&lt;Usuario&gt; listarCompas() {
+<span class="nc" id="L512">        int offset = 0;</span>
+<span class="nc bnc" id="L513" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL()) {</span>
+<span class="nc" id="L514">            offset = 1;</span>
+        }
+<span class="nc" id="L516">        HashSet&lt;Usuario&gt; compas = new HashSet&lt;&gt;();</span>
+        Estudiante usu;
+        String consulta;
+        String nombre;
+        String email;
+        int estID;
+<span class="nc" id="L522">        consulta = &quot;SELECT \&quot;Nombre\&quot;, \&quot;Email\&quot;, \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+                + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Tipo\&quot;=\'S\';&quot;;
+<span class="nc" id="L524">        ResultSet rs = this.executeQuery(consulta);</span>
+        ResultSet rs2;
+        try {
+<span class="nc bnc" id="L527" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L528">                nombre = rs.getString(0 + offset);</span>
+<span class="nc" id="L529">                estID = rs.getInt(2 + offset);</span>
+<span class="nc" id="L530">                email = rs.getString(1 + offset);</span>
+<span class="nc" id="L531">                System.out.println(&quot;Nombre: &quot;+nombre+&quot; email &quot;+email);</span>
+                // Si hay
+<span class="nc" id="L533">                HashSet&lt;String&gt; logros = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L534">                HashSet&lt;Comentario&gt; comentarios = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L535">                HashSet&lt;String&gt; materias = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L536">                HashSet&lt;String&gt; intereses = new HashSet&lt;&gt;();</span>
+                // Logros
+<span class="nc" id="L538">                consulta = &quot;SELECT LO.\&quot;Texto\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Logro\&quot; AS LO, &quot;</span>
+<span class="nc" id="L539">                        + ConnectionClass.getSchema() + &quot;\&quot;UsuarioXLogros\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot;</span>
+                        + estID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L541">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L543" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L544">                        logros.add(rs2.getString(0 + offset));</span>
+                    }
+<span class="nc" id="L546">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L548">                }</span>
+                // Comentarios
+<span class="nc" id="L550">                consulta = &quot;SELECT CO.\&quot;Texto\&quot;, CO.\&quot;Estrellas\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L551">                        + &quot;\&quot;Comentario\&quot; AS CO, &quot; + ConnectionClass.getSchema()</span>
+                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L554">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L556" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L557">                        comentarios.add(new Comentario(rs2.getString(1 + offset), rs2.getString(0 + offset)));</span>
+                    }
+<span class="nc" id="L559">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L561">                }</span>
+                // Materias
+<span class="nc" id="L563">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Materia\&quot; AS LO, &quot;</span>
+<span class="nc" id="L564">                        + ConnectionClass.getSchema()</span>
+                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L567">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L569" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L570">                        materias.add(rs2.getString(0 + offset));</span>
+                    }
+<span class="nc" id="L572">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L574">                }</span>
+                // Intereses
+<span class="nc" id="L576">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Interes\&quot; AS LO, &quot;</span>
+<span class="nc" id="L577">                        + ConnectionClass.getSchema()</span>
+                        + &quot;\&quot;UsuarioXIntereses\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXL.\&quot;InteresID\&quot;=LO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L580">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L582" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L583">                        intereses.add(rs2.getString(0 + offset));</span>
+                    }
+<span class="nc" id="L585">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L587">                }</span>
+<span class="nc" id="L588">                usu = new Estudiante(nombre, email, materias, comentarios, &quot;&quot;, intereses, logros);</span>
+<span class="nc" id="L589">                compas.add(usu);</span>
+<span class="nc" id="L590">            }</span>
+<span class="nc" id="L591">        } catch (Exception e) {</span>
+<span class="nc" id="L592">        }</span>
+<span class="nc" id="L593">        System.out.println(compas);</span>
+<span class="nc" id="L594">        return compas;</span>
+    }
+
+    public HashSet&lt;Usuario&gt; listarCompas(String nombre) {
+<span class="nc" id="L598">        int offset = 0;</span>
+<span class="nc bnc" id="L599" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL()) {</span>
+<span class="nc" id="L600">            offset = 1;</span>
+        }
+<span class="nc" id="L602">        HashSet&lt;Usuario&gt; compas = new HashSet&lt;&gt;();</span>
+        Estudiante usu;
+        String consulta;
+        String email;
+        int estID;
+<span class="nc" id="L607">        consulta = &quot;SELECT \&quot;Email\&quot;, \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+                + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Nombre\&quot;=\'&quot;+nombre+&quot;\';&quot;;
+<span class="nc" id="L609">        ResultSet rs = this.executeQuery(consulta);</span>
+        ResultSet rs2;
+        try {
+<span class="nc bnc" id="L612" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L613">                estID = rs.getInt(1 + offset);</span>
+<span class="nc" id="L614">                email = rs.getString(0 + offset);</span>
+                // Si hay
+<span class="nc" id="L616">                HashSet&lt;String&gt; logros = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L617">                HashSet&lt;Comentario&gt; comentarios = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L618">                HashSet&lt;String&gt; materias = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L619">                HashSet&lt;String&gt; intereses = new HashSet&lt;&gt;();</span>
+                // Logros
+<span class="nc" id="L621">                consulta = &quot;SELECT LO.\&quot;Texto\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Logro\&quot; AS LO, &quot;</span>
+<span class="nc" id="L622">                        + ConnectionClass.getSchema() + &quot;\&quot;UsuarioXLogros\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot;</span>
+                        + estID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L624">                rs2 = executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L626" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L627">                        logros.add(rs2.getString(0 + offset));</span>
+                    }
+<span class="nc" id="L629">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L631">                }</span>
+                // Comentarios
+<span class="nc" id="L633">                consulta = &quot;SELECT CO.\&quot;Texto\&quot;, CO.\&quot;Estrellas\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L634">                        + &quot;\&quot;Comentario\&quot; AS CO, &quot; + ConnectionClass.getSchema()</span>
+                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L637">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L639" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L640">                        comentarios.add(new Comentario(rs2.getString(1 + offset), rs2.getString(0 + offset)));</span>
+                    }
+<span class="nc" id="L642">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L644">                }</span>
+                // Materias
+<span class="nc" id="L646">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Materia\&quot; AS LO, &quot;</span>
+<span class="nc" id="L647">                        + ConnectionClass.getSchema()</span>
+                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L650">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L652" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L653">                        materias.add(rs2.getString(0 + offset));</span>
+                    }
+<span class="nc" id="L655">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L657">                }</span>
+                // Intereses
+<span class="nc" id="L659">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Interes\&quot; AS LO, &quot;</span>
+<span class="nc" id="L660">                        + ConnectionClass.getSchema()</span>
+                        + &quot;\&quot;UsuarioXIntereses\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXL.\&quot;InteresID\&quot;=LO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L663">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L665" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L666">                        intereses.add(rs2.getString(0 + offset));</span>
+                    }
+<span class="nc" id="L668">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L670">                }</span>
+<span class="nc" id="L671">                usu = new Estudiante(nombre, email, materias, comentarios, &quot;&quot;, intereses, logros);</span>
+<span class="nc" id="L672">                compas.add(usu);</span>
+<span class="nc" id="L673">            }</span>
+<span class="nc" id="L674">        } catch (Exception e) {</span>
+<span class="nc" id="L675">        }</span>
+<span class="nc" id="L676">        System.out.println(compas);</span>
+<span class="nc" id="L677">        return compas;</span>
+    }
+
+    public HashSet&lt;Usuario&gt; listarCompasGrupo(String codigo) {
+<span class="nc" id="L681">        int offset = 0;</span>
+<span class="nc bnc" id="L682" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL()) {</span>
+<span class="nc" id="L683">            offset = 1;</span>
+        }
+<span class="nc" id="L685">        HashSet&lt;Usuario&gt; compas = new HashSet&lt;&gt;();</span>
+        Estudiante usu;
+        String consulta;
+        String nombre;
+        String email;
+        int estID;
+<span class="nc" id="L691">        consulta = &quot;SELECT UR.\&quot;Nombre\&quot;, UR.\&quot;Email\&quot;, UR.\&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+                + &quot;\&quot;UsuarioRegistrado\&quot; AS UR, \&quot;GrupoEstudio\&quot; AS GE, \&quot;UsuarioxGrupoEstudio\&quot; AS UGE WHERE UGE.\&quot;GrupoEstudioID\&quot;=GE.\&quot;ID\&quot; AND GE.\&quot;Codigo\&quot;=\'&quot;+codigo+&quot;\' AND UGE.\&quot;UsuarioRegistradoID\&quot;=UR.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L693">        ResultSet rs = this.executeQuery(consulta);</span>
+        ResultSet rs2;
+        try {
+<span class="nc bnc" id="L696" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L697">                nombre = rs.getString(0 + offset);</span>
+<span class="nc" id="L698">                estID = rs.getInt(2 + offset);</span>
+<span class="nc" id="L699">                email = rs.getString(1 + offset);</span>
+<span class="nc" id="L700">                System.out.println(&quot;Nombre: &quot;+nombre+&quot; email &quot;+email);</span>
+                // Si hay
+<span class="nc" id="L702">                HashSet&lt;String&gt; logros = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L703">                HashSet&lt;Comentario&gt; comentarios = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L704">                HashSet&lt;String&gt; materias = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L705">                HashSet&lt;String&gt; intereses = new HashSet&lt;&gt;();</span>
+                // Logros
+<span class="nc" id="L707">                consulta = &quot;SELECT LO.\&quot;Texto\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Logro\&quot; AS LO, &quot;</span>
+<span class="nc" id="L708">                        + ConnectionClass.getSchema() + &quot;\&quot;UsuarioXLogros\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot;</span>
+                        + estID + &quot; AND UXL.\&quot;LogroID\&quot;=LO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L710">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L712" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L713">                        logros.add(rs2.getString(0 + offset));</span>
+                    }
+<span class="nc" id="L715">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L717">                }</span>
+                // Comentarios
+<span class="nc" id="L719">                consulta = &quot;SELECT CO.\&quot;Texto\&quot;, CO.\&quot;Estrellas\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L720">                        + &quot;\&quot;Comentario\&quot; AS CO, &quot; + ConnectionClass.getSchema()</span>
+                        + &quot;\&quot;UsuarioXComentario\&quot; AS UXC WHERE UXC.\&quot;UsuarioRegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXC.\&quot;ComentarioID\&quot;=CO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L723">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L725" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L726">                        comentarios.add(new Comentario(rs2.getString(1 + offset), rs2.getString(0 + offset)));</span>
+                    }
+<span class="nc" id="L728">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L730">                }</span>
+                // Materias
+<span class="nc" id="L732">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Materia\&quot; AS LO, &quot;</span>
+<span class="nc" id="L733">                        + ConnectionClass.getSchema()</span>
+                        + &quot;\&quot;UsuarioXMaterias\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXL.\&quot;MateriaID\&quot;=LO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L736">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L738" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L739">                        materias.add(rs2.getString(0 + offset));</span>
+                    }
+<span class="nc" id="L741">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L743">                }</span>
+                // Intereses
+<span class="nc" id="L745">                consulta = &quot;SELECT LO.\&quot;Nombre\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Interes\&quot; AS LO, &quot;</span>
+<span class="nc" id="L746">                        + ConnectionClass.getSchema()</span>
+                        + &quot;\&quot;UsuarioXIntereses\&quot; AS UXL WHERE UXL.\&quot;Usuario RegistradoID\&quot;=&quot; + estID
+                        + &quot; AND UXL.\&quot;InteresID\&quot;=LO.\&quot;ID\&quot;;&quot;;
+<span class="nc" id="L749">                rs2 = this.executeQuery(consulta);</span>
+                try {
+<span class="nc bnc" id="L751" title="All 2 branches missed.">                    while (rs2.next()) {</span>
+<span class="nc" id="L752">                        intereses.add(rs2.getString(0 + offset));</span>
+                    }
+<span class="nc" id="L754">                } catch (Exception e) {</span>
+                    // Nada
+<span class="nc" id="L756">                }</span>
+<span class="nc" id="L757">                usu = new Estudiante(nombre, email, materias, comentarios, &quot;&quot;, intereses, logros);</span>
+<span class="nc" id="L758">                compas.add(usu);</span>
+<span class="nc" id="L759">            }</span>
+<span class="nc" id="L760">        } catch (Exception e) {</span>
+<span class="nc" id="L761">        }</span>
+<span class="nc" id="L762">        System.out.println(compas);</span>
+<span class="nc" id="L763">        return compas;</span>
+    }
+    
+    public void Llenar(String email){
+<span class="nc" id="L767">        int id = this.getEstudianteID(email);</span>
+<span class="nc" id="L768">        this.insertarLogro(&quot;Excelencia Academica&quot;);</span>
+<span class="nc" id="L769">        this.insertarLogroXEstudiante(id, this.getLogroID(&quot;Excelencia Academica&quot;));</span>
+<span class="nc" id="L770">        this.insertarMateria(&quot;Sistemas de Informacion&quot;);</span>
+<span class="nc" id="L771">        this.insertarMateriaXEstudiante(id, this.getMateriaID(&quot;Sistemas de Informacion&quot;));</span>
+<span class="nc" id="L772">        this.insertarMateria(&quot;Fundamentos de Ing de Software&quot;);</span>
+<span class="nc" id="L773">        this.insertarMateriaXEstudiante(id, this.getMateriaID(&quot;Fundamentos de Ing de Software&quot;));</span>
+<span class="nc" id="L774">        this.insertarMateria(&quot;Analisis Numerico&quot;);</span>
+<span class="nc" id="L775">        this.insertarMateriaXEstudiante(id, this.getMateriaID(&quot;Analisis Numerico&quot;));</span>
+
+<span class="nc" id="L777">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
