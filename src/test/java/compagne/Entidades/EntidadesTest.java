@@ -1,10 +1,8 @@
-package compagne.entidades;
+package compagne.Entidades;
 
 import static org.junit.Assert.*;
 
 import org.junit.*;
-
-import compagne.Entidades.*;
 
 public class EntidadesTest{
     private ChatG chatG;
