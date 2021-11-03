@@ -6,7 +6,7 @@ import org.junit.*;
 import compagne.Entidades.Estudiante;
 import compagne.Entidades.Grupo;
 public class ControlGruposTest {
-    /* @Test
+    @Test
     public void testGetGrupos() {
         ControlGrupos cg = new ControlGrupos();
         assertEquals(cg.getGruposPublicos().size(), cg.getGruposPublicos().size());
@@ -55,5 +55,5 @@ public class ControlGruposTest {
         assertTrue(new ControlGrupos().modificarGrupo(grupo));
         assertTrue(new ControlGrupos().eliminarGrupo(grupo.getCodigo()));
         assertTrue(new ControlEstudiantes().eliminarEstudiante(estuUsuario.getEmail()));
-    } */
+    }
 }
