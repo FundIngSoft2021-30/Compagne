@@ -27,6 +27,7 @@ jobs:
         git add .
         git commit -m "Actualizando metricas de covertura de pruebas..." -a
     - name: Push changes
+      if: ${{ !failure() }}
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
