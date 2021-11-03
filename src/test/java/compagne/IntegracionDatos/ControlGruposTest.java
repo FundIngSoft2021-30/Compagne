@@ -67,7 +67,7 @@ public class ControlGruposTest {
         grupo.setNombre("Los Agrupados Bb");
         assertTrue(new ControlGrupos().modificarGrupo(grupo));
         int actual=new ControlGrupos().getGrupoID(grupo.getCodigo());
-        assertEquals(expected, actual);
+        assertNotEquals(expected, actual);
         assertTrue(new ControlGrupos().eliminarGrupo(grupo.getCodigo()));
         assertTrue(new ControlEstudiantes().eliminarEstudiante(estuUsuario.getEmail()));
     }
