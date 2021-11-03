@@ -49,7 +49,7 @@ public class ControlGruposTest {
     @Test
     public void testCrearGrupo(){
         Grupo grupo=new Grupo("Grupo de prueba", "el_codigo-del.GrupoDEPru$b@S%$#", "S");
-        Estudiante estuUsuario=new Estudiante("NombreG", "Un-EmailGenerico Para MI", null, null, "", null, null);
+        Estudiante estuUsuario=new Estudiante("NombreG", "Un-EmailGenerico ParaM&", null, null, "", null, null);
         assertTrue(new ControlEstudiantes().crearEstudiante(estuUsuario));
         assertTrue(new ControlGrupos().crearGrupo(grupo, estuUsuario.getEmail()));
         assertTrue(new ControlGrupos().modificarGrupo(grupo));

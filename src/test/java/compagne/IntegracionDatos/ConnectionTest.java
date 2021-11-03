@@ -67,7 +67,7 @@ public class ConnectionTest {
         ConnectionClass connection = new ConnectionClass();
         try {
             assertFalse(connection.getCon().isClosed());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             assertNull(connection.getCon());
         }
     }
