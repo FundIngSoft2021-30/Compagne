@@ -50,7 +50,7 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           # email subject
-          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          subject: ${{ github.job }} job of ${{ github.repository }} has failed
           # email body as text
           body: "${{ github.actor }} created commit: ${{ github.event.commits[0].message }} on https://github.com/${{ github.repository }}/commit/${{github.sha}}"
           # comma-separated string, send email to
