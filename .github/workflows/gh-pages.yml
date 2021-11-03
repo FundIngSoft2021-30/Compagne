@@ -35,7 +35,7 @@ jobs:
         force: true
 
   send_notification:
-    name: Maven Stuff
+    name: Notification for smtp.gmail.com
     needs: build
     if: ${{ failure() }}
     runs-on: ubuntu-latest
