@@ -1,11 +1,14 @@
 package compagne.IntegracionDatos;
+
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 
 import org.junit.*;
+
 public class ConnectionTest {
-    /*@Test
+    /*
+    @Test
     public void testConnectionNotNull() {
         ConnectionClass connection = new ConnectionClass();
         assertNotNull(connection);
@@ -45,5 +48,21 @@ public class ConnectionTest {
         } catch (SQLException e) {
             assertNull(connection.getCon());
         }
-    }*/
+    }
+
+    @Test
+    public void testClosedConnection() {
+        ConnectionClass connection = new ConnectionClass();
+        try {
+            assertFalse(connection.getCon().isClosed());
+        } catch (SQLException e) {
+            assertNull(connection.getCon());
+        }
+    }
+
+    @Test
+    public void testConnectionSchema() {
+        assertNotEquals("", ConnectionClass.getSchema());
+    }
+    */
 }
