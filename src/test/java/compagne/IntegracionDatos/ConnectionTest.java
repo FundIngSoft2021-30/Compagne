@@ -43,7 +43,7 @@ public class ConnectionTest {
             connection.closeConnection();
             assertTrue(connection.getCon().isClosed());
         } catch (SQLException e) {
-            assertNull(connection.getCon());
+            assertNotNull(connection.getCon());
         }
     }
 }
