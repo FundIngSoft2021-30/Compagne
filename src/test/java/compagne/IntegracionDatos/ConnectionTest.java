@@ -7,10 +7,16 @@ import java.sql.SQLException;
 import org.junit.*;
 
 public class ConnectionTest {
-    /*
     @Test
     public void testConnectionNotNull() {
         ConnectionClass connection = new ConnectionClass();
+        assertNotNull(connection);
+    }
+
+    @Test
+    public void testConnectionNull() {
+        ConnectionClass connection = new ConnectionClass(ConnectionClass.HOST, ConnectionClass.USER,
+                ConnectionClass.DATABASE);
         assertNotNull(connection);
     }
 
@@ -40,6 +46,12 @@ public class ConnectionTest {
     }
 
     @Test
+    public void testConnectionNEmpty() {
+        ConnectionClass connection = new ConnectionClass(ConnectionClass.URL, ConnectionClass.USER, ConnectionClass.PASS);
+        assertNotNull(connection.getCon());
+    }
+
+    @Test
     public void testConnectionClosed() {
         ConnectionClass connection = new ConnectionClass();
         try {
@@ -64,5 +76,9 @@ public class ConnectionTest {
     public void testConnectionSchema() {
         assertNotEquals("", ConnectionClass.getSchema());
     }
-    */
+
+    @Test
+    public void testConnectionPSQL() {
+        assertNotNull(ConnectionClass.usingPSQL());
+    }
 }
