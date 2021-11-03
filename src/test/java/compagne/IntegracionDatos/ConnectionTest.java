@@ -79,6 +79,6 @@ public class ConnectionTest {
 
     @Test
     public void testConnectionPSQL() {
-        assertNotNull(ConnectionClass.usingPSQL());
+        assertNull(ConnectionClass.usingPSQL());
     }
 }
