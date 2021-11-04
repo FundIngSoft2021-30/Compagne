@@ -7,8 +7,7 @@ package compagne.Negocio;
 
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
-import compagne.Entidades.Grupo;
-import compagne.Entidades.Usuario;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;

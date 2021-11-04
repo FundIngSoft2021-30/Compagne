@@ -95,7 +95,6 @@ public class PantallaMenuController {
                 PantallaPerfilController pfc = loader.getController();
                 pfc.start(this.email);
             } catch (Exception e) {
-                e.printStackTrace();
             }
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -135,16 +134,11 @@ public class PantallaMenuController {
 
     @FXML
     void initialize() {
-        assert cerrar_boton != null
-                : "fx:id=\"cerrar_boton\" was not injected: check your FXML file 'PantallaMenu.fxml'.";
-        assert companeros_boton != null
-                : "fx:id=\"companeros_boton\" was not injected: check your FXML file 'PantallaMenu.fxml'.";
-        assert grupos_boton != null
-                : "fx:id=\"grupos_boton\" was not injected: check your FXML file 'PantallaMenu.fxml'.";
-        assert mensajes_boton != null
-                : "fx:id=\"mensajes_boton\" was not injected: check your FXML file 'PantallaMenu.fxml'.";
-        assert miPerfil_boton != null
-                : "fx:id=\"miPerfil_boton\" was not injected: check your FXML file 'PantallaMenu.fxml'.";
+        assert cerrar_boton != null : "fx:id=\"cerrar_boton\" was not injected: check your FXML file 'PantallaMenu.fxml'.";
+        assert companeros_boton != null : "fx:id=\"companeros_boton\" was not injected: check your FXML file 'PantallaMenu.fxml'.";
+        assert grupos_boton != null : "fx:id=\"grupos_boton\" was not injected: check your FXML file 'PantallaMenu.fxml'.";
+        assert mensajes_boton != null : "fx:id=\"mensajes_boton\" was not injected: check your FXML file 'PantallaMenu.fxml'.";
+        assert miPerfil_boton != null : "fx:id=\"miPerfil_boton\" was not injected: check your FXML file 'PantallaMenu.fxml'.";
 
     }
 

@@ -1,16 +1,12 @@
 
 package compagne.Negocio;
 
-import compagne.Entidades.Estudiante;
 import javafx.stage.Stage;
 
 import javafx.scene.Node;
+import compagne.Entidades.Estudiante;
 import compagne.Entidades.Grupo;
-import compagne.Entidades.Usuario;
-import compagne.IntegracionDatos.ControlEstudiantes;
-import java.util.Collection;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,11 +15,6 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
 
-/**
- * FXML Controller class
- *
- * @author samue
- */
 public class PantallaPerfilController {
     
     private FacadeCompagne facade = FacadeCompagne.getInstance();
@@ -98,8 +89,7 @@ public class PantallaPerfilController {
     
     @FXML
     void Modificar(ActionEvent event) {
-        
-        
+        //TODO: Modificar
     }
     
     
@@ -213,17 +203,14 @@ public class PantallaPerfilController {
         }
     }
 
-    public void start(String u) {
-        
+    public void start(String u) {        
         this.usu = u;
-        Estudiante user = (Estudiante) facade.informacionUsuario(u);
+        Estudiante user = (Estudiante) facade.informacionUsuario(this.usu);
         this.NombreEstudiante.setText(user.getNombre());
         TextDescription.setText("Hola! soy una persona comprometida y proactiva ");
         TextGoals.setItems(FXCollections.observableArrayList(user.getLogros()));
         TextInterest.setItems(FXCollections.observableArrayList(user.getIntereses()));
         TextThemes.setItems(FXCollections.observableArrayList(user.getMaterias()));
-
-        
     }
 
     @FXML

@@ -1,9 +1,9 @@
 package compagne.Negocio;
 
-import compagne.Entidades.Estudiante;
-import compagne.Entidades.Grupo;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import compagne.Entidades.Estudiante;
 import compagne.Entidades.Usuario;
 import compagne.Vista.App;
 import java.util.Collection;

@@ -73,7 +73,10 @@ CREATE TABLE public."Chat" (
   "ID"   SERIAL NOT NULL , 
   "Codigo" varchar(255) UNIQUE,
   "FechaCreacion" timestamp with time zone NOT NULL,
-  "Tipo" varchar(1) NOT NULL, 
+  "Tipo" varchar(1) NOT NULL CONSTRAINT chatTipoCheck CHECK("Tipo"='P' OR "Tipo"='G'), 
+  "PerteneceID" int,
+  "Usuario1ID" int,
+  "Usuario2ID" int,
   PRIMARY KEY ("ID"));
 CREATE TABLE public."USChatXChat" (
   "ChatID"              int NOT NULL, 
@@ -88,7 +91,8 @@ CREATE TABLE public."Comentario" (
 CREATE TABLE public."Mensaje" (
   "ID"    SERIAL NOT NULL , 
   "Mensaje" text,
-  "Fecha" timestamp with time zone NOT NULL, 
+  "Fecha" timestamp with time zone NOT NULL,
+  "UsuarioRegistradoID" int NOT NULL,
   PRIMARY KEY ("ID"));
 CREATE TABLE public."ChatXMensaje"(
   "ChatID" int NOT NULL,
@@ -108,6 +112,9 @@ CREATE TABLE public."ReunionXGrupoEstudio" (
 ALTER TABLE public."UsuarioXDestacable" ADD CONSTRAINT "FKUsuarioXDe790678" FOREIGN KEY ("Usuario RegistradoID") REFERENCES "UsuarioRegistrado" ("ID");
 ALTER TABLE public."UsuarioXDestacable" ADD CONSTRAINT "FKUsuarioXDe521363" FOREIGN KEY ("DestacableID") REFERENCES "Destacable" ("ID");
 ALTER TABLE public."ChatXMensaje" ADD CONSTRAINT "FKChatXM790678" FOREIGN KEY ("ChatID") REFERENCES "Chat" ("ID");
+ALTER TABLE public."Chat" ADD CONSTRAINT "FKChat790678" FOREIGN KEY ("PerteneceID") REFERENCES "GrupoEstudio" ("ID");
+ALTER TABLE public."Chat" ADD CONSTRAINT "FKChat90678" FOREIGN KEY ("Usuario1ID") REFERENCES "UsuarioRegistrado" ("ID");
+ALTER TABLE public."Chat" ADD CONSTRAINT "FKChat678" FOREIGN KEY ("Usuario2ID") REFERENCES "UsuarioRegistrado" ("ID");
 ALTER TABLE public."ChatXMensaje" ADD CONSTRAINT "FKChatXM521363" FOREIGN KEY ("MensajeID") REFERENCES "Mensaje" ("ID");
 ALTER TABLE public."UsuarioXMaterias" ADD CONSTRAINT "FKUsuarioXMat521363" FOREIGN KEY ("Usuario RegistradoID") REFERENCES "UsuarioRegistrado" ("ID");
 ALTER TABLE public."UsuarioXMaterias" ADD CONSTRAINT "FKUsuarioXMat521364" FOREIGN KEY ("MateriaID") REFERENCES "Materia" ("ID");
@@ -125,4 +132,6 @@ ALTER TABLE public."UsuarioXComentario" ADD CONSTRAINT "FKUsuarioXCo742724" FORE
 ALTER TABLE public."UsuarioXComentario" ADD CONSTRAINT "FKUsuarioXCo246220" FOREIGN KEY ("ComentarioID") REFERENCES "Comentario" ("ID");
 ALTER TABLE public."ReunionXGrupoEstudio" ADD CONSTRAINT "FKReunionXGr367591" FOREIGN KEY ("GrupoEstudioID") REFERENCES "GrupoEstudio" ("ID");
 ALTER TABLE public."ReunionXGrupoEstudio" ADD CONSTRAINT "FKReunionXGr128047" FOREIGN KEY ("ReunionID") REFERENCES "Reunion" ("ID");
+ALTER TABLE public."Mensaje" ADD CONSTRAINT "FKMensaje123" FOREIGN KEY ("UsuarioRegistradoID") REFERENCES "GrupoEstudio" ("ID");
 
+INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Abril Cano', 'abril@cano.com', '@bril', 'S');
