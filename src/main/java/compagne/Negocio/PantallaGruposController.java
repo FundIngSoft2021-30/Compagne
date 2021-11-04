@@ -110,7 +110,7 @@ public class PantallaGruposController implements Initializable {
                     stage.showAndWait();
                 }
         }
-    }
+    
 
     @FXML
     public void Unirme2(ActionEvent event) {
