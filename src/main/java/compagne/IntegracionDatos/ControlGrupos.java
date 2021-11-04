@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import compagne.Entidades.Grupo;
+
 public class ControlGrupos {
 
     final ConnectionClass CONNECTION_CLASS = new ConnectionClass();

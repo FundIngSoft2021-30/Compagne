@@ -91,7 +91,8 @@ CREATE TABLE public."Comentario" (
 CREATE TABLE public."Mensaje" (
   "ID"    SERIAL NOT NULL , 
   "Mensaje" text,
-  "Fecha" timestamp with time zone NOT NULL, 
+  "Fecha" timestamp with time zone NOT NULL,
+  "UsuarioRegistradoID" int NOT NULL,
   PRIMARY KEY ("ID"));
 CREATE TABLE public."ChatXMensaje"(
   "ChatID" int NOT NULL,
@@ -131,3 +132,6 @@ ALTER TABLE public."UsuarioXComentario" ADD CONSTRAINT "FKUsuarioXCo742724" FORE
 ALTER TABLE public."UsuarioXComentario" ADD CONSTRAINT "FKUsuarioXCo246220" FOREIGN KEY ("ComentarioID") REFERENCES "Comentario" ("ID");
 ALTER TABLE public."ReunionXGrupoEstudio" ADD CONSTRAINT "FKReunionXGr367591" FOREIGN KEY ("GrupoEstudioID") REFERENCES "GrupoEstudio" ("ID");
 ALTER TABLE public."ReunionXGrupoEstudio" ADD CONSTRAINT "FKReunionXGr128047" FOREIGN KEY ("ReunionID") REFERENCES "Reunion" ("ID");
+ALTER TABLE public."Mensaje" ADD CONSTRAINT "FKMensaje123" FOREIGN KEY ("UsuarioRegistradoID") REFERENCES "GrupoEstudio" ("ID");
+
+INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Abril Cano', 'abril@cano.com', '@bril', 'S');
