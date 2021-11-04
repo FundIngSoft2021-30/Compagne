@@ -52,7 +52,7 @@ public class ControlGruposTest {
         assertTrue(b);
     }
 
-    /* private static int resultSetSize(ResultSet rs) {
+    private static int resultSetSize(ResultSet rs) {
         int size = 0;
         try {
             rs.last();
@@ -100,6 +100,7 @@ public class ControlGruposTest {
         cg.executeQuery("ALTER SEQUENCE \"UsuarioRegistrado_ID_seq\" RESTART WITH "
                 + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"UsuarioRegistrado\";"))) + ";");
     }
+    /*
     @Test
     public void testCrearGrupo() {
         Grupo grupo = new Grupo("Grupo de prueba", "el_codigo-del.GrupoDEPru$b@S%$#", "S");
