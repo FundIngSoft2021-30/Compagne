@@ -70,8 +70,7 @@ CREATE TABLE public."Reunion" (
   "Fecha" timestamp with time zone NOT NULL, 
   PRIMARY KEY ("ID"));
 CREATE TABLE public."Chat" (
-  "ID"   SERIAL NOT NULL , 
-  "Codigo" varchar(255) UNIQUE,
+  "ID"   SERIAL NOT NULL ,
   "FechaCreacion" timestamp with time zone NOT NULL,
   "Tipo" varchar(1) NOT NULL CONSTRAINT chatTipoCheck CHECK("Tipo"='P' OR "Tipo"='G'), 
   "PerteneceID" int,
@@ -91,8 +90,7 @@ CREATE TABLE public."Comentario" (
 CREATE TABLE public."Mensaje" (
   "ID"    SERIAL NOT NULL , 
   "Mensaje" text,
-  "Fecha" timestamp with time zone NOT NULL,
-  "UsuarioRegistradoID" int NOT NULL,
+  "Fecha" timestamp with time zone NOT NULL, 
   PRIMARY KEY ("ID"));
 CREATE TABLE public."ChatXMensaje"(
   "ChatID" int NOT NULL,
@@ -132,6 +130,7 @@ ALTER TABLE public."UsuarioXComentario" ADD CONSTRAINT "FKUsuarioXCo742724" FORE
 ALTER TABLE public."UsuarioXComentario" ADD CONSTRAINT "FKUsuarioXCo246220" FOREIGN KEY ("ComentarioID") REFERENCES "Comentario" ("ID");
 ALTER TABLE public."ReunionXGrupoEstudio" ADD CONSTRAINT "FKReunionXGr367591" FOREIGN KEY ("GrupoEstudioID") REFERENCES "GrupoEstudio" ("ID");
 ALTER TABLE public."ReunionXGrupoEstudio" ADD CONSTRAINT "FKReunionXGr128047" FOREIGN KEY ("ReunionID") REFERENCES "Reunion" ("ID");
-ALTER TABLE public."Mensaje" ADD CONSTRAINT "FKMensaje123" FOREIGN KEY ("UsuarioRegistradoID") REFERENCES "GrupoEstudio" ("ID");
-
 INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Abril Cano', 'abril@cano.com', '@bril', 'S');
+INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Jose Torres', 'jose@torres.com', 'J0s3', 'S');
+INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Anabel Montero', 'anmontero@javeriana.edu.co', '@Nab3l', 'T');
+INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('ELGrupoDeAbril', 'abril800q','S');
