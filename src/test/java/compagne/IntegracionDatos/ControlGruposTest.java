@@ -11,44 +11,52 @@ import compagne.Entidades.Grupo;
 
 public class ControlGruposTest {
 
+    private static ControlGrupos controlGrupos;
+    private static ControlEstudiantes ce;
+    @BeforeClass
+    public static void setUpBeforeClass() {
+        controlGrupos = new ControlGrupos();
+        ce= new ControlEstudiantes();
+    }
+
     @Test
     public void testGetGrupos() {
-        ControlGrupos cg = new ControlGrupos();
+        ControlGrupos cg = controlGrupos;
         assertEquals(cg.getGruposPublicos().size(), cg.getGruposPublicos().size());
     }
 
     @Test
     public void testExecute() {
-        ControlGrupos cg = new ControlGrupos();
+        ControlGrupos cg = controlGrupos;
         assertNotNull(cg.executeQuery("SELECT * FROM \"UsuarioRegistrado\""));
     }
 
     @Test
     public void testExecuteN() {
-        ControlGrupos cg = new ControlGrupos();
+        ControlGrupos cg = controlGrupos;
         assertNull(cg.executeQuery("SELECT * FROM *"));
     }
 
     @Test
     public void testGrupoId() {
-        ControlGrupos cg = new ControlGrupos();
+        ControlGrupos cg = controlGrupos;
         // No puede existir un grupo con codigo (@&-_-&@)
         assertEquals(cg.getGrupoID("(@&-_-&@)"), 0);
     }
 
     @Test
     public void testUsuarioXGrupo() {
-        assertTrue(new ControlGrupos().insertarUsuarioXGrupoEstudio("-1", "Este no es emmail", "N"));
+        assertTrue(controlGrupos.insertarUsuarioXGrupoEstudio("-1", "Este no es emmail", "N"));
     }
 
     @Test
     public void testDelUsuarioXGrupo() {
-        assertTrue(new ControlGrupos().eliminarUsuarioXGrupoEstudio("-1", "Este no es emmail"));
+        assertTrue(controlGrupos.eliminarUsuarioXGrupoEstudio("-1", "Este no es emmail"));
     }
 
     @Test
     public void testHacerAdmin() {
-        boolean b = new ControlGrupos().hacerAdminDeGrupo(-1, -1);
+        boolean b = controlGrupos.hacerAdminDeGrupo(-1, -1);
         assertTrue(b);
     }
 
@@ -65,7 +73,7 @@ public class ControlGruposTest {
 
     @AfterClass
     public static void resetSerials() {
-        ControlGrupos cg = new ControlGrupos();
+        ControlGrupos cg = controlGrupos;
         // Reset chat id serial
         cg.executeQuery("ALTER SEQUENCE \"Chat_ID_seq\" RESTART WITH "
                 + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"Chat\";"))) + ";");
@@ -100,30 +108,31 @@ public class ControlGruposTest {
         cg.executeQuery("ALTER SEQUENCE \"UsuarioRegistrado_ID_seq\" RESTART WITH "
                 + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"UsuarioRegistrado\";"))) + ";");
     }
-    /*
+
     @Test
     public void testCrearGrupo() {
         Grupo grupo = new Grupo("Grupo de prueba", "el_codigo-del.GrupoDEPru$b@S%$#", "S");
-        Estudiante estuUsuario = new Estudiante("NombreG", "Un-EmailGenerico ParaM&", null, null, "", null, null);
-        assertTrue(new ControlEstudiantes().crearEstudiante(estuUsuario));
-        assertTrue(new ControlGrupos().crearGrupo(grupo, estuUsuario.getEmail()));
-        assertTrue(new ControlGrupos().modificarGrupo(grupo));
-        assertTrue(new ControlGrupos().eliminarGrupo(grupo.getCodigo()));
-        assertTrue(new ControlEstudiantes().eliminarEstudiante(estuUsuario.getEmail()));
+        Estudiante estuUsuario =new Estudiante("NombreG", "Un-EmailGenerico ParaM&", null, null, "", null, null);
+        assertTrue(ce.crearEstudiante(estuUsuario));
+        assertTrue(controlGrupos.crearGrupo(grupo, estuUsuario.getEmail()));
+        assertTrue(controlGrupos.modificarGrupo(grupo));
+        assertTrue(controlGrupos.eliminarGrupo(grupo.getCodigo()));
+        assertTrue(ce.eliminarEstudiante(estuUsuario.getEmail()));
     }
 
+    /*
     @Test
     public void testModificarGrupo() {
         Grupo grupo = new Grupo("Grupo de prueba", "el_codigo-del.GrupoDEPru$b@S%$#", "S");
         Estudiante estuUsuario = new Estudiante("NombreG", "Un-EmailGenerico ParaM&", null, null, "", null, null);
-        assertTrue(new ControlEstudiantes().crearEstudiante(estuUsuario));
-        assertTrue(new ControlGrupos().crearGrupo(grupo, estuUsuario.getEmail()));
-        int expected = new ControlGrupos().getGrupoID(grupo.getCodigo());
+        assertTrue(ce.crearEstudiante(estuUsuario));
+        assertTrue(controlGrupos.crearGrupo(grupo, estuUsuario.getEmail()));
+        int expected = controlGrupos.getGrupoID(grupo.getCodigo());
         grupo.setNombre("Los Agrupados Bb");
-        assertTrue(new ControlGrupos().modificarGrupo(grupo));
-        int actual = new ControlGrupos().getGrupoID(grupo.getCodigo());
+        assertTrue(controlGrupos.modificarGrupo(grupo));
+        int actual = controlGrupos.getGrupoID(grupo.getCodigo());
         assertEquals(expected, actual);
-        assertTrue(new ControlGrupos().eliminarGrupo(grupo.getCodigo()));
-        assertTrue(new ControlEstudiantes().eliminarEstudiante(estuUsuario.getEmail()));
+        assertTrue(controlGrupos.eliminarGrupo(grupo.getCodigo()));
+        assertTrue(ce.eliminarEstudiante(estuUsuario.getEmail()));
     } */
 }
