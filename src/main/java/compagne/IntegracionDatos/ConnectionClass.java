@@ -28,6 +28,7 @@ public class ConnectionClass {
     }
 
     public void startConnection() throws SQLException {
+
         this.con = DriverManager.getConnection(URL, USER, PASS);
     }
 
@@ -44,6 +45,7 @@ public class ConnectionClass {
         try {
             this.startConnection();
         } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
     }
 
@@ -51,6 +53,7 @@ public class ConnectionClass {
         try {
             this.startConnection(URL, USER, PASS);
         } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
     }
 

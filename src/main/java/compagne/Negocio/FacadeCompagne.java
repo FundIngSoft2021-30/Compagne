@@ -8,10 +8,10 @@ import compagne.Entidades.Estudiante;
 import compagne.Entidades.Grupo;
 import compagne.Entidades.Profesor;
 import compagne.Entidades.Usuario;
+import compagne.IntegracionDatos.ControlProfesores;
 import compagne.IntegracionDatos.ConnectionClass;
 import compagne.IntegracionDatos.ControlEstudiantes;
 import compagne.IntegracionDatos.ControlGrupos;
-import compagne.IntegracionDatos.ControlProfesores;
 
 public class FacadeCompagne {
     private ControlProfesores controlProfesores;
