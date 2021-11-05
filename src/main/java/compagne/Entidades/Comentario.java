@@ -39,11 +39,8 @@ public class Comentario {
             "}";
     }
 
-
     public Comentario(String calificacion, String comentario) {
         this.calificacion = calificacion;
         this.comentario = comentario;
     }
-
-    
 }

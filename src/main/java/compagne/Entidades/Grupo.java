@@ -7,7 +7,6 @@ public class Grupo {
     private String nombre;
     private String codigo;
     private String publico;
-    private HashSet<Rol> roles;
     private HashSet <Usuario> miembros;
     
     //Reuniones
@@ -47,14 +46,6 @@ public class Grupo {
         this.publico = publico;
     }
 
-    public HashSet<Rol> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(HashSet<Rol> roles) {
-        this.roles = roles;
-    }
-
     public HashSet<Usuario> getMiembros() {
         return miembros;
     }
@@ -88,12 +79,12 @@ public class Grupo {
             return false;
         }
         Grupo grupo = (Grupo) o;
-        return Objects.equals(nombre, grupo.nombre) && Objects.equals(codigo, grupo.codigo) && Objects.equals(publico, grupo.publico) && Objects.equals(roles, grupo.roles) && Objects.equals(miembros, grupo.miembros) && Objects.equals(reuniones, grupo.reuniones) && Objects.equals(chats, grupo.chats);
+        return Objects.equals(nombre, grupo.nombre) && Objects.equals(codigo, grupo.codigo) && Objects.equals(publico, grupo.publico)&& Objects.equals(miembros, grupo.miembros) && Objects.equals(reuniones, grupo.reuniones) && Objects.equals(chats, grupo.chats);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, codigo, publico, roles, miembros, reuniones, chats);
+        return Objects.hash(nombre, codigo, publico, miembros, reuniones, chats);
     }
     
 
@@ -103,7 +94,6 @@ public class Grupo {
             " nombre='" + getNombre() + "'" +
             ", codigo='" + getCodigo() + "'" +
             ", publico='" + isPublico() + "'" +
-            ", roles='" + getRoles() + "'" +
             ", miembros='" + getMiembros() + "'" +
             ", reuniones='" + getReuniones() + "'" +
             ", chats='" + getChats() + "'" +

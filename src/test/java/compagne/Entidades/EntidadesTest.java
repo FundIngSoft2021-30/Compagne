@@ -20,13 +20,14 @@ public class EntidadesTest{
         chatG = new ChatG(null, null, (char) 0, null, grupo);
         chatP = new ChatP(null, null, (char) 0, null, estudiante, estudiante);
         comentario = new Comentario(null, null);
-        mensaje = new Mensaje(null, null, null);
+        mensaje = new Mensaje(null, null, null, null);
         profesor = new Profesor(null, null, null, null, null, null, null, null);
         reunion = new Reunion(null, null);
     }
     @Test
     public void ChatGTest()
     {
+        assertNotNull(chatG.getPertenece());
         assertNotNull( chatG );
     }
     @Test

@@ -35,6 +35,33 @@ public class ControlChats {
         return this.result;
     }
 
+    public int getChatID(Chat chat) {
+        int id = 0;
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        try {
+            this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
+                    + "\"Chat\" WHERE \"Tipo\"=\'" + chat.getTipo() + "\' AND \"FechaCreacion\"="
+                    + TimestampUtils.parseBackendTimeZone(chat.getFechaCreacion().toString()) + ";");
+            this.result = this.statement.executeQuery();
+            if (this.result.next())
+                id = this.result.getInt(0 + offset);
+            else
+                throw new Exception("No encontrado");
+        } catch (Exception e) {
+            id = 0;
+        }
+        return id;
+    }
+
+    public boolean eliminarChat(Chat chat) {
+        boolean result = false;
+        int chatID = this.getChatID(chat);
+        String query = "DELETE FROM \"Chats\" WHERE \"ID\"=" + chatID + ";";
+        return result;
+    }
+
     public boolean crearChat(Chat chat, int grupoID) {
         /*
          * Este método guarda un chat en la BD, recibe un objeto de la clase chat y un

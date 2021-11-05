@@ -77,11 +77,6 @@ CREATE TABLE public."Chat" (
   "Usuario1ID" int,
   "Usuario2ID" int,
   PRIMARY KEY ("ID"));
-CREATE TABLE public."USChatXChat" (
-  "ChatID"              int NOT NULL, 
-  "UsuarioRegistradoID" int NOT NULL, 
-  PRIMARY KEY ("ChatID", 
-  "UsuarioRegistradoID"));
 CREATE TABLE public."Comentario" (
   "ID"    SERIAL NOT NULL , 
   "Texto" text,
@@ -91,6 +86,7 @@ CREATE TABLE public."Mensaje" (
   "ID"    SERIAL NOT NULL , 
   "Mensaje" text,
   "Fecha" timestamp with time zone NOT NULL, 
+  "RemitenteID" int NOT NULL,
   PRIMARY KEY ("ID"));
 CREATE TABLE public."ChatXMensaje"(
   "ChatID" int NOT NULL,
@@ -108,6 +104,8 @@ CREATE TABLE public."ReunionXGrupoEstudio" (
   PRIMARY KEY ("GrupoEstudioID", 
   "ReunionID"));
 ALTER TABLE public."UsuarioXDestacable" ADD CONSTRAINT "FKUsuarioXDe790678" FOREIGN KEY ("Usuario RegistradoID") REFERENCES "UsuarioRegistrado" ("ID");
+
+ALTER TABLE public."Mensaje" ADD CONSTRAINT "FKRemitente6281" FOREIGN KEY ("RemitenteID") REFERENCES "UsuarioRegistrado" ("ID");
 ALTER TABLE public."UsuarioXDestacable" ADD CONSTRAINT "FKUsuarioXDe521363" FOREIGN KEY ("DestacableID") REFERENCES "Destacable" ("ID");
 ALTER TABLE public."ChatXMensaje" ADD CONSTRAINT "FKChatXM790678" FOREIGN KEY ("ChatID") REFERENCES "Chat" ("ID");
 ALTER TABLE public."Chat" ADD CONSTRAINT "FKChat790678" FOREIGN KEY ("PerteneceID") REFERENCES "GrupoEstudio" ("ID");
@@ -124,13 +122,12 @@ ALTER TABLE public."UsuarioxGrupoEstudio" ADD CONSTRAINT "FKUsuarioxGr206487" FO
 ALTER TABLE public."UsuarioxGrupoEstudio" ADD CONSTRAINT "FKUsuarioxGr705719" FOREIGN KEY ("GrupoEstudioID") REFERENCES "GrupoEstudio" ("ID");
 ALTER TABLE public."UsuarioXHorarioAtencion" ADD CONSTRAINT "FKUsuarioxHorarioA206487" FOREIGN KEY ("Usuario RegistradoID") REFERENCES "UsuarioRegistrado" ("ID");
 ALTER TABLE public."UsuarioXHorarioAtencion" ADD CONSTRAINT "FKUsuarioxHorarioA705719" FOREIGN KEY ("HorarioID") REFERENCES "HorarioAtencion" ("ID");
-ALTER TABLE public."USChatXChat" ADD CONSTRAINT "FKUSChatXCha279919" FOREIGN KEY ("ChatID") REFERENCES "Chat" ("ID");
-ALTER TABLE public."USChatXChat" ADD CONSTRAINT "FKUSChatXCha450146" FOREIGN KEY ("UsuarioRegistradoID") REFERENCES "UsuarioRegistrado" ("ID");
 ALTER TABLE public."UsuarioXComentario" ADD CONSTRAINT "FKUsuarioXCo742724" FOREIGN KEY ("UsuarioRegistradoID") REFERENCES "UsuarioRegistrado" ("ID");
 ALTER TABLE public."UsuarioXComentario" ADD CONSTRAINT "FKUsuarioXCo246220" FOREIGN KEY ("ComentarioID") REFERENCES "Comentario" ("ID");
 ALTER TABLE public."ReunionXGrupoEstudio" ADD CONSTRAINT "FKReunionXGr367591" FOREIGN KEY ("GrupoEstudioID") REFERENCES "GrupoEstudio" ("ID");
 ALTER TABLE public."ReunionXGrupoEstudio" ADD CONSTRAINT "FKReunionXGr128047" FOREIGN KEY ("ReunionID") REFERENCES "Reunion" ("ID");
 INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Abril Cano', 'abril@cano.com', '@bril', 'S');
 INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Jose Torres', 'jose@torres.com', 'J0s3', 'S');
+INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Usuario de prueba', 'a', 'a', 'S');
 INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Anabel Montero', 'anmontero@javeriana.edu.co', '@Nab3l', 'T');
 INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('ELGrupoDeAbril', 'abril800q','S');
