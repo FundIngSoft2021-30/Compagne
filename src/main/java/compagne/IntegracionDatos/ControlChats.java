@@ -42,8 +42,8 @@ public class ControlChats {
             offset = 1;
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
-                    + "\"Chat\" WHERE \"Tipo\"=\'" + chat.getTipo() + "\' AND \"FechaCreacion\"="
-                    + TimestampUtils.parseBackendTimeZone(chat.getFechaCreacion().toString()) + ";");
+                    + "\"Chat\" WHERE \"Tipo\"=\'" + chat.getTipo() + "\' AND \"FechaCreacion\"=\'"
+                    + TimestampUtils.parseBackendTimeZone(chat.getFechaCreacion().toString()) + "\';");
             this.result = this.statement.executeQuery();
             if (this.result.next())
                 id = this.result.getInt(0 + offset);
@@ -57,8 +57,28 @@ public class ControlChats {
 
     public boolean eliminarChat(Chat chat) {
         boolean result = false;
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
         int chatID = this.getChatID(chat);
-        String query = "DELETE FROM \"Chats\" WHERE \"ID\"=" + chatID + ";";
+        String query = "SELECT \"MensajeID\" FROM " + ConnectionClass.getSchema() + "\"ChatXMensaje\" WHERE \"ChatID\"="
+                + chatID + ";";
+        ResultSet rs = this.executeQuery(query);
+        try {
+            while (rs.next()) {
+                try {
+                    int mensajeID = rs.getInt(0 + offset);
+                    query = "DELETE FROM " + ConnectionClass.getSchema() + "\"ChatXMensaje\" WHERE \"MensajeID\"="
+                + mensajeID + ";";
+                    this.executeQuery(query);
+                    query = "DELETE FROM "+ConnectionClass.getSchema()+ "\"Mensaje\" WHERE \"ID\"=" + mensajeID + ";";
+                    this.executeQuery(query);
+                } catch (Exception e) {
+                }
+            }
+        } catch (Exception e) {
+        }
+        query = "DELETE FROM \"Chats\" WHERE \"ID\"=" + chatID + ";";
         return result;
     }
 
