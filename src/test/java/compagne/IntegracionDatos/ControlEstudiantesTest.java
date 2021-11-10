@@ -1,6 +1,8 @@
 package compagne.IntegracionDatos;
 
 import org.junit.*;
+import org.postgresql.core.v3.CopyDualImpl;
+
 import static org.junit.Assert.*;
 import java.sql.ResultSet;
 
@@ -30,22 +32,40 @@ public class ControlEstudiantesTest {
         @Test
         public void testInsertarComentario() {
                 String consulta = "";
-                String comentario = "Hola";
-                String calificacion = "3.2";
+                String comentario = "Hola. Este es un comentario prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
+                String calificacion = "5.0";
                 assertFalse(ce.insertarComentario(comentario, calificacion));
-                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Comentario\"=\'"
-                                + comentario + "\' AND \"Calificacion\"=\'" + calificacion + "\';";
-
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"ID\"="
+                                + ce.getComentarioID(comentario, calificacion) + ";";
                 assertNotNull(ce.getComentarioID(comentario, calificacion));
+                assertEquals(ce.getComentarioID("null", calificacion), 0);
+                assertEquals(ce.getComentarioID(comentario, "null"), 0);
                 assertNull(ce.executeQuery(consulta));
                 assertFalse(ce.insertarComentario(comentario, null));
-                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Comentario\"=\'"
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
                                 + comentario + "\';";
 
                 assertNull(ce.executeQuery(consulta));
                 assertFalse(ce.insertarComentario(null, calificacion));
-                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Calificacion\"=\'" + calificacion + "\';";
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"=\'"
+                                + calificacion + "\';";
                 assertNotNull(ce.getComentarioID(null, calificacion));
+                assertEquals(ce.getComentarioID(comentario, calificacion), 0);
+                assertNull(ce.executeQuery(consulta));
+        }
+
+        @Test
+        public void name() {
+                String consulta = "";
+                String comentario = "Hola. Este es un comentario prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
+                String calificacion = "5.0";
+                assertFalse(ce.insertarComentario(comentario, calificacion));
+                int cID = ce.getComentarioID(comentario, calificacion);
+                consulta = "DELETE FROM " + ConnectionClass.getSchema()
+                                + "\"UsuarioXComentario\" WHERE \"ComentarioID\"=" + cID + ";";
+                assertTrue(ce.insertarComentarioXEstudiante(1, cID));
+                assertNull(ce.executeQuery(consulta));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"ID\"=" + cID + ";";
                 assertNull(ce.executeQuery(consulta));
         }
 
