@@ -155,7 +155,7 @@ public class ControlEstudiantes {
         return b;
     }
 
-    private boolean insertarMateria(String materia) {
+    public boolean insertarMateria(String materia) {
         /*
          * Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre
          * de la materia
@@ -175,7 +175,7 @@ public class ControlEstudiantes {
         return b;
     }
 
-    private int getMateriaID(String materia) {
+    public int getMateriaID(String materia) {
         /*
          * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
          * nombre de la materia
@@ -215,7 +215,7 @@ public class ControlEstudiantes {
         return b;
     }
 
-    private boolean insertarLogro(String logro) {
+    public boolean insertarLogro(String logro) {
         /*
          * Inserta una materia en la BD. Recibe: materia -> String que tiene el nombre
          * de la materia
@@ -234,7 +234,7 @@ public class ControlEstudiantes {
         return b;
     }
 
-    private int getLogroID(String logro) {
+    public int getLogroID(String logro) {
         /*
          * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
          * el momento del horario
@@ -274,7 +274,7 @@ public class ControlEstudiantes {
         return b;
     }
 
-    private boolean insertarInteres(String interes) {
+    public boolean insertarInteres(String interes) {
         /*
          * Inserta un interes en la BD. Recibe: interes -> String que tiene el nombre
          * del interes
@@ -293,7 +293,7 @@ public class ControlEstudiantes {
         return b;
     }
 
-    private int getInteresID(String interes) {
+    public int getInteresID(String interes) {
         /*
          * Retorna el id de una materia en la BD. Recibe: horario -> String que tiene el
          * el momento del horario
@@ -529,7 +529,6 @@ public class ControlEstudiantes {
                 nombre = rs.getString(0 + offset);
                 estID = rs.getInt(2 + offset);
                 email = rs.getString(1 + offset);
-                System.out.println("Nombre: "+nombre+" email "+email);
                 // Si hay
                 HashSet<String> logros = new HashSet<>();
                 HashSet<Comentario> comentarios = new HashSet<>();
@@ -591,7 +590,6 @@ public class ControlEstudiantes {
             }
         } catch (Exception e) {
         }
-        System.out.println(compas);
         return compas;
     }
 
@@ -674,7 +672,6 @@ public class ControlEstudiantes {
             }
         } catch (Exception e) {
         }
-        System.out.println(compas);
         return compas;
     }
 
@@ -698,7 +695,6 @@ public class ControlEstudiantes {
                 nombre = rs.getString(0 + offset);
                 estID = rs.getInt(2 + offset);
                 email = rs.getString(1 + offset);
-                System.out.println("Nombre: "+nombre+" email "+email);
                 // Si hay
                 HashSet<String> logros = new HashSet<>();
                 HashSet<Comentario> comentarios = new HashSet<>();
@@ -760,7 +756,6 @@ public class ControlEstudiantes {
             }
         } catch (Exception e) {
         }
-        System.out.println(compas);
         return compas;
     }
     

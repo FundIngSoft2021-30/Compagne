@@ -1,12 +1,14 @@
 package compagne.IntegracionDatos;
 
 import org.junit.*;
-import org.postgresql.core.v3.CopyDualImpl;
 
 import static org.junit.Assert.*;
+
 import java.sql.ResultSet;
+import java.util.HashSet;
 
 import compagne.Entidades.Estudiante;
+import compagne.Entidades.Usuario;
 
 public class ControlEstudiantesTest {
         private static ControlEstudiantes ce;
@@ -55,7 +57,7 @@ public class ControlEstudiantesTest {
         }
 
         @Test
-        public void name() {
+        public void testComentarioXEstudiante() {
                 String consulta = "";
                 String comentario = "Hola. Este es un comentario prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
                 String calificacion = "5.0";
@@ -77,6 +79,108 @@ public class ControlEstudiantesTest {
                 assertTrue(ce.modificarEstudiante(estudiante));
                 estudiante.setNombre(nnom);
                 assertTrue(ce.modificarEstudiante(estudiante));
+        }
+
+        @Test
+        public void testMateria() {
+                String consulta = "";
+                String materia = "Hola. Esta es una materia prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
+                assertNotNull(ce.insertarMateria(materia));
+                int mID = ce.getMateriaID(materia);
+                assertNotEquals(0, mID);
+                assertEquals(0, ce.getMateriaID(materia.repeat(2)));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Materia\" WHERE \"Nombre\"=\'" + materia
+                                + "\';";
+                assertNull(ce.executeQuery(consulta));
+        }
+
+        @Test
+        public void testMateriaXEstudiante() {
+                String consulta = "";
+                String materia = "Hola. Esta es una materia prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
+                assertNotNull(ce.insertarMateria(materia));
+                int mID = ce.getMateriaID(materia);
+                assertNotEquals(0, mID);
+                assertNotNull(ce.insertarMateriaXEstudiante(1, mID));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"MateriaXEstudiante\" WHERE \"MateriaID\"="
+                                + mID + ";";
+                assertNull(ce.executeQuery(consulta));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Materia\" WHERE \"Nombre\"=\'" + materia
+                                + "\';";
+                assertNull(ce.executeQuery(consulta));
+        }
+
+        @Test
+        public void tetsLogro() {
+                String consulta = "";
+                String logro = "Hola. Este es un logro prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
+                assertNotNull(ce.insertarLogro(logro));
+                int lID = ce.getLogroID(logro);
+                assertNotEquals(0, lID);
+                assertEquals(0, ce.getMateriaID(logro.repeat(2)));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Logro\" WHERE \"Texto\"=\'" + logro
+                                + "\';";
+                assertNull(ce.executeQuery(consulta));
+        }
+
+        @Test
+        public void testLogroXEstudiante() {
+                String consulta = "";
+                String logro = "Hola. Este es un logro prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
+                assertNotNull(ce.insertarLogro(logro));
+                int lID = ce.getLogroID(logro);
+                assertNotEquals(0, lID);
+                assertNotNull(ce.insertarLogroXEstudiante(1, lID));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"UsuarioXLogros\" WHERE \"LogroID\"=" + lID
+                                + ";";
+
+                assertNull(ce.executeQuery(consulta));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Logro\" WHERE \"Texto\"=\'" + logro
+                                + "\';";
+                assertNull(ce.executeQuery(consulta));
+        }
+
+        @Test
+        public void tetsInteres() {
+                String consulta = "";
+                String interes = "Hola. Este es un interes prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
+                assertNotNull(ce.insertarInteres(interes));
+                int inIDID = ce.getInteresID(interes);
+                assertNotEquals(0, inIDID);
+                assertEquals(0, ce.getMateriaID(interes.repeat(2)));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Interes\" WHERE \"Nombre\"=\'" + interes
+                                + "\';";
+                assertNull(ce.executeQuery(consulta));
+        }
+
+        @Test
+        public void testInteresXEstudiante() {
+                String consulta = "";
+                String interes = "Hola. Este es un interes prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
+                assertNotNull(ce.insertarInteres(interes));
+                int inIDID = ce.getInteresID(interes);
+                assertNotEquals(0, inIDID);
+                assertNotNull(ce.insertarInteresXEstudiante(1, inIDID));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"UsuarioXIntereses\" WHERE \"InteresID\"=" + inIDID
+                                + ";";
+                assertNull(ce.executeQuery(consulta));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Interes\" WHERE \"Nombre\"=\'" + interes
+                                + "\';";
+                assertNull(ce.executeQuery(consulta));
+        }
+
+        @Test
+        public void testListarCompas() {
+                HashSet<Usuario> usuarios = ce.listarCompas();
+                assertNotNull(usuarios);
+                Usuario u = usuarios.iterator().next();
+                assertNotNull(u);
+                assertNotNull(ce.listarCompas(u.getNombre()));
+        }
+
+        @Test
+        public void testListarCompasGrupo() {
+                assertNotNull(ce.listarCompasGrupo("abril800q"));
         }
 
         @BeforeClass
