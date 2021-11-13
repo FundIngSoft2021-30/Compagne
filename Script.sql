@@ -131,3 +131,6 @@ INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo"
 INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Usuario de prueba', 'a', 'a', 'S');
 INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Anabel Montero', 'anmontero@javeriana.edu.co', '@Nab3l', 'T');
 INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('ELGrupoDeAbril', 'abril800q','S');
+INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Grupo de prueba', 'prueba', 'S');
+INSERT INTO public."UsuarioxGrupoEstudio" ("UsuarioRegistradoID", "GrupoEstudioID", "Admin") VALUES (1, 1, 'S');
+INSERT INTO public."UsuarioxGrupoEstudio" ("UsuarioRegistradoID", "GrupoEstudioID", "Admin") VALUES (2, 1, 'N');
