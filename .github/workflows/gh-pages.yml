@@ -36,7 +36,7 @@ jobs:
 
   send_notification:
     name: Notification for smtp.gmail.com
-    needs: build
+    needs: gh-pages_stuff
     if: ${{ failure() }}
     runs-on: ubuntu-latest
     steps:
@@ -57,3 +57,22 @@ jobs:
           to: cinc0m4s1bb@gmail.com
           # from email name
           from: Compagne APP
+
+  clear_docs:
+    name: Remove docs dir
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove directories
+        run: rm -rf docs/* target/*
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Eliminando directorios innecesarios en caso que estos existan..."
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
