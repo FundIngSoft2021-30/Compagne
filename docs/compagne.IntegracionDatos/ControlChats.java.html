@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControlChats.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">test-coverage</a> &gt; <a href="index.source.html" class="el_package">compagne.IntegracionDatos</a> &gt; <span class="el_source">ControlChats.java</span></div><h1>ControlChats.java</h1><pre class="source lang-java linenums">package compagne.IntegracionDatos;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashSet;
+
+import org.postgresql.jdbc.TimestampUtils;
+
+import compagne.Entidades.Chat;
+import compagne.Entidades.ChatG;
+import compagne.Entidades.ChatP;
+import compagne.Entidades.Comentario;
+import compagne.Entidades.Estudiante;
+import compagne.Entidades.Grupo;
+import compagne.Entidades.Mensaje;
+import compagne.Entidades.Profesor;
+import compagne.Entidades.Usuario;
+
+public class ControlChats {
+<span class="nc" id="L23">    final ConnectionClass CONNECTION_CLASS = new ConnectionClass();</span>
+    private Connection con;
+    private PreparedStatement statement;
+    private ResultSet result;
+
+    public ResultSet executeQuery(String query) {
+        try {
+<span class="nc" id="L30">            this.statement = this.con.prepareStatement(query);</span>
+<span class="nc" id="L31">            this.result = this.statement.executeQuery();</span>
+<span class="nc" id="L32">        } catch (SQLException e) {</span>
+<span class="nc" id="L33">            this.result = null;</span>
+        }
+<span class="nc" id="L35">        return this.result;</span>
+    }
+
+    public int getChatID(Chat chat) {
+<span class="nc" id="L39">        int id = 0;</span>
+<span class="nc" id="L40">        int offset = 0;</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL())</span>
+<span class="nc" id="L42">            offset = 1;</span>
+        try {
+<span class="nc" id="L44">            this.statement = this.con.prepareStatement(&quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L45">                    + &quot;\&quot;Chat\&quot; WHERE \&quot;Tipo\&quot;=\'&quot; + chat.getTipo() + &quot;\' AND \&quot;FechaCreacion\&quot;=\'&quot;</span>
+<span class="nc" id="L46">                    + TimestampUtils.parseBackendTimeZone(chat.getFechaCreacion().toString()) + &quot;\';&quot;);</span>
+<span class="nc" id="L47">            this.result = this.statement.executeQuery();</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            if (this.result.next())</span>
+<span class="nc" id="L49">                id = this.result.getInt(0 + offset);</span>
+            else
+<span class="nc" id="L51">                throw new Exception(&quot;No encontrado&quot;);</span>
+<span class="nc" id="L52">        } catch (Exception e) {</span>
+<span class="nc" id="L53">            id = 0;</span>
+        }
+<span class="nc" id="L55">        return id;</span>
+    }
+
+    public boolean eliminarChat(Chat chat) {
+<span class="nc" id="L59">        boolean result = false;</span>
+<span class="nc" id="L60">        int offset = 0;</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (ConnectionClass.usingPSQL())</span>
+<span class="nc" id="L62">            offset = 1;</span>
+<span class="nc" id="L63">        int chatID = this.getChatID(chat);</span>
+<span class="nc" id="L64">        String query = &quot;SELECT \&quot;MensajeID\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;ChatXMensaje\&quot; WHERE \&quot;ChatID\&quot;=&quot;</span>
+<span class="nc" id="L65">                + chatID + &quot;;&quot;;</span>
+<span class="nc" id="L66">        ResultSet rs = this.executeQuery(query);</span>
+        try {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">            while (rs.next()) {</span>
+                try {
+<span class="nc" id="L70">                    int mensajeID = rs.getInt(0 + offset);</span>
+<span class="nc" id="L71">                    query = &quot;DELETE FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;ChatXMensaje\&quot; WHERE \&quot;MensajeID\&quot;=&quot;</span>
+<span class="nc" id="L72">                + mensajeID + &quot;;&quot;;</span>
+<span class="nc" id="L73">                    this.executeQuery(query);</span>
+<span class="nc" id="L74">                    query = &quot;DELETE FROM &quot;+ConnectionClass.getSchema()+ &quot;\&quot;Mensaje\&quot; WHERE \&quot;ID\&quot;=&quot; + mensajeID + &quot;;&quot;;</span>
+<span class="nc" id="L75">                    this.executeQuery(query);</span>
+<span class="nc" id="L76">                } catch (Exception e) {</span>
+                }
+            }
+<span class="nc" id="L79">        } catch (Exception e) {</span>
+        }
+<span class="nc" id="L81">        query = &quot;DELETE FROM \&quot;Chats\&quot; WHERE \&quot;ID\&quot;=&quot; + chatID + &quot;;&quot;;</span>
+<span class="nc" id="L82">        return result;</span>
+    }
+
+    public boolean crearChat(Chat chat, int grupoID) {
+        /*
+         * Este método guarda un chat en la BD, recibe un objeto de la clase chat y un
+         * id de un grupo y hace que este persista en la BD . Recibe: chat -&gt; Instancia
+         * de la clase Chat, representa el chat que quiere guardarse en la BD, grupoID
+         * -&gt; representa el ID del grupo al que pertenece el chat
+         */
+<span class="nc" id="L92">        boolean b = true; // Inicializo lo que retorno (Si el grupo se guardo bien)</span>
+<span class="nc" id="L93">        String sql = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L94">                + &quot;\&quot;Chat\&quot; (\&quot;Codigo\&quot;,\&quot;FechaCreacion\&quot;, \&quot;Tipo\&quot;, \&quot;PerteneceID\&quot;) VALUES ('&quot; + chat.getCodigo()</span>
+<span class="nc" id="L95">                + &quot;','&quot; + TimestampUtils.parseBackendTimeZone(chat.getFechaCreacion().toString()) + &quot;','&quot;</span>
+<span class="nc" id="L96">                + chat.getTipo() + &quot;',&quot; + grupoID + &quot;);&quot;;</span>
+        // Consulta SQL para insertar
+        // un chat en la BD
+        try {
+<span class="nc" id="L100">            this.statement = this.con.prepareStatement(sql); // Preparando una consulta SQL</span>
+<span class="nc" id="L101">            this.statement.execute(); // Ejecutando una consulta SQL</span>
+<span class="nc" id="L102">        } catch (Exception e) {</span>
+        }
+        // Fin de crear grupo
+<span class="nc" id="L105">        return b;</span>
+    }
+
+    public boolean crearChat(Chat chat, int usuario1ID, int usuario2ID) {
+        /*
+         * Este método guarda un chat en la BD, recibe un objeto de la clase chat y un
+         * dos id de usuarios y hace que este persista en la BD . Recibe: chat -&gt;
+         * Instancia de la clase Chat, representa el chat que quiere guardarse en la BD,
+         * usuario1ID -&gt; representa el ID del primerUsuario al que pertenece el chat,
+         * usuario2ID -&gt; representa el ID del segundoUsuario al que pertenece el chat
+         */
+<span class="nc" id="L116">        boolean b = true; // Inicializo lo que retorno (Si el grupo se guardo bien)</span>
+<span class="nc" id="L117">        String sql = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L118">                + &quot;\&quot;Chat\&quot; (\&quot;Codigo\&quot;,\&quot;FechaCreacion\&quot;, \&quot;Tipo\&quot;, \&quot;Usuario1ID\&quot;, \&quot;Usuario2ID\&quot;) VALUES ('&quot;</span>
+<span class="nc" id="L119">                + chat.getCodigo() + &quot;','&quot; + TimestampUtils.parseBackendTimeZone(chat.getFechaCreacion().toString())</span>
+<span class="nc" id="L120">                + &quot;','&quot; + chat.getTipo() + &quot;',&quot; + usuario1ID + &quot;,&quot; + usuario2ID + &quot;);&quot;;</span>
+        // Consulta SQL para insertar
+        // un chat en la BD
+        try {
+<span class="nc" id="L124">            this.statement = this.con.prepareStatement(sql); // Preparando una consulta SQL</span>
+<span class="nc" id="L125">            this.statement.execute(); // Ejecutando una consulta SQL</span>
+<span class="nc" id="L126">        } catch (Exception e) {</span>
+        }
+        // Fin de crear grupo
+<span class="nc" id="L129">        return b;</span>
+    }
+
+    public HashSet&lt;Integer&gt; buscarChat(int grupoID) {
+<span class="nc" id="L133">        HashSet&lt;Integer&gt; chats = new HashSet&lt;&gt;();</span>
+        /*
+         * Este método busca chats por grupo, recibe un id de un grupo y devuelve un id
+         * de varios chats
+         */
+<span class="nc" id="L138">        String sql = &quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Chat\&quot; WHERE \&quot;PerteneceID\&quot; = &quot; + grupoID</span>
+<span class="nc" id="L139">                + &quot;;&quot;;</span>
+        // Consulta SQL para buscar chats por grupo en la BD
+<span class="nc" id="L141">        ResultSet rs = this.executeQuery(sql);</span>
+        try {
+<span class="nc bnc" id="L143" title="All 2 branches missed.">            while (rs.next())</span>
+<span class="nc" id="L144">                chats.add(rs.getInt(&quot;ID&quot;));</span>
+<span class="nc" id="L145">        } catch (Exception e) {</span>
+        }
+<span class="nc" id="L147">        return chats;</span>
+    }
+
+    public HashSet&lt;ChatG&gt; buscarChatsXGrupo(int grupoID) {
+<span class="nc" id="L151">        HashSet&lt;ChatG&gt; chats = new HashSet&lt;&gt;();</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">        for (int chatID : this.buscarChat(grupoID)) {</span>
+<span class="nc" id="L153">            ChatG chat = this.buscarChatG(chatID);</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">            if (chat != null)</span>
+<span class="nc" id="L155">                chats.add(chat);</span>
+        }
+<span class="nc" id="L157">        return chats;</span>
+    }
+
+    public HashSet&lt;ChatP&gt; buscarChatsXUsuario(int usuarioID) {
+<span class="nc" id="L161">        HashSet&lt;ChatP&gt; chats = new HashSet&lt;&gt;();</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        for (int chatID : this.buscarChat(usuarioID, 'P')) {</span>
+<span class="nc" id="L163">            ChatP chat = this.buscarChatP(chatID);</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">            if (chat != null)</span>
+<span class="nc" id="L165">                chats.add(chat);</span>
+        }
+<span class="nc" id="L167">        return chats;</span>
+    }
+
+    private ChatP buscarChatP(int chatID) {
+<span class="nc" id="L171">        ChatP chat = null;</span>
+        /*
+         * Este método busca un chat grupal por id, recibe un id de un chat y devuelve
+         * un objeto de la clase chat grupal
+         */
+<span class="nc" id="L176">        String sql = &quot;SELECT \&quot;FechaCreacion\&quot;,\&quot;Codigo\&quot;,\&quot;Usuario1ID\&quot;, \&quot;Usuario2ID\&quot; FROM &quot;</span>
+<span class="nc" id="L177">                + ConnectionClass.getSchema() + &quot;\&quot;Chat\&quot; WHERE \&quot;ID\&quot; = &quot; + chatID + &quot;;&quot;;</span>
+        // Consulta SQL para buscar chats por grupo en la BD
+<span class="nc" id="L179">        ResultSet rs = this.executeQuery(sql);</span>
+        try {
+<span class="nc" id="L181">            int u1ID = rs.getInt(&quot;Usuario1ID&quot;);</span>
+<span class="nc" id="L182">            int u2ID = rs.getInt(&quot;Usuario2ID&quot;);</span>
+            // Buscar un usuario por id
+<span class="nc" id="L184">            sql = &quot;SELECT \&quot;Nombre\&quot;,\&quot;Email\&quot;, \&quot;Tipo\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L185">                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;ID\&quot; = &quot; + u1ID + &quot;;&quot;;</span>
+<span class="nc" id="L186">            ResultSet rs2 = this.executeQuery(sql);</span>
+<span class="nc" id="L187">            sql = &quot;SELECT \&quot;Nombre\&quot;,\&quot;Email\&quot;, \&quot;Tipo\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L188">                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;ID\&quot; = &quot; + u2ID + &quot;;&quot;;</span>
+<span class="nc" id="L189">            ResultSet rs3 = this.executeQuery(sql);</span>
+<span class="nc bnc" id="L190" title="All 6 branches missed.">            if (rs.next() &amp;&amp; rs2.next() &amp;&amp; rs3.next()) {</span>
+<span class="nc" id="L191">                String nombre = rs2.getString(&quot;Nombre&quot;);</span>
+<span class="nc" id="L192">                String email = rs2.getString(&quot;Email&quot;);</span>
+<span class="nc" id="L193">                HashSet&lt;String&gt; materias = new HashSet&lt;&gt;();</span>
+<span class="nc" id="L194">                HashSet&lt;Comentario&gt; comentarios = new HashSet&lt;&gt;();</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">                Usuario u1 = (rs2.getString(&quot;Tipo&quot;).equals(&quot;S&quot;))</span>
+<span class="nc" id="L196">                        ? new Estudiante(nombre, email, materias, comentarios, &quot;&quot;, materias, materias)</span>
+<span class="nc" id="L197">                        : new Profesor(nombre, email, materias, comentarios, &quot;&quot;, &quot;&quot;, materias, materias);</span>
+<span class="nc" id="L198">                nombre = rs3.getString(&quot;Nombre&quot;);</span>
+<span class="nc" id="L199">                email = rs3.getString(&quot;Email&quot;);</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">                Usuario u2 = (rs3.getString(&quot;Tipo&quot;).equals(&quot;S&quot;))</span>
+<span class="nc" id="L201">                        ? new Estudiante(nombre, email, materias, comentarios, &quot;&quot;, materias, materias)</span>
+<span class="nc" id="L202">                        : new Profesor(nombre, email, materias, comentarios, &quot;&quot;, &quot;&quot;, materias, materias);</span>
+                ;
+<span class="nc" id="L204">                chat = new ChatP(new Date(rs.getTimestamp(&quot;FechaCreacion&quot;).getTime()), rs.getString(&quot;Codigo&quot;), 'G',</span>
+<span class="nc" id="L205">                        new HashSet&lt;Mensaje&gt;(), u1, u2);</span>
+            }
+<span class="nc" id="L207">        } catch (Exception e) {</span>
+        }
+<span class="nc" id="L209">        return chat;</span>
+    }
+
+    private ChatG buscarChatG(int chatID) {
+<span class="nc" id="L213">        ChatG chat = null;</span>
+        /*
+         * Este método busca un chat grupal por id, recibe un id de un chat y devuelve
+         * un objeto de la clase chat grupal
+         */
+<span class="nc" id="L218">        String sql = &quot;SELECT \&quot;FechaCreacion\&quot;,\&quot;Codigo\&quot;,\&quot;PerteneceID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L219">                + &quot;\&quot;Chat\&quot; WHERE \&quot;ID\&quot; = &quot; + chatID + &quot;;&quot;;</span>
+        // Consulta SQL para buscar chats por grupo en la BD
+<span class="nc" id="L221">        ResultSet rs = this.executeQuery(sql);</span>
+        try {
+<span class="nc" id="L223">            int grupoID = rs.getInt(&quot;PerteneceID&quot;);</span>
+            // Buscar un grupo por id
+<span class="nc" id="L225">            sql = &quot;SELECT \&quot;Nombre\&quot;,\&quot;Codigo\&quot;,\&quot;Publico\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="nc" id="L226">                    + &quot;\&quot;GrupoEstudio\&quot; WHERE \&quot;ID\&quot; = &quot; + grupoID + &quot;;&quot;;</span>
+<span class="nc" id="L227">            ResultSet rs2 = this.executeQuery(sql);</span>
+<span class="nc bnc" id="L228" title="All 4 branches missed.">            if (rs.next() &amp;&amp; rs2.next()) {</span>
+<span class="nc" id="L229">                String nombre = rs2.getString(&quot;Nombre&quot;);</span>
+<span class="nc" id="L230">                String codigo = rs2.getString(&quot;Codigo&quot;);</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">                String publico = (rs2.getBoolean(&quot;Publico&quot;)) ? &quot;Si&quot; : &quot;No&quot;;</span>
+<span class="nc" id="L232">                chat = new ChatG(new Date(rs.getTimestamp(&quot;FechaCreacion&quot;).getTime()), rs.getString(&quot;Codigo&quot;), 'G',</span>
+<span class="nc" id="L233">                        new HashSet&lt;Mensaje&gt;(), new Grupo(nombre, codigo, publico));</span>
+            }
+<span class="nc" id="L235">        } catch (Exception e) {</span>
+        }
+<span class="nc" id="L237">        return chat;</span>
+    }
+
+    public HashSet&lt;Integer&gt; buscarChat(int usuarioID, char tipo) {
+<span class="nc" id="L241">        HashSet&lt;Integer&gt; chats = new HashSet&lt;&gt;();</span>
+        /*
+         * Este método busca chats por usuario, recibe un id de un usuario, un tipo para
+         * diferenciarlo del metodo anterior y devuelve un id de varios chats
+         */
+<span class="nc" id="L246">        String sql = &quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Chat\&quot; WHERE \&quot;Usuario1ID\&quot; = &quot;</span>
+<span class="nc" id="L247">                + usuarioID + &quot; OR \&quot;Usuario2ID\&quot; = &quot; + usuarioID + &quot;;&quot;;</span>
+        // Consulta SQL para buscar chats por grupo en la BD
+<span class="nc" id="L249">        ResultSet rs = this.executeQuery(sql);</span>
+        try {
+<span class="nc bnc" id="L251" title="All 2 branches missed.">            while (rs.next())</span>
+<span class="nc" id="L252">                chats.add(rs.getInt(&quot;ID&quot;));</span>
+<span class="nc" id="L253">        } catch (Exception e) {</span>
+        }
+<span class="nc" id="L255">        return chats;</span>
+    }
+
+<span class="nc" id="L258">    public ControlChats() {</span>
+<span class="nc" id="L259">        this.con = this.CONNECTION_CLASS.getCon();</span>
+        try {
+<span class="nc" id="L261">            this.con.setAutoCommit(true);</span>
+<span class="nc" id="L262">        } catch (SQLException e) {</span>
+        }
+<span class="nc" id="L264">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

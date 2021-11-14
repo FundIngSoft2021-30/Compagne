@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Chat.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">test-coverage</a> &gt; <a href="index.source.html" class="el_package">compagne.Entidades</a> &gt; <span class="el_source">Chat.java</span></div><h1>Chat.java</h1><pre class="source lang-java linenums">package compagne.Entidades;
+
+import java.util.Date;
+import java.util.Objects;
+import java.util.HashSet;
+
+public abstract class Chat {
+    private Date fechaCreacion;
+    private String codigo;
+    private char tipo;
+    private HashSet&lt;Mensaje&gt; mensajes;
+
+
+    public Date getFechaCreacion() {
+<span class="nc" id="L15">        return this.fechaCreacion;</span>
+    }
+
+    public String getCodigo() {
+<span class="nc" id="L19">        return this.codigo;</span>
+    }
+
+    public char getTipo() {
+<span class="nc" id="L23">        return this.tipo;</span>
+    }
+
+    public HashSet&lt;Mensaje&gt; getMensajes() {
+<span class="nc" id="L27">        return this.mensajes;</span>
+    }
+
+<span class="fc" id="L30">    public Chat(Date fechaCreacion, String codigo, char tipo, HashSet&lt;Mensaje&gt; mensajes) {</span>
+<span class="fc" id="L31">        this.fechaCreacion = fechaCreacion;</span>
+<span class="fc" id="L32">        this.codigo = codigo;</span>
+<span class="fc" id="L33">        this.tipo = tipo;</span>
+<span class="fc" id="L34">        this.mensajes = mensajes;</span>
+<span class="fc" id="L35">    }</span>
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (o == this)</span>
+<span class="nc" id="L40">            return true;</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (!(o instanceof Chat)) {</span>
+<span class="nc" id="L42">            return false;</span>
+        }
+<span class="nc" id="L44">        Chat chat = (Chat) o;</span>
+<span class="nc bnc" id="L45" title="All 8 branches missed.">        return Objects.equals(fechaCreacion, chat.fechaCreacion) &amp;&amp; Objects.equals(codigo, chat.codigo) &amp;&amp; tipo == chat.tipo &amp;&amp; Objects.equals(mensajes, chat.mensajes);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L50">        return Objects.hash(fechaCreacion, codigo, tipo, mensajes);</span>
+    }
+
+
+    @Override
+    public String toString() {
+<span class="nc" id="L56">        return &quot;{&quot; +</span>
+<span class="nc" id="L57">            &quot; fechaCreacion='&quot; + getFechaCreacion() + &quot;'&quot; +</span>
+<span class="nc" id="L58">            &quot;, codigo='&quot; + getCodigo() + &quot;'&quot; +</span>
+<span class="nc" id="L59">            &quot;, tipo='&quot; + getTipo() + &quot;'&quot; +</span>
+<span class="nc" id="L60">            &quot;, mensajes='&quot; + getMensajes() + &quot;'&quot; +</span>
+<span class="nc" id="L61">            &quot;}&quot;;</span>
+    }
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
