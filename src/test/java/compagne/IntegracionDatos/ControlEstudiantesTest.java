@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 import java.sql.ResultSet;
 import java.util.HashSet;
 
+import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
 import compagne.Entidades.Usuario;
 
@@ -161,8 +162,8 @@ public class ControlEstudiantesTest {
                 int inIDID = ce.getInteresID(interes);
                 assertNotEquals(0, inIDID);
                 assertNotNull(ce.insertarInteresXEstudiante(1, inIDID));
-                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"UsuarioXIntereses\" WHERE \"InteresID\"=" + inIDID
-                                + ";";
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"UsuarioXIntereses\" WHERE \"InteresID\"="
+                                + inIDID + ";";
                 assertNull(ce.executeQuery(consulta));
                 consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Interes\" WHERE \"Nombre\"=\'" + interes
                                 + "\';";
@@ -185,7 +186,23 @@ public class ControlEstudiantesTest {
 
         @BeforeClass
         public static void setUpBeforeClass() {
-                estudiante = new Estudiante("NombreG", "Un-EmailGenerico ParaM&", null, null, "", null, null);
+                HashSet<String> mSet = new HashSet<String>();
+                mSet.add("Hola. Esta es una materia prueba, el texto que aquí se usa no debería de estar presente en la base de datos,  hablo enserio con este texto, nisiquiera debería saberse esto");
+                mSet.add("Analisis Numerico");
+                HashSet<Comentario> cSet = new HashSet<Comentario>();
+                cSet.add(new Comentario(
+                                "Hola. Este es un comentario de prueba, esto no debería estar en la base de datos, puesto que si estuviera en la BD sería algo fatal :C",
+                                null));
+                cSet.add(new Comentario(null, "3.0"));
+                String contrasenia = "12345";
+                HashSet<String> intereses = new HashSet<String>();
+                intereses.add("Hola. Este es un interes prueba, el texto que aquí se usa no debería de estar presente en la base de datos, este interes debe ser usado únicamente en la prueba que se eta llevando a cabo actualmente. Gracias");
+                intereses.add("Futbol");
+                HashSet<String> logros = new HashSet<String>();
+                logros.add("Hola. Este es un logro prueba, el texto que aquí se usa no debería de estar presente en la base de datos, este logro debe ser usado únicamente en la prueba que se eta llevando a cabo actualmente. Gracias");
+                logros.add("Excelencia Academica");
+                estudiante = new Estudiante("NombreG", "Un-EmailGenerico ParaM&", mSet, cSet, contrasenia, intereses,
+                                logros);
                 ce = new ControlEstudiantes();
                 assertTrue(ce.crearEstudiante(estudiante));
         }
@@ -204,6 +221,18 @@ public class ControlEstudiantesTest {
         @AfterClass
         public static void resetSerials() {
                 assertTrue(ce.eliminarEstudiante(estudiante.getEmail()));
+                ce.executeQuery("DELETE FROM " + ConnectionClass.getSchema() + "\"Materia\" WHERE \"Nombre\"=\'"
+                                + "Hola. Esta es una materia prueba, el texto que aquí se usa no debería de estar presente en la base de datos,  hablo enserio con este texto, nisiquiera debería saberse esto"
+                                + "\';");
+                ce.executeQuery("DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
+                                + "Hola. Este es un comentario de prueba, esto no debería estar en la base de datos, puesto que si estuviera en la BD sería algo fatal :C"
+                                + "\';");
+                ce.executeQuery("DELETE FROM " + ConnectionClass.getSchema() + "\"Interes\" WHERE \"Nombre\"=\'"
+                                + "Hola. Este es un interes prueba, el texto que aquí se usa no debería de estar presente en la base de datos, este interes debe ser usado únicamente en la prueba que se eta llevando a cabo actualmente. Gracias"
+                                + "\';");
+                ce.executeQuery("DELETE FROM " + ConnectionClass.getSchema() + "\"Logro\" WHERE \"Texto\"=\'"
+                                + "Hola. Este es un logro prueba, el texto que aquí se usa no debería de estar presente en la base de datos, este logro debe ser usado únicamente en la prueba que se eta llevando a cabo actualmente. Gracias"
+                                + "\';");
                 // Reset chat id serial
                 ce.executeQuery("ALTER SEQUENCE \"Chat_ID_seq\" RESTART WITH "
                                 + String.valueOf(resultSetSize(ce.executeQuery("SELECT * FROM \"Chat\";"))) + ";");

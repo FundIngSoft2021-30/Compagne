@@ -134,3 +134,8 @@ INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('ELGru
 INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Grupo de prueba', 'prueba', 'S');
 INSERT INTO public."UsuarioxGrupoEstudio" ("UsuarioRegistradoID", "GrupoEstudioID", "Admin") VALUES (1, 1, 'S');
 INSERT INTO public."UsuarioxGrupoEstudio" ("UsuarioRegistradoID", "GrupoEstudioID", "Admin") VALUES (2, 1, 'N');
+INSERT INTO public."Interes" ("Nombre") VALUES ('Futbol');
+INSERT INTO public."Materia" ("Nombre") VALUES ('Analisis Numerico');
+INSERT INTO public."Comentario" ("Estrellas") VALUES ('3.0');
+INSERT INTO public."Interes" ("Nombre") VALUES ('Excelencia Academica');
+INSERT INTO public."HorarioAtencion" ("Franja") VALUES ('Lunes 7-9');

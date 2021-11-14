@@ -761,13 +761,11 @@ public class ControlEstudiantes {
     
     public void Llenar(String email){
         int id = this.getEstudianteID(email);
-        this.insertarLogro("Excelencia Academica");
         this.insertarLogroXEstudiante(id, this.getLogroID("Excelencia Academica"));
         this.insertarMateria("Sistemas de Informacion");
         this.insertarMateriaXEstudiante(id, this.getMateriaID("Sistemas de Informacion"));
         this.insertarMateria("Fundamentos de Ing de Software");
         this.insertarMateriaXEstudiante(id, this.getMateriaID("Fundamentos de Ing de Software"));
-        this.insertarMateria("Analisis Numerico");
         this.insertarMateriaXEstudiante(id, this.getMateriaID("Analisis Numerico"));
 
     }
