@@ -6,7 +6,7 @@ on:
     branches:
       - main
   schedule:
-  - cron: '0 0 1 1 *'
+  - cron: '0 0 * * *'
 
 jobs:
   gh-pages_stuff:
@@ -60,6 +60,7 @@ jobs:
 
   clear_docs:
     name: Remove docs dir
+    needs: gh-pages_stuff
     if: always()
     runs-on: ubuntu-latest
     steps:
