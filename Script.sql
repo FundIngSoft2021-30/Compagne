@@ -126,16 +126,24 @@ ALTER TABLE public."UsuarioXComentario" ADD CONSTRAINT "FKUsuarioXCo742724" FORE
 ALTER TABLE public."UsuarioXComentario" ADD CONSTRAINT "FKUsuarioXCo246220" FOREIGN KEY ("ComentarioID") REFERENCES "Comentario" ("ID");
 ALTER TABLE public."ReunionXGrupoEstudio" ADD CONSTRAINT "FKReunionXGr367591" FOREIGN KEY ("GrupoEstudioID") REFERENCES "GrupoEstudio" ("ID");
 ALTER TABLE public."ReunionXGrupoEstudio" ADD CONSTRAINT "FKReunionXGr128047" FOREIGN KEY ("ReunionID") REFERENCES "Reunion" ("ID");
-INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Abril Cano', 'abril@cano.com', '@bril', 'S');
-INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Jose Torres', 'jose@torres.com', 'J0s3', 'S');
-INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Usuario de prueba', 'a', 'a', 'S');
-INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Anabel Montero', 'anmontero@javeriana.edu.co', '@Nab3l', 'T');
-INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('ELGrupoDeAbril', 'abril800q','S');
-INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Grupo de prueba', 'prueba', 'S');
+INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Abril Cano', 'abril@cano.com', '@bril', 'S'); --ID 1
+INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Jose Torres', 'jose@torres.com', 'J0s3', 'S'); --ID 2
+INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Usuario de prueba', 'a', 'a', 'S'); --ID 3
+INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Anabel Montero', 'anmontero@javeriana.edu.co', '@Nab3l', 'T'); --ID 4
+INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('ELGrupoDeAbril', 'abril800q','S'); --ID 1
+INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Grupo de prueba', 'prueba', 'S'); --ID 2
 INSERT INTO public."UsuarioxGrupoEstudio" ("UsuarioRegistradoID", "GrupoEstudioID", "Admin") VALUES (1, 1, 'S');
 INSERT INTO public."UsuarioxGrupoEstudio" ("UsuarioRegistradoID", "GrupoEstudioID", "Admin") VALUES (2, 1, 'N');
-INSERT INTO public."Interes" ("Nombre") VALUES ('Futbol');
-INSERT INTO public."Materia" ("Nombre") VALUES ('Analisis Numerico');
-INSERT INTO public."Comentario" ("Estrellas") VALUES ('3.0');
-INSERT INTO public."Interes" ("Nombre") VALUES ('Excelencia Academica');
-INSERT INTO public."HorarioAtencion" ("Franja") VALUES ('Lunes 7-9');
+INSERT INTO public."Interes" ("Nombre") VALUES ('Futbol'); --ID 1
+INSERT INTO public."Logro" ("Texto") VALUES ('Excelencia Academica'); --ID 1
+INSERT INTO public."Materia" ("Nombre") VALUES ('Analisis Numerico'); --ID 1
+INSERT INTO public."Materia" ("Nombre") VALUES ('Sistemas de Informacion'); --ID 2
+INSERT INTO public."Materia" ("Nombre") VALUES ('Fundamentos de Ing de Software'); --ID 3
+INSERT INTO public."Comentario" ("Estrellas") VALUES ('3.0'); --ID 1
+INSERT INTO public."Comentario" ("Estrellas", "Texto") VALUES ('4.5', 'Una persona muy comprometida con todas sus actividades'); --ID 2
+INSERT INTO public."HorarioAtencion" ("Franja") VALUES ('Lunes 7-9'); --ID 1
+INSERT INTO public."HorarioAtencion" ("Franja") VALUES ('Martes 9-11'); --ID 2
+INSERT INTO public."UsuarioXComentario" ("UsuarioRegistradoID", "ComentarioID") VALUES (1,2);
+INSERT INTO public."UsuarioXHorarioAtencion" ("Usuario RegistradoID", "HorarioID") VALUES (4,2);
+INSERT INTO public."UsuarioXIntereses" ("Usuario RegistradoID", "InteresID") VALUES (2,1);
+INSERT INTO public."UsuarioXLogros" ("Usuario RegistradoID", "LogroID") VALUES (1,1);
