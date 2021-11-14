@@ -147,3 +147,6 @@ INSERT INTO public."UsuarioXComentario" ("UsuarioRegistradoID", "ComentarioID") 
 INSERT INTO public."UsuarioXHorarioAtencion" ("Usuario RegistradoID", "HorarioID") VALUES (4,2);
 INSERT INTO public."UsuarioXIntereses" ("Usuario RegistradoID", "InteresID") VALUES (2,1);
 INSERT INTO public."UsuarioXLogros" ("Usuario RegistradoID", "LogroID") VALUES (1,1);
+INSERT INTO public."UsuarioXMaterias" ("Usuario RegistradoID", "MateriaID") VALUES (1,1);
+INSERT INTO public."UsuarioXMaterias" ("Usuario RegistradoID", "MateriaID") VALUES (1,2);
+INSERT INTO public."UsuarioXMaterias" ("Usuario RegistradoID", "MateriaID") VALUES (1,3);

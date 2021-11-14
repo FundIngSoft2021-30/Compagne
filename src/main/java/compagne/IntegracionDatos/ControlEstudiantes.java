@@ -758,11 +758,4 @@ public class ControlEstudiantes {
         }
         return compas;
     }
-    
-    public void Llenar(String email){
-        int id = this.getEstudianteID(email);
-        this.insertarMateriaXEstudiante(id, this.getMateriaID("Sistemas de Informacion"));
-        this.insertarMateriaXEstudiante(id, this.getMateriaID("Fundamentos de Ing de Software"));
-        this.insertarMateriaXEstudiante(id, this.getMateriaID("Analisis Numerico"));
-    }
 }

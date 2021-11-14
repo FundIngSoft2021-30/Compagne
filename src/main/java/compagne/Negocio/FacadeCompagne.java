@@ -562,8 +562,4 @@ public class FacadeCompagne {
     public HashSet<Usuario> listarCompas(String nombre){
         return this.controlEstudiantes.listarCompas(nombre);
     }
-    
-    public void Llenar(String email){
-        this.controlProfesores.Llenar(email);
-    }
 }
