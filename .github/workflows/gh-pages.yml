@@ -76,7 +76,7 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add . && git commit -m "Eliminando directorios innecesarios en caso que estos existan..." || echo "Nada para modificar..."
+          git add . && git commit -m "Eliminando directorios innecesario..." || echo "Nada para modificar..."
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
