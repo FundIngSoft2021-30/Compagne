@@ -16,12 +16,6 @@ public class ControlEstudiantesTest {
         private static Estudiante estudiante;
 
         @Test
-        public void testInstance() {
-                ce.instanceOf();
-                assertNotNull(ce);
-        }
-
-        @Test
         public void testExecute() {
                 assertNotNull(ce.executeQuery("SELECT * FROM \"UsuarioRegistrado\""));
         }

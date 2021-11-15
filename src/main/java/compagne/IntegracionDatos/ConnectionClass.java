@@ -15,12 +15,19 @@ public class ConnectionClass {
     final static String USER = "rnyrjrmcxwiylc";
     final static String PASS = "039149865843c41f53758d306e7eefd9c02ca68d09b37c29c31fb010b9c63b85";
 
+    protected void finalize() {
+        try {
+            this.con.close();
+        } catch (SQLException e) {
+        }
+    }
+
     public Connection getCon() {
         return this.con;
     }
 
     public static String getSchema() {
-        return SCHEMA+'.';
+        return SCHEMA + '.';
     }
 
     public static boolean usingPSQL() {

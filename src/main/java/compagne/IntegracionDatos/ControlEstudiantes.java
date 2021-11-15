@@ -17,8 +17,11 @@ public class ControlEstudiantes {
     private PreparedStatement statement;
     private ResultSet result;
 
-    public void instanceOf() {
-
+    protected void finalize() {
+        try {
+            this.con.close();
+        } catch (SQLException e) {
+        }
     }
 
     public ResultSet executeQuery(String query) {

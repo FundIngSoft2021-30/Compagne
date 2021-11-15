@@ -20,6 +20,13 @@ public class ControlGrupos {
     private PreparedStatement statement;
     private ResultSet result;
 
+    protected void finalize() {
+        try {
+            this.con.close();
+        } catch (SQLException e) {
+        }
+    }
+
     public ResultSet executeQuery(String query) {
         try {
             this.statement = this.con.prepareStatement(query);
