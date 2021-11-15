@@ -17,8 +17,8 @@ public class EntidadesTest{
     public void setUp(){
         estudiante = new Estudiante(null, null, null, null, null, null, null);
         grupo = new Grupo(null, null, null);
-        chatG = new ChatG(null, null, (char) 0, null, grupo);
-        chatP = new ChatP(null, null, (char) 0, null, estudiante, estudiante);
+        chatG = new ChatG(null, (char) 0, null, grupo);
+        chatP = new ChatP(null, (char) 0, null, estudiante, estudiante);
         comentario = new Comentario(null, null);
         mensaje = new Mensaje(null, null, null, null);
         profesor = new Profesor(null, null, null, null, null, null, null, null);

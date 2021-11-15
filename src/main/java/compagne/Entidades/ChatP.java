@@ -1,6 +1,5 @@
 package compagne.Entidades;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -17,8 +16,8 @@ public class ChatP extends Chat{
         return this.usuario2;
     }
 
-    public ChatP(Date fechaCreacion, String codigo, char tipo, HashSet<Mensaje> mensajes, Usuario usuario1, Usuario usuario2) {
-        super(fechaCreacion, codigo, tipo, mensajes);
+    public ChatP(String fechaCreacion, char tipo, HashSet<Mensaje> mensajes, Usuario usuario1, Usuario usuario2) {
+        super(fechaCreacion, tipo, mensajes);
         this.usuario1=usuario1;
         this.usuario2=usuario2;
     }

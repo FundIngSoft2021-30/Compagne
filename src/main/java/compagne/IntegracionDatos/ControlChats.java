@@ -197,7 +197,7 @@ public class ControlChats {
                         ? new Estudiante(nombre, email, materias, comentarios, "", materias, materias)
                         : new Profesor(nombre, email, materias, comentarios, "", "", materias, materias);
                 ;
-                chat = new ChatP(new Date(rs.getTimestamp("FechaCreacion").getTime()), rs.getString("Codigo"), 'G',
+                chat = new ChatP(rs.getString("FechaCreacion"), 'G',
                         new HashSet<Mensaje>(), u1, u2);
             }
         } catch (Exception e) {
@@ -225,7 +225,7 @@ public class ControlChats {
                 String nombre = rs2.getString("Nombre");
                 String codigo = rs2.getString("Codigo");
                 String publico = (rs2.getBoolean("Publico")) ? "Si" : "No";
-                chat = new ChatG(new Date(rs.getTimestamp("FechaCreacion").getTime()), rs.getString("Codigo"), 'G',
+                chat = new ChatG(rs.getString("FechaCreacion"), 'G',
                         new HashSet<Mensaje>(), new Grupo(nombre, codigo, publico));
             }
         } catch (Exception e) {

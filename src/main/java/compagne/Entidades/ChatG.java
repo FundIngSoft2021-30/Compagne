@@ -1,6 +1,5 @@
 package compagne.Entidades;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -28,8 +27,8 @@ public class ChatG extends Chat{
         return Objects.hashCode(pertenece);
     }
 
-    public ChatG(Date fechaCreacion, String codigo, char tipo, HashSet<Mensaje> mensajes, Grupo pertenece) {
-        super(fechaCreacion, codigo, tipo, mensajes);
+    public ChatG(String fechaCreacion, char tipo, HashSet<Mensaje> mensajes, Grupo pertenece) {
+        super(fechaCreacion, tipo, mensajes);
         this.pertenece=pertenece;
     }
 
