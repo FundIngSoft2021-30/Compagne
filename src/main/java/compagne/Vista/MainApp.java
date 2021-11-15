@@ -11,9 +11,13 @@ public class MainApp {
                 Estudiante estudiante2=new Estudiante("Juan Carlos Caceres Cuarto", "email2", null, null, "contrasenia", null, null);
                 ControlEstudiantes ce=new ControlEstudiantes();
                 ControlChats cc=new ControlChats();
-                ChatP chat1=new ChatP(estudiante1, estudiante2);
+                int est1ID=ce.getEstudianteID(estudiante1.getEmail());
+                int est2ID=ce.getEstudianteID(estudiante2.getEmail());
+                ChatP chat1=new ChatP("14/11/21", 'P', null, estudiante1, estudiante2);
                 ce.crearEstudiante(estudiante1);
                 ce.crearEstudiante(estudiante2);
+                cc.crearChat(chat1, est1ID, est2ID);
+                cc.eliminarChat(chat1);
                 ce.eliminarEstudiante(estudiante1.getEmail());
                 ce.eliminarEstudiante(estudiante2.getEmail());
         }
