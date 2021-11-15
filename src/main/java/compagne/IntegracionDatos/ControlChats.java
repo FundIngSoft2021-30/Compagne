@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashSet;
 
-import org.postgresql.jdbc.TimestampUtils;
-
 import compagne.Entidades.Chat;
 import compagne.Entidades.ChatG;
 import compagne.Entidades.ChatP;
