@@ -22,7 +22,7 @@ public class ControlChats {
     private PreparedStatement statement;
     private ResultSet result;
 
-    protected void finalize() {
+    public void finalize() {
         try {
             this.con.close();
         } catch (SQLException e) {

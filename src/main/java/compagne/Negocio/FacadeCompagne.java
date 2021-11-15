@@ -22,6 +22,22 @@ public class FacadeCompagne {
     private ControlProfesores controlProfesores;
     private ControlEstudiantes controlEstudiantes;
     private ControlGrupos controlGrupos;
+
+    public ControlChats getControlChats() {
+        return this.controlChats;
+    }
+
+    public ControlProfesores getControlProfesores() {
+        return this.controlProfesores;
+    }
+
+    public ControlEstudiantes getControlEstudiantes() {
+        return this.controlEstudiantes;
+    }
+
+    public ControlGrupos getControlGrupos() {
+        return this.controlGrupos;
+    }
     public static FacadeCompagne instance;
     public String usu;
 
@@ -607,5 +623,12 @@ public class FacadeCompagne {
 
     public HashSet<Usuario> listarCompas(String nombre){
         return this.controlEstudiantes.listarCompas(nombre);
+    }
+
+    protected void finalize(){
+        this.controlGrupos.finalize();
+        this.controlEstudiantes.finalize();
+        this.controlChats.finalize();
+        this.controlProfesores.finalize();
     }
 }

@@ -2,8 +2,6 @@ package compagne.IntegracionDatos;
 
 import static org.junit.Assert.*;
 
-import java.sql.SQLException;
-
 import org.junit.*;
 
 public class ConnectionTest {
@@ -60,7 +58,7 @@ public class ConnectionTest {
         try {
             connection.closeConnection();
             assertTrue(connection.getCon().isClosed());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             assertNull(connection.getCon());
         }
     }
