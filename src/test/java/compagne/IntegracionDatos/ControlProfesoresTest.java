@@ -44,6 +44,31 @@ public class ControlProfesoresTest {
         }
 
         @Test
+        public void testInsertarComentario() {
+                String consulta = "";
+                String comentario = "Hola. Este es un comentario prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
+                String calificacion = "5.0";
+                assertFalse(controlProfesores.insertarComentario(comentario, calificacion));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"ID\"="
+                                + controlProfesores.getComentarioID(comentario, calificacion) + ";";
+                assertNotNull(controlProfesores.getComentarioID(comentario, calificacion));
+                assertEquals(controlProfesores.getComentarioID("null", calificacion), 0);
+                assertEquals(controlProfesores.getComentarioID(comentario, "null"), 0);
+                assertNull(controlProfesores.executeQuery(consulta));
+                assertFalse(controlProfesores.insertarComentario(comentario, null));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
+                                + comentario + "\';";
+
+                assertNull(controlProfesores.executeQuery(consulta));
+                assertFalse(controlProfesores.insertarComentario(null, calificacion));
+                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"=\'"
+                                + calificacion + "\';";
+                assertNotNull(controlProfesores.getComentarioID(null, calificacion));
+                assertEquals(controlProfesores.getComentarioID(comentario, calificacion), 0);
+                assertNull(controlProfesores.executeQuery(consulta));
+        }
+
+        @Test
         public void testCrearProfesor() {
                 assertNotNull(controlProfesores.crearProfesor(profesor));
         }
@@ -52,6 +77,12 @@ public class ControlProfesoresTest {
         public void testModificarProfesor() {
                 profesor.setNombre("NombreModificado");
                 assertNotNull(controlProfesores.modificarProfesor(profesor));
+        }
+
+        @Test
+        public void testProfesorByID() {
+                assertNotNull(controlProfesores.getProfesorByID(4));
+                assertNull(controlProfesores.getProfesorByID(1));
         }
 
         private static int resultSetSize(ResultSet rs) {

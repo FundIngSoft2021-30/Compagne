@@ -42,8 +42,7 @@ public class ControlChats {
             offset = 1;
         try {
             this.statement = this.con.prepareStatement("SELECT \"ID\" FROM " + ConnectionClass.getSchema()
-                    + "\"Chat\" WHERE \"Tipo\"=\'" + chat.getTipo() + "\' AND \"FechaCreacion\"=\'"
-                    + TimestampUtils.parseBackendTimeZone(chat.getFechaCreacion().toString()) + "\';");
+                    + "\"Chat\" WHERE \"Tipo\"=\'" + chat.getTipo() + "\' AND \"FechaCreacion\"=\'"+chat.getFechaCreacion().toString() + "\';");
             this.result = this.statement.executeQuery();
             if (this.result.next())
                 id = this.result.getInt(0 + offset);
@@ -56,7 +55,7 @@ public class ControlChats {
     }
 
     public boolean eliminarChat(Chat chat) {
-        boolean result = false;
+        boolean result = true;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
             offset = 1;
@@ -69,9 +68,10 @@ public class ControlChats {
                 try {
                     int mensajeID = rs.getInt(0 + offset);
                     query = "DELETE FROM " + ConnectionClass.getSchema() + "\"ChatXMensaje\" WHERE \"MensajeID\"="
-                + mensajeID + ";";
+                            + mensajeID + ";";
                     this.executeQuery(query);
-                    query = "DELETE FROM "+ConnectionClass.getSchema()+ "\"Mensaje\" WHERE \"ID\"=" + mensajeID + ";";
+                    query = "DELETE FROM " + ConnectionClass.getSchema() + "\"Mensaje\" WHERE \"ID\"=" + mensajeID
+                            + ";";
                     this.executeQuery(query);
                 } catch (Exception e) {
                 }
@@ -91,8 +91,7 @@ public class ControlChats {
          */
         boolean b = true; // Inicializo lo que retorno (Si el grupo se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"Chat\" (\"Codigo\",\"FechaCreacion\", \"Tipo\", \"PerteneceID\") VALUES ('" + chat.getCodigo()
-                + "','" + TimestampUtils.parseBackendTimeZone(chat.getFechaCreacion().toString()) + "','"
+                + "\"Chat\" (\"FechaCreacion\", \"Tipo\", \"PerteneceID\") VALUES ('" + chat.getFechaCreacion().toString() + "','"
                 + chat.getTipo() + "'," + grupoID + ");";
         // Consulta SQL para insertar
         // un chat en la BD
@@ -115,9 +114,8 @@ public class ControlChats {
          */
         boolean b = true; // Inicializo lo que retorno (Si el grupo se guardo bien)
         String sql = "INSERT INTO " + ConnectionClass.getSchema()
-                + "\"Chat\" (\"Codigo\",\"FechaCreacion\", \"Tipo\", \"Usuario1ID\", \"Usuario2ID\") VALUES ('"
-                + chat.getCodigo() + "','" + TimestampUtils.parseBackendTimeZone(chat.getFechaCreacion().toString())
-                + "','" + chat.getTipo() + "'," + usuario1ID + "," + usuario2ID + ");";
+                + "\"Chat\" (\"FechaCreacion\", \"Tipo\", \"Usuario1ID\", \"Usuario2ID\") VALUES ('"+chat.getFechaCreacion().toString() + "','" + chat.getTipo()
+                + "'," + usuario1ID + "," + usuario2ID + ");";
         // Consulta SQL para insertar
         // un chat en la BD
         try {

@@ -184,6 +184,12 @@ public class ControlEstudiantesTest {
                 assertNotNull(ce.listarCompasGrupo("abril800q"));
         }
 
+        @Test
+        public void testEstudianterByID() {
+                assertNotNull(ce.getEstudianteByID(1));
+                assertNull(ce.getEstudianteByID(4));
+        }
+
         @BeforeClass
         public static void setUpBeforeClass() {
                 HashSet<String> mSet = new HashSet<String>();

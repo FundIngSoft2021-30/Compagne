@@ -5,14 +5,9 @@ import java.util.Date;
 
 public class Reunion {
     private Date fecha;
-    private String codigo;
 
     public Date getFecha() {
         return this.fecha;
-    }
-
-    public String getCodigo() {
-        return this.codigo;
     }
 
     @Override
@@ -23,12 +18,12 @@ public class Reunion {
             return false;
         }
         Reunion reunion = (Reunion) o;
-        return Objects.equals(fecha, reunion.fecha) && Objects.equals(codigo, reunion.codigo);
+        return Objects.equals(fecha, reunion.fecha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fecha, codigo);
+        return Objects.hash(fecha);
     }
 
 
@@ -36,14 +31,12 @@ public class Reunion {
     public String toString() {
         return "{" +
             " fecha='" + getFecha() + "'" +
-            ", codigo='" + getCodigo() + "'" +
             "}";
     }
 
 
-    public Reunion(Date fecha, String codigo) {
+    public Reunion(Date fecha) {
         this.fecha = fecha;
-        this.codigo = codigo;
     }
 
 

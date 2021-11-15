@@ -22,7 +22,7 @@ public class EntidadesTest{
         comentario = new Comentario(null, null);
         mensaje = new Mensaje(null, null, null, null);
         profesor = new Profesor(null, null, null, null, null, null, null, null);
-        reunion = new Reunion(null, null);
+        reunion = new Reunion(null);
     }
     @Test
     public void ChatGTest()

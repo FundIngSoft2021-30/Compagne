@@ -22,6 +22,17 @@ public class Grupo {
         this.chats = new HashSet<>();
     }
 
+
+    public Grupo(String nombre, String codigo, String publico, HashSet<Usuario> miembros, HashSet<Reunion> reuniones, HashSet<ChatG> chats) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.publico = publico;
+        this.miembros = miembros;
+        this.reuniones = reuniones;
+        this.chats = chats;
+    }
+
+
     public String getNombre() {
         return nombre;
     }
