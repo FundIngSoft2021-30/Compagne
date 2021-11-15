@@ -2,14 +2,13 @@ package compagne.IntegracionDatos;
 
 import org.junit.*;
 
-import compagne.Entidades.Chat;
 import compagne.Entidades.Mensaje;
 import compagne.Entidades.ChatG;
 import compagne.Entidades.ChatP;
+
 import static org.junit.Assert.*;
 
 import java.sql.ResultSet;
-import java.time.Instant;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
