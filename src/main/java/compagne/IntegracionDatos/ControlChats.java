@@ -79,6 +79,69 @@ public class ControlChats {
         return result;
     }
 
+    public int insertarMensaje(Mensaje mensaje, int remitenteID) {
+        int id = 0;
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        try {
+            String query = "INSERT INTO " + ConnectionClass.getSchema() + "\"Mensaje\" (\"Mensaje\", \"Fecha\", \"RemitenteID\") VALUES ('"
+                + mensaje.getMensaje() + "', '"+mensaje.getHora()+"'," +  remitenteID+ ");";
+            this.executeQuery(query);
+            query = "SELECT \"ID\" FROM " + ConnectionClass.getSchema() + "\"Mensaje\" WHERE \"Mensaje\"='"
+                + mensaje.getMensaje() + "' AND \"Fecha\"='"+mensaje.getHora()+"' AND \"RemitenteID\"=" + remitenteID + ";";
+            ResultSet rs = this.executeQuery(query);
+            if (rs.next())
+                id = rs.getInt(0 + offset);
+            else
+                throw new Exception("No encontrado");
+        }catch(Exception e){
+            id=0;
+        }
+        return id;
+    }
+
+    public boolean insertarMensajeXChat(int chat_id, Mensaje mensaje, int remitenteID){
+        boolean result = true;
+        String query = "INSERT INTO " + ConnectionClass.getSchema() + "\"ChatXMensaje\" (\"ChatID\", \"MensajeID\") VALUES ("
+                + chat_id + ", " +  this.insertarMensaje(mensaje, remitenteID)+ ");";
+        try {
+            this.executeQuery(query);
+        } catch (Exception e) {
+            result = false;
+        }
+        return result;
+    }
+
+    public HashSet<Mensaje> mensajesXChat(int chatID){
+        ControlEstudiantes cEstudiantes=new ControlEstudiantes();
+        ControlProfesores cProfesores=new ControlProfesores();
+        HashSet<Mensaje> mensajes = new HashSet<Mensaje>();
+        int offset = 0;
+        if (ConnectionClass.usingPSQL())
+            offset = 1;
+        String query = "SELECT ME.\"Mensaje\", ME.\"Fecha\", ME.\"RemitenteID\" FROM " + ConnectionClass.getSchema() + "\"ChatXMensaje\" AS CME, "+ConnectionClass.getSchema()+"\"Mensaje\" AS ME WHERE CME.\"ChatID\"="
+                + chatID +"AND CME.\"MensajeID\"=ME.\"ID\""+ ";";
+        ResultSet rs = this.executeQuery(query);
+        try {
+            while (rs.next()) {
+                try {
+                    String texto=rs.getString(0 + offset);
+                    String fecha=rs.getString(1 + offset);
+                    int remitenteID=rs.getInt(2 + offset);
+                    Usuario remitente=cEstudiantes.getEstudianteByID(remitenteID);
+                    if(remitente==null)
+                        remitente=cProfesores.getProfesorByID(remitenteID);
+                    Mensaje mensaje = new Mensaje(fecha, texto, remitente, null);
+                    mensajes.add(mensaje);
+                } catch (Exception e) {
+                }
+            }
+        } catch (Exception e) {
+        }
+        return mensajes;
+    }
+
     public boolean crearChat(Chat chat, int grupoID) {
         /*
          * Este método guarda un chat en la BD, recibe un objeto de la clase chat y un
