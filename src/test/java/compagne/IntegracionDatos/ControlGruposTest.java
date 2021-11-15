@@ -50,12 +50,8 @@ public class ControlGruposTest {
     }
 
     @Test
-    public void testUsuarioXGrupo() {
+    public void testUsuarioXGrupo_DEL() {
         assertTrue(controlGrupos.insertarUsuarioXGrupoEstudio("-1", "Este no es emmail", "N"));
-    }
-
-    @Test
-    public void testDelUsuarioXGrupo() {
         assertTrue(controlGrupos.eliminarUsuarioXGrupoEstudio("-1", "Este no es emmail"));
     }
 

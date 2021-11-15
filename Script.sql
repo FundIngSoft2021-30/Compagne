@@ -104,7 +104,6 @@ CREATE TABLE public."ReunionXGrupoEstudio" (
   PRIMARY KEY ("GrupoEstudioID", 
   "ReunionID"));
 ALTER TABLE public."UsuarioXDestacable" ADD CONSTRAINT "FKUsuarioXDe790678" FOREIGN KEY ("Usuario RegistradoID") REFERENCES "UsuarioRegistrado" ("ID");
-
 ALTER TABLE public."Mensaje" ADD CONSTRAINT "FKRemitente6281" FOREIGN KEY ("RemitenteID") REFERENCES "UsuarioRegistrado" ("ID");
 ALTER TABLE public."UsuarioXDestacable" ADD CONSTRAINT "FKUsuarioXDe521363" FOREIGN KEY ("DestacableID") REFERENCES "Destacable" ("ID");
 ALTER TABLE public."ChatXMensaje" ADD CONSTRAINT "FKChatXM790678" FOREIGN KEY ("ChatID") REFERENCES "Chat" ("ID");
@@ -136,6 +135,7 @@ INSERT INTO public."UsuarioxGrupoEstudio" ("UsuarioRegistradoID", "GrupoEstudioI
 INSERT INTO public."UsuarioxGrupoEstudio" ("UsuarioRegistradoID", "GrupoEstudioID", "Admin") VALUES (2, 1, 'N');
 INSERT INTO public."Interes" ("Nombre") VALUES ('Futbol'); --ID 1
 INSERT INTO public."Logro" ("Texto") VALUES ('Excelencia Academica'); --ID 1
+INSERT INTO public."Logro" ("Texto") VALUES ('Premio a la profe del año'); --ID 2
 INSERT INTO public."Materia" ("Nombre") VALUES ('Analisis Numerico'); --ID 1
 INSERT INTO public."Materia" ("Nombre") VALUES ('Sistemas de Informacion'); --ID 2
 INSERT INTO public."Materia" ("Nombre") VALUES ('Fundamentos de Ing de Software'); --ID 3
@@ -143,10 +143,13 @@ INSERT INTO public."Comentario" ("Estrellas") VALUES ('3.0'); --ID 1
 INSERT INTO public."Comentario" ("Estrellas", "Texto") VALUES ('4.5', 'Una persona muy comprometida con todas sus actividades'); --ID 2
 INSERT INTO public."HorarioAtencion" ("Franja") VALUES ('Lunes 7-9'); --ID 1
 INSERT INTO public."HorarioAtencion" ("Franja") VALUES ('Martes 9-11'); --ID 2
+INSERT INTO public."Reunion" ("Fecha") VALUES ('14/11/21 13:00:00'); --ID 1
 INSERT INTO public."UsuarioXComentario" ("UsuarioRegistradoID", "ComentarioID") VALUES (1,2);
 INSERT INTO public."UsuarioXHorarioAtencion" ("Usuario RegistradoID", "HorarioID") VALUES (4,2);
 INSERT INTO public."UsuarioXIntereses" ("Usuario RegistradoID", "InteresID") VALUES (2,1);
 INSERT INTO public."UsuarioXLogros" ("Usuario RegistradoID", "LogroID") VALUES (1,1);
+INSERT INTO public."UsuarioXLogros" ("Usuario RegistradoID", "LogroID") VALUES (4,2);
 INSERT INTO public."UsuarioXMaterias" ("Usuario RegistradoID", "MateriaID") VALUES (1,1);
 INSERT INTO public."UsuarioXMaterias" ("Usuario RegistradoID", "MateriaID") VALUES (1,2);
 INSERT INTO public."UsuarioXMaterias" ("Usuario RegistradoID", "MateriaID") VALUES (1,3);
+INSERT INTO public."ReunionXGrupoEstudio" ("GrupoEstudioID", "ReunionID") VALUES (1,1);
