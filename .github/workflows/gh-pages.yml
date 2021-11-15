@@ -19,7 +19,7 @@ jobs:
     - name: Remove old tests
       run: rm -rf docs
     - name: Create local changes
-      run: mvn clean install test clean
+      run: mvn clean install test verify clean
     - name: Remove directories
       run: rm -rf src .classpath .project .github pom.xml .gitignore Script.sql .github
     - name: Commit files
