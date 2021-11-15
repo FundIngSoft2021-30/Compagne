@@ -18,7 +18,6 @@ import javafx.scene.shape.Polygon;
 public class PantallaPerfilProfesorController {
     
     private FacadeCompagne facade = FacadeCompagne.getInstance();
-    private String usu;
 
     @FXML
     private ResourceBundle resources;
@@ -213,7 +212,6 @@ public class PantallaPerfilProfesorController {
 
     public void start(String u) {
         //facade.Llenar(u);
-        this.usu = u;
         Profesor p = (Profesor) facade.informacionUsuario(u);
         this.NombreEstudiante.setText(p.getNombre());
         this.TextDescription.setText(p.getExperiencia());

@@ -128,8 +128,11 @@ public class ControlGrupos {
                             Chat chat = null;
                             HashSet<Mensaje> mensajes = new HashSet<>();
                             while (rs.next()) {
-                                Mensaje mensaje = new Mensaje(rs.getDate(1 + offset), rs.getString(0 + offset),
-                                        (Usuario) controlEstudiantes.getEstudianteByID(rs.getInt(2 + offset)), chat);
+                                Usuario user=controlEstudiantes.getEstudianteByID(rs.getInt(2 + offset));
+                                if (user==null)
+                                    user=controlProfesores.getProfesorByID(rs.getInt(2 + offset));
+                                Mensaje mensaje = new Mensaje(rs.getString(1 + offset), rs.getString(0 + offset),
+                                        user, chat);
                                 mensajes.add(mensaje);
                             }
                             chats.add(new ChatG(null, 'G', mensajes, null));

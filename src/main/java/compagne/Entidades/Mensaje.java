@@ -1,11 +1,10 @@
 package compagne.Entidades;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class Mensaje {
     
-    private Date hora;
+    private String hora;
     private String mensaje;
     private Usuario remitente;
     private Chat chat;
@@ -14,7 +13,7 @@ public class Mensaje {
         return this.remitente;
     }
 
-    public Date getHora() {
+    public String getHora() {
         return this.hora;
     }
 
@@ -26,7 +25,7 @@ public class Mensaje {
         return this.chat;
     }
 
-    public Mensaje(Date hora, String mensaje, Usuario remitente, Chat chat) {
+    public Mensaje(String hora, String mensaje, Usuario remitente, Chat chat) {
         this.hora = hora;
         this.mensaje = mensaje;
         this.remitente = remitente;
