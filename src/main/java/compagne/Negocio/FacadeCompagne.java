@@ -3,17 +3,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 
+import compagne.Entidades.ChatG;
+import compagne.Entidades.ChatP;
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
 import compagne.Entidades.Grupo;
+import compagne.Entidades.Mensaje;
 import compagne.Entidades.Profesor;
 import compagne.Entidades.Usuario;
 import compagne.IntegracionDatos.ControlProfesores;
 import compagne.IntegracionDatos.ConnectionClass;
+import compagne.IntegracionDatos.ControlChats;
 import compagne.IntegracionDatos.ControlEstudiantes;
 import compagne.IntegracionDatos.ControlGrupos;
 
 public class FacadeCompagne {
+    private ControlChats controlChats;
     private ControlProfesores controlProfesores;
     private ControlEstudiantes controlEstudiantes;
     private ControlGrupos controlGrupos;
@@ -24,12 +29,53 @@ public class FacadeCompagne {
         this.controlEstudiantes = new ControlEstudiantes();
         this.controlProfesores = new ControlProfesores();
         this.controlGrupos = new ControlGrupos();
+        this.controlChats=new ControlChats();
     }
 
     public static FacadeCompagne getInstance() {
         if (instance == null)
             instance = new FacadeCompagne();
         return instance;
+    }
+
+    public int getChatID(ChatP chat) {
+        return controlChats.getChatID(chat);
+    }
+
+    public int getChatID(ChatG chat) {
+        return controlChats.getChatID(chat);
+    }
+
+    public boolean eliminarChat(ChatP chat) {
+        return controlChats.eliminarChat(chat);
+    }
+
+    public boolean eliminarChat(ChatG chat) {
+        return controlChats.eliminarChat(chat);
+    }
+
+    public boolean redactarMensaje(int chat_id, Mensaje mensaje, int remitenteID) {
+        return controlChats.insertarMensajeXChat(chat_id, mensaje, remitenteID);
+    }
+
+    public HashSet<Mensaje> buscarMensajesXChat(int chatID){
+        return this.controlChats.mensajesXChat(chatID);
+    }
+
+    public HashSet<ChatP> buscarChatsXUsuario(int usuarioID){
+        return controlChats.buscarChatsXUsuario(usuarioID);
+    }
+
+    public HashSet<ChatG> buscarChatsXGrupo(int grupoID){
+        return controlChats.buscarChatsXGrupo(grupoID);
+    }
+
+    public boolean crearChat(ChatG chat, int grupoID){
+        return controlChats.crearChat(chat, grupoID);
+    }
+
+    public boolean crearChat(ChatP chat, int usuario1ID, int usuario2ID) {
+        return controlChats.crearChat(chat, usuario1ID, usuario2ID);
     }
 
     public Profesor crearPerfilProfesor(String nombre, String experiencia, String email, String contrasenia,
