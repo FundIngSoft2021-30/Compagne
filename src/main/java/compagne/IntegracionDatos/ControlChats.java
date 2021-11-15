@@ -238,11 +238,13 @@ public class ControlChats {
          * Este método busca un chat grupal por id, recibe un id de un chat y devuelve
          * un objeto de la clase chat grupal
          */
-        String sql = "SELECT \"FechaCreacion\",\"Codigo\",\"Usuario1ID\", \"Usuario2ID\" FROM "
+        String sql = "SELECT \"FechaCreacion\",\"Usuario1ID\", \"Usuario2ID\" FROM "
                 + ConnectionClass.getSchema() + "\"Chat\" WHERE \"ID\" = " + chatID + ";";
         // Consulta SQL para buscar chats por grupo en la BD
         ResultSet rs = this.executeQuery(sql);
         try {
+            if (!rs.next())
+                throw new Exception("No se encontró ningún registro...");
             int u1ID = rs.getInt("Usuario1ID");
             int u2ID = rs.getInt("Usuario2ID");
             // Buscar un usuario por id
@@ -252,7 +254,7 @@ public class ControlChats {
             sql = "SELECT \"Nombre\",\"Email\", \"Tipo\" FROM " + ConnectionClass.getSchema()
                     + "\"UsuarioRegistrado\" WHERE \"ID\" = " + u2ID + ";";
             ResultSet rs3 = this.executeQuery(sql);
-            if (rs.next() && rs2.next() && rs3.next()) {
+            if (rs2.next() && rs3.next()) {
                 String nombre = rs2.getString("Nombre");
                 String email = rs2.getString("Email");
                 HashSet<String> materias = new HashSet<>();
@@ -270,7 +272,6 @@ public class ControlChats {
                         new HashSet<Mensaje>(), u1, u2);
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return chat;
     }
@@ -281,25 +282,26 @@ public class ControlChats {
          * Este método busca un chat grupal por id, recibe un id de un chat y devuelve
          * un objeto de la clase chat grupal
          */
-        String sql = "SELECT \"FechaCreacion\",\"Codigo\",\"PerteneceID\" FROM " + ConnectionClass.getSchema()
+        String sql = "SELECT \"FechaCreacion\",\"PerteneceID\" FROM " + ConnectionClass.getSchema()
                 + "\"Chat\" WHERE \"ID\" = " + chatID + ";";
         // Consulta SQL para buscar chats por grupo en la BD
         ResultSet rs = this.executeQuery(sql);
         try {
+            if (!rs.next())
+                throw new Exception("No se encontró ningún registro...");
             int grupoID = rs.getInt("PerteneceID");
             // Buscar un grupo por id
             sql = "SELECT \"Nombre\",\"Codigo\",\"Publico\" FROM " + ConnectionClass.getSchema()
                     + "\"GrupoEstudio\" WHERE \"ID\" = " + grupoID + ";";
             ResultSet rs2 = this.executeQuery(sql);
-            if (rs.next() && rs2.next()) {
+            if (rs2.next()) {
                 String nombre = rs2.getString("Nombre");
                 String codigo = rs2.getString("Codigo");
-                String publico = (rs2.getBoolean("Publico")) ? "Si" : "No";
+                String publico = (rs2.getBoolean("Publico")) ? "S" : "N";
                 chat = new ChatG(rs.getString("FechaCreacion"), 'G',
                         new HashSet<Mensaje>(), new Grupo(nombre, codigo, publico));
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return chat;
     }
