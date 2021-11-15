@@ -112,6 +112,8 @@ public class ControlGruposTest {
         controlGrupos.executeQuery("ALTER SEQUENCE \"UsuarioRegistrado_ID_seq\" RESTART WITH "
                 + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"UsuarioRegistrado\";")))
                 + ";");
+        controlGrupos.finalize();
+        ce.finalize();
     }
 
     @Test

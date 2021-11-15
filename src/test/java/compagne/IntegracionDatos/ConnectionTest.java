@@ -37,6 +37,8 @@ public class ConnectionTest {
         ConnectionClass connection1 = new ConnectionClass();
         ConnectionClass connection2 = new ConnectionClass();
         assertNotEquals(connection1, connection2);
+        connection1.finalize();
+        connection2.finalize();
     }
 
     @Test
@@ -49,6 +51,7 @@ public class ConnectionTest {
     public void testConnectionNEmpty() {
         ConnectionClass connection = new ConnectionClass(ConnectionClass.URL, ConnectionClass.USER, ConnectionClass.PASS);
         assertNotNull(connection.getCon());
+        connection.finalize();
     }
 
     @Test
@@ -67,6 +70,7 @@ public class ConnectionTest {
         ConnectionClass connection = new ConnectionClass();
         try {
             assertFalse(connection.getCon().isClosed());
+            connection.finalize();
         } catch (Exception e) {
             assertNull(connection.getCon());
         }

@@ -158,5 +158,6 @@ public class ControlProfesoresTest {
                                 + String.valueOf(resultSetSize(
                                                 controlProfesores.executeQuery("SELECT * FROM \"UsuarioRegistrado\";")))
                                 + ";");
+                controlProfesores.finalize();
         }
 }

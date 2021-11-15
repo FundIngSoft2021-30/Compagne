@@ -207,5 +207,6 @@ public class ControlEstudiantesTest {
                 ce.executeQuery("ALTER SEQUENCE \"UsuarioRegistrado_ID_seq\" RESTART WITH "
                                 + String.valueOf(resultSetSize(ce.executeQuery("SELECT * FROM \"UsuarioRegistrado\";")))
                                 + ";");
+                ce.finalize();
         }
 }
