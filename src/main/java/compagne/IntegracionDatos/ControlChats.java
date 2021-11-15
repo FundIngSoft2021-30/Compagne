@@ -86,7 +86,7 @@ public class ControlChats {
         return result;
     }
 
-    public int insertarMensaje(Mensaje mensaje, int remitenteID) {
+    private int insertarMensaje(Mensaje mensaje, int remitenteID) {
         int id = 0;
         int offset = 0;
         if (ConnectionClass.usingPSQL())
@@ -270,6 +270,7 @@ public class ControlChats {
                         new HashSet<Mensaje>(), u1, u2);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return chat;
     }
@@ -298,6 +299,7 @@ public class ControlChats {
                         new HashSet<Mensaje>(), new Grupo(nombre, codigo, publico));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return chat;
     }
