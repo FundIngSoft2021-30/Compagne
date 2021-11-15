@@ -6,12 +6,60 @@ import java.sql.ResultSet;
 
 import org.junit.*;
 
+import compagne.Entidades.ChatG;
+import compagne.Entidades.ChatP;
+
 public class FacadeTest {
     private static FacadeCompagne facade;
 
     @BeforeClass
     public static void setUpBeforeClass() {
         facade = new FacadeCompagne();
+    }
+
+    @Test
+    public void testGetCompas() {
+        assertNotNull(facade.listarCompas());
+        assertNotNull(facade.listarCompas("No name"));
+    }
+
+    @Test
+    public void testlistarGrupos() {
+        assertNotNull(facade.listarGruposPublicos());
+    }
+
+    @Test
+    public void testGetters() {
+        assertNotNull(facade.getControlChats());
+        assertNotNull(facade.getControlEstudiantes());
+        assertNotNull(facade.getControlGrupos());
+        assertNotNull(facade.getControlProfesores());
+        assertNotNull(FacadeCompagne.getInstance());
+    }
+
+    @Test
+    public void testIniciarSesion() {
+        assertNotNull(facade.iniciarSesion("abril@cano.com", "@bril"));
+        assertNull(facade.iniciarSesion("abril@cano.com", "abril"));
+    }
+
+    @Test
+    public void testsBuscar() {
+        int usuario1ID = 1;
+        int usuario2ID = 4;
+        int perteneceID=1;
+        assertNotNull(facade.buscarIDUsuario("abril@cano.com"));
+        assertNotNull(facade.buscarIDGrupo("abril800q"));
+        ChatP chatP = new ChatP("Fecha1", 'P', null, facade.getControlEstudiantes().getEstudianteByID(usuario1ID),
+                facade.getControlProfesores().getProfesorByID(usuario2ID));
+        assertTrue(facade.crearChat(chatP, usuario1ID, usuario2ID));
+        assertNotNull(facade.buscarMensajesXChat(facade.getControlChats().getChatID(chatP)));
+        ChatG chatG = new ChatG("Fecha2", 'G', null, facade.getControlGrupos().getGrupoByID(perteneceID));
+        assertTrue(facade.crearChat(chatG, perteneceID));
+        assertNotNull(facade.buscarChatsXGrupo(perteneceID));
+        assertNotNull(facade.buscarChatsXUsuario(usuario1ID));
+        assertTrue(facade.eliminarChat(chatP));
+        assertTrue(facade.eliminarChat(chatG));
     }
 
     private static int resultSetSize(ResultSet rs) {
@@ -86,6 +134,6 @@ public class FacadeTest {
                         + String.valueOf(resultSetSize(
                                 facade.getControlEstudiantes().executeQuery("SELECT * FROM \"UsuarioRegistrado\";")))
                         + ";");
-        
+        facade.finalize();
     }
 }

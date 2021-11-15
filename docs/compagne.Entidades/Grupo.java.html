@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Grupo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">test-coverage</a> &gt; <a href="index.source.html" class="el_package">compagne.Entidades</a> &gt; <span class="el_source">Grupo.java</span></div><h1>Grupo.java</h1><pre class="source lang-java linenums">package compagne.Entidades;
+
+import java.util.HashSet;
+import java.util.Objects;
+
+public class Grupo {
+    private String nombre;
+    private String codigo;
+    private String publico;
+    private HashSet &lt;Usuario&gt; miembros;
+    
+    //Reuniones
+    private HashSet&lt;Reunion&gt; reuniones;
+    private HashSet&lt;ChatG&gt; chats;
+
+<span class="fc" id="L16">    public Grupo(String nombre, String codigo, String publico) {</span>
+<span class="fc" id="L17">        this.nombre = nombre;</span>
+<span class="fc" id="L18">        this.codigo = codigo;</span>
+<span class="fc" id="L19">        this.publico = publico;</span>
+<span class="fc" id="L20">        this.miembros = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L21">        this.reuniones = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L22">        this.chats = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L23">    }</span>
+
+
+<span class="fc" id="L26">    public Grupo(String nombre, String codigo, String publico, HashSet&lt;Usuario&gt; miembros, HashSet&lt;Reunion&gt; reuniones, HashSet&lt;ChatG&gt; chats) {</span>
+<span class="fc" id="L27">        this.nombre = nombre;</span>
+<span class="fc" id="L28">        this.codigo = codigo;</span>
+<span class="fc" id="L29">        this.publico = publico;</span>
+<span class="fc" id="L30">        this.miembros = miembros;</span>
+<span class="fc" id="L31">        this.reuniones = reuniones;</span>
+<span class="fc" id="L32">        this.chats = chats;</span>
+<span class="fc" id="L33">    }</span>
+
+
+    public String getNombre() {
+<span class="fc" id="L37">        return nombre;</span>
+    }
+
+    public void setNombre(String nombre) {
+<span class="fc" id="L41">        this.nombre = nombre;</span>
+<span class="fc" id="L42">    }</span>
+
+    public String getCodigo() {
+<span class="fc" id="L45">        return codigo;</span>
+    }
+
+    public void setCodigo(String codigo) {
+<span class="nc" id="L49">        this.codigo = codigo;</span>
+<span class="nc" id="L50">    }</span>
+
+    public String isPublico() {
+<span class="fc" id="L53">        return publico;</span>
+    }
+
+    public void setPublico(String publico) {
+<span class="nc" id="L57">        this.publico = publico;</span>
+<span class="nc" id="L58">    }</span>
+
+    public HashSet&lt;Usuario&gt; getMiembros() {
+<span class="fc" id="L61">        return miembros;</span>
+    }
+
+    public void setMiembros(HashSet&lt;Usuario&gt; miembros) {
+<span class="nc" id="L65">        this.miembros = miembros;</span>
+<span class="nc" id="L66">    }</span>
+
+    public HashSet&lt;Reunion&gt; getReuniones() {
+<span class="fc" id="L69">        return reuniones;</span>
+    }
+
+    public void setReuniones(HashSet&lt;Reunion&gt; reuniones) {
+<span class="nc" id="L73">        this.reuniones = reuniones;</span>
+<span class="nc" id="L74">    }</span>
+
+    public HashSet&lt;ChatG&gt; getChats() {
+<span class="fc" id="L77">        return chats;</span>
+    }
+
+    public void setChats(HashSet&lt;ChatG&gt; chats) {
+<span class="nc" id="L81">        this.chats = chats;</span>
+<span class="nc" id="L82">    }</span>
+    
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (o == this)</span>
+<span class="nc" id="L88">            return true;</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (!(o instanceof Grupo)) {</span>
+<span class="nc" id="L90">            return false;</span>
+        }
+<span class="nc" id="L92">        Grupo grupo = (Grupo) o;</span>
+<span class="nc bnc" id="L93" title="All 12 branches missed.">        return Objects.equals(nombre, grupo.nombre) &amp;&amp; Objects.equals(codigo, grupo.codigo) &amp;&amp; Objects.equals(publico, grupo.publico)&amp;&amp; Objects.equals(miembros, grupo.miembros) &amp;&amp; Objects.equals(reuniones, grupo.reuniones) &amp;&amp; Objects.equals(chats, grupo.chats);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L98">        return Objects.hash(nombre, codigo, publico, miembros, reuniones, chats);</span>
+    }
+    
+
+    @Override
+    public String toString() {
+<span class="fc" id="L104">        return &quot;{&quot; +</span>
+<span class="fc" id="L105">            &quot; nombre='&quot; + getNombre() + &quot;'&quot; +</span>
+<span class="fc" id="L106">            &quot;, codigo='&quot; + getCodigo() + &quot;'&quot; +</span>
+<span class="fc" id="L107">            &quot;, publico='&quot; + isPublico() + &quot;'&quot; +</span>
+<span class="fc" id="L108">            &quot;, miembros='&quot; + getMiembros() + &quot;'&quot; +</span>
+<span class="fc" id="L109">            &quot;, reuniones='&quot; + getReuniones() + &quot;'&quot; +</span>
+<span class="fc" id="L110">            &quot;, chats='&quot; + getChats() + &quot;'&quot; +</span>
+            &quot;}&quot;;
+    }
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
