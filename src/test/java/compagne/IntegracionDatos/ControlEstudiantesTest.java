@@ -27,31 +27,6 @@ public class ControlEstudiantesTest {
         }
 
         @Test
-        public void testInsertarComentario() {
-                String consulta = "";
-                String comentario = "Hola. Este es un comentario prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
-                String calificacion = "5.0";
-                assertFalse(ce.insertarComentario(comentario, calificacion));
-                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"ID\"="
-                                + ce.getComentarioID(comentario, calificacion) + ";";
-                assertNotNull(ce.getComentarioID(comentario, calificacion));
-                assertEquals(ce.getComentarioID("null", calificacion), 0);
-                assertEquals(ce.getComentarioID(comentario, "null"), 0);
-                assertNull(ce.executeQuery(consulta));
-                assertFalse(ce.insertarComentario(comentario, null));
-                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Texto\"=\'"
-                                + comentario + "\';";
-
-                assertNull(ce.executeQuery(consulta));
-                assertFalse(ce.insertarComentario(null, calificacion));
-                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Comentario\" WHERE \"Estrellas\"=\'"
-                                + calificacion + "\';";
-                assertNotNull(ce.getComentarioID(null, calificacion));
-                assertEquals(ce.getComentarioID(comentario, calificacion), 0);
-                assertNull(ce.executeQuery(consulta));
-        }
-
-        @Test
         public void testComentarioXEstudiante() {
                 String consulta = "";
                 String comentario = "Hola. Este es un comentario prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
@@ -77,19 +52,6 @@ public class ControlEstudiantesTest {
         }
 
         @Test
-        public void testMateria() {
-                String consulta = "";
-                String materia = "Hola. Esta es una materia prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
-                assertNotNull(ce.insertarMateria(materia));
-                int mID = ce.getMateriaID(materia);
-                assertNotEquals(0, mID);
-                assertEquals(0, ce.getMateriaID(materia.repeat(2)));
-                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Materia\" WHERE \"Nombre\"=\'" + materia
-                                + "\';";
-                assertNull(ce.executeQuery(consulta));
-        }
-
-        @Test
         public void testMateriaXEstudiante() {
                 String consulta = "";
                 String materia = "Hola. Esta es una materia prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
@@ -101,19 +63,6 @@ public class ControlEstudiantesTest {
                                 + mID + ";";
                 assertNull(ce.executeQuery(consulta));
                 consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Materia\" WHERE \"Nombre\"=\'" + materia
-                                + "\';";
-                assertNull(ce.executeQuery(consulta));
-        }
-
-        @Test
-        public void tetsLogro() {
-                String consulta = "";
-                String logro = "Hola. Este es un logro prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
-                assertNotNull(ce.insertarLogro(logro));
-                int lID = ce.getLogroID(logro);
-                assertNotEquals(0, lID);
-                assertEquals(0, ce.getMateriaID(logro.repeat(2)));
-                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Logro\" WHERE \"Texto\"=\'" + logro
                                 + "\';";
                 assertNull(ce.executeQuery(consulta));
         }
@@ -131,19 +80,6 @@ public class ControlEstudiantesTest {
 
                 assertNull(ce.executeQuery(consulta));
                 consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Logro\" WHERE \"Texto\"=\'" + logro
-                                + "\';";
-                assertNull(ce.executeQuery(consulta));
-        }
-
-        @Test
-        public void tetsInteres() {
-                String consulta = "";
-                String interes = "Hola. Este es un interes prueba, el texto que aquí se usa no debería de estar presente en la base de datos";
-                assertNotNull(ce.insertarInteres(interes));
-                int inIDID = ce.getInteresID(interes);
-                assertNotEquals(0, inIDID);
-                assertEquals(0, ce.getMateriaID(interes.repeat(2)));
-                consulta = "DELETE FROM " + ConnectionClass.getSchema() + "\"Interes\" WHERE \"Nombre\"=\'" + interes
                                 + "\';";
                 assertNull(ce.executeQuery(consulta));
         }

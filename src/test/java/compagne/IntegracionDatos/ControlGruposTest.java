@@ -26,27 +26,27 @@ public class ControlGruposTest {
 
     @Test
     public void testGetGrupos() {
-        ControlGrupos cg = controlGrupos;
-        assertEquals(cg.getGruposPublicos().size(), cg.getGruposPublicos().size());
+
+        assertEquals(controlGrupos.getGruposPublicos().size(), controlGrupos.getGruposPublicos().size());
     }
 
     @Test
     public void testExecute() {
-        ControlGrupos cg = controlGrupos;
-        assertNotNull(cg.executeQuery("SELECT * FROM \"UsuarioRegistrado\""));
+
+        assertNotNull(controlGrupos.executeQuery("SELECT * FROM \"UsuarioRegistrado\""));
     }
 
     @Test
     public void testExecuteN() {
-        ControlGrupos cg = controlGrupos;
-        assertNull(cg.executeQuery("SELECT * FROM *"));
+
+        assertNull(controlGrupos.executeQuery("SELECT * FROM *"));
     }
 
     @Test
     public void testGrupoId() {
-        ControlGrupos cg = controlGrupos;
+
         // No puede existir un grupo con codigo (@&-_-&@)
-        assertEquals(cg.getGrupoID("(@&-_-&@)"), 0);
+        assertEquals(controlGrupos.getGrupoID("(@&-_-&@)"), 0);
     }
 
     @Test
@@ -74,42 +74,44 @@ public class ControlGruposTest {
 
     @AfterClass
     public static void resetSerials() {
-        ControlGrupos cg = controlGrupos;
+
         assertTrue(controlGrupos.eliminarGrupo(grupo.getCodigo()));
         assertTrue(ce.eliminarEstudiante(estuUsuario.getEmail()));
         // Reset chat id serial
-        cg.executeQuery("ALTER SEQUENCE \"Chat_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"Chat\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"Chat_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"Chat\";"))) + ";");
         // Reset comentario id serial
-        cg.executeQuery("ALTER SEQUENCE \"Comentario_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"Comentario\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"Comentario_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"Comentario\";"))) + ";");
         // Reset destacable id serial
-        cg.executeQuery("ALTER SEQUENCE \"Destacable_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"Destacable\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"Destacable_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"Destacable\";"))) + ";");
         // Reset grupo estudio id serial
-        cg.executeQuery("ALTER SEQUENCE \"GrupoEstudio_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"GrupoEstudio\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"GrupoEstudio_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"GrupoEstudio\";"))) + ";");
         // Reset horario atencion id serial
-        cg.executeQuery("ALTER SEQUENCE \"HorarioAtencion_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"HorarioAtencion\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"HorarioAtencion_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"HorarioAtencion\";")))
+                + ";");
         // Reset interes id serial
-        cg.executeQuery("ALTER SEQUENCE \"Interes_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"Interes\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"Interes_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"Interes\";"))) + ";");
         // Reset logro id serial
-        cg.executeQuery("ALTER SEQUENCE \"Logro_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"Logro\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"Logro_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"Logro\";"))) + ";");
         // Reset materia id serial
-        cg.executeQuery("ALTER SEQUENCE \"Materia_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"Materia\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"Materia_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"Materia\";"))) + ";");
         // Reset mensaje id serial
-        cg.executeQuery("ALTER SEQUENCE \"Mensaje_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"Mensaje\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"Mensaje_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"Mensaje\";"))) + ";");
         // Reset reunion id serial
-        cg.executeQuery("ALTER SEQUENCE \"Reunion_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"Reunion\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"Reunion_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"Reunion\";"))) + ";");
         // Reset usuario registrado id serial
-        cg.executeQuery("ALTER SEQUENCE \"UsuarioRegistrado_ID_seq\" RESTART WITH "
-                + String.valueOf(resultSetSize(cg.executeQuery("SELECT * FROM \"UsuarioRegistrado\";"))) + ";");
+        controlGrupos.executeQuery("ALTER SEQUENCE \"UsuarioRegistrado_ID_seq\" RESTART WITH "
+                + String.valueOf(resultSetSize(controlGrupos.executeQuery("SELECT * FROM \"UsuarioRegistrado\";")))
+                + ";");
     }
 
     @Test
@@ -126,5 +128,5 @@ public class ControlGruposTest {
         int actual = controlGrupos.getGrupoID(grupo.getCodigo());
         assertEquals(expected, actual);
     }
-        
+
 }

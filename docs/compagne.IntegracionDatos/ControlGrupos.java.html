@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControlGrupos.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">test-coverage</a> &gt; <a href="index.source.html" class="el_package">compagne.IntegracionDatos</a> &gt; <span class="el_source">ControlGrupos.java</span></div><h1>ControlGrupos.java</h1><pre class="source lang-java linenums">package compagne.IntegracionDatos;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashSet;
+
+import compagne.Entidades.Chat;
+import compagne.Entidades.ChatG;
+import compagne.Entidades.Grupo;
+import compagne.Entidades.Mensaje;
+import compagne.Entidades.Reunion;
+import compagne.Entidades.Usuario;
+
+public class ControlGrupos {
+
+<span class="fc" id="L18">    final ConnectionClass CONNECTION_CLASS = new ConnectionClass();</span>
+    private Connection con;
+    private PreparedStatement statement;
+    private ResultSet result;
+
+    protected void finalize() {
+        try {
+<span class="nc" id="L25">            this.con.close();</span>
+<span class="nc" id="L26">        } catch (SQLException e) {</span>
+        }
+<span class="nc" id="L28">    }</span>
+
+    public ResultSet executeQuery(String query) {
+        try {
+<span class="fc" id="L32">            this.statement = this.con.prepareStatement(query);</span>
+<span class="fc" id="L33">            this.result = this.statement.executeQuery();</span>
+<span class="fc" id="L34">        } catch (SQLException e) {</span>
+<span class="fc" id="L35">            this.result = null;</span>
+        }
+<span class="fc" id="L37">        return this.result;</span>
+    }
+
+    public HashSet&lt;Grupo&gt; getGruposPublicos() {
+<span class="fc" id="L41">        int offset = 0;</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (ConnectionClass.usingPSQL()) {</span>
+<span class="fc" id="L43">            offset = 1;</span>
+        }
+<span class="fc" id="L45">        HashSet&lt;Grupo&gt; grupos = new HashSet&lt;&gt;();</span>
+        Grupo grupo;
+<span class="fc" id="L47">        String query = &quot;SELECT \&quot;Nombre\&quot;,\&quot;Codigo\&quot;, \&quot;Publico\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L48">                + &quot;\&quot;GrupoEstudio\&quot; WHERE \&quot;Publico\&quot;=\'S\';&quot;;</span>
+        try {
+<span class="fc" id="L50">            this.statement = this.con.prepareStatement(query);</span>
+<span class="fc" id="L51">            this.result = this.statement.executeQuery();</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            while (this.result.next()) {</span>
+<span class="fc" id="L53">                grupo = new Grupo(this.result.getString(0 + offset), this.result.getString(1 + offset),</span>
+<span class="fc" id="L54">                        this.result.getString(2 + offset));</span>
+<span class="fc" id="L55">                grupos.add(grupo);</span>
+            }
+<span class="pc" id="L57">        } catch (SQLException e) {</span>
+<span class="nc" id="L58">            this.result = null;</span>
+        }
+<span class="fc" id="L60">        return grupos;</span>
+    }
+
+    public Grupo getGrupoByID(int id) {
+<span class="fc" id="L64">        int offset = 0;</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (ConnectionClass.usingPSQL()) {</span>
+<span class="fc" id="L66">            offset = 1;</span>
+        }
+<span class="fc" id="L68">        Grupo grupo = null;</span>
+<span class="fc" id="L69">        String query = &quot;SELECT \&quot;Nombre\&quot;,\&quot;Codigo\&quot;, \&quot;Publico\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L70">                + &quot;\&quot;GrupoEstudio\&quot; WHERE \&quot;ID\&quot;=&quot; + id + &quot;;&quot;;</span>
+        try {
+<span class="fc" id="L72">            this.statement = this.con.prepareStatement(query);</span>
+<span class="fc" id="L73">            this.result = this.statement.executeQuery();</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">            if (this.result.next()) {</span>
+<span class="fc" id="L75">                ControlEstudiantes controlEstudiantes = new ControlEstudiantes();</span>
+<span class="fc" id="L76">                ControlProfesores controlProfesores = new ControlProfesores();</span>
+<span class="fc" id="L77">                String nombre = this.result.getString(0 + offset);</span>
+<span class="fc" id="L78">                String codigo = this.result.getString(1 + offset);</span>
+<span class="fc" id="L79">                String publico = this.result.getString(2 + offset);</span>
+<span class="fc" id="L80">                HashSet&lt;Usuario&gt; usuarios = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L81">                HashSet&lt;Reunion&gt; reuniones = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L82">                HashSet&lt;ChatG&gt; chats = new HashSet&lt;&gt;();</span>
+                // Sacar Miembros
+<span class="fc" id="L84">                query = &quot;SELECT \&quot;UsuarioRegistradoID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L85">                        + &quot;\&quot;UsuarioxGrupoEstudio\&quot; WHERE \&quot;GrupoEstudioID\&quot;=&quot; + id + &quot;;&quot;;</span>
+                try {
+<span class="fc" id="L87">                    this.statement = this.con.prepareStatement(query);</span>
+<span class="fc" id="L88">                    this.result = this.statement.executeQuery();</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">                    while (this.result.next()) {</span>
+<span class="fc" id="L90">                        Usuario usuario = controlEstudiantes.getEstudianteByID(this.result.getInt(0 + offset));</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">                        if (usuario == null)</span>
+<span class="nc" id="L92">                            usuario = controlProfesores.getProfesorByID(this.result.getInt(0 + offset));</span>
+<span class="fc" id="L93">                        usuarios.add(usuario);</span>
+                    }
+<span class="pc" id="L95">                } catch (Exception e) {</span>
+                    // Error sacando miembros del grupo
+                }
+                // Sacar Reuniones
+<span class="fc" id="L99">                query = &quot;SELECT \&quot;ReunionID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L100">                        + &quot;\&quot;ReunionXGrupoEstudio\&quot; WHERE \&quot;GrupoEstudioID\&quot;=&quot; + id + &quot;;&quot;;</span>
+                try {
+<span class="fc" id="L102">                    this.statement = this.con.prepareStatement(query);</span>
+<span class="fc" id="L103">                    this.result = this.statement.executeQuery();</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">                    while (this.result.next()) {</span>
+                        ResultSet rs;
+<span class="nc" id="L106">                        query = &quot;SELECT \&quot;Fecha\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Reunion\&quot; WHERE \&quot;ID\&quot;=&quot;</span>
+<span class="nc" id="L107">                                + this.result.getInt(0 + offset) + &quot;;&quot;;</span>
+                        try {
+<span class="nc" id="L109">                            this.statement = this.con.prepareStatement(query);</span>
+<span class="nc" id="L110">                            rs = this.statement.executeQuery();</span>
+<span class="nc" id="L111">                            reuniones.add(new Reunion(rs.getDate(0 + offset)));</span>
+<span class="nc" id="L112">                        } catch (Exception e) {</span>
+                            // Error sacando reuniones del grupo
+                        }
+                    }
+<span class="pc" id="L116">                } catch (Exception e) {</span>
+                    // Error sacando reuniones del grupo
+                }
+                // Sacar Chats
+<span class="fc" id="L120">                query = &quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;Chat\&quot; WHERE \&quot;PerteneceID\&quot;=&quot; + id</span>
+<span class="fc" id="L121">                        + &quot;;&quot;;</span>
+                try {
+<span class="fc" id="L123">                    this.statement = this.con.prepareStatement(query);</span>
+<span class="fc" id="L124">                    this.result = this.statement.executeQuery();</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">                    while (this.result.next()) {</span>
+<span class="fc" id="L126">                        int chatID = this.result.getInt(0 + offset);</span>
+                        ResultSet rs;
+<span class="fc" id="L128">                        query = &quot;SELECT ME.\&quot;Mensaje\&quot;,ME.\&quot;Fecha\&quot;,ME.\&quot;RemitenteID\&quot; FROM &quot;</span>
+<span class="fc" id="L129">                                + ConnectionClass.getSchema() + &quot;\&quot;Mensaje\&quot; AS ME, &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L130">                                + &quot;\&quot;ChatXMensaje\&quot; AS CME WHERE CME.\&quot;ChatID\&quot;=&quot; + chatID</span>
+<span class="fc" id="L131">                                + &quot;AND ME.\&quot;ID\&quot;=CME.\&quot;MensajeID\&quot;&quot; + &quot;;&quot;;</span>
+                        try {
+<span class="fc" id="L133">                            this.statement = this.con.prepareStatement(query);</span>
+<span class="fc" id="L134">                            rs = this.statement.executeQuery();</span>
+<span class="fc" id="L135">                            Chat chat = null;</span>
+<span class="fc" id="L136">                            HashSet&lt;Mensaje&gt; mensajes = new HashSet&lt;&gt;();</span>
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">                            while (rs.next()) {</span>
+<span class="nc" id="L138">                                Usuario user=controlEstudiantes.getEstudianteByID(rs.getInt(2 + offset));</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">                                if (user==null)</span>
+<span class="nc" id="L140">                                    user=controlProfesores.getProfesorByID(rs.getInt(2 + offset));</span>
+<span class="nc" id="L141">                                Mensaje mensaje = new Mensaje(rs.getString(1 + offset), rs.getString(0 + offset),</span>
+<span class="nc" id="L142">                                        user, chat);</span>
+<span class="nc" id="L143">                                mensajes.add(mensaje);</span>
+                            }
+<span class="fc" id="L145">                            chats.add(new ChatG(null, 'G', mensajes, null));</span>
+<span class="pc" id="L146">                        } catch (Exception e) {</span>
+                            // Error sacando chats del grupo
+                        }
+                    }
+<span class="pc" id="L150">                } catch (Exception e) {</span>
+                    // Error sacando chats del grupo
+                }
+<span class="fc" id="L153">                grupo = new Grupo(nombre, codigo, publico, usuarios, reuniones, chats);</span>
+            }
+<span class="pc" id="L155">        } catch (SQLException e) {</span>
+<span class="nc" id="L156">            this.result = null;</span>
+        }
+<span class="fc" id="L158">        return grupo;</span>
+    }
+
+    public int getGrupoID(String codigo) {
+        /*
+         * Este metodo retorna el ID de un grupo al cual busca por su codigo. Recibe :
+         * email -&gt; String que representa un email
+         */
+<span class="fc" id="L166">        int r = 0;</span>
+<span class="fc" id="L167">        int offset = 0;</span>
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">        if (ConnectionClass.usingPSQL()) {</span>
+<span class="fc" id="L169">            offset = 1;</span>
+        }
+        try {
+<span class="fc" id="L172">            this.statement = this.con.prepareStatement(&quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L173">                    + &quot;\&quot;GrupoEstudio\&quot; WHERE \&quot;Codigo\&quot;=\'&quot; + codigo + &quot;\';&quot;);</span>
+<span class="fc" id="L174">            this.result = this.statement.executeQuery();</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">            if (this.result.next()) {</span>
+<span class="fc" id="L176">                r = this.result.getInt(0 + offset);</span>
+<span class="fc" id="L177">            } else {</span>
+<span class="fc" id="L178">                throw new Exception(&quot;No encontrado&quot;);</span>
+            }
+<span class="fc" id="L180">        } catch (Exception e) {</span>
+<span class="fc" id="L181">            r = 0;</span>
+        }
+<span class="fc" id="L183">        return r;</span>
+    }
+
+    public boolean insertarUsuarioXGrupoEstudio(String cod, String email, String admin) {
+        /*
+         * Inserta un usuario en un grupo. Recibe: grupoid-&gt; int con el idusuario del
+         * grupo, idusuario-&gt; int con el id del usuario, admin -&gt; String (S/N) que
+         * determina si el usuario es admin
+         */
+<span class="fc" id="L192">        boolean b = true;</span>
+<span class="fc" id="L193">        int idusuario = this.getUsarioID(email);</span>
+<span class="fc" id="L194">        int grupoid = this.getGrupoID(cod);</span>
+<span class="fc" id="L195">        String consulta = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L196">                + &quot;\&quot;UsuarioxGrupoEstudio\&quot;(\&quot;UsuarioRegistradoID\&quot;, \&quot;GrupoEstudioID\&quot;, \&quot;Admin\&quot;) VALUES (&quot;</span>
+<span class="fc" id="L197">                + String.valueOf(idusuario) + &quot;, &quot; + String.valueOf(grupoid) + &quot;,\'&quot; + admin.toUpperCase() + &quot;\');&quot;;</span>
+        try {
+<span class="fc" id="L199">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L200">            this.statement.executeQuery();</span>
+<span class="pc" id="L201">        } catch (Exception e) {</span>
+        }
+<span class="fc" id="L203">        return b;</span>
+    }
+
+    public boolean eliminarUsuarioXGrupoEstudio(String cod, String email) {
+        /*
+         * Elimina un usuario en un grupo. Recibe: grupoid-&gt; int con el idusuario del
+         * grupo, idusuario-&gt; int con el id del usuario, admin -&gt; String (S/N) que
+         * determina si el usuario es admin
+         */
+<span class="fc" id="L212">        boolean b = true;</span>
+<span class="fc" id="L213">        int idusuario = this.getUsarioID(email);</span>
+<span class="fc" id="L214">        int grupoid = this.getGrupoID(cod);</span>
+<span class="fc" id="L215">        String consulta = &quot;DELETE FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L216">                + &quot;\&quot;UsuarioxGrupoEstudio\&quot; WHERE \&quot;UsuarioRegistradoID\&quot;=&quot; + String.valueOf(idusuario)</span>
+<span class="fc" id="L217">                + &quot; AND \&quot;GrupoEstudioID\&quot;= &quot; + String.valueOf(grupoid);</span>
+        try {
+<span class="fc" id="L219">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L220">            this.statement.executeQuery();</span>
+<span class="pc" id="L221">        } catch (Exception e) {</span>
+        }
+<span class="fc" id="L223">        return b;</span>
+    }
+
+    public boolean hacerAdminDeGrupo(int grupoid, int idusuario) {
+        /*
+         * Convierte a un usuario en administrador del grupo. Recibe: grupoid-&gt; int con
+         * el idusuario del grupo, idusuario-&gt; int con el id del usuario
+         */
+<span class="fc" id="L231">        boolean b = true;</span>
+<span class="fc" id="L232">        String consulta = &quot;UPDATE &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L233">                + &quot;\&quot;UsuarioxGrupoEstudio\&quot; SET \&quot;Admin\&quot;=\'S\' WHERE \&quot;UsuarioRegistradoID\&quot; = \&quot;&quot; + idusuario</span>
+<span class="fc" id="L234">                + &quot;\&quot; AND \&quot;GrupoEstudioID\&quot; =  \&quot;&quot; + grupoid + &quot;\&quot; ;&quot;;</span>
+        try {
+<span class="fc" id="L236">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L237">            this.statement.executeQuery();</span>
+<span class="pc" id="L238">        } catch (Exception e) {</span>
+        }
+<span class="fc" id="L240">        return b;</span>
+
+    }
+
+    public boolean crearGrupo(Grupo grupo, String usuario) {
+        /*
+         * Este método guarda un grupo en la BD, recibe un objeto de la clase grupo y
+         * hace que este persista en la BD . Recibe: grupo -&gt; Instancia de la clase
+         * Grupo, representa el grupo que quiere guardarse en la BD
+         */
+<span class="fc" id="L250">        boolean b = true; // Inicializo lo que retorno (Si el grupo se guardo bien)</span>
+<span class="fc" id="L251">        String sql = &quot;INSERT INTO &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L252">                + &quot;\&quot;GrupoEstudio\&quot; (\&quot;Nombre\&quot;,\&quot;Publico\&quot;, \&quot;Codigo\&quot;) VALUES ('&quot; + grupo.getNombre() + &quot;','&quot;</span>
+<span class="fc" id="L253">                + grupo.isPublico() + &quot;','&quot; + grupo.getCodigo() + &quot;');&quot;;</span>
+        // Consulta SQL para insertar
+        // un grupo registrado en la BD
+
+        try {
+<span class="fc" id="L258">            this.statement = this.con.prepareStatement(sql); // Preparando una consulta SQL</span>
+<span class="fc" id="L259">            this.statement.execute(); // Ejecutando una consulta SQL</span>
+<span class="fc" id="L260">        } catch (Exception e) {</span>
+        }
+        try {
+            // Toca insertar el usuario y el grupo en UsuarioXGrupoEstudio
+<span class="fc" id="L264">            this.insertarUsuarioXGrupoEstudio(grupo.getCodigo(), usuario, &quot;S&quot;);</span>
+<span class="pc" id="L265">        } catch (Exception e) { // No pasa nada</span>
+        }
+        // Fin de crear grupo
+<span class="fc" id="L268">        return b;</span>
+    }
+
+    public boolean eliminarGrupo(String codigo) {
+        /*
+         * Elimina un grupo de la BD. Recibe: codigo -&gt; String que representa el codigo
+         * de un grupo
+         */
+<span class="fc" id="L276">        boolean b = true;</span>
+<span class="fc" id="L277">        int id = this.getGrupoID(codigo);</span>
+<span class="fc bfc" id="L278" title="All 2 branches covered.">        if (id == 0) {</span>
+<span class="fc" id="L279">            b = false;</span>
+<span class="fc" id="L280">        } else {</span>
+            try {
+                // Borrar registros de grupo de UsuarioXGrupoEstudio
+<span class="fc" id="L283">                String sql = &quot;DELETE FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L284">                        + &quot;\&quot;UsuarioxGrupoEstudio\&quot; WHERE \&quot;GrupoEstudioID\&quot;=&quot; + String.valueOf(id);</span>
+<span class="fc" id="L285">                this.statement = this.con.prepareStatement(sql);</span>
+<span class="nc" id="L286">                this.result = this.statement.executeQuery();</span>
+<span class="pc" id="L287">            } catch (Exception e) {</span>
+            }
+            try {
+                // Borrar grupo de GrupoEstudio
+<span class="fc" id="L291">                String sql = &quot;DELETE FROM &quot; + ConnectionClass.getSchema() + &quot;\&quot;GrupoEstudio\&quot; WHERE \&quot;ID\&quot;=&quot;</span>
+<span class="fc" id="L292">                        + String.valueOf(id);</span>
+<span class="fc" id="L293">                this.statement = this.con.prepareStatement(sql);</span>
+<span class="nc" id="L294">                this.result = this.statement.executeQuery();</span>
+<span class="pc" id="L295">            } catch (Exception e) {</span>
+            }
+        }
+<span class="fc" id="L298">        return b;</span>
+    }
+
+    public boolean modificarGrupo(Grupo grupo) {
+        /*
+         * Modifica un grupo en la BD. Recibe: grupo -&gt; Instancia de la clase grupo que
+         * tiene los datos actualizados de un grupo, sin embargo, su codigo no cambia
+         */
+<span class="fc" id="L306">        boolean b = true;</span>
+<span class="fc" id="L307">        String consulta = &quot;UPDATE &quot; + ConnectionClass.getSchema() + &quot;\&quot;GrupoEstudio\&quot; SET \&quot;Nombre\&quot;=\'&quot;</span>
+<span class="fc" id="L308">                + grupo.getNombre() + &quot;\', \&quot;Publico\&quot;=\'&quot; + grupo.isPublico() + &quot;\'  WHERE \&quot;Codigo\&quot;=\'&quot;</span>
+<span class="fc" id="L309">                + grupo.getCodigo() + &quot;\';&quot;;</span>
+        try {
+<span class="fc" id="L311">            this.statement = this.con.prepareStatement(consulta);</span>
+<span class="nc" id="L312">            this.statement.executeQuery();</span>
+<span class="pc" id="L313">        } catch (Exception e) {</span>
+        }
+<span class="fc" id="L315">        return b;</span>
+    }
+
+    public int getUsarioID(String email) {
+        /*
+         * Este metodo retorna el ID de un usuario al cual busca por su mail. Recibe :
+         * email -&gt; String que representa un email
+         */
+<span class="fc" id="L323">        int r = 0;</span>
+<span class="fc" id="L324">        int offset = 0;</span>
+<span class="pc bpc" id="L325" title="1 of 2 branches missed.">        if (ConnectionClass.usingPSQL())</span>
+<span class="fc" id="L326">            offset = 1;</span>
+        try {
+<span class="fc" id="L328">            this.statement = this.con.prepareStatement(&quot;SELECT \&quot;ID\&quot; FROM &quot; + ConnectionClass.getSchema()</span>
+<span class="fc" id="L329">                    + &quot;\&quot;UsuarioRegistrado\&quot; WHERE \&quot;Email\&quot;=\'&quot; + email + &quot;\';&quot;);</span>
+<span class="fc" id="L330">            this.result = this.statement.executeQuery();</span>
+<span class="fc bfc" id="L331" title="All 2 branches covered.">            if (this.result.next())</span>
+<span class="fc" id="L332">                r = this.result.getInt(0 + offset);</span>
+            else
+<span class="fc" id="L334">                throw new Exception(&quot;No encontrado&quot;);</span>
+<span class="fc" id="L335">        } catch (Exception e) {</span>
+<span class="fc" id="L336">            r = 0;</span>
+        }
+<span class="fc" id="L338">        return r;</span>
+    }
+
+<span class="fc" id="L341">    public ControlGrupos() {</span>
+<span class="fc" id="L342">        this.con = this.CONNECTION_CLASS.getCon();</span>
+        try {
+<span class="fc" id="L344">            this.con.setAutoCommit(true);</span>
+<span class="pc" id="L345">        } catch (SQLException e) {</span>
+        }
+<span class="fc" id="L347">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

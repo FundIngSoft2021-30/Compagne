@@ -40,6 +40,16 @@ public class ControlChatsTest {
         assertTrue(controlChats.crearChat(chatG, perteneceID));
     }
 
+    @Test
+    public void enviarMSJtest() {
+            int cid=controlChats.getChatID(chatP);
+        Mensaje mensaje = new Mensaje("Fecha1", "Mensaje1", controlEstudiantes.getEstudianteByID(usuario1ID), chatP);
+        assertTrue(controlChats.insertarMensajeXChat(cid, mensaje, usuario1ID));
+        int s1=controlChats.mensajesXChat(cid).size();
+        mensaje = new Mensaje("Fecha1", "Mensaje2", controlEstudiantes.getEstudianteByID(usuario2ID), chatP);
+        assertTrue(controlChats.insertarMensajeXChat(cid, mensaje, usuario2ID));
+        assertEquals(s1+1, controlChats.mensajesXChat(cid).size());
+    }
 
     @Test
     public void getChatIDTest() {
