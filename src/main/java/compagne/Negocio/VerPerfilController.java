@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package compagne.Negocio;
 
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Estudiante;
-import compagne.Entidades.Grupo;
-import compagne.Entidades.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -24,11 +17,6 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author USUARIO
- */
 public class VerPerfilController implements Initializable {
 
     private FacadeCompagne facade = FacadeCompagne.getInstance();
