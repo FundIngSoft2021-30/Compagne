@@ -9,9 +9,6 @@ import compagne.Entidades.ChatP;
 import static org.junit.Assert.*;
 
 import java.sql.ResultSet;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Calendar;
 
 import java.util.HashSet;
 
@@ -37,9 +34,9 @@ public class ControlChatsTest {
         controlGrupos = new ControlGrupos();
         controlEstudiantes= new ControlEstudiantes();
         controlProfesores = new ControlProfesores();
-        chatP = new ChatP(new Date(), "ElcodIG0D3lgrUp0PRU3b@", 'P', mensajes, controlEstudiantes.getEstudianteByID(usuario1ID), controlProfesores.getProfesorByID(usuario2ID));
+        chatP = new ChatP("Fecha1", 'P', mensajes, controlEstudiantes.getEstudianteByID(usuario1ID), controlProfesores.getProfesorByID(usuario2ID));
         assertTrue(controlChats.crearChat(chatP, usuario1ID, usuario2ID));
-        chatG = new ChatG(new Date(), "Un }}COJDIHD'0 de sete cgatr", 'G', mensajes2, controlGrupos.getGrupoByID(perteneceID));
+        chatG = new ChatG("Fecha2", 'G', mensajes2, controlGrupos.getGrupoByID(perteneceID));
         assertTrue(controlChats.crearChat(chatG, perteneceID));
     }
 
@@ -47,7 +44,7 @@ public class ControlChatsTest {
     @Test
     public void getChatIDTest() {
         assertNotEquals(0, controlChats.getChatID(chatP));
-        assertEquals(0, controlChats.getChatID(chatG = new ChatG((Date)new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime(), "Un }}COJDIHD'0 de sete cgatr", 'G', null, controlGrupos.getGrupoByID(perteneceID))));
+        assertEquals(0, controlChats.getChatID(chatG = new ChatG("(Date)new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime()", 'G', null, controlGrupos.getGrupoByID(perteneceID))));
     }
 
     @Test

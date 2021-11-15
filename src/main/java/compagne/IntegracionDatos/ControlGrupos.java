@@ -132,7 +132,7 @@ public class ControlGrupos {
                                         (Usuario) controlEstudiantes.getEstudianteByID(rs.getInt(2 + offset)), chat);
                                 mensajes.add(mensaje);
                             }
-                            chats.add(new ChatG(null, "", 'G', mensajes, null));
+                            chats.add(new ChatG(null, 'G', mensajes, null));
                         } catch (Exception e) {
                             // Error sacando chats del grupo
                         }
