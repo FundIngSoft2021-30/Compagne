@@ -50,7 +50,7 @@ public class Mensaje {
             return false;
         }
         Mensaje mensaje = (Mensaje) o;
-        return Objects.equals(hora, mensaje.hora) && Objects.equals(mensaje, mensaje.mensaje) && Objects.equals(remitente, mensaje.remitente) && Objects.equals(chat, mensaje.chat);
+        return Objects.equals(hora, mensaje.hora) && Objects.equals(this.mensaje, mensaje.mensaje) && Objects.equals(remitente, mensaje.remitente) && Objects.equals(chat, mensaje.chat);
     }
 
     @Override

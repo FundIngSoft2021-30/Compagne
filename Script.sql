@@ -67,11 +67,11 @@ CREATE TABLE public."UsuarioxGrupoEstudio" (
   "GrupoEstudioID"));
 CREATE TABLE public."Reunion" (
   "ID"    SERIAL NOT NULL , 
-  "Fecha" varchar(30) NOT NULL, 
+  "Fecha" text NOT NULL, 
   PRIMARY KEY ("ID"));
 CREATE TABLE public."Chat" (
   "ID"   SERIAL NOT NULL ,
-  "FechaCreacion" varchar(30) NOT NULL,
+  "FechaCreacion" text NOT NULL,
   "Tipo" varchar(1) NOT NULL CONSTRAINT chatTipoCheck CHECK("Tipo"='P' OR "Tipo"='G'), 
   "PerteneceID" int,
   "Usuario1ID" int,
@@ -85,7 +85,7 @@ CREATE TABLE public."Comentario" (
 CREATE TABLE public."Mensaje" (
   "ID"    SERIAL NOT NULL , 
   "Mensaje" text,
-  "Fecha" varchar(30) NOT NULL, 
+  "Fecha" text NOT NULL, 
   "RemitenteID" int NOT NULL,
   PRIMARY KEY ("ID"));
 CREATE TABLE public."ChatXMensaje"(
