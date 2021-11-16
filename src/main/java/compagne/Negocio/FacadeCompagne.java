@@ -1,4 +1,5 @@
 package compagne.Negocio;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -38,6 +39,7 @@ public class FacadeCompagne {
     public ControlGrupos getControlGrupos() {
         return this.controlGrupos;
     }
+
     public static FacadeCompagne instance;
     public String usu;
 
@@ -45,7 +47,7 @@ public class FacadeCompagne {
         this.controlEstudiantes = new ControlEstudiantes();
         this.controlProfesores = new ControlProfesores();
         this.controlGrupos = new ControlGrupos();
-        this.controlChats=new ControlChats();
+        this.controlChats = new ControlChats();
     }
 
     public static FacadeCompagne getInstance() {
@@ -74,19 +76,19 @@ public class FacadeCompagne {
         return controlChats.insertarMensajeXChat(chat_id, mensaje, remitenteID);
     }
 
-    public HashSet<Mensaje> buscarMensajesXChat(int chatID){
+    public HashSet<Mensaje> buscarMensajesXChat(int chatID) {
         return this.controlChats.mensajesXChat(chatID);
     }
 
-    public HashSet<ChatP> buscarChatsXUsuario(int usuarioID){
+    public HashSet<ChatP> buscarChatsXUsuario(int usuarioID) {
         return controlChats.buscarChatsXUsuario(usuarioID);
     }
 
-    public HashSet<ChatG> buscarChatsXGrupo(int grupoID){
+    public HashSet<ChatG> buscarChatsXGrupo(int grupoID) {
         return controlChats.buscarChatsXGrupo(grupoID);
     }
 
-    public boolean crearChat(ChatG chat, int grupoID){
+    public boolean crearChat(ChatG chat, int grupoID) {
         return controlChats.crearChat(chat, grupoID);
     }
 
@@ -104,9 +106,12 @@ public class FacadeCompagne {
         return profesor;
     }
 
-    public Profesor modificarPerfilProfesor(String nombre, String experiencia, String email, String contrasenia) {
+    public Profesor modificarPerfilProfesor(String nombre, String experiencia, String email, String contrasenia,
+            HashSet<String> horariosAtencion, HashSet<String> materias, HashSet<Comentario> comentarios,
+            HashSet<String> logros) {
         // Email no se puede cambiar
-        Profesor profesor = new Profesor(nombre, email, null, null, experiencia, contrasenia, null, null);
+        Profesor profesor = new Profesor(nombre, email, materias, comentarios, experiencia, contrasenia,
+                horariosAtencion, logros);
         this.controlProfesores.modificarProfesor(profesor);
         return profesor;
     }
@@ -123,8 +128,10 @@ public class FacadeCompagne {
         return estudiante;
     }
 
-    public Estudiante modificarPerfilEstudiante(String nombre, String email, String contrasenia) {
-        Estudiante estudiante = new Estudiante(nombre, email, null, null, contrasenia, null, null);
+    public Estudiante modificarPerfilEstudiante(String nombre, String email, String contrasenia,
+            HashSet<String> materias, HashSet<Comentario> comentarios, HashSet<String> intereses,
+            HashSet<String> logros) {
+        Estudiante estudiante = new Estudiante(nombre, email, materias, comentarios, contrasenia, intereses, logros);
         this.controlEstudiantes.modificarEstudiante(estudiante);
         return estudiante;
     }
@@ -304,11 +311,12 @@ public class FacadeCompagne {
                     // Nada
                 }
                 // Materias
-                consulta = "SELECT LO.\"Experiencia\" FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" AS LO WHERE "+proID+"=LO.\"ID\";";
+                consulta = "SELECT LO.\"Experiencia\" FROM " + ConnectionClass.getSchema()
+                        + "\"UsuarioRegistrado\" AS LO WHERE " + proID + "=LO.\"ID\";";
                 rs = this.controlProfesores.executeQuery(consulta);
                 try {
                     if (rs.next()) {
-                        experiencia=rs.getString(0 + offset);
+                        experiencia = rs.getString(0 + offset);
                     }
                 } catch (Exception e) {
                     // Nada
@@ -331,7 +339,7 @@ public class FacadeCompagne {
         }
         return usu;
     }
-    
+
     public Usuario informacionUsuario(String email) {
         Usuario usu = null;
         String nombre = "";
@@ -344,8 +352,7 @@ public class FacadeCompagne {
         boolean b = false;
         if (estID > 0) {
             consulta = "SELECT \"Nombre\" FROM " + ConnectionClass.getSchema()
-                    + "\"UsuarioRegistrado\" WHERE \"Email\"=" + "\'" + email
-                    + "\' AND \"Tipo\"=\'S\';";
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=" + "\'" + email + "\' AND \"Tipo\"=\'S\';";
             ResultSet rs = this.controlEstudiantes.executeQuery(consulta);
             try {
                 if (rs.next()) {
@@ -412,12 +419,11 @@ public class FacadeCompagne {
                 } catch (Exception e) {
                     // Nada
                 }
-                usu = new Estudiante(nombre, email, materias, comentarios,"*******", intereses, logros);
+                usu = new Estudiante(nombre, email, materias, comentarios, "*******", intereses, logros);
             }
         } else if (proID > 0) {
             consulta = "SELECT \"Nombre\" FROM " + ConnectionClass.getSchema()
-                    + "\"UsuarioRegistrado\" WHERE \"Email\"=" + "\'" + email
-                    + "\' AND \"Tipo\"=\'T\';";
+                    + "\"UsuarioRegistrado\" WHERE \"Email\"=" + "\'" + email + "\' AND \"Tipo\"=\'T\';";
             ResultSet rs = this.controlEstudiantes.executeQuery(consulta);
             try {
                 if (rs.next()) {
@@ -461,11 +467,12 @@ public class FacadeCompagne {
                     // Nada
                 }
                 // Materias
-                consulta = "SELECT LO.\"Experiencia\" FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" AS LO WHERE "+proID+"=LO.\"ID\";";
+                consulta = "SELECT LO.\"Experiencia\" FROM " + ConnectionClass.getSchema()
+                        + "\"UsuarioRegistrado\" AS LO WHERE " + proID + "=LO.\"ID\";";
                 rs = this.controlProfesores.executeQuery(consulta);
                 try {
                     if (rs.next()) {
-                        experiencia=rs.getString(0 + offset);
+                        experiencia = rs.getString(0 + offset);
                     }
                 } catch (Exception e) {
                     // Nada
@@ -483,22 +490,23 @@ public class FacadeCompagne {
                 } catch (Exception e) {
                     // Nada
                 }
-                usu = new Profesor(nombre, email, materias, comentarios, experiencia, "***********", horarioAtencion, logros);
+                usu = new Profesor(nombre, email, materias, comentarios, experiencia, "***********", horarioAtencion,
+                        logros);
             }
         }
         return usu;
     }
-    
-    public HashSet<String> buscarCompaNombre(String nombre){
-        
+
+    public HashSet<String> buscarCompaNombre(String nombre) {
+
         HashSet<String> emails = new HashSet<>();
         String consulta = "";
         int offset = 0;
         if (ConnectionClass.usingPSQL())
             offset = 1;
-        
-        consulta = "SELECT \"Email\" FROM " + ConnectionClass.getSchema()
-                + "\"UsuarioRegistrado\" WHERE \"Nombre\"=" + "\'" + nombre // Cambiar "=" por "LIKE"
+
+        consulta = "SELECT \"Email\" FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" WHERE \"Nombre\"="
+                + "\'" + nombre // Cambiar "=" por "LIKE"
                 + "\' AND \"Tipo\"=\'S\'" + "\';";
         ResultSet rs = this.controlEstudiantes.executeQuery(consulta);
         try {
@@ -509,11 +517,11 @@ public class FacadeCompagne {
             // Nada
         }
         return emails;
-        
+
     }
-    
-    public Grupo informacionGrupo(String grupocod){
-        Grupo g=null;
+
+    public Grupo informacionGrupo(String grupocod) {
+        Grupo g = null;
         HashSet<Integer> ids = new HashSet<>();
         HashSet<String> emails = new HashSet<>();
         HashSet<Usuario> miembros = new HashSet<>();
@@ -521,111 +529,105 @@ public class FacadeCompagne {
         int offset = 0;
         if (ConnectionClass.usingPSQL())
             offset = 1;
-        
-        consulta = "SELECT \"Nombre\", \"Publico\" FROM "+ConnectionClass.getSchema()+"\"GrupoEstudio\" WHERE \"Codigo\"=" + "\';"+ grupocod+"\';";
+
+        consulta = "SELECT \"Nombre\", \"Publico\" FROM " + ConnectionClass.getSchema()
+                + "\"GrupoEstudio\" WHERE \"Codigo\"=" + "\';" + grupocod + "\';";
         ResultSet rs = this.controlGrupos.executeQuery(consulta);
         try {
-            if(rs.next()) {
-                g = new Grupo (rs.getString(0 + offset),grupocod,rs.getString(1 + offset));
+            if (rs.next()) {
+                g = new Grupo(rs.getString(0 + offset), grupocod, rs.getString(1 + offset));
             }
         } catch (Exception e) {
             // Nada
         }
-        if(g!=null){
-            consulta = "SELECT \"UsuarioRegistradoID\", \"Admin\" FROM "+ ConnectionClass.getSchema()
-                + "\"UsuarioxGrupoEstudio\" WHERE \"GrupoEstudioID\"=" + "\';"+ grupocod+"\';";
+        if (g != null) {
+            consulta = "SELECT \"UsuarioRegistradoID\", \"Admin\" FROM " + ConnectionClass.getSchema()
+                    + "\"UsuarioxGrupoEstudio\" WHERE \"GrupoEstudioID\"=" + "\';" + grupocod + "\';";
             rs = this.controlGrupos.executeQuery(consulta);
             try {
-                while(rs.next()) {
+                while (rs.next()) {
                     ids.add(rs.getInt(0 + offset));
                 }
             } catch (Exception e) {
                 // Nada
             }
         }
-        if(!ids.isEmpty()){
-            for(Integer i:ids){
+        if (!ids.isEmpty()) {
+            for (Integer i : ids) {
                 emails.add(this.controlEstudiantes.getEstudianteEmail(i));
             }
         }
-        if(!emails.isEmpty()){
-            for(String e:emails){
+        if (!emails.isEmpty()) {
+            for (String e : emails) {
                 miembros.add(informacionUsuario(e));
             }
         }
-        if(!miembros.isEmpty()) g.setMiembros(miembros);
+        if (!miembros.isEmpty())
+            g.setMiembros(miembros);
         return g;
     }
-    
-    public Grupo crearGrupo(String nombre, String codigo, String publico, String usuario)
-    {
+
+    public Grupo crearGrupo(String nombre, String codigo, String publico, String usuario) {
         Grupo grupo = new Grupo(nombre, codigo, publico);
-        if (!this.controlGrupos.crearGrupo(grupo,usuario))
+        if (!this.controlGrupos.crearGrupo(grupo, usuario))
             grupo = null;
         return grupo;
     }
 
-    public Grupo modificarGrupo(String nombre, String codigo, String publico)
-    {
+    public Grupo modificarGrupo(String nombre, String codigo, String publico) {
         Grupo grupo = new Grupo(nombre, codigo, publico);
         if (!this.controlGrupos.modificarGrupo(grupo))
             grupo = null;
         return grupo;
     }
 
-    public boolean eliminarGrupo(String codigo)
-    {
+    public boolean eliminarGrupo(String codigo) {
         return this.controlGrupos.eliminarGrupo(codigo);
     }
 
-    public boolean agregarUsuarioAGrupo(String grupocod, String email, String admin)
-    {
+    public boolean agregarUsuarioAGrupo(String grupocod, String email, String admin) {
         return this.controlGrupos.insertarUsuarioXGrupoEstudio(grupocod, email, admin);
     }
-    
-    public boolean eliminarUsuarioDeGrupo(String grupocod, String email)
-    {
+
+    public boolean eliminarUsuarioDeGrupo(String grupocod, String email) {
         return this.controlGrupos.eliminarUsuarioXGrupoEstudio(grupocod, email);
     }
-    
-    public boolean hacerAdminDeGrupo(int grupoid, int idusuario)
-    {
+
+    public boolean hacerAdminDeGrupo(int grupoid, int idusuario) {
         return this.controlGrupos.hacerAdminDeGrupo(grupoid, idusuario);
     }
-    
-    public HashSet<Usuario> listarCompasGrupo(String codigo){
-        HashSet<Usuario> losU=this.controlEstudiantes.listarCompasGrupo(codigo);
+
+    public HashSet<Usuario> listarCompasGrupo(String codigo) {
+        HashSet<Usuario> losU = this.controlEstudiantes.listarCompasGrupo(codigo);
         return losU;
     }
-    
-    
-    //BUSQUEDA
-    public int buscarIDUsuario(String email)
-    {
+
+    // BUSQUEDA
+    public int buscarIDUsuario(String email) {
         return this.controlGrupos.getUsarioID(email);
     }
-    public int buscarIDGrupo(String codigo)
-    {
+
+    public int buscarIDGrupo(String codigo) {
         return this.controlGrupos.getGrupoID(codigo);
     }
-    public boolean isEstudiante(String email){
-        return (this.controlEstudiantes.getEstudianteID(email)>0);
+
+    public boolean isEstudiante(String email) {
+        return (this.controlEstudiantes.getEstudianteID(email) > 0);
     }
 
-    
     public HashSet<Grupo> listarGruposPublicos() {
         return this.controlGrupos.getGruposPublicos();
     }
 
-    public HashSet<Usuario> listarCompas(){
+    public HashSet<Usuario> listarCompas() {
         return this.controlEstudiantes.listarCompas();
     }
 
-    public HashSet<Usuario> listarCompas(String nombre){
+    public HashSet<Usuario> listarCompas(String nombre) {
         return this.controlEstudiantes.listarCompas(nombre);
     }
 
-    protected void finalize(){
+    protected void finalize() {
         this.controlGrupos.finalize();
         this.controlEstudiantes.finalize();
         this.controlChats.finalize();
