@@ -40,6 +40,7 @@ public class FacadeTest {
     @Test
     public void testIniciarSesion() {
         assertNotNull(facade.iniciarSesion("abril@cano.com", "@bril"));
+        assertNotNull(facade.iniciarSesion("anmontero@javeriana.edu.co", "@Nab3l"));
         assertNull(facade.iniciarSesion("abril@cano.com", "abril"));
     }
 
