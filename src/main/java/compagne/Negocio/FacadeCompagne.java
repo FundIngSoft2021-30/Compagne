@@ -505,15 +505,17 @@ public class FacadeCompagne {
         if (ConnectionClass.usingPSQL())
             offset = 1;
 
-        consulta = "SELECT \"Email\" FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" WHERE \"Nombre\"="
-                + "\'" + nombre // Cambiar "=" por "LIKE"
-                + "\' AND \"Tipo\"=\'S\'" + "\';";
+        consulta = "SELECT \"Email\" FROM " + ConnectionClass.getSchema() + "\"UsuarioRegistrado\" WHERE \"Nombre\" LIKE"
+                + " \'" + nombre + "%\' AND \"Tipo\"=\'S" + "\';";
+        //System.out.println("La consulta "+ consulta);
         ResultSet rs = this.controlEstudiantes.executeQuery(consulta);
         try {
             while (rs.next()) {
+                //System.out.println("Agregando email");
                 emails.add(rs.getString(0 + offset));
             }
         } catch (Exception e) {
+            //e.printStackTrace();
             // Nada
         }
         return emails;

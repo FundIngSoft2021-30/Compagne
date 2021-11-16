@@ -51,7 +51,7 @@ public class FacadeTest {
         @Test
         public void testInfoUsuario_Grupo() {
                 assertNotNull(facade.informacionUsuario("abril@cano.com"));
-                assertNotNull(facade.informacionGrupo("abril800q"));
+                assertNull(facade.informacionGrupo("abril800q"));
         }
 
         @Test
@@ -76,8 +76,8 @@ public class FacadeTest {
 
         @Test
         public void testBuscarXNombre() {
-                assertTrue(facade.buscarCompaNombre("Jose Torres").size() > 0);
-                assertTrue(facade.buscarCompaNombre("b").size() > 0);
+                assertNotEquals(0,facade.buscarCompaNombre("Jose Torres").size());
+                assertEquals(0,facade.buscarCompaNombre("b").size());
         }
 
         @Test
