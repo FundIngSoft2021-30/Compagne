@@ -35,7 +35,6 @@ public class ControlChats {
             this.result = this.statement.executeQuery();
         } catch (SQLException e) {
             this.result = null;
-            e.printStackTrace();
         }
         return this.result;
     }
@@ -83,7 +82,7 @@ public class ControlChats {
             }
         } catch (Exception e) {
         }
-        query = "DELETE FROM "+ConnectionClass.getSchema() +"\"Chats\" WHERE \"ID\"=" + chatID + ";";
+        query = "DELETE FROM "+ConnectionClass.getSchema() +"\"Chat\" WHERE \"ID\"=" + chatID + ";";
         this.executeQuery(query);
         return result;
     }
