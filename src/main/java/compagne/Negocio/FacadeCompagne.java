@@ -533,14 +533,13 @@ public class FacadeCompagne {
             offset = 1;
 
         consulta = "SELECT \"Nombre\", \"Publico\" FROM " + ConnectionClass.getSchema()
-                + "\"GrupoEstudio\" WHERE \"Codigo\"=" + "\';" + grupocod + "\';";
+                + "\"GrupoEstudio\" WHERE \"Codigo\"=" + "\'" + grupocod + "\';";
         ResultSet rs = this.controlGrupos.executeQuery(consulta);
         try {
             if (rs.next()) {
                 g = new Grupo(rs.getString(0 + offset), grupocod, rs.getString(1 + offset));
             }
         } catch (Exception e) {
-            e.printStackTrace();
             // Nada
         }
         if (g != null) {
