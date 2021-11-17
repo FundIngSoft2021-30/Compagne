@@ -112,12 +112,14 @@ public class FacadeTest {
                 Comentario comentario = new Comentario("4.5", "Una persona muy comprometida con todas sus actividades");
                 assertNotNull(facade.calificarUsuario(comentario, u));
                 assertNotNull(facade.calificarUsuario(comentario, a));
-                Grupo gr=facade.crearGrupo("NoProm&s$S", "NoDEbe3d33x1st1r3st03nl4()codigo", "S", u.getEmail());
+                Grupo gr = facade.crearGrupo("NoProm&s$S", "NoDEbe3d33x1st1r3st03nl4()codigo", "S", u.getEmail());
                 assertNotNull(gr);
-                gr=facade.modificarGrupo("UnGRUP=", "NoDEbe3d33x1st1r3st03nl4()codigo", "S");
+                gr = facade.modificarGrupo("UnGRUP=", "NoDEbe3d33x1st1r3st03nl4()codigo", "S");
                 assertNotNull(facade.agregarUsuarioAGrupo("NoDEbe3d33x1st1r3st03nl4()codigo", "abril@cano.com", "N"));
-                assertNotNull(facade.hacerAdminDeGrupo(facade.getControlGrupos().getGrupoID("NoDEbe3d33x1st1r3st03nl4()codigo"), 1));
+                assertNotNull(facade.hacerAdminDeGrupo(
+                                facade.getControlGrupos().getGrupoID("NoDEbe3d33x1st1r3st03nl4()codigo"), 1));
                 assertNotNull(facade.listarCompasGrupo("NoDEbe3d33x1st1r3st03nl4()codigo"));
+                assertNotNull(facade.eliminarUsuarioDeGrupo("NoDEbe3d33x1st1r3st03nl4()codigo", "abril@cano.com"));
                 // Para eliminar
                 facade.eliminarGrupo("NoDEbe3d33x1st1r3st03nl4()codigo");
                 facade.eliminarPerfilProfesor("emailP");
