@@ -10,6 +10,7 @@ import org.junit.*;
 import compagne.Entidades.ChatG;
 import compagne.Entidades.ChatP;
 import compagne.Entidades.Comentario;
+import compagne.Entidades.Grupo;
 import compagne.Entidades.Usuario;
 import compagne.IntegracionDatos.ConnectionClass;
 
@@ -42,16 +43,12 @@ public class FacadeTest {
         }
 
         @Test
-        public void testIniciarSesion() {
-                assertNotNull(facade.iniciarSesion("abril@cano.com", "@bril"));
-                assertNotNull(facade.iniciarSesion("anmontero@javeriana.edu.co", "@Nab3l"));
-                assertNull(facade.iniciarSesion("abril@cano.com", "abril"));
-        }
-
-        @Test
-        public void testInfoUsuario_Grupo() {
+        public void testIniciarSesion_testInfoUsuarioGrupo_testIsEstudiante() {
                 assertNotNull(facade.informacionUsuario("abril@cano.com"));
+                assertNotNull(facade.informacionUsuario("anmontero@javeriana.edu.co"));
                 assertNull(facade.informacionGrupo("abril800q"));
+                assertTrue(facade.isEstudiante("abril@cano.com"));
+                assertFalse(facade.isEstudiante("anmontero@javeriana.edu.co"));
         }
 
         @Test
@@ -76,8 +73,8 @@ public class FacadeTest {
 
         @Test
         public void testBuscarXNombre() {
-                assertNotEquals(0,facade.buscarCompaNombre("Jose Torres").size());
-                assertEquals(0,facade.buscarCompaNombre("b").size());
+                assertNotEquals(0, facade.buscarCompaNombre("Jose Torres").size());
+                assertEquals(0, facade.buscarCompaNombre("b").size());
         }
 
         @Test
@@ -106,13 +103,20 @@ public class FacadeTest {
                 assertNotNull(u);
                 assertNotNull(facade.crearPerfilEstudiante("nombre", "emailE", "contrasenia", mSet, cSet, intereses,
                                 logros));
-                Usuario a = facade.modificarPerfilEstudiante("NewN", "emailE", "contrasenia", mSet,
-                                cSet, intereses, logros);
+                Usuario a = facade.modificarPerfilEstudiante("NewN", "emailE", "contrasenia", mSet, cSet, intereses,
+                                logros);
                 assertNotNull(u);
                 Comentario comentario = new Comentario("4.5", "Una persona muy comprometida con todas sus actividades");
                 assertNotNull(facade.calificarUsuario(comentario, u));
                 assertNotNull(facade.calificarUsuario(comentario, a));
+                Grupo gr=facade.crearGrupo("NoProm&s$S", "NoDEbe3d33x1st1r3st03nl4()codigo", "S", u.getEmail());
+                assertNotNull(gr);
+                gr=facade.modificarGrupo("UnGRUP=", "NoDEbe3d33x1st1r3st03nl4()codigo", "S");
+                assertNotNull(facade.agregarUsuarioAGrupo("NoDEbe3d33x1st1r3st03nl4()codigo", "abril@cano.com", "N"));
+                assertNotNull(facade.hacerAdminDeGrupo(facade.getControlGrupos().getGrupoID("NoDEbe3d33x1st1r3st03nl4()codigo"), 1));
+                assertNotNull(facade.listarCompasGrupo("NoDEbe3d33x1st1r3st03nl4()codigo"));
                 // Para eliminar
+                facade.eliminarGrupo("NoDEbe3d33x1st1r3st03nl4()codigo");
                 facade.eliminarPerfilProfesor("emailP");
                 facade.eliminarPerfilEstudiante("emailE");
                 facade.getControlProfesores().executeQuery("DELETE FROM " + ConnectionClass.getSchema()
