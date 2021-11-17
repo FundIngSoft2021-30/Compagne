@@ -2,6 +2,8 @@ package compagne.Negocio;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import compagne.Vista.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
-import compagne.Vista.App;
 import javafx.scene.Node;
 
 public class PantallaMenuController {

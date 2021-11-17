@@ -8,9 +8,8 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
-import compagne.Vista.App;
-
 import compagne.Entidades.Usuario;
+import compagne.Vista.App;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

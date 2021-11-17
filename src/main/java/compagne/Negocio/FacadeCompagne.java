@@ -540,6 +540,7 @@ public class FacadeCompagne {
                 g = new Grupo(rs.getString(0 + offset), grupocod, rs.getString(1 + offset));
             }
         } catch (Exception e) {
+            e.printStackTrace();
             // Nada
         }
         if (g != null) {

@@ -68,8 +68,13 @@ public class FacadeTest {
                 assertTrue(facade.crearChat(chatP, usuario1ID, usuario2ID));
                 ChatG chatG = new ChatG("Fecha2", 'G', mensajes2, facade.getControlGrupos().getGrupoByID(perteneceID));
                 assertTrue(facade.crearChat(chatG, perteneceID));
-                assertTrue(facade.getControlChats().eliminarChat(chatP));
-                assertTrue(facade.getControlChats().eliminarChat(chatG));
+                assertNotNull(facade.getChatID(chatP));
+                assertNotNull(facade.getChatID(chatG));
+                Mensaje mensaje = new Mensaje("Fecha1_0", "Mensaje1",
+                                facade.getControlEstudiantes().getEstudianteByID(usuario1ID), chatP);
+                assertNotNull(facade.redactarMensaje(facade.getChatID(chatP), mensaje, usuario2ID));
+                assertTrue(facade.eliminarChat(chatP));
+                assertTrue(facade.eliminarChat(chatG));
         }
 
         @Test

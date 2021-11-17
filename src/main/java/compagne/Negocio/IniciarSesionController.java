@@ -3,7 +3,6 @@ package compagne.Negocio;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import compagne.Vista.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import compagne.Entidades.Usuario;
+import compagne.Vista.App;
 import javafx.stage.Stage;
 
 public class IniciarSesionController {
