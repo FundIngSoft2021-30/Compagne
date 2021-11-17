@@ -48,7 +48,7 @@ public class FacadeTest {
                 assertNotNull(facade.informacionUsuario("anmontero@javeriana.edu.co"));
                 assertNotNull(facade.iniciarSesion("abril@cano.com", "@bril"));
                 assertNotNull(facade.iniciarSesion("anmontero@javeriana.edu.co", "@Nab3l"));
-                assertNotNull(facade.iniciarSesion("anmontero@javeriana.edu.co", "@Nabel"));
+                assertNull(facade.iniciarSesion("anmontero@javeriana.edu.co", "@Nabel"));
                 assertNull(facade.informacionGrupo("abril800q"));
                 assertTrue(facade.isEstudiante("abril@cano.com"));
                 assertFalse(facade.isEstudiante("anmontero@javeriana.edu.co"));
