@@ -83,6 +83,7 @@ public class ControlChats {
         } catch (Exception e) {
         }
         query = "DELETE FROM "+ConnectionClass.getSchema() +"\"Chats\" WHERE \"ID\"=" + chatID + ";";
+        this.executeQuery(query);
         return result;
     }
 
