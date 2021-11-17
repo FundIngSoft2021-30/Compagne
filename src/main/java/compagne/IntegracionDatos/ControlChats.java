@@ -78,6 +78,7 @@ public class ControlChats {
                             + ";";
                     this.executeQuery(query);
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         } catch (Exception e) {
