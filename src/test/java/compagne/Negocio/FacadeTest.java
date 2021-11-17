@@ -11,6 +11,7 @@ import compagne.Entidades.ChatG;
 import compagne.Entidades.ChatP;
 import compagne.Entidades.Comentario;
 import compagne.Entidades.Grupo;
+import compagne.Entidades.Mensaje;
 import compagne.Entidades.Usuario;
 import compagne.IntegracionDatos.ConnectionClass;
 
@@ -55,6 +56,23 @@ public class FacadeTest {
         }
 
         @Test
+        public void testEnviarMsj() {
+                HashSet<Mensaje> mensajes = new HashSet<Mensaje>();
+                HashSet<Mensaje> mensajes2 = new HashSet<Mensaje>();
+                int usuario1ID = 1;
+                int usuario2ID = 4;
+                int perteneceID = 1;
+                ChatP chatP = new ChatP("Fecha1", 'P', mensajes,
+                                facade.getControlEstudiantes().getEstudianteByID(usuario1ID),
+                                facade.getControlProfesores().getProfesorByID(usuario2ID));
+                assertTrue(facade.crearChat(chatP, usuario1ID, usuario2ID));
+                ChatG chatG = new ChatG("Fecha2", 'G', mensajes2, facade.getControlGrupos().getGrupoByID(perteneceID));
+                assertTrue(facade.crearChat(chatG, perteneceID));
+                assertTrue(facade.getControlChats().eliminarChat(chatP));
+                assertTrue(facade.getControlChats().eliminarChat(chatG));
+        }
+
+        @Test
         public void testsBuscar() {
                 int usuario1ID = 1;
                 int usuario2ID = 4;
@@ -70,8 +88,8 @@ public class FacadeTest {
                 assertTrue(facade.crearChat(chatG, perteneceID));
                 assertNotNull(facade.buscarChatsXGrupo(perteneceID));
                 assertNotNull(facade.buscarChatsXUsuario(usuario1ID));
-                assertTrue(facade.eliminarChat(chatP));
-                assertTrue(facade.eliminarChat(chatG));
+                assertTrue(facade.getControlChats().eliminarChat(chatP));
+                assertTrue(facade.getControlChats().eliminarChat(chatG));
         }
 
         @Test
