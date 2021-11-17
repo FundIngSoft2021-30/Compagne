@@ -82,7 +82,7 @@ public class ControlChats {
             }
         } catch (Exception e) {
         }
-        query = "DELETE FROM \"Chats\" WHERE \"ID\"=" + chatID + ";";
+        query = "DELETE FROM "+ConnectionClass.getSchema() +"\"Chats\" WHERE \"ID\"=" + chatID + ";";
         return result;
     }
 
