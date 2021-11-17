@@ -35,6 +35,7 @@ public class ControlChats {
             this.result = this.statement.executeQuery();
         } catch (SQLException e) {
             this.result = null;
+            e.printStackTrace();
         }
         return this.result;
     }
