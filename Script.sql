@@ -130,7 +130,12 @@ INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo"
 INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Usuario de prueba', 'a', 'a', 'S'); --ID 3
 INSERT INTO public."UsuarioRegistrado" ("Nombre", "Email", "Contrasenia", "Tipo") VALUES ('Anabel Montero', 'anmontero@javeriana.edu.co', '@Nab3l', 'T'); --ID 4
 INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('ELGrupoDeAbril', 'abril800q','S'); --ID 1
-INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Grupo de prueba', 'prueba', 'S'); --ID 2
+INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Grupo de prueba', 'prueba', 'N'); --ID 2
+INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Grupo de prueba2', 'prueba2', 'N'); --ID 3
+INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Cincomas1', 'cm1', 'N'); --ID 4
+INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Cincomas2', 'cm2', 'N'); --ID 5
+INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Cincomas3', 'cm3', 'N'); --ID 6
+INSERT INTO public."GrupoEstudio" ("Nombre", "Codigo", "Publico") VALUES ('Cincomas4', 'cm4', 'N'); --ID 7
 INSERT INTO public."UsuarioxGrupoEstudio" ("UsuarioRegistradoID", "GrupoEstudioID", "Admin") VALUES (1, 1, 'S');
 INSERT INTO public."UsuarioxGrupoEstudio" ("UsuarioRegistradoID", "GrupoEstudioID", "Admin") VALUES (2, 1, 'N');
 INSERT INTO public."Interes" ("Nombre") VALUES ('Futbol'); --ID 1
