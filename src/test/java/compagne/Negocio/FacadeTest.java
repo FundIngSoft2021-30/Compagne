@@ -129,7 +129,7 @@ public class FacadeTest {
                 assertNotNull(u);
                 assertNotNull(facade.crearPerfilEstudiante("nombre", "emailE", "contrasenia", mSet, cSet, intereses,
                                 logros));
-                Usuario a = facade.modificarPerfilEstudiante("NewN", "emailE", "contrasenia", mSet, cSet, intereses,
+                Usuario a = facade.modificarPerfilEstudiante("NewN", "emailE", "contrasenia",  cSet, mSet,intereses,
                                 logros);
                 assertNotNull(u);
                 Comentario comentario = new Comentario("4.5", "Una persona muy comprometida con todas sus actividades");

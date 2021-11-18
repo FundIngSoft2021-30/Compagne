@@ -7,6 +7,7 @@ import compagne.Entidades.Usuario;
 import compagne.Vista.App;
 
 import java.util.Collection;
+import java.util.Iterator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +43,24 @@ public class CompaController {
     
     @FXML
     private Button VerC;
+    
+    @FXML
+    private TextField Compa3;
+
+    @FXML
+    private Button VerC3;
+
+    @FXML
+    private TextField Compa1;
+
+    @FXML
+    private Button VerC1;
+
+    @FXML
+    private TextField Compa2;
+
+    @FXML
+    private Button VerC2;
 
     @FXML
     void Ver(ActionEvent event) {
@@ -69,6 +88,13 @@ public class CompaController {
         Collection<Usuario> col = this.facadeCompagne.listarCompas();
         for (Usuario e : col)
             this.lista_compa.getItems().add(e);
+        
+        Iterator<Usuario> it = col.iterator();
+        
+        Compa1.setText(it.next().getNombre());
+        Compa2.setText(it.next().getNombre());
+        Compa3.setText(it.next().getNombre());
+
     }
 
     @FXML
