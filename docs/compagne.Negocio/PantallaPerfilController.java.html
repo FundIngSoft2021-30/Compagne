@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaPerfilController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">test-coverage</a> &gt; <a href="index.source.html" class="el_package">compagne.Negocio</a> &gt; <span class="el_source">PantallaPerfilController.java</span></div><h1>PantallaPerfilController.java</h1><pre class="source lang-java linenums">
+package compagne.Negocio;
+
+import compagne.Entidades.Estudiante;
+import javafx.stage.Stage;
+
+import javafx.scene.Node;
+import compagne.Entidades.Grupo;
+import compagne.Entidades.Usuario;
+import compagne.IntegracionDatos.ControlEstudiantes;
+import compagne.Vista.App;
+import java.util.Collection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ListView;
+import javafx.stage.Modality;
+
+/**
+ * FXML Controller class
+ *
+ * @author samue
+ */
+<span class="nc" id="L32">public class PantallaPerfilController {</span>
+    
+<span class="nc" id="L34">    private FacadeCompagne facade = FacadeCompagne.getInstance();</span>
+    private String usu;
+    
+    @FXML
+    private ListView&lt;String&gt; TextThemes;
+
+    @FXML
+    private ListView&lt;String&gt; TextGoals;
+
+    @FXML
+    private ListView&lt;String&gt; TextInterest;
+
+    @FXML
+    private Button ButtonGroups;
+
+    @FXML
+    private TextField TextDescription;
+
+    @FXML
+    private Button ButtonDescription;
+
+    @FXML
+    private Line l1;
+
+    @FXML
+    private Button ButtonGoals;
+
+    @FXML
+    private Line l2;
+
+    @FXML
+    private Button ButtonThemes;
+
+    @FXML
+    private Line l4;
+
+    @FXML
+    private Button ButtonInterest;
+
+    @FXML
+    private Polygon t1;
+
+    @FXML
+    private Polygon t2;
+
+    @FXML
+    private Polygon t3;
+
+    @FXML
+    private Polygon t4;
+
+    @FXML
+    private ListView&lt;Grupo&gt; listGroups;
+
+    @FXML
+    private TextField NombreEstudiante;
+
+    @FXML
+    private Line l3;
+
+    @FXML
+    private Polygon t5;
+
+    @FXML
+    private Line l5;
+    
+    @FXML
+    private Button BEditarP;
+    
+    
+    @FXML
+    void Modificar(ActionEvent event) {
+<span class="nc" id="L106">        String nomFXML = &quot;EditarPerfil.fxml&quot;;</span>
+<span class="nc" id="L107">                Parent root = null;</span>
+                try {
+<span class="nc" id="L109">                        FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));</span>
+<span class="nc" id="L110">                        root = loader.load();</span>
+<span class="nc" id="L111">                        EditarPerfilController pgc = loader.getController();</span>
+<span class="nc" id="L112">                        pgc.start(this.usu);</span>
+<span class="nc" id="L113">                } catch (Exception e) {</span>
+
+<span class="nc" id="L115">                }</span>
+<span class="nc" id="L116">                Scene scene = new Scene(root);</span>
+<span class="nc" id="L117">                Stage stage = new Stage();</span>
+<span class="nc" id="L118">                stage.initModality(Modality.APPLICATION_MODAL);</span>
+<span class="nc" id="L119">                stage.setTitle(&quot;Crear Grupo&quot;);</span>
+<span class="nc" id="L120">                stage.setScene(scene);</span>
+<span class="nc" id="L121">                stage.showAndWait();</span>
+        
+<span class="nc" id="L123">    }</span>
+    
+    
+    @FXML
+    void click(ActionEvent event) {
+<span class="nc" id="L128">        int tam = 62;</span>
+<span class="nc bnc" id="L129" title="All 4 branches missed.">        if (event.getSource() == ButtonDescription &amp;&amp; TextDescription.isVisible()) {</span>
+<span class="nc" id="L130">            l1.setLayoutY(l1.getLayoutY() - tam);</span>
+<span class="nc" id="L131">            l2.setLayoutY(l2.getLayoutY() - tam);</span>
+<span class="nc" id="L132">            l3.setLayoutY(l3.getLayoutY() - tam);</span>
+<span class="nc" id="L133">            l4.setLayoutY(l4.getLayoutY() - tam);</span>
+<span class="nc" id="L134">            l5.setLayoutY(l5.getLayoutY() - tam);</span>
+<span class="nc" id="L135">            ButtonGoals.setLayoutY(ButtonGoals.getLayoutY() - tam);</span>
+<span class="nc" id="L136">            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() - tam);</span>
+<span class="nc" id="L137">            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() - tam);</span>
+<span class="nc" id="L138">            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - tam);</span>
+<span class="nc" id="L139">            t1.setRotate(0);</span>
+<span class="nc" id="L140">            t2.setLayoutY(t2.getLayoutY() - tam);</span>
+<span class="nc" id="L141">            t3.setLayoutY(t3.getLayoutY() - tam);</span>
+<span class="nc" id="L142">            t4.setLayoutY(t4.getLayoutY() - tam);</span>
+<span class="nc" id="L143">            t5.setLayoutY(t5.getLayoutY() - tam);</span>
+<span class="nc" id="L144">            TextDescription.setVisible(false);</span>
+<span class="nc bnc" id="L145" title="All 4 branches missed.">        } else if (event.getSource() == ButtonDescription &amp;&amp; !TextDescription.isVisible()) {</span>
+<span class="nc" id="L146">            l1.setLayoutY(l1.getLayoutY() + tam);</span>
+<span class="nc" id="L147">            l2.setLayoutY(l2.getLayoutY() + tam);</span>
+<span class="nc" id="L148">            l3.setLayoutY(l3.getLayoutY() + tam);</span>
+<span class="nc" id="L149">            l4.setLayoutY(l4.getLayoutY() + tam);</span>
+<span class="nc" id="L150">            l5.setLayoutY(l5.getLayoutY() + tam);</span>
+<span class="nc" id="L151">            ButtonGoals.setLayoutY(ButtonGoals.getLayoutY() + tam);</span>
+<span class="nc" id="L152">            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + tam);</span>
+<span class="nc" id="L153">            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + tam);</span>
+<span class="nc" id="L154">            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + tam);</span>
+<span class="nc" id="L155">            t1.setRotate(-90);</span>
+<span class="nc" id="L156">            t2.setLayoutY(t2.getLayoutY() + tam);</span>
+<span class="nc" id="L157">            t3.setLayoutY(t3.getLayoutY() + tam);</span>
+<span class="nc" id="L158">            t4.setLayoutY(t4.getLayoutY() + tam);</span>
+<span class="nc" id="L159">            t5.setLayoutY(t5.getLayoutY() + tam);</span>
+<span class="nc" id="L160">            TextDescription.setVisible(true);</span>
+        }
+<span class="nc bnc" id="L162" title="All 4 branches missed.">        if (event.getSource() == ButtonGoals &amp;&amp; TextGoals.isVisible()) {</span>
+<span class="nc" id="L163">            l2.setLayoutY(l2.getLayoutY() - tam);</span>
+<span class="nc" id="L164">            l3.setLayoutY(l3.getLayoutY() - tam);</span>
+<span class="nc" id="L165">            l4.setLayoutY(l4.getLayoutY() - tam);</span>
+<span class="nc" id="L166">            l5.setLayoutY(l5.getLayoutY() - tam);</span>
+<span class="nc" id="L167">            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() - tam);</span>
+<span class="nc" id="L168">            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() - tam);</span>
+<span class="nc" id="L169">            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - tam);</span>
+<span class="nc" id="L170">            t2.setRotate(0);</span>
+<span class="nc" id="L171">            t3.setLayoutY(t3.getLayoutY() - tam);</span>
+<span class="nc" id="L172">            t4.setLayoutY(t4.getLayoutY() - tam);</span>
+<span class="nc" id="L173">            t5.setLayoutY(t5.getLayoutY() - tam);</span>
+<span class="nc" id="L174">            TextGoals.setVisible(false);</span>
+<span class="nc bnc" id="L175" title="All 4 branches missed.">        } else if (event.getSource() == ButtonGoals &amp;&amp; !TextGoals.isVisible()) {</span>
+<span class="nc" id="L176">            l2.setLayoutY(l2.getLayoutY() + tam);</span>
+<span class="nc" id="L177">            l3.setLayoutY(l3.getLayoutY() + tam);</span>
+<span class="nc" id="L178">            l4.setLayoutY(l4.getLayoutY() + tam);</span>
+<span class="nc" id="L179">            l5.setLayoutY(l5.getLayoutY() + tam);</span>
+<span class="nc" id="L180">            ButtonInterest.setLayoutY(ButtonInterest.getLayoutY() + tam);</span>
+<span class="nc" id="L181">            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + tam);</span>
+<span class="nc" id="L182">            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + tam);</span>
+<span class="nc" id="L183">            t2.setRotate(-90);</span>
+<span class="nc" id="L184">            t3.setLayoutY(t3.getLayoutY() + tam);</span>
+<span class="nc" id="L185">            t4.setLayoutY(t4.getLayoutY() + tam);</span>
+<span class="nc" id="L186">            t5.setLayoutY(t5.getLayoutY() + tam);</span>
+<span class="nc" id="L187">            TextGoals.setVisible(true);</span>
+        }
+<span class="nc bnc" id="L189" title="All 4 branches missed.">        if (event.getSource() == ButtonInterest &amp;&amp; !TextInterest.isVisible()) {</span>
+<span class="nc" id="L190">            l3.setLayoutY(l3.getLayoutY() + tam);</span>
+<span class="nc" id="L191">            l4.setLayoutY(l4.getLayoutY() + tam);</span>
+<span class="nc" id="L192">            l5.setLayoutY(l5.getLayoutY() + tam);</span>
+<span class="nc" id="L193">            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() + tam);</span>
+<span class="nc" id="L194">            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + tam);</span>
+<span class="nc" id="L195">            t3.setRotate(-90);</span>
+<span class="nc" id="L196">            t4.setLayoutY(t4.getLayoutY() + tam);</span>
+<span class="nc" id="L197">            t5.setLayoutY(t5.getLayoutY() + tam);</span>
+<span class="nc" id="L198">            TextInterest.setVisible(true);</span>
+<span class="nc bnc" id="L199" title="All 4 branches missed.">        } else if (event.getSource() == ButtonInterest &amp;&amp; TextInterest.isVisible()) {</span>
+<span class="nc" id="L200">            l3.setLayoutY(l3.getLayoutY() - tam);</span>
+<span class="nc" id="L201">            l4.setLayoutY(l4.getLayoutY() - tam);</span>
+<span class="nc" id="L202">            l5.setLayoutY(l5.getLayoutY() - tam);</span>
+<span class="nc" id="L203">            ButtonThemes.setLayoutY(ButtonThemes.getLayoutY() - tam);</span>
+<span class="nc" id="L204">            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - tam);</span>
+<span class="nc" id="L205">            t3.setRotate(0);</span>
+<span class="nc" id="L206">            t4.setLayoutY(t4.getLayoutY() - tam);</span>
+<span class="nc" id="L207">            t5.setLayoutY(t5.getLayoutY() - tam);</span>
+<span class="nc" id="L208">            TextInterest.setVisible(false);</span>
+        }
+<span class="nc bnc" id="L210" title="All 4 branches missed.">        if (event.getSource() == ButtonThemes &amp;&amp; !TextThemes.isVisible()) {</span>
+<span class="nc" id="L211">            l4.setLayoutY(l4.getLayoutY() + tam);</span>
+<span class="nc" id="L212">            l5.setLayoutY(l5.getLayoutY() + tam);</span>
+<span class="nc" id="L213">            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() + tam);</span>
+<span class="nc" id="L214">            t4.setRotate(-90);</span>
+<span class="nc" id="L215">            t5.setLayoutY(t5.getLayoutY() + tam);</span>
+<span class="nc" id="L216">            TextThemes.setVisible(true);</span>
+<span class="nc bnc" id="L217" title="All 4 branches missed.">        } else if (event.getSource() == ButtonThemes &amp;&amp; TextThemes.isVisible()) {</span>
+<span class="nc" id="L218">            l4.setLayoutY(l4.getLayoutY() - tam);</span>
+<span class="nc" id="L219">            l5.setLayoutY(l5.getLayoutY() - tam);</span>
+<span class="nc" id="L220">            ButtonGroups.setLayoutY(ButtonGroups.getLayoutY() - tam);</span>
+<span class="nc" id="L221">            t4.setRotate(0);</span>
+<span class="nc" id="L222">            t5.setLayoutY(t5.getLayoutY() - tam);</span>
+<span class="nc" id="L223">            TextThemes.setVisible(false);</span>
+        }
+<span class="nc bnc" id="L225" title="All 4 branches missed.">        if (event.getSource() == ButtonGroups &amp;&amp; !listGroups.isVisible()) {</span>
+<span class="nc" id="L226">            l5.setLayoutY(l5.getLayoutY() + tam);</span>
+<span class="nc" id="L227">            t5.setRotate(-90);</span>
+<span class="nc" id="L228">            listGroups.setVisible(true);</span>
+<span class="nc bnc" id="L229" title="All 4 branches missed.">        } else if (event.getSource() == ButtonGroups &amp;&amp; listGroups.isVisible()) {</span>
+<span class="nc" id="L230">            l5.setLayoutY(l5.getLayoutY() - tam);</span>
+<span class="nc" id="L231">            t5.setRotate(0);</span>
+<span class="nc" id="L232">            listGroups.setVisible(false);</span>
+        }
+<span class="nc" id="L234">    }</span>
+
+    public void start(String u) {
+
+<span class="nc" id="L238">        this.usu = u;</span>
+<span class="nc" id="L239">        Estudiante user = (Estudiante) facade.informacionUsuario(u);</span>
+<span class="nc" id="L240">        this.NombreEstudiante.setText(user.getNombre());</span>
+<span class="nc" id="L241">        TextDescription.setText(&quot;Hola! soy una persona comprometida y proactiva &quot;);</span>
+<span class="nc" id="L242">        TextGoals.setItems(FXCollections.observableArrayList(user.getLogros()));</span>
+<span class="nc" id="L243">        TextInterest.setItems(FXCollections.observableArrayList(user.getIntereses()));</span>
+<span class="nc" id="L244">        TextThemes.setItems(FXCollections.observableArrayList(user.getMaterias()));</span>
+
+        
+<span class="nc" id="L247">    }</span>
+
+    @FXML
+    public void desplegarMenu(ActionEvent event) {
+<span class="nc" id="L251">        Node source = (Node) event.getSource();</span>
+<span class="nc" id="L252">        Stage stage = (Stage) source.getScene().getWindow();</span>
+<span class="nc" id="L253">        stage.close();</span>
+<span class="nc" id="L254">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

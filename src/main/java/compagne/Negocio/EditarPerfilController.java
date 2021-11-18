@@ -1,50 +1,29 @@
-
 package compagne.Negocio;
 
 import compagne.Entidades.Estudiante;
-import javafx.stage.Stage;
-import javafx.scene.Node;
-import compagne.Entidades.Grupo;
-import compagne.Entidades.Usuario;
-import compagne.IntegracionDatos.ControlEstudiantes;
-import compagne.Vista.App;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ListView;
-import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-
-public class PantallaPerfilController {
-    
+public class EditarPerfilController {
     private FacadeCompagne facade = FacadeCompagne.getInstance();
     private String usu;
-    
-    @FXML
-    private ListView<String> TextThemes;
-
-    @FXML
-    private ListView<String> TextGoals;
-
-    @FXML
-    private ListView<String> TextInterest;
-
-    @FXML
-    private Button ButtonGroups;
-
-    @FXML
-    private TextField TextDescription;
 
     @FXML
     private Button ButtonDescription;
+
+    @FXML
+    private TextField TextDescription;
 
     @FXML
     private Line l1;
@@ -59,7 +38,7 @@ public class PantallaPerfilController {
     private Button ButtonThemes;
 
     @FXML
-    private Line l4;
+    private Line l3;
 
     @FXML
     private Button ButtonInterest;
@@ -77,46 +56,63 @@ public class PantallaPerfilController {
     private Polygon t4;
 
     @FXML
-    private ListView<Grupo> listGroups;
+    private ListView<String> listGroups;
 
     @FXML
     private TextField NombreEstudiante;
 
     @FXML
-    private Line l3;
+    private Line l4;
+
+    @FXML
+    private Button ButtonGroups;
 
     @FXML
     private Polygon t5;
 
     @FXML
     private Line l5;
-    
-    @FXML
-    private Button BEditarP;
-    
-    
-    @FXML
-    void Modificar(ActionEvent event) {
-        String nomFXML = "EditarPerfil.fxml";
-                Parent root = null;
-                try {
-                        FXMLLoader loader = new FXMLLoader(App.class.getResource(nomFXML));
-                        root = loader.load();
-                        EditarPerfilController pgc = loader.getController();
-                        pgc.start(this.usu);
-                } catch (Exception e) {
 
-                }
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Crear Grupo");
-                stage.setScene(scene);
-                stage.showAndWait();
+    @FXML
+    private Button Guardar;
+
+    @FXML
+    private TextField TextGoals;
+
+    @FXML
+    private TextField TextThemes;
+
+    @FXML
+    private TextField TextInterest;
+
+    @FXML
+    private Button menu;
+
+    @FXML
+    void Save(ActionEvent event) {
+        String desc = TextDescription.getText();
+        String logros = TextGoals.getText();
+        String intereses = TextInterest.getText();
+        String materias = TextThemes.getText();
         
+        String[] log = logros.split(",");
+        String[] inte = intereses.split(",");
+        String[] mat = materias.split(",");
+        
+        HashSet<String> setLog = new HashSet<>(Arrays.asList(log));
+        HashSet<String> setInt = new HashSet<>(Arrays.asList(inte));
+        HashSet<String> setMat = new HashSet<>(Arrays.asList(mat));
+        
+        Estudiante user = (Estudiante) facade.informacionUsuario(usu);
+        
+        facade.modificarPerfilEstudiante(user.getNombre(),usu,user.getContrasenia(),user.getComentarios(),setInt, setLog, setMat);
+       
+        
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
-    
-    
+
     @FXML
     void click(ActionEvent event) {
         int tam = 62;
@@ -227,23 +223,38 @@ public class PantallaPerfilController {
         }
     }
 
-    public void start(String u) {
-
-        this.usu = u;
-        Estudiante user = (Estudiante) facade.informacionUsuario(u);
-        this.NombreEstudiante.setText(user.getNombre());
-        TextDescription.setText("Hola! soy una persona comprometida y proactiva ");
-        TextGoals.setItems(FXCollections.observableArrayList(user.getLogros()));
-        TextInterest.setItems(FXCollections.observableArrayList(user.getIntereses()));
-        TextThemes.setItems(FXCollections.observableArrayList(user.getMaterias()));
-
-        
-    }
-
     @FXML
-    public void desplegarMenu(ActionEvent event) {
+    void desplegarMenu(ActionEvent event) {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
+    
+    public void start(String u) {
+        
+        this.usu = u;
+        Estudiante user = (Estudiante) facade.informacionUsuario(u);
+        this.NombreEstudiante.setText(user.getNombre());
+        TextDescription.setText("Descripción");
+        
+        String intereses = "";
+        String logros = "";
+        String materias = "";
+        
+        for(String i: user.getIntereses()){
+            intereses = i + "," + intereses;
+        }
+        for(String i: user.getLogros()){
+            logros = i + "," + logros;
+        }
+        for(String i: user.getMaterias()){
+            materias = i + "," + materias;
+        }
+        
+        TextGoals.setText(logros);
+        TextInterest.setText(intereses);
+        TextThemes.setText(materias);  
+        
+    }
+
 }

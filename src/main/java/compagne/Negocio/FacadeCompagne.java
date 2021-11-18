@@ -128,11 +128,23 @@ public class FacadeCompagne {
         return estudiante;
     }
 
-    public Estudiante modificarPerfilEstudiante(String nombre, String email, String contrasenia,
-            HashSet<String> materias, HashSet<Comentario> comentarios, HashSet<String> intereses,
-            HashSet<String> logros) {
-        Estudiante estudiante = new Estudiante(nombre, email, materias, comentarios, contrasenia, intereses, logros);
+ 
+    public Estudiante modificarPerfilEstudiante(String nombre, String email, String contrasenia, HashSet<Comentario> com, HashSet<String> Intereses, HashSet<String> logros, HashSet<String> materias) {
+        Estudiante estudiante = new Estudiante(nombre, email, null, null, contrasenia, null, null);
+        int ID = buscarIDUsuario(email);
         this.controlEstudiantes.modificarEstudiante(estudiante);
+        for(String interes: Intereses){
+            this.controlEstudiantes.insertarInteres(interes);
+            this.controlEstudiantes.insertarInteresXEstudiante(ID, this.controlEstudiantes.getInteresID(interes));
+        }
+        for(String logro: logros){
+            this.controlEstudiantes.insertarLogro(logro);
+            this.controlEstudiantes.insertarLogroXEstudiante(ID, this.controlEstudiantes.getLogroID(logro));
+        }
+        for(String materia: materias){
+            this.controlEstudiantes.insertarMateria(materia);
+            this.controlEstudiantes.insertarMateriaXEstudiante(ID, this.controlEstudiantes.getMateriaID(materia));
+        }
         return estudiante;
     }
 
