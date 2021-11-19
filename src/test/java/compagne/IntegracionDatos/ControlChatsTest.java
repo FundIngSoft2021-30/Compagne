@@ -54,13 +54,6 @@ public class ControlChatsTest {
         }
 
         @Test
-        public void getChatIDTest() {
-                assertNotEquals(0, controlChats.getChatID(chatP));
-                assertEquals(0, controlChats.getChatID(new ChatG("(Date)new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime()",
-                                                'G', null, controlGrupos.getGrupoByID(perteneceID))));
-        }
-
-        @Test
         public void buscarChatsTest() {
                 assertNotNull(controlChats.buscarChatsXGrupo(perteneceID));
                 assertNotNull(controlChats.buscarChatsXUsuario(usuario1ID));
