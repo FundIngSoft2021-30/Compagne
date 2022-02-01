@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainApp.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">test-coverage</a> &gt; <a href="index.source.html" class="el_package">compagne.Vista</a> &gt; <span class="el_source">MainApp.java</span></div><h1>MainApp.java</h1><pre class="source lang-java linenums">package compagne.Vista;
+
+import java.util.HashSet;
+
+import compagne.Entidades.ChatP;
+import compagne.Entidades.Estudiante;
+import compagne.Entidades.Mensaje;
+import compagne.IntegracionDatos.ControlChats;
+import compagne.IntegracionDatos.ControlEstudiantes;
+
+<span class="nc" id="L11">public class MainApp {</span>
+        public static void main(String[] args) {
+<span class="nc" id="L13">                Estudiante estudiante1=new Estudiante(&quot;Juan Carlos Caceres Tercero&quot;, &quot;email&quot;, null, null, &quot;contrasenia&quot;, null, null);</span>
+<span class="nc" id="L14">                Estudiante estudiante2=new Estudiante(&quot;Juan Carlos Caceres Cuarto&quot;, &quot;email2&quot;, null, null, &quot;contrasenia&quot;, null, null);</span>
+<span class="nc" id="L15">                ControlEstudiantes ce=new ControlEstudiantes();</span>
+<span class="nc" id="L16">                ControlChats cc=new ControlChats();</span>
+<span class="nc" id="L17">                ChatP chat1=new ChatP(&quot;14/11/21&quot;, 'P', null, estudiante1, estudiante2);</span>
+<span class="nc" id="L18">                ce.crearEstudiante(estudiante1);</span>
+<span class="nc" id="L19">                ce.crearEstudiante(estudiante2);</span>
+<span class="nc" id="L20">                int est1ID=ce.getEstudianteID(estudiante1.getEmail());</span>
+<span class="nc" id="L21">                int est2ID=ce.getEstudianteID(estudiante2.getEmail());</span>
+<span class="nc" id="L22">                cc.crearChat(chat1, est1ID, est2ID);</span>
+<span class="nc" id="L23">                Mensaje mensaje1=new Mensaje(&quot;14/11/21 13:26:25&quot;, &quot;Hola&quot;, estudiante1, chat1);</span>
+<span class="nc" id="L24">                cc.insertarMensajeXChat(cc.getChatID(chat1), mensaje1, est1ID);</span>
+<span class="nc" id="L25">                Mensaje mensaje2=new Mensaje(&quot;14/11/21 13:26:30&quot;, &quot;Hola&quot;, estudiante2, chat1);</span>
+<span class="nc" id="L26">                cc.insertarMensajeXChat(cc.getChatID(chat1), mensaje2, est2ID);</span>
+<span class="nc" id="L27">                HashSet&lt;Mensaje&gt; mensajes=cc.mensajesXChat(cc.getChatID(chat1));</span>
+<span class="nc" id="L28">                System.out.println(&quot;El tamaño es: &quot;+mensajes.size());</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">                for (Mensaje m:mensajes)</span>
+<span class="nc" id="L30">                        System.out.println(m);</span>
+<span class="nc" id="L31">                cc.eliminarChat(chat1);</span>
+<span class="nc" id="L32">                ce.eliminarEstudiante(estudiante1.getEmail());</span>
+<span class="nc" id="L33">                ce.eliminarEstudiante(estudiante2.getEmail());</span>
+<span class="nc" id="L34">        }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,7 +1,0 @@
-target/
-.vscode
-.idea
-.eclipse
-.project
-.settings
-nb*.xml
